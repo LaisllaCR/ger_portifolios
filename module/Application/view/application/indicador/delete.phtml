@@ -1,7 +1,6 @@
 <?php
- // module/Album/view/album/album/delete.phtml:
 
- $title = 'Excluir Projeto';
+ $title = 'Excluir Indicador';
  $this->headTitle($title);
  ?>
  
@@ -11,7 +10,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Projeto</h3>
+              <h3>Indicador</h3>
             </div>
             
           </div>
@@ -23,7 +22,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Excluir Projeto <small></small></h2>
+                  <h2>Excluir Indicador <small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"></a>
                     </li>
@@ -41,17 +40,17 @@
                   <!-- Smart Wizard -->
                   
 				 <p>Tem certeza que deseja excluir <br>
-				     <strong><?php echo $this->escapeHtml($projeto->projeto_nome); ?></strong>?
+				     <strong><?php echo $this->escapeHtml($indicador->indicador_nome); ?></strong>?
 				 </p>
  
                   
-  				<form action="<?php echo $this->url('projeto/delete', array('action' => 'delete','id' => $this->id)); ?>" method="post" role="form" class="form-horizontal form-label-left">
+  				<form action="<?php echo $this->url('indicador/delete', array('action' => 'delete','id' => $this->id)); ?>" method="post" role="form" class="form-horizontal form-label-left">
               
                   <div id="" class="form_wizard wizard_horizontal">
                   
                                             
      
-     						<input type="hidden" name="id" value="<?php echo (int) $projeto->projeto_id; ?>" />
+     						<input type="hidden" name="id" value="<?php echo (int) $indicador->indicador_id; ?>" />
      										    
 						    
 							  <div class="form-group"> 

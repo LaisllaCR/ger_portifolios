@@ -34,7 +34,11 @@
 
                   <!-- Smart Wizard -->
                   <p>Esse é o formulário onde deve ser preenchidas todas as informações do novo projeto.</p>
+                  
+  				<form method="post" action="<?php echo $this->url('projeto/add',  array('action'=>'add'));?>" role="form" class="form-horizontal form-label-left">
+              
                   <div id="wizard" class="form_wizard wizard_horizontal">
+              
                     <ul class="wizard_steps">
                       <li>
                         <a href="#step-1">
@@ -74,62 +78,59 @@
                       </li>
                     </ul>
                     <div id="step-1">
-                      <form class="form-horizontal form-label-left">
 
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Título <span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_nome">Título <span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="projeto_nome" name="projeto_nome" required="required" class="form-control col-md-7 col-xs-12">
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Gerente Responsável <span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_gerente_id">Gerente Responsável <span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="projeto_gerente_id" name="projeto_gerente_id" required="required" class="form-control col-md-7 col-xs-12">
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Data de início <span class="required">*</span></label>
+                          <label for="projeto_data_inicio" class="control-label col-md-3 col-sm-3 col-xs-12">Data de início <span class="required">*</span></label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="middle-name" class="form-control col-md-7 col-xs-12" type="date" name="middle-name">
+                            <input id="projeto_data_inicio" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_inicio">
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Previsão de Término <span class="required">*</span> </label>
+                          <label for="projeto_data_previsao_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Previsão de Término <span class="required">*</span> </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="middle-name" class="form-control col-md-7 col-xs-12" type="date" name="middle-name">
+                            <input id="projeto_data_previsao_termino" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_previsao_termino">
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Data real de término</label>
+                          <label for="projeto_data_real_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Data real de término</label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="middle-name" class="form-control col-md-7 col-xs-12" type="date" name="middle-name">
+                            <input id="projeto_data_real_termino" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_real_termino">
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Orçamento Total<span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_orcamento_total">Orçamento Total<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="projeto_orcamento_total" name="projeto_orcamento_total" required="required" class="form-control col-md-7 col-xs-12">
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Descrição<span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_descricao">Descrição<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12"></textarea>
+                            <textarea id="projeto_descricao" name="projeto_descricao" required="required" class="form-control col-md-7 col-xs-12"></textarea>
                           </div>
                         </div>
-
-                      </form>
 
                     </div>
                     
@@ -142,17 +143,17 @@
 	                      <div class="col-md-9 col-sm-9 col-xs-12">
 	                      	<div class="radio">
 	                          <label>
-	                            <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Baixo risco
+	                            <input type="radio" value="Baixo risco" id="Baixo risco" name="riscoRadios"> Baixo risco
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> Médio risco
+	                            <input type="radio" value="Medio risco" id="Medio risco" name="riscoRadios"> Médio risco
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> Alto risco
+	                            <input type="radio" value="Alto risco" id="Alto risco" name="riscoRadios"> Alto risco
 	                          </label>
 	                        </div>
 	                      </div>
@@ -167,42 +168,42 @@
 	                      <div class="col-md-9 col-sm-9 col-xs-12">
 	                      	<div class="radio">
 	                          <label>
-	                            <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> em análise
+	                            <input type="radio" value="Em analise" id="Em analise" name="statusRadios"> em análise
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> análise realizada
+	                            <input type="radio" value="Analise realizada" id="Analise realizada" name="statusRadios"> análise realizada
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> análise aprovada
+	                            <input type="radio" value="Analise aprovada" id="Analise aprovada" name="statusRadios"> análise aprovada
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> iniciado
+	                            <input type="radio" value="Iniciado" id="Iniciado" name="statusRadios"> iniciado
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> planejado
+	                            <input type="radio" value="Planejado" id="Planejado" name="statusRadios"> planejado
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> em andamento
+	                            <input type="radio" value="Em andamento" id="Em andamento" name="statusRadios"> em andamento
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> encerrado
+	                            <input type="radio" value="Encerrado" id="Encerrado" name="statusRadios"> encerrado
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> cancelado
+	                            <input type="radio" value="Cancelado" id="Cancelado" name="statusRadios"> cancelado
 	                          </label>
 	                        </div>
 	                      </div>
@@ -279,7 +280,16 @@
                       
                     </div>
 
+                        <div class="form-group"> 
+						    <div class="control-label col-sm-4">
+						      <button type="reset" class="btn btn-default" onclick="location.href='<?php echo $this->url('projeto', array('action'=>'index'));?>'">Cancelar</button>
+						    </div>
+						    <div class="control-label col-sm-1">
+						      <button type="submit" class="btn btn-default">Cadastrar</button>
+						    </div>
+					  </div>
                   </div>
+                  </form>
                   <!-- End SmartWizard Content -->
 
                 </div>

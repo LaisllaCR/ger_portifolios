@@ -13,6 +13,10 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Application\Model\Projeto;
 use Application\Model\ProjetoTable;
+use Application\Model\Indicador;
+use Application\Model\IndicadorTable;
+use Application\Model\IndicadorProjeto;
+use Application\Model\IndicadorProjetoTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
@@ -55,6 +59,28 @@ class Module
 		    					$resultSetPrototype = new ResultSet();
 		    					$resultSetPrototype->setArrayObjectPrototype(new Projeto());
 		    					return new TableGateway('projeto', $dbAdapter, null, $resultSetPrototype);
+	    					},
+	    					'Application\Model\IndicadorTable' =>  function($sm) {
+		    					$tableGateway = $sm->get('IndicadorTableGateway');
+		    					$table = new IndicadorTable($tableGateway);
+		    					return $table;
+	    					},
+	    					'IndicadorTableGateway' => function ($sm) {
+		    					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+		    					$resultSetPrototype = new ResultSet();
+		    					$resultSetPrototype->setArrayObjectPrototype(new Indicador());
+		    					return new TableGateway('indicadores', $dbAdapter, null, $resultSetPrototype);
+	    					},
+	    					'Application\Model\IndicadorProjetoTable' =>  function($sm) {
+		    					$tableGateway = $sm->get('IndicadorProjetoTableGateway');
+		    					$table = new IndicadorProjetoTable($tableGateway);
+		    					return $table;
+	    					},
+	    					'IndicadorProjetoTableGateway' => function ($sm) {
+		    					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+		    					$resultSetPrototype = new ResultSet();
+		    					$resultSetPrototype->setArrayObjectPrototype(new IndicadorProjeto());
+		    					return new TableGateway('indicadores_projeto', $dbAdapter, null, $resultSetPrototype);
 	    					},
     					),
     				);

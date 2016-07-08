@@ -1,44 +1,358 @@
-<div class="jumbotron">
-    <h1><?php echo sprintf($this->translate('Welcome to %sZend Framework 2%s'), '<span class="zf-green">', '</span>') ?></h1>
-    <p><?php echo sprintf($this->translate('Congratulations! You have successfully installed the %sZF2 Skeleton Application%s. You are currently running Zend Framework version %s. This skeleton can serve as a simple starting point for you to begin building your application on ZF2.'), '<a href="https://github.com/zendframework/ZendSkeletonApplication" target="_blank">', '</a>', \Zend\Version\Version::VERSION) ?></p>
-    <p><a class="btn btn-success btn-lg" href="https://github.com/zendframework/zf2" target="_blank"><?php echo $this->translate('Fork Zend Framework 2 on GitHub') ?> &raquo;</a></p>
-</div>
+      <!-- page content -->
+      <div class="right_col" role="main">
 
-<div class="row">
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Projeto</h3>
+            </div>
+            
+          </div>
+          <div class="clearfix"></div>
 
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Follow Development') ?></h3>
+          <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                
+                <div class="x_title">
+                  <h2>Editar Projeto <small></small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>                      
+                    </li>
+                    <li><a href="<?php echo $this->url('application', array('action'=>'index'));?>" class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                
+                <div class="x_content">
+
+
+                  <!-- Smart Wizard -->
+                  <p>Esse é o formulário onde deve ser preenchidas todas as informações do projeto.</p>
+                   <form method="post" action="<?php echo $this->url('projeto/edit',  array('action'=>'edit', 'id' => $projeto->projeto_id));?>" role="form" class="form-horizontal form-label-left">
+                  <div id="wizard" class="form_wizard wizard_horizontal">
+                  
+                    <ul class="wizard_steps">
+                      <li>
+                        <a href="#step-1">
+                          <span class="step_no">1</span>
+                          <span class="step_descr">
+                                            Dados<br />
+                                            <small>Dados Gerais do Projeto</small>
+                                        </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#step-2">
+                          <span class="step_no">2</span>
+                          <span class="step_descr">
+                                            Classificação<br />
+                                            <small>Classificação do projeto</small>
+                                        </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#step-3">
+                          <span class="step_no">3</span>
+                          <span class="step_descr">
+                                            Status<br />
+                                            <small>Status do projeto</small>
+                                        </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#step-4">
+                          <span class="step_no">4</span>
+                          <span class="step_descr">
+                                            Revisão<br />
+                                            <small>Finalize o cadastro do projeto</small>
+                                        </span>
+                        </a>
+                      </li>
+                    </ul>
+                    
+                    <div id="step-1">
+
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_nome">Título <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="projeto_nome" name="projeto_nome" value="<?php echo $projeto->projeto_nome; ?>" required="required" class="form-control col-md-7 col-xs-12">
+                          	<input type="hidden"  id="projeto_id" name="projeto_id" value="<?php echo $projeto->projeto_nome; ?>">                 	
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_gerente_id">Gerente Responsável <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="projeto_gerente_id" value="<?php echo $projeto->projeto_gerente_id; ?>" name="projeto_gerente_id" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label for="projeto_data_inicio" class="control-label col-md-3 col-sm-3 col-xs-12">Data de início <span class="required">*</span></label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="projeto_data_inicio" value="<?php echo $projeto->projeto_data_inicio; ?>" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_inicio">
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label for="projeto_data_previsao_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Previsão de Término <span class="required">*</span> </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="projeto_data_previsao_termino" value="<?php echo $projeto->projeto_data_previsao_termino; ?>" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_previsao_termino">
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label for="projeto_data_real_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Data real de término</label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="projeto_data_real_termino" value="<?php echo $projeto->projeto_data_real_termino; ?>" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_real_termino">
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_orcamento_total">Orçamento Total<span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="projeto_orcamento_total" value="<?php echo $projeto->projeto_orcamento_total; ?>" name="projeto_orcamento_total" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_descricao">Descrição<span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea id="projeto_descricao" name="projeto_descricao" required="required" class="form-control col-md-7 col-xs-12"><?php echo $projeto->projeto_descricao; ?> </textarea>
+                          </div>
+                        </div>   
+
+                    </div>
+                    
+                    <div id="step-2">
+                      <h2 class="StepTitle">Classificação de Risco</h2>
+                      <?php 
+                      $baixoRisco = "";
+                      $medioRisco = "";
+                      $altoRisco = "";
+                      
+                      if($projeto->projeto_risco == "Baixo risco"){
+                      	$baixoRisco = 'checked=""';                      	
+                      }else if($projeto->projeto_risco == "Medio risco"){
+                      	$medioRisco = 'checked=""';                                   	
+                      }else if($projeto->projeto_risco == "Alto risco"){
+                      	$altoRisco = 'checked=""';                          	
+                      }
+                      
+                      ?>
+                      
+                      <div class="form-horizontal form-label-left">
+	
+	                      <div class="col-md-9 col-sm-9 col-xs-12">
+	                      	<div class="radio">
+	                          <label>
+	                            <input type="radio" <?php echo $baixoRisco; ?> value="Baixo risco" id="Baixo risco" name="riscoRadios"> Baixo risco
+	                          </label>
+	                        </div>
+	                        <div class="radio">
+	                          <label>
+	                            <input type="radio" <?php echo $medioRisco; ?> value="Medio risco" id="Medio risco" name="riscoRadios"> Médio risco
+	                          </label>
+	                        </div>
+	                        <div class="radio">
+	                          <label>
+	                            <input type="radio" <?php echo $altoRisco; ?> value="Alto risco" id="Alto risco" name="riscoRadios"> Alto risco
+	                          </label>
+	                        </div>
+	                      </div>
+                    	</div>
+                      
+                    </div>
+                    
+                    <div id="step-3">
+                      <h2 class="StepTitle">Status</h2>
+                      
+                      <?php 
+                      $emAnalise = "";
+                      $analiseRealizada = "";
+                      $analiseAprovada = "";
+                      $iniciado = "";
+                      $planejado = "";
+                      $emAndamento = "";
+                      $encerrado = "";
+                      $cancelado = "";
+                      
+                      if($projeto->projeto_status == "Em analise"){
+                      	$emAnalise = 'checked=""';                      	
+                      }else if($projeto->projeto_status == "Analise realizada"){
+                      	$analiseRealizada = 'checked=""';                                   	
+                      }else if($projeto->projeto_status == "Analise aprovada"){
+                      	$analiseAprovada = 'checked=""';                          	
+                      }else if($projeto->projeto_status == "Iniciado"){
+                      	$iniciado = 'checked=""';                          	
+                      }else if($projeto->projeto_status == "Planejado"){
+                      	$planejado = 'checked=""';                          	
+                      }else if($projeto->projeto_status == "Em andamento"){
+                      	$emAndamento = 'checked=""';                          	
+                      }else if($projeto->projeto_status == "Encerrado"){
+                      	$encerrado = 'checked=""';                          	
+                      }else if($projeto->projeto_status == "Cancelado"){
+                      	$cancelado = 'checked=""';                          	
+                      }
+                      
+                      ?>
+                      
+                      
+                      <div class="form-horizontal form-label-left">
+	                      <div class="col-md-9 col-sm-9 col-xs-12">
+	                      	<div class="radio">
+	                          <label>
+	                            <input type="radio"  <?php echo $emAnalise; ?> value="Em analise" id="Em analise" name="statusRadios"> Em análise
+	                          </label>
+	                        </div>
+	                        <div class="radio">
+	                          <label>
+	                            <input type="radio"  <?php echo $analiseRealizada; ?> value="Analise realizada" id="Analise realizada" name="statusRadios"> Análise realizada
+	                          </label>
+	                        </div>
+	                        <div class="radio">
+	                          <label>
+	                            <input type="radio"   <?php echo $analiseAprovada; ?> value="Analise aprovada" id="Analise aprovada" name="statusRadios"> Análise aprovada
+	                          </label>
+	                        </div>
+	                        <div class="radio">
+	                          <label>
+	                            <input type="radio"   <?php echo $iniciado; ?> value="Iniciado" id="Iniciado" name="statusRadios"> Iniciado
+	                          </label>
+	                        </div>
+	                        <div class="radio">
+	                          <label>
+	                            <input type="radio"  <?php echo $planejado; ?> value="Planejado" id="Planejado" name="statusRadios"> Planejado
+	                          </label>
+	                        </div>
+	                        <div class="radio">
+	                          <label>
+	                            <input type="radio"  <?php echo $emAndamento; ?> value="Em andamento" id="Em andamento" name="statusRadios"> Em andamento
+	                          </label>
+	                        </div>
+	                        <div class="radio">
+	                          <label>
+	                            <input type="radio"  <?php echo $encerrado; ?> value="Encerrado" id="Encerrado" name="statusRadios"> Encerrado
+	                          </label>
+	                        </div>
+	                        <div class="radio">
+	                          <label>
+	                            <input type="radio"  <?php echo $cancelado; ?> value="Cancelado" id="Cancelado" name="statusRadios"> Cancelado
+	                          </label>
+	                        </div>
+	                      </div>
+                    	</div>
+                      
+                    </div>
+                    
+                    <div id="step-4">
+                      <h2 class="StepTitle">Revisão</h2>
+                      
+                        <div class="form-group">
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Título: 
+                          </label>
+                          <div class="col-md-10 col-sm-10 col-xs-12">
+                            Gerenciador de portifólios
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Gerente responsável: 
+                          </label>
+                          <div class="col-md-10 col-sm-10 col-xs-12">
+                            Laislla Ramos
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Data de início: 
+                          </label>
+                          <div class="col-md-10 col-sm-10 col-xs-12">
+                            20/05/2016
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Previsão de término: 
+                          </label>
+                          <div class="col-md-10 col-sm-10 col-xs-12">
+                            01/08/2016
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Data real de término: 
+                          </label>
+                          <div class="col-md-10 col-sm-10 col-xs-12">
+                            --
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Orçamento Total: 
+                          </label>
+                          <div class="col-md-10 col-sm-10 col-xs-12">
+                            R$ 0,00
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Descrição: 
+                          </label>
+                          <div class="col-md-10 col-sm-10 col-xs-12">
+                            Esse é um projeto teste.
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Risco: 
+                          </label>
+                          <div class="col-md-10 col-sm-10 col-xs-12">
+                            Baixo Risco
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Status: 
+                          </label>
+                          <div class="col-md-10 col-sm-10 col-xs-12">
+                            Iniciado
+                          </div>
+                        </div>
+                      
+                    </div>
+
+                        <div class="form-group"> 
+						    <div class="control-label col-sm-4">
+						      <button type="reset" class="btn btn-default" onclick="location.href='<?php echo $this->url('projeto', array('action'=>'index'));?>'">Cancelar</button>
+						    </div>
+						    <div class="control-label col-sm-1">
+						      <button type="submit" class="btn btn-default">Alterar</button>
+						    </div>
+					  </div>
+					  
+                  </div>
+                  </form>
+                  <!-- End SmartWizard Content -->
+
+                </div>
+              </div>
             </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('Zend Framework 2 is under active development. If you are interested in following the development of ZF2, there is a special ZF2 portal on the official Zend Framework website which provides links to the ZF2 %swiki%s, %sdev blog%s, %sissue tracker%s, and much more. This is a great resource for staying up to date with the latest developments!'), '<a href="http://framework.zend.com/wiki/display/ZFDEV2/Home">', '</a>', '<a href="http://framework.zend.com/zf2/blog">', '</a>', '<a href="https://github.com/zendframework/zf2/issues">', '</a>') ?></p>
-                <p><a class="btn btn-success pull-right" href="http://framework.zend.com/zf2" target="_blank"><?php echo $this->translate('ZF2 Development Portal') ?> &raquo;</a></p>
-            </div>
+
+          </div>
         </div>
-    </div>
 
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Discover Modules') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('The community is working on developing a community site to serve as a repository and gallery for ZF2 modules. The project is available %son GitHub%s. The site is currently live and currently contains a list of some of the modules already available for ZF2.'), '<a href="https://github.com/zendframework/modules.zendframework.com">', '</a>') ?></p>
-                <p><a class="btn btn-success pull-right" href="http://modules.zendframework.com/" target="_blank"><?php echo $this->translate('Explore ZF2 Modules') ?> &raquo;</a></p>
-            </div>
-        </div>
-    </div>
+        <!-- footer content -->
+        <footer>
+          <div class="copyright-info">
+            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
+            </p>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
 
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?php echo $this->translate('Help &amp; Support') ?></h3>
-            </div>
-            <div class="panel-body">
-                <p><?php echo sprintf($this->translate('If you need any help or support while developing with ZF2, you may reach us via IRC: %s#zftalk on Freenode%s. We\'d love to hear any questions or feedback you may have regarding the beta releases. Alternatively, you may subscribe and post questions to the %smailing lists%s.'), '<a href="irc://irc.freenode.net/zftalk">', '</a>', '<a href="http://framework.zend.com/wiki/display/ZFDEV/Mailing+Lists">', '</a>') ?></p>
-                <p><a class="btn btn-success pull-right" href="http://webchat.freenode.net?channels=zftalk" target="_blank"><?php echo $this->translate('Ping us on IRC') ?> &raquo;</a></p>
-            </div>
-        </div>
-    </div>
-</div>
+      </div>
+      <!-- /page content -->

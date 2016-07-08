@@ -1,0 +1,96 @@
+      <!-- page content -->
+      <div class="right_col" role="main">
+
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Indicador</h3>
+            </div>
+            
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                
+                <div class="x_title">
+                  <h2>Editar Indicador <small></small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>                      
+                    </li>
+                    <li><a href="<?php echo $this->url('application', array('action'=>'index'));?>" class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                
+                <div class="x_content">
+
+
+                  <!-- Smart Wizard -->
+                  <p>Esse é o formulário onde deve ser preenchidas todas as informações do indicador.</p>
+                   <form method="post" action="<?php echo $this->url('indicador/edit',  array('action'=>'edit', 'id' => $indicador->indicador_id));?>" role="form" class="form-horizontal form-label-left">
+                  <div id="wizard" class="form_wizard wizard_horizontal">
+                  
+                    <ul class="wizard_steps">
+                      <li>
+                        <a href="#step-1">
+                          <span class="step_no">1</span>
+                          <span class="step_descr">
+                                            Dados<br />
+                                            <small>Dados Gerais do Projeto</small>
+                                        </span>
+                        </a>
+                      </li>
+                    </ul>
+                    
+                    <div id="step-1">
+
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Título <span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="indicador_nome" name="indicador_nome" value="<?php echo $indicador->indicador_nome; ?>" required="required" class="form-control col-md-7 col-xs-12">
+                          	<input type="hidden"  id="indicador_id" name="indicador_id" value="<?php echo $indicador->indicador_id; ?>">                 	
+                          </div>
+                        </div>
+
+                    </div>
+
+                        <div class="form-group"> 
+						    <div class="control-label col-sm-4">
+						      <button type="reset" class="btn btn-default" onclick="location.href='<?php echo $this->url('indicador', array('action'=>'index'));?>'">Cancelar</button>
+						    </div>
+						    <div class="control-label col-sm-1">
+						      <button type="submit" class="btn btn-default">Alterar</button>
+						    </div>
+					  </div>
+					  
+                  </div>
+                  </form>
+                  <!-- End SmartWizard Content -->
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- footer content -->
+        <footer>
+          <div class="copyright-info">
+            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
+            </p>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+
+      </div>
+      <!-- /page content -->

@@ -4,7 +4,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Projetos </h3>
+              <h3>Indicadores do Projeto</h3>
             </div>
 
             <div class="title_right">
@@ -24,11 +24,11 @@
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Projetos</h2>
+                  <h2>Indicadores do Projeto</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
-                    <li><a class="link"  href="<?php echo $this->url('projeto/add'); ?>" ><i class="fa fa-plus" aria-hidden="true"></i></a>
+                    <li><a class="link"  href="<?php echo $this->url('indicador_projeto/add', array('id' => $id));?>" ><i class="fa fa-plus" aria-hidden="true"></i></a>
                     </li>
                     <li><a class="close-link"><i class="fa fa-close"></i></a>
                     </li>
@@ -37,17 +37,17 @@
                 </div>
                 <div class="x_content">
 
-                  <p>Lista de todos os projetos</p>
+                  <p>Lista de todos os indicadores do projeto</p>
 
                   <!-- start project list -->
                   <table class="table table-striped projects">
                     <thead>
                       <tr>
                         <th style="width: 1%">#</th>
-                        <th style="width: 20%">Projeto Nome</th>
-                        <th>Membros</th>
-                        <th>Projeto Progresso</th>
-                        <th>Status</th>
+                        <th style="width: 20%">Fase</th>
+                        <th style="width: 20%">Indicador</th>
+                        <th style="width: 20%">Valor mínimo</th>
+                        <th style="width: 20%">Valor máximo</th>
                         <th style="width: 20%">Edição</th>
                       </tr>
                     </thead>
@@ -55,54 +55,26 @@
                     <tbody>
                     <?php 
 
-						foreach ($projetos as $projeto)
+						foreach ($indicadoresProjeto as $indicador)
 						{
+							if(is_object($indicador)){
+                //    echo "<pre>";
+                   // print_r($indicador);die;
 					?>
                       <tr>
-                        <td><?php echo $projeto->projeto_id; ?></td>
+                        <td><?php echo $indicador->indicador_projeto_id; ?></td>
+                        <td><?php echo $indicador->projeto_fase; ?></td>
+                        <td><?php echo $indicador->indicador_id; ?></td>
+                        <td><?php echo $indicador->valor_minimo; ?></td>
+                        <td><?php echo $indicador->valor_maximo; ?></td>
                         <td>
-                          <a><?php echo $projeto->projeto_nome; ?></a>
-                          <br />                          
-		                    <?php 
-		
-								$projeto_data_inicio = explode('-', $projeto->projeto_data_inicio);
-								
-							?>                          
-                          <small>Início <?php echo $projeto_data_inicio[2]."/".$projeto_data_inicio[1]."/".$projeto_data_inicio[0]; ?></small>
-                        </td>
-                        <td>
-                          <ul class="list-inline">
-                            <li>
-                              <img src="http://localhost/personal/njoroge/assets3/img.jpg" class="avatar" alt="Avatar">
-                            </li>
-                            <li>
-                              <img src="http://localhost/personal/njoroge/assets3/img.jpg" class="avatar" alt="Avatar">
-                            </li>
-                            <li>
-                              <img src="http://localhost/personal/njoroge/assets3/img.jpg" class="avatar" alt="Avatar">
-                            </li>
-                            <li>
-                              <img src="http://localhost/personal/njoroge/assets3/img.jpg" class="avatar" alt="Avatar">
-                            </li>
-                          </ul>
-                        </td>
-                        <td class="project_progress">
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
-                          </div>
-                          <small>57% Complete</small>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-success btn-xs">Sucesso</button>
-                        </td>
-                        <td>
-                          <a href="<?php echo $this->url('projeto/detalhe', array('id' => $projeto->projeto_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>  </a>
-                          <a href="<?php echo $this->url('projeto/edit', array('id' => $projeto->projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
-                          <a href="<?php echo $this->url('projeto/delete', array('id' => $projeto->projeto_id)); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
-                          <a href="<?php echo $this->url('indicador_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" class="btn btn-success btn-xs"><i class="fa fa-tags" aria-hidden="true"></i></a>
+                          <a href="<?php echo $this->url('indicador_projeto/detalhe', array('id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>  </a>
+                          <a href="<?php echo $this->url('indicador_projeto/edit', array('id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
+                          <a href="<?php echo $this->url('indicador_projeto/delete', array('id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
                         </td>
                       </tr>
                       <?php 
+							}
 						}
                       ?>                      
                     </tbody>

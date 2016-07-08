@@ -1,0 +1,136 @@
+      <!-- page content -->
+      <div class="right_col" role="main">
+
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Associar Indicador a Projeto</h3>
+            </div>
+            
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                
+                <div class="x_title">
+                  <h2>Associar Indicador a Projeto <small></small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>                      
+                    </li>
+                    <li><a href="<?php echo $this->url('application', array('action'=>'index'));?>" class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                
+                <div class="x_content">
+
+
+                  <!-- Smart Wizard -->
+                  <p>Esse é o formulário onde deve ser preenchidas todas as informações do novo indicador.</p>
+                  
+  				<form method="post" action="<?php echo $this->url('indicador_projeto/add',  array('action'=>'add'));?>" role="form" class="form-horizontal form-label-left">
+              
+                  <div id="wizard" class="form_wizard wizard_horizontal">
+              
+                    <ul class="wizard_steps">
+                      <li>
+                        <a href="#step-1">
+                          <span class="step_no">1</span>
+                          <span class="step_descr">
+                                            Dados<br />
+                                            <small>Dados Gerais do Indicador</small>
+                                        </span>
+                        </a>
+                      </li>
+                    </ul>
+                    
+                    <div id="step-1">
+
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_id">Indicador <span class="required">*</span>
+                          </label>
+                          <div class="col-md-4 col-sm-6 col-xs-12">
+                          	<select name="indicador_id" id="indicador_id"  required="required"  class="form-control col-md-7 col-xs-12">
+                          	<?php 
+                          		foreach($indicadores as $indicador)
+                          		{
+                          	?>
+                          		<option value="<?php echo $indicador->indicador_id; ?>"><?php echo $indicador->indicador_nome; ?></option>
+                          	<?php 
+                          		}
+                          	
+                          	?>
+                          	</select>
+                          </div>
+                        </div>                        
+                        
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_fase">Fase <span class="required">*</span>
+                          </label>
+                          <div class="col-md-3 col-sm-6 col-xs-12">
+                          	<select name="projeto_fase" id="projeto_fase"  required="required"  class="form-control col-md-7 col-xs-12">
+                          		<option value="Iniciacao">Iniciação</option>
+                          		<option value="Planejamento">Planejamento</option>
+                          		<option value="Execucao">Execução</option>
+                          		<option value="Monitoramento e Controle">Monitoramento e Controle</option>
+                          		<option value="Encerramento">Encerramento</option>
+                          	</select>
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="valor_minimo">Valor Mínimo <span class="required">*</span>
+                          </label>
+                          <div class="col-md-2 col-sm-6 col-xs-12">
+                            <input type="number" id="valor_minimo" name="valor_minimo" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="valor_maximo">Valor máximo <span class="required">*</span>
+                          </label>
+                          <div class="col-md-2 col-sm-6 col-xs-12">
+                            <input type="number" id="valor_maximo" name="valor_maximo" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+
+                    </div>
+                    
+                        <div class="form-group"> 
+						    <div class="control-label col-sm-4">
+						      <button type="reset" class="btn btn-default" onclick="location.href='<?php echo $this->url('indicador_projeto/consulta', array('action'=>'consulta', 'id' => 3));?>'">Cancelar</button>
+						    </div>
+						    <div class="control-label col-sm-1">
+						      <button type="submit" class="btn btn-default">Cadastrar</button>
+						    </div>
+					  </div>
+                  </div>
+                  </form>
+                  <!-- End SmartWizard Content -->
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- footer content -->
+        <footer>
+          <div class="copyright-info">
+            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
+            </p>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+
+      </div>
+      <!-- /page content -->
