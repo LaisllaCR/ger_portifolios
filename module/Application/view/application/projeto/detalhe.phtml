@@ -27,18 +27,8 @@
                 <div class="x_title">
                   <h2><?php echo $projeto->projeto_nome;?></h2>
                   <ul class="nav navbar-right panel_toolbox">
-                    <li><a href="#"><i class="fa fa-chevron-up"></i></a>
-                    </li>
                     <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-close"></i></a>
+                      <a href="<?php echo $this->url('projeto/edit', array('id' => $projeto->projeto_id)); ?>" ><i class="fa fa-wrench"></i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
@@ -50,7 +40,7 @@
 
                     <ul class="stats-overview">
                       <li>
-                        <span class="name"> Data Início </span>
+                        <span class="name"> Data Inicio </span>
                         <?php 		
 								$projeto_data_inicio = explode('-', $projeto->projeto_data_inicio);
 								$projeto_data_previsao_termino = explode('-', $projeto->projeto_data_previsao_termino);
@@ -59,79 +49,17 @@
                         <span class="value text-success"> <?php echo $projeto_data_inicio[2]."/".$projeto_data_inicio[1]."/".$projeto_data_inicio[0]; ?> </span>
                       </li>
                       <li>
-                        <span class="name"> Data Previsão Término </span>
+                        <span class="name"> Data Previsao Termino </span>
                         <span class="value text-success"> <?php echo $projeto_data_previsao_termino[2]."/".$projeto_data_previsao_termino[1]."/".$projeto_data_previsao_termino[0]; ?> </span>
                       </li>
                       <li class="hidden-phone">
-                        <span class="name"> Data Término </span>
+                        <span class="name"> Data Termino </span>
                         <span class="value text-success"> <?php echo $projeto_data_real_termino[2]."/".$projeto_data_real_termino[1]."/".$projeto_data_real_termino[0]; ?> </span>
                       </li>
                     </ul>
                     <br />
 
                     <div id="mainb" style="height:350px;"></div>
-
-                    <div>
-
-                      <h4>Recent Activity</h4>
-
-                      <!-- end of user messages -->
-                      <ul class="messages">
-                        <li>
-                          <img src="images/img.jpg" class="avatar" alt="Avatar">
-                          <div class="message_date">
-                            <h3 class="date text-info">24</h3>
-                            <p class="month">May</p>
-                          </div>
-                          <div class="message_wrapper">
-                            <h4 class="heading">Desmond Davison</h4>
-                            <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
-                            <br />
-                            <p class="url">
-                              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
-                              <a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>
-                            </p>
-                          </div>
-                        </li>
-                        <li>
-                          <img src="images/img.jpg" class="avatar" alt="Avatar">
-                          <div class="message_date">
-                            <h3 class="date text-error">21</h3>
-                            <p class="month">May</p>
-                          </div>
-                          <div class="message_wrapper">
-                            <h4 class="heading">Brian Michaels</h4>
-                            <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
-                            <br />
-                            <p class="url">
-                              <span class="fs1" aria-hidden="true" data-icon=""></span>
-                              <a href="#" data-original-title="">Download</a>
-                            </p>
-                          </div>
-                        </li>
-                        <li>
-                          <img src="images/img.jpg" class="avatar" alt="Avatar">
-                          <div class="message_date">
-                            <h3 class="date text-info">24</h3>
-                            <p class="month">May</p>
-                          </div>
-                          <div class="message_wrapper">
-                            <h4 class="heading">Desmond Davison</h4>
-                            <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
-                            <br />
-                            <p class="url">
-                              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
-                              <a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>
-                            </p>
-                          </div>
-                        </li>
-                      </ul>
-                      <!-- end of user messages -->
-
-
-                    </div>
-
-
                   </div>
 
                   <!-- start project-detail sidebar -->
@@ -140,37 +68,35 @@
                     <section class="panel">
 
                       <div class="x_title">
-                        <h2>Projeto Descrição</h2>
+                        <h2>Projeto Descricao</h2>
                         <div class="clearfix"></div>
                       </div>
                       <div class="panel-body">
-                        <h3 class="green"><i class="fa fa-paint-brush"></i> <?php echo $projeto->projeto_nome;?></h3>
 
                         <p><?php echo $projeto->projeto_descricao;?></p>
                         <br />
 
                         <div class="project_detail">
 
-                          <p class="title">Client Company</p>
-                          <p>Deveint Inc</p>
-                          <p class="title">Project Leader</p>
-                          <p>Tony Chicken</p>
+                          <p class="title">Gerente Responsavel</p>
+                          <?php 
+                          $gerente = "";
+                          foreach($usuarios as $usuario){
+                          	if($usuario->usuario_id == $projeto->projeto_gerente_id){
+                          		$gerente = $usuario->usuario_nome;
+                          	}
+                          }
+                          
+                          ?>
+                          <p><?php echo $gerente;?></p>
+                          <p class="title">Orcamento Total</p>
+                          <p><?php echo $projeto->projeto_orcamento_total;?></p>
+                          <p class="title">Risco</p>
+                          <p><?php echo $projeto->projeto_risco;?></p>
+                          <p class="title">Status</p>
+                          <p><?php echo $projeto->projeto_status;?></p>
                         </div>
 
-                        <br />
-                        <h5>Project files</h5>
-                        <ul class="list-unstyled project_files">
-                          <li><a href=""><i class="fa fa-file-word-o"></i> Functional-requirements.docx</a>
-                          </li>
-                          <li><a href=""><i class="fa fa-file-pdf-o"></i> UAT.pdf</a>
-                          </li>
-                          <li><a href=""><i class="fa fa-mail-forward"></i> Email-from-flatbal.mln</a>
-                          </li>
-                          <li><a href=""><i class="fa fa-picture-o"></i> Logo.png</a>
-                          </li>
-                          <li><a href=""><i class="fa fa-file-word-o"></i> Contract-10_12_2014.docx</a>
-                          </li>
-                        </ul>
                         <br />
 
                         <div class="text-center mtop20">
@@ -183,6 +109,49 @@
 
                   </div>
                   <!-- end project-detail sidebar -->
+                  
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+	
+	                      <h4>Membros do Projeto</h4>
+							<div class="row">
+				            <div class="col-md-12">
+				              <div class="x_panel">
+				                <div class="x_content">
+				
+				                  <div class="row">
+				
+				
+				                    <div class="col-md-4 col-sm-4 col-xs-12 animated fadeInDown">
+				                      <div class="well profile_view">
+				                        <div class="col-sm-12">
+				                          <h4 class="brief"><i>Gerente de Projeto</i></h4>
+				                          <div class="left col-xs-7">
+				                            <h2>Nicole Pearson</h2>
+				                            <p>laisllaramos@gmail.com</p> <br> <br> <br> 
+				                          </div>
+				                          <div class="right col-xs-5 text-center">
+				                            <img src="<?php echo $this->basePath('images/img.jpg'); ?>" alt="" class="img-circle img-responsive">
+				                          </div>
+				                        </div>
+				                        <div class="col-xs-12 bottom text-center">
+				                          <div class="col-xs-12 col-sm-6 emphasis">
+				                          <p>4 Tarefas</p>
+				                          </div>
+				                          <div class="col-xs-12 col-sm-6 emphasis">
+				                            <button type="button" class="btn btn-primary btn-xs"> <i class="fa fa-user">
+				                                                            </i> Ver Usuario</button>
+				                          </div>
+				                        </div>
+				                      </div>
+				                    </div>
+				                  </div>
+				
+				                </div>
+				              </div>
+				            </div>
+				          </div>
+	
+	                    </div>
 
                 </div>
               </div>
@@ -231,7 +200,7 @@
         x: 'center',
         y: 'top',
         padding: [0, 0, 20, 0],
-        text: 'Project Perfomance :: Revenue vs Input vs Time Spent',
+        text: 'Tarefas por fase do Projeto',
         textStyle: {
           fontSize: 15,
           fontWeight: 'normal'

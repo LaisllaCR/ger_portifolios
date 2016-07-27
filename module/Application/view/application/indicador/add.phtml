@@ -23,8 +23,6 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>                      
                     </li>
-                    <li><a href="<?php echo $this->url('application', array('action'=>'index'));?>" class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
                   </ul>
                   <div class="clearfix"></div>
                 </div>
@@ -36,22 +34,8 @@
                   <p>Esse é o formulário onde deve ser preenchidas todas as informações do novo indicador.</p>
                   
   				<form method="post" action="<?php echo $this->url('indicador/add',  array('action'=>'add'));?>" role="form" class="form-horizontal form-label-left">
-              
-                  <div id="wizard" class="form_wizard wizard_horizontal">
-              
-                    <ul class="wizard_steps">
-                      <li>
-                        <a href="#step-1">
-                          <span class="step_no">1</span>
-                          <span class="step_descr">
-                                            Dados<br />
-                                            <small>Dados Gerais do Indicador</small>
-                                        </span>
-                        </a>
-                      </li>
-                    </ul>
-                    
-                    <div id="step-1">
+                                                
+                    <div>
 
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Título <span class="required">*</span>
@@ -63,15 +47,18 @@
 
                     </div>
                     
+                    
                         <div class="form-group"> 
-						    <div class="control-label col-sm-4">
-						      <button type="reset" class="btn btn-default" onclick="location.href='<?php echo $this->url('indicador', array('action'=>'index'));?>'">Cancelar</button>
-						    </div>
+                          	<label for="usuario_senha" class="control-label col-md-3 col-sm-3 col-xs-12"> </label>
+                        
 						    <div class="control-label col-sm-1">
 						      <button type="submit" class="btn btn-default">Cadastrar</button>
 						    </div>
+						    <div class="control-label col-sm-2">
+						       <button type="reset" class="btn btn-default" onclick="location.href='<?php echo $this->url('indicador', array('action'=>'index'));?>'">Cancelar</button>
+						   </div>
 					  </div>
-                  </div>
+                    
                   </form>
                   <!-- End SmartWizard Content -->
 

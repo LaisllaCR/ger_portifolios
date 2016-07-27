@@ -16,14 +16,12 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Editar Indicador a Projeto <small></small></h2>
+                  <h2>Editar Indicador de  <?php echo $projeto->projeto_nome;?> <small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"></a>
                     </li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>                      
-                    </li>
-                    <li><a href="<?php echo $this->url('application', array('action'=>'index'));?>" class="close-link"><i class="fa fa-close"></i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
@@ -34,22 +32,13 @@
 
                   <!-- Smart Wizard -->
                   <p>Esse é o formulário onde deve ser preenchidas todas as informações do indicador.</p>
-                   <form method="post" action="<?php echo $this->url('indicador_projeto/edit',  array('action'=>'edit', 'id' => $indicadorProjeto->indicador_projeto_id));?>" role="form" class="form-horizontal form-label-left">
-                  <div id="wizard" class="form_wizard wizard_horizontal">
                   
-                    <ul class="wizard_steps">
-                      <li>
-                        <a href="#step-1">
-                          <span class="step_no">1</span>
-                          <span class="step_descr">
-                                            Dados<br />
-                                            <small>Dados Gerais do Indicador</small>
-                                        </span>
-                        </a>
-                      </li>
-                    </ul>
-                    
-                    <div id="step-1">
+                   <form method="post" action="<?php echo $this->url('indicador_projeto/edit',  array('action'=>'edit','projeto_id' => $projeto_id, 'id' => $indicadorProjeto->indicador_projeto_id));?>" role="form" class="form-horizontal form-label-left">
+                   		
+                   		<input type="hidden" id="indicador_projeto_valor" name="indicador_projeto_valor" value="<?php echo $indicadorProjeto->indicador_projeto_valor;?>">
+                        <input type="hidden" id="indicador_projeto_descricao" name="indicador_projeto_descricao" value="<?php echo $indicadorProjeto->indicador_projeto_descricao;?>">
+                       
+                  <div>
 
                        <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_id">Indicador <span class="required">*</span>
@@ -87,16 +76,16 @@
 	                          $execucao = "";
 	                          $monitoramento = "";
 	                          $encerramento = "";
-                          
-                          	if($indicadorProjeto->projeto_fase == "Iniciacao"){
+	                          
+                          	if(utf8_decode($indicadorProjeto->projeto_fase) == "Iniciação"){
                           		$iniciacao = "selected";
-                          	}else if($indicadorProjeto->projeto_fase == "Planejamento"){
+                          	}else if(utf8_decode($indicadorProjeto->projeto_fase) == "Planejamento"){
                           		$planejamento = "selected";
-                          	}else if($indicadorProjeto->projeto_fase == "Execucao"){
+                          	}else if(utf8_decode($indicadorProjeto->projeto_fase) == "Execução"){
                           		$execucao = "selected";
-                          	}else if($indicadorProjeto->projeto_fase == "Monitoramento e Controle"){
+                          	}else if(utf8_decode($indicadorProjeto->projeto_fase) == "Monitoramento e Controle"){
                           		$monitoramento = "selected";
-                          	}else if($indicadorProjeto->projeto_fase == "Encerramento"){
+                          	}else if(utf8_decode($indicadorProjeto->projeto_fase) == "Encerramento"){
                           		$encerramento = "selected";
                           	}
                           
@@ -128,17 +117,18 @@
                           </div>
                         </div>
 
-                    </div>
 
                         <div class="form-group"> 
-						    <div class="control-label col-sm-4">
-						      <button type="reset" class="btn btn-default" onclick="location.href='<?php echo $this->url('indicador_projeto/consulta', array('action'=>'consulta', 'id' => 3));?>'">Cancelar</button>
-						    </div>
+                          	<label for="usuario_senha" class="control-label col-md-3 col-sm-3 col-xs-12"> </label>
+                        
 						    <div class="control-label col-sm-1">
-						      <button type="submit" class="btn btn-default">Alterar</button>
+						      <button type="submit" class="btn btn-default">Editar</button>
 						    </div>
+						    <div class="control-label col-sm-2">
+						        <button type="reset" class="btn btn-default" onclick="location.href='<?php echo $this->url('indicador_projeto/consulta', array('action'=>'consulta', 'id' => $projeto_id));?>'">Cancelar</button>
+						  </div>
 					  </div>
-					  
+					  					  
                   </div>
                   </form>
                   <!-- End SmartWizard Content -->

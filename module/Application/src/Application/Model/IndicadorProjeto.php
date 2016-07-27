@@ -11,6 +11,8 @@ class IndicadorProjeto
 	public $projeto_fase;
 	public $valor_minimo;
 	public $valor_maximo;
+	public $indicador_projeto_valor;
+	public $indicador_projeto_descricao;
 
 	public function exchangeArray($data)
 	{
@@ -21,5 +23,7 @@ class IndicadorProjeto
 		$this->projeto_fase     = (!empty($data['projeto_fase'])) ? $data['projeto_fase'] : null;		
 		$this->valor_minimo     = (!empty($data['valor_minimo'])) ? $data['valor_minimo'] : null;		
 		$this->valor_maximo     = (!empty($data['valor_maximo'])) ? $data['valor_maximo'] : null;		
+		$this->indicador_projeto_valor     = (!empty($data['indicador_projeto_valor'])) ? $data['indicador_projeto_valor'] : null;		
+		$this->indicador_projeto_descricao     = (!empty($data['indicador_projeto_descricao'])) ? $data['indicador_projeto_descricao'] : null;		
 	}
 }

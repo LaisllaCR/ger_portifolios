@@ -1,0 +1,109 @@
+<?php
+
+ $title = 'Visualizar Tarefa do Projeto';
+ $this->headTitle($title);
+ ?>
+ 
+       <!-- page content -->
+      <div class="right_col" role="main">
+
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Tarefas do Projeto</h3>
+            </div>
+            
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+              <div class="x_panel">
+                
+                <div class="x_title">
+                  <h2><?php echo $title;?> <small></small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>                      
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                
+                <div class="x_content"> 
+ 
+                  <!-- Smart Wizard --> 
+                  
+  				<form action="" method="post" role="form" class="form-horizontal form-label-left">
+  				
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Título:
+                          </label>
+                          <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
+                          <label class="control-label "><?php echo $tarefa->tarefa_nome; ?>
+                          </label>      	
+                          </div>
+                        </div>		
+                        	
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Descrição: </label>
+                          <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">                          
+                          	<label class="control-label"><?php echo trim($tarefa->tarefa_descricao); ?></label>  
+                          </div>
+                        </div>	
+                        
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Status:</label>
+                          <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
+                          	<label class="control-label"><?php echo $tarefa->tarefa_status; ?></label>      	
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Data Início:</label>
+                          <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
+                          	<label class="control-label"><?php echo date('d/m/Y', strtotime($tarefa->tarefa_data_inicio)); ?></label>      	
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Previsão de Término:</label>
+                          <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
+                          	<label class="control-label"><?php echo date('d/m/Y', strtotime($tarefa->tarefa_data_previsao_termino)); ?></label>      	
+                          </div>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Data Término:</label>
+                          <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
+                          	<label class="control-label"><?php echo date('d/m/Y', strtotime($tarefa->tarefa_data_termino)); ?></label>      	
+                          </div>
+                        </div>
+                  
+                  </form>
+                  <!-- End SmartWizard Content -->
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- footer content -->
+        <footer>
+          <div class="copyright-info">
+            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
+            </p>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+
+      </div>
+      <!-- /page content -->
+                  
+ 

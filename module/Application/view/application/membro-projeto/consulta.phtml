@@ -1,0 +1,120 @@
+       <!-- page content -->
+      <div class="right_col" role="main">
+
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Membros do Projeto</h3>
+            </div>
+
+            <div class="title_right">
+              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">Buscar!</button>
+                        </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Membros de <?php echo  $projeto->projeto_nome;?></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="link"  href="<?php echo $this->url('membro_projeto/add', array('id' => $id)); ?>" ><i class="fa fa-plus" aria-hidden="true"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                  <p>Lista todos os membros do projeto</p>
+
+                  <!-- start project list -->
+                  <table class="table table-striped projects">
+                    <thead>
+                      <tr>
+                        <th style="width: 15%">#</th>
+                        <th style="width: 20%">Nome</th>
+                        <th style="width: 20%">Papel</th>
+                        <th style="width: 20%">Edição</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                    <?php 
+                    
+                    $array_usuarios = Array();
+                    
+                    foreach($usuarios as $usuario){
+                    	$array_usuarios[$usuario->usuario_id] = $usuario->usuario_nome;
+                    }
+
+						foreach ($membrosProjeto as $membro)
+						{
+							if(is_object($membro)){
+								
+					?>
+                      <tr>
+                        <td>
+	                        
+                          <div class="col-xs-5">
+                            <img src="<?php echo $this->basePath('images/img.jpg'); ?>" alt="" class="img-circle img-responsive">
+                          </div>
+			            </td>
+                        <td><?php echo $array_usuarios[$membro->usuario_id]; ?></td>
+                        <td>Gerente</td>
+                        <td>
+                          <a href="<?php echo $this->url('membro_projeto/detalhe', array('id' => $membro->projeto_membro_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>  </a>
+                          <a href="<?php echo $this->url('membro_projeto/edit', array('projeto_id' => $id, 'id' => $membro->projeto_membro_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
+                          <a href="<?php echo $this->url('membro_projeto/delete', array('projeto_id' => $id, 'id' => $membro->projeto_membro_id)); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
+                        </td>
+                      </tr>
+                      <?php 
+							}
+						}
+                      ?>                      
+                    </tbody>
+                  </table>
+                  <!-- end project list -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- footer content -->
+        <footer>
+          <div class="copyright-info">
+            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
+            </p>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+
+      </div>
+      <!-- /page content -->
+
+  <script src="<?php echo $this->basePath('js/bootstrap.min.js'); ?>"></script>
+
+  <!-- chart js -->
+  <script src="<?php echo $this->basePath('js/chartjs/chart.min.js'); ?>"></script>
+  <!-- bootstrap progress js -->
+  <script src="<?php echo $this->basePath('js/progressbar/bootstrap-progressbar.min.js'); ?>"></script>
+  <script src="<?php echo $this->basePath('js/nicescroll/jquery.nicescroll.min.js'); ?>"></script>
+  <!-- icheck -->
+  <script src="<?php echo $this->basePath('js/icheck/icheck.min.js'); ?>"></script>
+
+  <script src="<?php echo $this->basePath('js/custom.js'); ?>"></script>
+
+  <!-- pace -->
+  <script src="<?php echo $this->basePath('js/pace/pace.min.js'); ?>"></script>
+
+

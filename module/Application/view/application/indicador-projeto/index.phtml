@@ -26,18 +26,14 @@
                 <div class="x_title">
                   <h2>Indicadores do Projeto</h2>
                   <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
                     <li><a class="link"  href="<?php echo $this->url('indicador_projeto/add', array('id' => $id)); ?>" ><i class="fa fa-plus" aria-hidden="true"></i></a>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
 
-                  <p>Lista de todos os indicadores do projeto</p>
+                  <p>Lista todos os indicadores do projeto</p>
 
                   <!-- start project list -->
                   <table class="table table-striped projects">
@@ -68,8 +64,8 @@
                         <td><?php echo $indicador->valor_maximo; ?></td>
                         <td>
                           <a href="<?php echo $this->url('indicador_projeto/'.$id.'/detalhe', array('id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>  </a>
-                          <a href="<?php echo $this->url('indicador_projeto/'.$id.'/edit', array('id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
-                          <a href="<?php echo $this->url('indicador_projeto/'.$id.'/delete', array('id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
+                          <a href="<?php echo $this->url('indicador_projeto/'.$id.'/edit', array('projeto_id' => $id, 'id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
+                          <a href="<?php echo $this->url('indicador_projeto/'.$id.'/delete', array('projeto_id' => $id, 'id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
                         </td>
                       </tr>
                       <?php 

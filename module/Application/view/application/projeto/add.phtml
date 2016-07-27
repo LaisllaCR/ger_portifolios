@@ -23,8 +23,6 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>                      
                     </li>
-                    <li><a href="<?php echo $this->url('application', array('action'=>'index'));?>" class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
                   </ul>
                   <div class="clearfix"></div>
                 </div>
@@ -37,47 +35,10 @@
                   
   				<form method="post" action="<?php echo $this->url('projeto/add',  array('action'=>'add'));?>" role="form" class="form-horizontal form-label-left">
               
-                  <div id="wizard" class="form_wizard wizard_horizontal">
+                  <div>
               
-                    <ul class="wizard_steps">
-                      <li>
-                        <a href="#step-1">
-                          <span class="step_no">1</span>
-                          <span class="step_descr">
-                                            Dados<br />
-                                            <small>Dados Gerais do Projeto</small>
-                                        </span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#step-2">
-                          <span class="step_no">2</span>
-                          <span class="step_descr">
-                                            Classificação<br />
-                                            <small>Classificação do projeto</small>
-                                        </span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#step-3">
-                          <span class="step_no">3</span>
-                          <span class="step_descr">
-                                            Status<br />
-                                            <small>Status do projeto</small>
-                                        </span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#step-4">
-                          <span class="step_no">4</span>
-                          <span class="step_descr">
-                                            Revisão<br />
-                                            <small>Finalize o cadastro do projeto</small>
-                                        </span>
-                        </a>
-                      </li>
-                    </ul>
-                    <div id="step-1">
+                   
+                    <div>
 
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_nome">Título <span class="required">*</span>
@@ -90,28 +51,37 @@
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_gerente_id">Gerente Responsável <span class="required">*</span>
                           </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="projeto_gerente_id" name="projeto_gerente_id" required="required" class="form-control col-md-7 col-xs-12">
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+                          	<select name="projeto_gerente_id" id="projeto_gerente_id"  required="required"  class="form-control col-md-7 col-xs-12">
+                          	<?php 
+                          			foreach($usuarios as $usuario){
+                          	?>
+                          	
+                          		<option value="<?php echo $usuario->usuario_id; ?>"><?php echo $usuario->usuario_nome?></option>
+                          	<?php 
+                          			}
+                          	?>
+                          	</select>
                           </div>
                         </div>
                         
                         <div class="form-group">
                           <label for="projeto_data_inicio" class="control-label col-md-3 col-sm-3 col-xs-12">Data de início <span class="required">*</span></label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="col-md-3 col-sm-3 col-xs-12">
                             <input id="projeto_data_inicio" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_inicio">
                           </div>
                         </div>
                         
                         <div class="form-group">
                           <label for="projeto_data_previsao_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Previsão de Término <span class="required">*</span> </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="col-md-3 col-sm-3 col-xs-12">
                             <input id="projeto_data_previsao_termino" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_previsao_termino">
                           </div>
                         </div>
                         
                         <div class="form-group">
                           <label for="projeto_data_real_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Data real de término</label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="col-md-3 col-sm-3 col-xs-12">
                             <input id="projeto_data_real_termino" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_real_termino">
                           </div>
                         </div>
@@ -119,7 +89,7 @@
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_orcamento_total">Orçamento Total<span class="required">*</span>
                           </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="col-md-3 col-sm-3 col-xs-12">
                             <input type="text" id="projeto_orcamento_total" name="projeto_orcamento_total" required="required" class="form-control col-md-7 col-xs-12">
                           </div>
                         </div>
@@ -131,17 +101,12 @@
                             <textarea id="projeto_descricao" name="projeto_descricao" required="required" class="form-control col-md-7 col-xs-12"></textarea>
                           </div>
                         </div>
-
-                    </div>
-                    
-                    <div id="step-2">
-                      <h2 class="StepTitle">Classificação de Risco</h2>
-                      
-                      
-                      <div class="form-horizontal form-label-left">
-	
-	                      <div class="col-md-9 col-sm-9 col-xs-12">
-	                      	<div class="radio">
+                     
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="riscoRadios">Classificação de Risco<span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="radio">
 	                          <label>
 	                            <input type="radio" value="Baixo risco" id="Baixo risco" name="riscoRadios"> Baixo risco
 	                          </label>
@@ -156,138 +121,21 @@
 	                            <input type="radio" value="Alto risco" id="Alto risco" name="riscoRadios"> Alto risco
 	                          </label>
 	                        </div>
-	                      </div>
-                    	</div>
-                      
-                    </div>
+                            
+                          </div>
+                        </div>                 
                     
-                    <div id="step-3">
-                      <h2 class="StepTitle">Status</h2>
-                      
-                      <div class="form-horizontal form-label-left">
-	                      <div class="col-md-9 col-sm-9 col-xs-12">
-	                      	<div class="radio">
-	                          <label>
-	                            <input type="radio" value="Em analise" id="Em analise" name="statusRadios"> em análise
-	                          </label>
-	                        </div>
-	                        <div class="radio">
-	                          <label>
-	                            <input type="radio" value="Analise realizada" id="Analise realizada" name="statusRadios"> análise realizada
-	                          </label>
-	                        </div>
-	                        <div class="radio">
-	                          <label>
-	                            <input type="radio" value="Analise aprovada" id="Analise aprovada" name="statusRadios"> análise aprovada
-	                          </label>
-	                        </div>
-	                        <div class="radio">
-	                          <label>
-	                            <input type="radio" value="Iniciado" id="Iniciado" name="statusRadios"> iniciado
-	                          </label>
-	                        </div>
-	                        <div class="radio">
-	                          <label>
-	                            <input type="radio" value="Planejado" id="Planejado" name="statusRadios"> planejado
-	                          </label>
-	                        </div>
-	                        <div class="radio">
-	                          <label>
-	                            <input type="radio" value="Em andamento" id="Em andamento" name="statusRadios"> em andamento
-	                          </label>
-	                        </div>
-	                        <div class="radio">
-	                          <label>
-	                            <input type="radio" value="Encerrado" id="Encerrado" name="statusRadios"> encerrado
-	                          </label>
-	                        </div>
-	                        <div class="radio">
-	                          <label>
-	                            <input type="radio" value="Cancelado" id="Cancelado" name="statusRadios"> cancelado
-	                          </label>
-	                        </div>
-	                      </div>
-                    	</div>
-                      
-                    </div>
-                    
-                    <div id="step-4">
-                      <h2 class="StepTitle">Revisão</h2>
-                      
-                        <div class="form-group">
-                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Título: 
-                          </label>
-                          <div class="col-md-10 col-sm-10 col-xs-12">
-                            Gerenciador de portifólios
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Gerente responsável: 
-                          </label>
-                          <div class="col-md-10 col-sm-10 col-xs-12">
-                            Laislla Ramos
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Data de início: 
-                          </label>
-                          <div class="col-md-10 col-sm-10 col-xs-12">
-                            20/05/2016
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Previsão de término: 
-                          </label>
-                          <div class="col-md-10 col-sm-10 col-xs-12">
-                            01/08/2016
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Data real de término: 
-                          </label>
-                          <div class="col-md-10 col-sm-10 col-xs-12">
-                            --
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Orçamento Total: 
-                          </label>
-                          <div class="col-md-10 col-sm-10 col-xs-12">
-                            R$ 0,00
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Descrição: 
-                          </label>
-                          <div class="col-md-10 col-sm-10 col-xs-12">
-                            Esse é um projeto teste.
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Risco: 
-                          </label>
-                          <div class="col-md-10 col-sm-10 col-xs-12">
-                            Baixo Risco
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">Status: 
-                          </label>
-                          <div class="col-md-10 col-sm-10 col-xs-12">
-                            Iniciado
-                          </div>
-                        </div>
-                      
-                    </div>
-
                         <div class="form-group"> 
-						    <div class="control-label col-sm-4">
-						      <button type="reset" class="btn btn-default" onclick="location.href='<?php echo $this->url('projeto', array('action'=>'index'));?>'">Cancelar</button>
-						    </div>
+                          	<label for="usuario_senha" class="control-label col-md-3 col-sm-3 col-xs-12"> </label>
+                        
 						    <div class="control-label col-sm-1">
 						      <button type="submit" class="btn btn-default">Cadastrar</button>
 						    </div>
+						    <div class="control-label col-sm-2">
+						      <button type="reset" class="btn btn-default" onclick="location.href='<?php echo $this->url('projeto', array('action'=>'index'));?>'">Cancelar</button>
+						    </div>
 					  </div>
+					  
                   </div>
                   </form>
                   <!-- End SmartWizard Content -->

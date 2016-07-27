@@ -1,0 +1,95 @@
+      <!-- page content -->
+      <div class="right_col" role="main">
+
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Analisar Indicador do Projeto</h3>
+            </div>
+            
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                
+                <div class="x_title">
+                  <h2>Analisar Indicador de  <?php echo $projeto->projeto_nome;?> <small></small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>                      
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                
+                <div class="x_content">
+
+
+                  <!-- Smart Wizard -->
+                  <p>Esse é o formulário onde deve ser preenchidas todas as informações da análise do indicador.</p>
+                  
+                   <form method="post" action="<?php echo $this->url('indicador_projeto/analise',  array('action'=>'analise','projeto_id' => $projeto_id, 'id' => $indicadorProjeto->indicador_projeto_id));?>" role="form" class="form-horizontal form-label-left">
+                  
+                  <div>       		
+    		
+                        <input type="hidden" id="projeto_fase" name="projeto_fase" value="<?php echo $indicadorProjeto->projeto_fase;?>">
+                        <input type="hidden" id="indicador_id" name="indicador_id" value="<?php echo $indicadorProjeto->indicador_id;?>">
+                        <input type="hidden" id="valor_minimo" name="valor_minimo" value="<?php echo $indicadorProjeto->valor_minimo;?>">
+                        <input type="hidden" id="valor_maximo" name="valor_maximo" value="<?php echo $indicadorProjeto->valor_maximo;?>">
+                                                     
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_projeto_valor">Valor <span class="required">*</span>
+                          </label>
+                          <div class="col-md-2 col-sm-6 col-xs-12">
+                            <input type="number" id="indicador_projeto_valor" value="<?php echo $indicadorProjeto->indicador_projeto_valor; ?>" name="indicador_projeto_valor" required="required" class="form-control col-md-7 col-xs-12">
+                          </div>
+                        </div>
+                                                
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_projeto_descricao">Descrição<span class="required">*</span>
+                          </label>
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <textarea id="indicador_projeto_descricao" name="indicador_projeto_descricao" required="required" class="form-control col-md-7 col-xs-12"><?php echo $indicadorProjeto->indicador_projeto_descricao; ?> </textarea>
+                          </div>
+                        </div> 
+
+
+                        <div class="form-group"> 
+                          	<label for="usuario_senha" class="control-label col-md-3 col-sm-3 col-xs-12"> </label>
+                        
+						    <div class="control-label col-sm-1">
+						      <button type="submit" class="btn btn-default">Alterar</button>
+						    </div>
+						    <div class="control-label col-sm-2">
+						        <button type="reset" class="btn btn-default" onclick="location.href='<?php echo $this->url('indicador_projeto/consulta', array('action'=>'consulta', 'id' => $projeto_id));?>'">Cancelar</button>
+						  </div>
+					  </div>
+					  					  
+                  </div>
+                  </form>
+                  <!-- End SmartWizard Content -->
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- footer content -->
+        <footer>
+          <div class="copyright-info">
+            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
+            </p>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+
+      </div>
+      <!-- /page content -->

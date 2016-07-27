@@ -130,26 +130,4 @@ class IndicadorController extends AbstractActionController
     			'indicador' => $this->getIndicadorTable()->getIndicador($this->params('id')),
     	));
     }
-    
-    public function addAction()
-    {
-    	$request = $this->getRequest();
-    	if ($request->isPost()) {
-    		$indicador = new Indicador();
-    		$dados_form = $request->getPost();
-    		 
-    		if ($dados_form) {
-    
-    			$indicador->indicador_nome = $dados_form['indicador_nome'];
-    
-    			$this->getIndicadorTable()->saveIndicador($indicador);
-    			 
-    			return $this->redirect()->toRoute('indicador');
-    		}
-    	}
-    	 
-    	return new ViewModel(array(
-    			'indicadores' => $this->getIndicadorTable()->fetchAll(),
-    	));
-    }
 }

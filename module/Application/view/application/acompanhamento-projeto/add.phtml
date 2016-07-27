@@ -1,0 +1,90 @@
+      <!-- page content -->
+      <div class="right_col" role="main">
+
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Novo Membro</h3>
+            </div>
+            
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                
+                <div class="x_title">
+                  <h2>Novo Membro de <?php echo $projeto->projeto_nome;?> <small></small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                
+                <div class="x_content">
+
+
+                  <!-- Smart Wizard -->
+                  <p>Esse é o formulário onde deve ser preenchidas todas as informações do novo membro.</p>
+                  
+  				<form method="post" action="<?php echo $this->url('membro_projeto/add', array('id' => $id));?>" role="form" class="form-horizontal form-label-left">
+              
+                  <div>          	
+                                                
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario_id">Usuário <span class="required">*</span>
+                          </label>
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                          	<select name="usuario_id" id="usuario_id"  required="required"  class="form-control col-md-7 col-xs-12">
+                          	
+                          		<?php 
+                          		foreach ($usuarios as $usuario){
+                          		?>
+                          		
+                          		<option value="<?php echo $usuario->usuario_id?>"><?php echo $usuario->usuario_nome; ?></option>
+                          		
+                          		<?php 
+                          		}
+                          		
+                          		?>
+                          	</select>
+                          </div>
+                        </div>	
+					  
+                        <div class="form-group"> 
+                          	<label for="usuario_senha" class="control-label col-md-3 col-sm-3 col-xs-12"> </label>
+                        
+						    <div class="control-label col-sm-1">
+						      <button type="submit" class="btn btn-default">Cadastrar</button>
+						    </div>
+						    <div class="control-label col-sm-2">
+						       <button type="reset" class="btn btn-default" onclick="location.href='<?php echo $this->url('membro_projeto/consulta', array('action'=>'consulta', 'id' => $id));?>'">Cancelar</button>
+						     </div>
+					  </div>
+					  
+                  </div>
+                  </form>
+                  <!-- End SmartWizard Content -->
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- footer content -->
+        <footer>
+          <div class="copyright-info">
+            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
+            </p>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+
+      </div>
+      <!-- /page content -->

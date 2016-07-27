@@ -10,7 +10,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Indicador</h3>
+              <h3>Indicadores do Projeto</h3>
             </div>
             
           </div>
@@ -18,18 +18,16 @@
 
           <div class="row">
 
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Excluir Indicador <small></small></h2>
+                  <h2>Excluir Indicador de <?php echo $projeto->projeto_nome; ?><small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"></a>
                     </li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>                      
-                    </li>
-                    <li><a href="<?php echo $this->url('application', array('action'=>'index'));?>" class="close-link"><i class="fa fa-close"></i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
@@ -38,26 +36,34 @@
                 <div class="x_content"> 
  
                   <!-- Smart Wizard -->
+                  <?php 
                   
-				 <p>Tem certeza que deseja excluir <br>
-				     <strong><?php echo $this->escapeHtml($indicador->indicador_nome); ?></strong>?
+
+                  $array_indicadores = Array();
+                  
+                  foreach($indicadores as $indicador){
+                  	$array_indicadores[$indicador->indicador_id] = $indicador->indicador_nome;
+                  }
+                  
+                  ?>
+				 <p>Tem certeza que deseja excluir o indicador <br>
+				     <strong><?php echo '"'.$this->escapeHtml($array_indicadores[$indicadorProjeto->indicador_id]).'"'; ?></strong> do projeto ?
 				 </p>
  
                   
-  				<form action="<?php echo $this->url('indicador/delete', array('action' => 'delete','id' => $this->id)); ?>" method="post" role="form" class="form-horizontal form-label-left">
+  				<form action="<?php echo $this->url('indicador_projeto/delete', array('action' => 'delete','projeto_id'=>$projeto_id, 'id' => $this->id)); ?>" method="post" role="form" class="form-horizontal form-label-left">
               
-                  <div id="" class="form_wizard wizard_horizontal">
+                  <div  style="text-align: center;">
                   
                                             
      
-     						<input type="hidden" name="id" value="<?php echo (int) $indicador->indicador_id; ?>" />
-     										    
-						    
+     						<input type="hidden" name="id" value="<?php echo (int) $indicadorProjeto->indicador_projeto_id; ?>" />
+     								
 							  <div class="form-group"> 
-							    <div class="control-label col-sm-1">
+							    <div class="control-label col-md-6 col-sm-6 col-xs-6">
 							      <button type="submit" class="btn btn-default" name="submit" value="Sim">Sim</button>
 							    </div>
-							    <div class="control-label col-sm-2">
+							    <div class="control-label col-md-1 col-sm-1 col-xs-1"">
 							      <button type="submit" class="btn btn-default" name="submit" value="Nao">Não</button>
 							    </div>
 							  </div>

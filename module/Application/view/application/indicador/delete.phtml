@@ -18,7 +18,7 @@
 
           <div class="row">
 
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
               <div class="x_panel">
                 
                 <div class="x_title">
@@ -28,8 +28,6 @@
                     </li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>                      
-                    </li>
-                    <li><a href="<?php echo $this->url('application', array('action'=>'index'));?>" class="close-link"><i class="fa fa-close"></i></a>
                     </li>
                   </ul>
                   <div class="clearfix"></div>
@@ -46,18 +44,17 @@
                   
   				<form action="<?php echo $this->url('indicador/delete', array('action' => 'delete','id' => $this->id)); ?>" method="post" role="form" class="form-horizontal form-label-left">
               
-                  <div id="" class="form_wizard wizard_horizontal">
+                  <div  style="text-align: center;">
                   
                                             
      
      						<input type="hidden" name="id" value="<?php echo (int) $indicador->indicador_id; ?>" />
-     										    
-						    
+     								
 							  <div class="form-group"> 
-							    <div class="control-label col-sm-1">
+							    <div class="control-label col-md-6 col-sm-6 col-xs-6">
 							      <button type="submit" class="btn btn-default" name="submit" value="Sim">Sim</button>
 							    </div>
-							    <div class="control-label col-sm-2">
+							    <div class="control-label col-md-1 col-sm-1 col-xs-1"">
 							      <button type="submit" class="btn btn-default" name="submit" value="Nao">Não</button>
 							    </div>
 							  </div>

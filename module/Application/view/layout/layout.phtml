@@ -103,12 +103,23 @@
 			                <li><a><i class="fa fa-home"></i> Home </a></li>
 			                
 			                <li><a href="<?php echo $this->url('projeto', array('action'=>'index'));?>" ><i class="fa fa-edit"></i> Projetos </a></li>
-			                                
-			                <li><a ><i class="fa fa-users"></i> Equipe </a></li>
-			                
+			                                			                
 			                <li><a href="<?php echo $this->url('indicador', array('action'=>'index'));?>"><i class="fa fa-line-chart"></i> Indicadores </a></li>
 			                
-			                <li><a><i class="fa fa-bar-chart-o"></i> Relatórios </a></li>                
+			                <li><a><i class="fa fa-bar-chart-o"></i> Relatórios </a></li>  
+			                
+			                <li><a href="<?php echo $this->url('usuario', array('action'=>'index'));?>" ><i class="fa fa-users"></i> Usuários </a></li>
+			                
+			                
+			                <li><a><i class="fa fa-user-secret"></i>Perfil de acesso <span class="fa fa-chevron-down"></span></a>
+			                  <ul class="nav child_menu" style="display: none">
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 1));?>">Administrador</a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 3));?>">Líder de Projeto</a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 2));?>">Líder de Escritorio de Projeto</a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 4));?>">Alta Direção</a></li>
+			                  </ul>
+			                </li>
+			                              
 			                
 			              </ul>
 			            </div> 
