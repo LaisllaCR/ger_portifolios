@@ -119,7 +119,7 @@ class UsuarioController extends AbstractActionController
     {
     	$id = (int) $this->params()->fromRoute('id', 0);
     	if (!$id) {
-    		return $this->redirect()->toRoute('usuario', array(
+    		return $this->redirect()->toRoute('home', array(
     				'action' => 'index'
     		));
     	}
@@ -128,7 +128,7 @@ class UsuarioController extends AbstractActionController
     		$usuario = $this->getUsuarioTable()->getUsuario($id);
     	}
     	catch (\Exception $ex) {
-    		return $this->redirect()->toRoute('usuario', array(
+    		return $this->redirect()->toRoute('home', array(
     				'action' => 'index'
     		));
     	}
@@ -143,7 +143,7 @@ class UsuarioController extends AbstractActionController
     		if ($dados_form) {
     			$this->getUsuarioTable()->saveUsuario($usuario);
     
-    			return $this->redirect()->toRoute('usuario');
+    			return $this->redirect()->toRoute('home');
     		}
     	}
     

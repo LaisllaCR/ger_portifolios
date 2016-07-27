@@ -11,35 +11,76 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+
 use Application\Model\Projeto;
 use Application\Model\ProjetoTable;
+
 use Application\Model\Indicador;
 use Application\Model\IndicadorTable;
+
 use Application\Model\IndicadorProjeto;
 use Application\Model\IndicadorProjetoTable;
+
 use Application\Model\ProjetoMembro;
 use Application\Model\ProjetoMembroTable;
+
 use Application\Model\ProjetoAcompanhamento;
 use Application\Model\ProjetoAcompanhamentoTable;
+
 use Application\Model\Tarefa;
 use Application\Model\TarefaTable;
+
 use Application\Model\ProjetoTarefa;
 use Application\Model\ProjetoTarefaTable;
+
 use Application\Model\Usuario;
 use Application\Model\UsuarioTable;
+
 use Application\Model\Perfil;
 use Application\Model\PerfilTable;
+
 use Application\Model\PerfilAcesso;
 use Application\Model\PerfilAcessoTable;
+
 use Application\Model\ProjetoStatusJustificativa;
 use Application\Model\ProjetoStatusJustificativaTable;
+
 use Application\Model\Funcionalidade;
 use Application\Model\FuncionalidadeTable;
+
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
+use Zend\ModuleManager\ModuleManager;
+use Zend\Session\Container;
+
+
 class Module
 {
+	public function init(ModuleManager $moduleManager)
+	{
+		$sharedEvents = $moduleManager->getEventManager()->getSharedManager();
+		 
+		$sharedEvents->attach('Zend\Mvc\Controller\AbstractActionController', MvcEvent::EVENT_DISPATCH, array($this, 'verificaAutenticacao'), 100);
+	}
+	
+	public function verificaAutenticacao($e)
+	{
+		// vamos descobrir onde estamos?
+		$controller = $e->getTarget();
+		$rota = $controller->getEvent()->getRouteMatch()->getMatchedRouteName();
+		 
+		if ($rota != 'login' && $rota != 'login/default') {
+			 
+			$sessao = new Container('usuario_dados');
+						
+			if (!$sessao->id) {
+				return $controller->redirect()->toRoute('login');
+			}
+			 
+		}
+	}
+	
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager        = $e->getApplication()->getEventManager();

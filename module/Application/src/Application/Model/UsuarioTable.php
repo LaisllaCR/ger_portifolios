@@ -30,6 +30,20 @@ class UsuarioTable
 		return $row;
 	}
 
+	public function getUsuarioEmail($email)
+	{
+		$rowset = $this->tableGateway->select(array('usuario_email' => $email));
+			
+		return count($rowset);
+	}
+	
+	public function getUsuarioLogin($login, $senha)
+	{
+		$rowset = $this->tableGateway->select(array('usuario_email' => $login, 'usuario_senha' => $senha));
+			
+		return $rowset;
+	}
+	
 	public function saveUsuario(Usuario $usuario)
 	{
 		$data = array(

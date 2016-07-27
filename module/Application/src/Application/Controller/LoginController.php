@@ -21,9 +21,11 @@ use Zend\Session\Container;
 class LoginController extends AbstractActionController
 {		
     public function indexAction()
-    {    	
-		return new ViewModel(array(
-		));	
+    {    	 
+    	// Turn off the layout, i.e. only render the view script.
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+        return $viewModel;
     }
 
     protected $usuarioTable;
@@ -36,10 +38,31 @@ class LoginController extends AbstractActionController
 		}
 		return $this->usuarioTable;
 	}
+      /*  
+    public function addUsuarioAction()
+    {    	   	
+    	$request = $this->getRequest();
+    	if ($request->isPost()) {
+    		$usuario = new Usuario();
+    		$dados_form = $request->getPost();
+    	
+    		if ($dados_form) {
+
+    			$usuario->usuario_nome = $dados_form['usuario_nome'];
+    			$usuario->usuario_email = $dados_form['usuario_email'];
+    			$usuario->usuario_senha = $dados_form['usuario_senha'];
+    			$usuario->perfil_id = $dados_form['perfil_id'];
+    			 
+    			$this->getUsuarioTable()->saveUsuario($usuario);
+    	
+    			return $this->redirect()->toRoute('login');
+    		}
+    	}
+    }
+    */
     
     public function logarAction()
     {
-
     	$request = $this->getRequest();
     	 
     	if ($request->isPost()) {
@@ -48,12 +71,12 @@ class LoginController extends AbstractActionController
     		 
     		if ($form_dados) {
 					
-    			$usuarioLogado = $this->getUsuarioTable()->getUsuarioLogin($form_dados['login'], $form_dados['senha']);
+    			$usuarioLogado = $this->getUsuarioTable()->getUsuarioLogin($form_dados['usuario_email'], $form_dados['usuario_senha']);
     			$dadosUsuarioLogado = $usuarioLogado->current();
     			
     			if(count($usuarioLogado) > 0){
     				$this->criarSessao($dadosUsuarioLogado, $form_dados['lembrar']);
-    				return $this->redirect()->toRoute('orcamento');
+    				return $this->redirect()->toRoute('home');
     			}else{
     				return $this->redirect()->toRoute('login', array('erro'=>'1'));
     			}
@@ -111,13 +134,12 @@ class LoginController extends AbstractActionController
 	{
 		$this->session->getManager()->forgetMe();
 	}
-	
-	
+		
 	public function sairAction()
 	{	
 		$this->destruirSessao();
-
-		return $this->redirect()->toRoute('home');
+				
+        return $this->redirect()->toRoute('login');
 	}
     
     public function destruirSessao()
