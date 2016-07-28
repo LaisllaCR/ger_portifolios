@@ -14,6 +14,7 @@ use Zend\View\Model\ViewModel;
 
 use Application\Model\Usuario;
 use Application\Model\Perfil;
+use Application\Controller\Login;
 
 class UsuarioController extends AbstractActionController
 {
@@ -152,6 +153,50 @@ class UsuarioController extends AbstractActionController
     			'usuario' => $usuario,
     	);
     	 
+    }
+    
+    public function editUserAction()
+    {
+    	$id = (int) $this->params()->fromRoute('id', 0);
+    	if (!$id) {
+    		return $this->redirect()->toRoute('home', array(
+    				'action' => 'index'
+    		));
+    	}
+    
+    	try {
+    		$usuario = $this->getUsuarioTable()->getUsuario($id);
+    	}
+    	catch (\Exception $ex) {
+    		return $this->redirect()->toRoute('home', array(
+    				'action' => 'index'
+    		));
+    	}
+    
+    	$request = $this->getRequest();
+    	if ($request->isPost()) {
+    		$dados_form = $request->getPost();
+    
+    		$usuario->usuario_id = $id;
+    		$usuario->usuario_nome = $dados_form['usuario_nome'];
+    		$usuario->usuario_email = $dados_form['usuario_email'];
+    		$usuario->usuario_senha = $dados_form['usuario_senha'];
+    		$usuario->perfil_id = $dados_form['perfil_id'];
+    		 
+    		if ($dados_form) {
+    			$this->getUsuarioTable()->saveUsuario($usuario);
+    			$login = new LoginController();
+    			$login->atualizarDadosSessao($usuario);
+    
+    			return $this->redirect()->toRoute('home');
+    		}
+    	}
+    
+    	return array(
+    			'id' => $id,
+    			'usuario' => $usuario,
+    	);
+    
     }
     
     public function deleteAction()

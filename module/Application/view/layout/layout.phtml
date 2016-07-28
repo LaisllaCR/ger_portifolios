@@ -61,7 +61,32 @@ use Zend\Session\Container;
   <!-- Custom styling plus plugins -->
   <link href="<?php echo $this->basePath('css/custom.css'); ?>" rel="stylesheet">
   <link href="<?php echo $this->basePath('css/icheck/flat/green.css'); ?>" rel="stylesheet">
+  
+<script type="text/javascript">
+function toggleFullScreen() {
+	  if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
+	   (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+	    if (document.documentElement.requestFullScreen) {  
+	      document.documentElement.requestFullScreen();  
+	    } else if (document.documentElement.mozRequestFullScreen) {  
+	      document.documentElement.mozRequestFullScreen();  
+	    } else if (document.documentElement.webkitRequestFullScreen) {  
+	      document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
+	    }  
+	  } else {  
+	    if (document.cancelFullScreen) {  
+	      document.cancelFullScreen();  
+	    } else if (document.mozCancelFullScreen) {  
+	      document.mozCancelFullScreen();  
+	    } else if (document.webkitCancelFullScreen) {  
+	      document.webkitCancelFullScreen();  
+	    }  
+	  }  
+	} 
 
+
+
+</script>
 
   <script src="<?php echo $this->basePath('js/jquery.min.js'); ?>"></script>
   
@@ -108,13 +133,13 @@ use Zend\Session\Container;
 			            <div class="menu_section">
 			              <ul class="nav side-menu">
 			              
-			                <li><a><i class="fa fa-home"></i> Home </a></li>
+			                <li><a href="<?php echo $this->url('home', array('action'=>'index'));?>" ><i class="fa fa-home"></i> Home </a></li>
 			                
 			                <li><a href="<?php echo $this->url('projeto', array('action'=>'index'));?>" ><i class="fa fa-clipboard"></i> Projetos </a></li>
 			                                			                
 			                <li><a href="<?php echo $this->url('indicador', array('action'=>'index'));?>"><i class="fa fa-line-chart"></i> Indicadores </a></li>
 			                
-			                <li><a><i class="fa fa-bar-chart-o"></i> Relatórios </a></li>  
+			                <li><a href="<?php echo $this->url('relatorios', array('action'=>'index'));?>" ><i class="fa fa-bar-chart-o"></i> Relatórios </a></li>  
 			                
 			                <li><a href="<?php echo $this->url('usuario', array('action'=>'index'));?>" ><i class="fa fa-users"></i> Usuários </a></li>
 			                
@@ -137,14 +162,14 @@ use Zend\Session\Container;
 			
 			          <!-- /menu footer buttons -->
 			          <div class="sidebar-footer hidden-small">
-			            <a  href="<?php echo $this->url('usuario/edit-senha', array('action' => 'edit-senha', 'id' => $session_dados->id)); ?>" data-toggle="tooltip" data-placement="top" title="Configurações">
+			            <a  href="<?php echo $this->url('usuario/edit-user', array('action' => 'edit-senha', 'id' => $session_dados->id)); ?>" data-toggle="tooltip" data-placement="top" title="Configurações">
 			              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 			            </a>
-			            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-			              <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-			            </a>
-			            <a data-toggle="tooltip" data-placement="top" title="Lock">
+			            <a href="<?php echo $this->url('usuario/edit-senha', array('action' => 'edit-senha', 'id' => $session_dados->id)); ?>" data-toggle="tooltip" data-placement="top" title="Alterar Senha">
 			              <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+			            </a>
+			            <a onclick="toggleFullScreen()" data-toggle="tooltip" data-placement="top" title="Tela cheia">
+			              <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
 			            </a>
 			            <a  href="<?php echo $this->url('login', array('action' => 'sair')); ?>" data-toggle="tooltip" data-placement="top" title="Sair">
 			              <span class="glyphicon glyphicon-off" aria-hidden="true"></span>

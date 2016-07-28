@@ -599,6 +599,19 @@ return array(
 														)
 												)
 										),
+										'edit-user' => array(
+												'type' => 'segment',
+												'options' => array(
+														'route'    => '/edit-user/:id',
+														'defaults' => array(
+																'controller' => 'Application\Controller\Usuario',
+																'action'     => 'edit-user'
+														),
+														'constraints' => array(
+																'id' => '\d+'
+														)
+												)
+										),
 										'delete' => array(
 												'type' => 'segment',
 												'options' => array(
@@ -631,6 +644,21 @@ return array(
 								),
 						),
 						
+						'relatorios' => array(
+								'type'    => 'segment',
+								'options' => array(
+										'route'    => '/relatorios[/:action][/:id]',
+										'constraints' => array(
+												'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+												'id'     => '[0-9]+',
+										),
+										'defaults' => array(
+												'controller' => 'Application\Controller\Relatorios',
+												'action'     => 'index',
+										),
+								),
+						),
+						
 						
 						'application' => array(
 								'type'    => 'Literal',
@@ -658,6 +686,7 @@ return array(
 										),
 								),
 						),
+						
 						'home' => array(
 								'type' => 'Zend\Mvc\Router\Http\Literal',
 								'options' => array(

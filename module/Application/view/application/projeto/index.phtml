@@ -1,3 +1,8 @@
+     <?php 
+
+     use Zend\Session\Container;
+     
+     ?>
        <!-- page content -->
       <div class="right_col" role="main">
 
@@ -26,8 +31,17 @@
                 <div class="x_title">
                   <h2>Projetos</h2>
                   <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="link"  href="<?php echo $this->url('projeto/add'); ?>" ><i class="fa fa-plus" aria-hidden="true"></i></a>
+                  
+		              <?php 
+			        	$session_dados = new Container('usuario_dados');
+			        	if(isset($session_dados->id)){ 
+     						if($session_dados->perfil == 1 || $session_dados->perfil == 2){       	
+			        ?>
+                    <li>
+                    	<a class="link"  href="<?php echo $this->url('projeto/add'); ?>" ><i class="fa fa-plus" aria-hidden="true"></i></a>
                     </li>
+                    <?php 	}
+     					}?>
                   </ul>
                   <div class="clearfix"></div>
                 </div>

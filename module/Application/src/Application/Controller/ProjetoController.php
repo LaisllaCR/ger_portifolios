@@ -15,8 +15,11 @@ use Zend\View\Model\ViewModel;
 use Application\Model\Projeto;
 use Application\Model\ProjetoAcompanhamento;
 use Application\Model\Usuario;
+use Application\Model\ProjetoMembro;
 use Application\Model\ProjetoStatusJustificativa;
+
 use Zend\Db\Sql\Ddl\Column\Date;
+use Zend\Session\Container;
 
 class ProjetoController extends AbstractActionController
 {
@@ -24,13 +27,50 @@ class ProjetoController extends AbstractActionController
 	protected $usuarioTable;
 	protected $projetoStatusJustificativaTable;
 	protected $projetoAcompanhamentoTable;
+	protected $membroProjetoTable;
 	
 	public function indexAction()
-     {
-         return new ViewModel(array(
-             'projetos' => $this->getProjetoTable()->fetchAll(),
-         ));
+    {
+     	$session_dados = new Container('usuario_dados');
+     	if(isset($session_dados->id)){
+     		if($session_dados->perfil == 1 || $session_dados->perfil == 2){
+		         return new ViewModel(array(
+		             'projetos' => $this->getProjetoTable()->fetchAll(),
+		         ));     			
+     		}else{
+     			$membros_projetos = $this->getMembroProjetoTable()->fetchAll();
+     			
+     			$projetos_usuario_sessao = Array();
+     			
+     			foreach ($membros_projetos as $membro){
+     				if($membro->usuario_id == $session_dados->id){
+     					$projetos_usuario_sessao[] = $membro->projeto_id;
+     				}
+     			}
+
+     			$projetos = $this->getProjetoTable()->fetchAll();
+     			$dados_projetos_usuario_sessao = Array();
+     			foreach ($projetos as $projeto){
+     				if(in_array($projeto->projeto_id, $projetos_usuario_sessao)){
+     					$dados_projetos_usuario_sessao[] = $projeto;
+     				}
+     			}
+     			
+		         return new ViewModel(array(
+		             'projetos' => $dados_projetos_usuario_sessao,
+		         ));     			
+     		}
+     	}
      }
+     
+    public function getMembroProjetoTable()
+    {
+    	if (!$this->membroProjetoTable) {
+    		$sm = $this->getServiceLocator();
+    		$this->membroProjetoTable = $sm->get('Application\Model\ProjetoMembroTable');
+    	}
+    	return $this->membroProjetoTable;
+    }
     
     public function getProjetoTable()
     {

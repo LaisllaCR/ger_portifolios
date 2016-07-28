@@ -107,7 +107,8 @@ class LoginController extends AbstractActionController
     	$sessionTimer->id = $usuarioLogadoDados->usuario_id;
     	$sessionTimer->email = $usuarioLogadoDados->usuario_email;
     	$sessionTimer->senha = $usuarioLogadoDados->usuario_senha;
-    	$sessionTimer->nome = $usuarioLogadoDados->usuario_nome;	    	
+    	$sessionTimer->nome = $usuarioLogadoDados->usuario_nome;	
+    	$sessionTimer->perfil = $usuarioLogadoDados->perfil_id;	    	
     }
 
 	public function atualizarDadosSessao($usuario_dados)
@@ -118,6 +119,7 @@ class LoginController extends AbstractActionController
 		$dados_sessao_atual->email = $usuario_dados->usuario_email;
 		$dados_sessao_atual->senha = $usuario_dados->usuario_senha;
 		$dados_sessao_atual->nome = $usuario_dados->usuario_nome;
+    	$dados_sessao_atual->perfil = $usuario_dados->perfil_id;	   
 	}
 	
 

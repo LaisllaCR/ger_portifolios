@@ -11,12 +11,27 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 use Application\Model\Indicador;
 
 class IndicadorController extends AbstractActionController
 {
 	protected $indicadorTable;
+	
+	/*public function indexAction()
+	{
+		$session_dados = new Container('usuario_dados');
+		if(isset($session_dados->id)){
+			if($session_dados->perfil == 1 || $session_dados->perfil == 2){
+		         return new ViewModel(array(
+		             'indicadores' => $this->getIndicadorTable()->fetchAll(),
+		         ));
+			}else{
+    			return $this->redirect()->toRoute('home');					
+			}
+		}
+	}*/
 	
 	public function indexAction()
      {
