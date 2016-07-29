@@ -24,8 +24,10 @@ use Zend\Session\Container;
                         ->prependStylesheet($this->basePath('css/icheck/flat/green.css'))
                         ->prependStylesheet($this->basePath('css/floatexamples.css'))?>                        
         <!-- Scripts -->
+
         <?php echo $this->headScript()
             ->prependFile($this->basePath('js/jquery.min.js'))
+            ->prependFile($this->basePath('js/jquery.maskMoney.js'))
             
             ->prependFile($this->basePath('js/bootstrap.min.js'))
             ->prependFile($this->basePath('js/nicescroll/jquery.nicescroll.min.js'))
@@ -63,6 +65,36 @@ use Zend\Session\Container;
   <link href="<?php echo $this->basePath('css/icheck/flat/green.css'); ?>" rel="stylesheet">
   
 <script type="text/javascript">
+
+var mask = {
+ money: function() {
+ 	var el = this
+ 	,exec = function(v) {
+ 	v = v.replace(/\D/g,"");
+ 	v = new String(Number(v));
+ 	var len = v.length;
+ 	if (1== len)
+ 	v = v.replace(/(\d)/,"0.0$1");
+ 	else if (2 == len)
+ 	v = v.replace(/(\d)/,"0.$1");
+ 	else if (len > 2) {
+ 	v = v.replace(/(\d{2})$/,'.$1');
+ 	}
+ 	return v;
+ 	};
+
+ 	setTimeout(function(){
+ 	el.value = exec(el.value);
+ 	},1);
+ }
+
+}
+
+$(function(){
+ $('#projeto_orcamento_total').bind('keypress',mask.money);
+});
+
+
 function toggleFullScreen() {
 	  if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
 	   (!document.mozFullScreen && !document.webkitIsFullScreen)) {

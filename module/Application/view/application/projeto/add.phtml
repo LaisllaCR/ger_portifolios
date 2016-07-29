@@ -1,3 +1,28 @@
+ <script>
+	
+	function validateForm(){
+    	var segundos = 5;
+    	
+	    var projeto_risco = document.getElementsByName('riscoRadios').value;
+
+		if (document.getElementsByName('riscoRadios').checked) { 	
+    		document.getElementById('alerta').innerHTML = "O campo 'Classificação de risco é obrigatório!'";
+        	document.getElementById('alerta').style.display = 'block';
+    			  	    	
+    		setTimeout(function(){
+    	  		$('#alerta').fadeOut();
+    		}, segundos*1000);      	   	
+
+    		document.getElementsByName('riscoRadios').focus();
+		    return false;
+		}else{	    
+	        $('#add').submit(); 
+	        return true;
+	    }	
+	}
+
+</script>
+     
       <!-- page content -->
       <div class="right_col" role="main">
 
@@ -32,13 +57,17 @@
 
                   <!-- Smart Wizard -->
                   <p>Esse é o formulário onde deve ser preenchidas todas as informações do novo projeto.</p>
-                  
-  				<form method="post" action="<?php echo $this->url('projeto/add',  array('action'=>'add'));?>" role="form" class="form-horizontal form-label-left">
+               
+              	<form id="add" name="add"  onSubmit="validateForm(); return false;" method="post" action="<?php echo $this->url('projeto/add',  array('action'=>'add'));?>" role="form" class="form-horizontal form-label-left" enctype="multipart/form-data">
               
                   <div>
               
                    
                     <div>
+                    
+                  		<div class="alert alert-danger" id="alerta" name="alerta" style="display: none;">
+						  <strong>Erro!</strong> 
+						</div> 
 
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_nome">Título <span class="required">*</span>
@@ -68,14 +97,14 @@
                         <div class="form-group">
                           <label for="projeto_data_inicio" class="control-label col-md-3 col-sm-3 col-xs-12">Data de início <span class="required">*</span></label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
-                            <input id="projeto_data_inicio" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_inicio">
+                            <input id="projeto_data_inicio" class="form-control col-md-7 col-xs-12"  required="required" type="date" name="projeto_data_inicio">
                           </div>
                         </div>
                         
                         <div class="form-group">
                           <label for="projeto_data_previsao_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Previsão de Término <span class="required">*</span> </label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
-                            <input id="projeto_data_previsao_termino" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_previsao_termino">
+                            <input id="projeto_data_previsao_termino" class="form-control col-md-7 col-xs-12"  required="required" type="date" name="projeto_data_previsao_termino">
                           </div>
                         </div>
                         
@@ -103,7 +132,7 @@
                         </div>
                      
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="riscoRadios">Classificação de Risco<span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="riscoRadios" required="required">Classificação de Risco<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="radio">
