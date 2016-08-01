@@ -1,3 +1,36 @@
+   <script>
+	
+	function validateForm(){
+    	var segundos = 5;
+
+    		  var rads = document.getElementsByName("membros");
+    		  var novo_membro = document.getElementById("usuario_id").value;
+    		  var membro_atual = document.getElementById("membro_atual").value;
+
+    		  var cont = 0;
+    		  for(var i = 0; i < rads.length; i++){
+        		  var membro = rads[i].value;
+        		  if(novo_membro == membro){
+
+            		  if(membro_atual != novo_membro){
+        		    	document.getElementById('alerta').innerHTML = "Esse usuário já faz parte do projeto!";
+        		        document.getElementById('alerta').style.display = 'block';
+        		    		  	    	
+        		    	setTimeout(function(){
+        		    	  $('#alerta').fadeOut();
+        		    	}, segundos*1000);  
+
+        		    	cont = cont +1;
+        		        return false;	
+            		  }	        
+        		  }
+    		   }
+
+		       $('#membro_edit').submit(); 
+		       return true;
+	}
+
+</script>   
       <!-- page content -->
       <div class="right_col" role="main">
 
@@ -29,10 +62,57 @@
                   <!-- Smart Wizard -->
                   <p>Esse é o formulário onde deve ser preenchidas todas as informações do membro do projeto.</p>
                   
-  				<form method="post" action="<?php echo $this->url('membro_projeto/edit', array('id' => $id, 'projeto_id' => $projeto_id));?>" role="form" class="form-horizontal form-label-left">
-              
-                  <div>                    
-                                                
+  				<form id="membro_edit" name="membro_edit"  onSubmit="validateForm(); return false;"   method="post" action="<?php echo $this->url('membro_projeto/edit', array('id' => $id, 'projeto_id' => $projeto_id));?>" role="form" class="form-horizontal form-label-left">
+              <?php 
+                          		foreach ($membros as $membrovalida){
+                          			if($membrovalida->usuario_id == $membro->usuario_id){ ?>
+                          				
+                          				<input type="hidden" id="membro_atual" name="membro_atual" value="<?php echo $membrovalida->usuario_id?>">
+                          			<?php 	
+                          			}
+                          		?>
+                          		
+                          		<input type="hidden" id="membro_<?php echo $membrovalida->usuario_id?>" name="membros" value="<?php echo $membrovalida->usuario_id?>">
+                          		
+                          		<?php 
+                          		}
+                          		
+                          		?>
+              	
+                  <div>        
+                  		<div class="alert alert-danger" id="alerta" name="alerta" style="display: none;">
+						  <strong>Erro!</strong> 
+						</div>   	
+						   
+                      <?php 
+                      $dev = "";
+                      $des = "";
+                      $test = "";
+                      $analiReq = "";
+                      $analiNeg = "";
+                      $BD = "";
+                      $arq = "";
+                      $analiSis = "";
+                      
+                      if($membro->projeto_membro_papel == "Desenvolvedor"){
+                      	$dev = 'selected';                      	
+                      }else if($membro->projeto_membro_papel == "Designer"){
+                      	$des = 'selected';                                   	
+                      }else if($membro->projeto_membro_papel == "Testador"){
+                      	$test = 'selected';                          	
+                      }else if($membro->projeto_membro_papel == "Analista de Requisitos"){
+                      	$analiReq = 'selected';                          	
+                      }else if($membro->projeto_membro_papel == "Analista de negocio"){
+                      	$analiNeg = 'selected';                          	
+                      }else if($membro->projeto_membro_papel == "Administrador de BD"){
+                      	$BD = 'selected';                          	
+                      }else if($membro->projeto_membro_papel == "Arquiteto da Informacao"){
+                      	$arq = 'selected';                          	
+                      }else if($membro->projeto_membro_papel == "Analista de Sistemas"){
+                      	$analiSis = 'selected';                          	
+                      }
+                      
+                      ?>                  
                                        
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario_id">Usuário <span class="required">*</span>
@@ -52,6 +132,23 @@
                           		}
                           		
                           		?>
+                          	</select>
+                          </div>
+                        </div>	
+                        
+                         <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_membro_papel">Papel <span class="required">*</span>
+                          </label>
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                          	<select name="projeto_membro_papel" id="projeto_membro_papel"  required="required"  class="form-control col-md-7 col-xs-12">
+                          		<option  <?php echo $dev; ?> value="Desenvolvedor">Desenvolvedor</option>
+                          		<option  <?php echo $des; ?> value="Designer">Designer</option>
+                          		<option  <?php echo $test; ?> value="Testador">Testador</option>
+                          		<option  <?php echo $analiReq; ?> value="Analista de Requisitos">Analista de Requisitos</option>
+                          		<option  <?php echo $analiNeg; ?> value="Analista de negocio">Analista de negocio</option>
+                          		<option  <?php echo $BD; ?> value="Administrador de BD">Administrador de BD</option>
+                          		<option  <?php echo $arq; ?> value="Arquiteto da Informacao">Arquiteto da Informacao</option>
+                          		<option  <?php echo $analiSis; ?> value="Analista de Sistemas">Analista de Sistemas</option>
                           	</select>
                           </div>
                         </div>	

@@ -68,6 +68,11 @@ class ProjetoAcompanhamentoTable
 		$this->tableGateway->delete(array('projeto_acompanhamento_id' => (int) $id));
 	}
 	
+	public function deleteProjetoAcompanhamentos($id)
+	{
+		$this->tableGateway->delete(array('projeto_id' => (int) $id));
+	}
+	
 	public function salvarDatasAcompanhamento(Projeto $projeto)
 	{
 		 

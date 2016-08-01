@@ -61,4 +61,10 @@ class ProjetoStatusJustificativaTable
 			}
 		}
 	}
+	
+
+	public function deleteProjetoStatusJustificativas($id)
+	{
+		$this->tableGateway->delete(array('projeto_id' => (int) $id));
+	}
 }

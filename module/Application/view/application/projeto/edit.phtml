@@ -1,3 +1,70 @@
+ <script>
+	
+	function validateForm(){
+    	var segundos = 5;
+		
+		var projeto_data_inicio = document.getElementById("projeto_data_inicio").value;
+		var projeto_data_previsao_termino = document.getElementById("projeto_data_previsao_termino").value;
+		var projeto_data_real_termino = document.getElementById("projeto_data_real_termino").value;
+		
+	    var data_inicio = new Date(projeto_data_inicio);
+	    var data_previsao = new Date(projeto_data_previsao_termino);
+	    var data_termino = new Date(projeto_data_real_termino);
+	    
+	    if (data_inicio > data_previsao) {
+		    
+	    	document.getElementById('alerta').innerHTML = "A Data de Início deve ser menor que a Previsão de Término!";
+	        document.getElementById('alerta').style.display = 'block';
+	    		  	    	
+	    	setTimeout(function(){
+	    	  $('#alerta').fadeOut();
+	    	}, segundos*1000);  
+	    	   
+	        return false;		        
+	    }
+
+	    if(projeto_data_inicio == projeto_data_previsao_termino) {
+		    
+	    	document.getElementById('alerta').innerHTML = "A Data de Início e a Previsão de Término NÃO devem ser iguais!";
+	        document.getElementById('alerta').style.display = 'block';
+	    		  	    	
+	    	setTimeout(function(){
+	    	  $('#alerta').fadeOut();
+	    	}, segundos*1000);  
+	    	   
+	        return false;		        
+	    }
+	    
+		if (data_inicio > data_termino || data_inicio === data_termino) {
+		    
+	    	document.getElementById('alerta').innerHTML = "A Data de Início deve ser menor que a Data de Término!";
+	        document.getElementById('alerta').style.display = 'block';
+	    		  	    	
+	    	setTimeout(function(){
+	    	  $('#alerta').fadeOut();
+	    	}, segundos*1000);  
+	    	   
+	        return false;		        
+	    } 
+
+	    if(projeto_data_inicio == projeto_data_real_termino) {
+		    
+	    	document.getElementById('alerta').innerHTML = "A Data de Início e a Data de Término NÃO devem ser iguais!";
+	        document.getElementById('alerta').style.display = 'block';
+	    		  	    	
+	    	setTimeout(function(){
+	    	  $('#alerta').fadeOut();
+	    	}, segundos*1000);  
+	    	   
+	        return false;		        
+	    } else {
+		       $('#projeto_edit').submit(); 
+		       return true;
+	    }		
+	}
+
+</script>
+
       <!-- page content -->
       <div class="right_col" role="main">
 
@@ -32,12 +99,15 @@
 
                   <!-- Smart Wizard -->
                   <p>Esse é o formulário onde deve ser preenchidas todas as informações do projeto.</p>
-                   <form method="post" action="<?php echo $this->url('projeto/edit',  array('action'=>'edit', 'id' => $projeto->projeto_id));?>" role="form" class="form-horizontal form-label-left">
+                   <form id="projeto_edit" name="projeto_edit"  onSubmit="validateForm(); return false;" method="post" action="<?php echo $this->url('projeto/edit',  array('action'=>'edit', 'id' => $projeto->projeto_id));?>" role="form" class="form-horizontal form-label-left" enctype="multipart/form-data">
                   
                   <div >
                   
                     
                     
+                  		<div class="alert alert-danger" id="alerta" name="alerta" style="display: none;">
+						  <strong>Erro!</strong> 
+						</div> 
 
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_nome">Título <span class="required">*</span>
@@ -75,14 +145,14 @@
                         <div class="form-group">
                           <label for="projeto_data_inicio" class="control-label col-md-3 col-sm-3 col-xs-12">Data de início <span class="required">*</span></label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
-                            <input id="projeto_data_inicio" value="<?php echo $projeto->projeto_data_inicio; ?>" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_inicio">
+                            <input required="required"  id="projeto_data_inicio" value="<?php echo $projeto->projeto_data_inicio; ?>" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_inicio">
                           </div>
                         </div>
                         
                         <div class="form-group">
                           <label for="projeto_data_previsao_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Previsão de Término <span class="required">*</span> </label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
-                            <input id="projeto_data_previsao_termino" value="<?php echo $projeto->projeto_data_previsao_termino; ?>" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_previsao_termino">
+                            <input required="required" id="projeto_data_previsao_termino" value="<?php echo $projeto->projeto_data_previsao_termino; ?>" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_previsao_termino">
                           </div>
                         </div>
                         
@@ -133,17 +203,17 @@
 		                      <div class="col-md-9 col-sm-9 col-xs-12">
 		                      	<div class="radio">
 		                          <label>
-		                            <input type="radio" <?php echo $baixoRisco; ?> value="Baixo risco" id="Baixo risco" name="riscoRadios"> Baixo risco
+		                            <input required="required" type="radio" <?php echo $baixoRisco; ?> value="Baixo risco" id="Baixo risco" name="riscoRadios"> Baixo risco
 		                          </label>
 		                        </div>
 		                        <div class="radio">
 		                          <label>
-		                            <input type="radio" <?php echo $medioRisco; ?> value="Medio risco" id="Medio risco" name="riscoRadios"> Médio risco
+		                            <input required="required" type="radio" <?php echo $medioRisco; ?> value="Medio risco" id="Medio risco" name="riscoRadios"> Médio risco
 		                          </label>
 		                        </div>
 		                        <div class="radio">
 		                          <label>
-		                            <input type="radio" <?php echo $altoRisco; ?> value="Alto risco" id="Alto risco" name="riscoRadios"> Alto risco
+		                            <input required="required" type="radio" <?php echo $altoRisco; ?> value="Alto risco" id="Alto risco" name="riscoRadios"> Alto risco
 		                          </label>
 		                        </div>
 		                      </div>

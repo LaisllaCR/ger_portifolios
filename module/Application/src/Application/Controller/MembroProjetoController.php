@@ -96,7 +96,7 @@ class MembroProjetoController extends AbstractActionController
 
     			$membroProjeto->usuario_id = $dados_form['usuario_id'];
     			$membroProjeto->projeto_id = $id;
-    			$membroProjeto->perfil_id = 5;
+    			$membroProjeto->projeto_membro_papel = $dados_form['projeto_membro_papel'];
     			 
     			$this->getMembroProjetoTable()->saveMembroProjeto($membroProjeto);
 
@@ -141,7 +141,7 @@ class MembroProjetoController extends AbstractActionController
     		$membroProjeto->projeto_membro_id = $id; 
     		$membroProjeto->projeto_id = $projeto_id;    
     		$membroProjeto->usuario_id = $dados_form['usuario_id'];
-    		$membroProjeto->papel_id = 5;
+    		$membroProjeto->projeto_membro_papel = $dados_form['projeto_membro_papel'];
     		 
     		if ($dados_form) {
     			$this->getMembroProjetoTable()->saveMembroProjeto($membroProjeto);
@@ -157,6 +157,7 @@ class MembroProjetoController extends AbstractActionController
     			'projeto_id' => $projeto_id,
      			'usuarios' => $this->getUsuarioTable()->fetchAll(),
      			'projeto' => $this->getProjetoTable()->getProjeto($projeto_id),
+    			'membros' => $this->getMembroProjetoTable()->fetchAll(),
     			'membro' => $membroProjeto,
      	);
     	

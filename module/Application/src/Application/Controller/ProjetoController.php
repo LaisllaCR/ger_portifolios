@@ -17,6 +17,8 @@ use Application\Model\ProjetoAcompanhamento;
 use Application\Model\Usuario;
 use Application\Model\ProjetoMembro;
 use Application\Model\ProjetoStatusJustificativa;
+use Application\Model\IndicadorProjeto;
+use Application\Model\ProjetoTarefa;
 
 use Zend\Db\Sql\Ddl\Column\Date;
 use Zend\Session\Container;
@@ -25,9 +27,12 @@ class ProjetoController extends AbstractActionController
 {
 	protected $projetoTable;
 	protected $usuarioTable;
+	
 	protected $projetoStatusJustificativaTable;
+	protected $indicadorProjetoTable;
 	protected $projetoAcompanhamentoTable;
 	protected $membroProjetoTable;
+	protected $tarefaProjetoTable;
 	
 	public function indexAction()
     {
@@ -61,6 +66,16 @@ class ProjetoController extends AbstractActionController
 		         ));     			
      		}
      	}
+     }
+    
+
+     public function getIndicadorProjetoTable()
+     {
+     	if (!$this->indicadorProjetoTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->indicadorProjetoTable = $sm->get('Application\Model\IndicadorProjetoTable');
+     	}
+     	return $this->indicadorProjetoTable;
      }
      
     public function getMembroProjetoTable()
@@ -106,6 +121,15 @@ class ProjetoController extends AbstractActionController
     		$this->projetoAcompanhamentoTable = $sm->get('Application\Model\ProjetoAcompanhamentoTable');
     	}
     	return $this->projetoAcompanhamentoTable;
+    }    
+
+    public function getTarefaProjetoTable()
+    {
+    	if (!$this->tarefaProjetoTable) {
+    		$sm = $this->getServiceLocator();
+    		$this->tarefaProjetoTable = $sm->get('Application\Model\ProjetoTarefaTable');
+    	}
+    	return $this->tarefaProjetoTable;
     }
     
     public function addAction()
@@ -126,6 +150,8 @@ class ProjetoController extends AbstractActionController
     			$projeto->projeto_orcamento_total = $dados_form['projeto_orcamento_total'];
     			$projeto->projeto_descricao = $dados_form['projeto_descricao'];
     			$projeto->projeto_status = 'Em analise';
+    			
+    			
     			$projeto->projeto_risco = $dados_form['riscoRadios'];
     			 
     			$id = $this->getProjetoTable()->saveProjeto($projeto);
@@ -244,6 +270,7 @@ class ProjetoController extends AbstractActionController
     
     	return array(
     			'id' => $id,
+    			'justificativas' => $projetoJustificativas,
     			'projeto' => $projeto,
     			'usuarios' => $this->getUsuarioTable()->fetchAll(),
     	);
@@ -264,7 +291,24 @@ class ProjetoController extends AbstractActionController
 
     		if($dados_form['submit'] == "Sim"){
     			$id = (int) $request->getPost('id');
+    			
+    			// exclui projeto
     			$this->getProjetoTable()->deleteProjeto($id);
+    			
+    			// exclui indicadores do projeto
+    			$this->getIndicadorProjetoTable()->deleteIndicadoresProjeto($id);
+
+    			// exclui acompanhamento
+    			$this->getProjetoAcompanhamentoTable()->deleteProjetoAcompanhamentos($id);
+    			
+    			// exclui justificativas de status do projeto
+    			$this->getProjetoStatusJustificativaTable()->deleteProjetoStatusJustificativas($id);
+    			
+    			// exclui tarefas
+    			$this->getTarefaProjetoTable()->deleteTarefasProjeto($id);
+    			
+    			// exclui membros
+    			$this->getMembroProjetoTable()->deleteProjetoMembros($id);
     		}
     	
     		return $this->redirect()->toRoute('projeto');
@@ -279,10 +323,13 @@ class ProjetoController extends AbstractActionController
 	public function detalheAction()
     {
 		 $request = $this->getRequest();
-		 
+		 $id = $this->params('id');
+
+		 $membrosProjeto = $this->getMembroProjetoTable()->getMembrosProjeto($id);
 		 
     	return new ViewModel(array(
-    			'projeto' => $this->getProjetoTable()->getProjeto($this->params('id')),
+     			'membrosProjeto' => $membrosProjeto,
+    			'projeto' => $this->getProjetoTable()->getProjeto($id),
     			'usuarios' => $this->getUsuarioTable()->fetchAll(),
     	));
     }

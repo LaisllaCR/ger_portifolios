@@ -69,4 +69,9 @@ class ProjetoTarefaTable
 	{
 		$this->tableGateway->delete(array('tarefa_id' => (int) $id));
 	}
+	
+	public function deleteTarefasProjeto($id)
+	{
+		$this->tableGateway->delete(array('projeto_id' => (int) $id));
+	}
 }

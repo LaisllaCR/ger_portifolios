@@ -89,4 +89,9 @@ class IndicadorProjetoTable
 	{
 		$this->tableGateway->delete(array('indicador_projeto_id' => (int) $id));
 	}
+	
+	public function deleteIndicadoresProjeto($id)
+	{
+		$this->tableGateway->delete(array('projeto_id' => (int) $id));
+	}
 }

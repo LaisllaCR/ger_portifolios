@@ -1,3 +1,28 @@
+ <script>
+	
+	function validateForm(){
+    	var segundos = 5;
+		
+		var senha = document.getElementById("usuario_senha").value;
+	    
+	    if (senha.length < 6 ) {
+		    
+	    	document.getElementById('alerta').innerHTML = "A Senha deve conter no mínimo 6 dígitos!";
+	        document.getElementById('alerta').style.display = 'block';
+	    		  	    	
+	    	setTimeout(function(){
+	    	  $('#alerta').fadeOut();
+	    	}, segundos*1000);  
+	    	   
+	        return false;		        
+	    } else {
+		       $('#usuario_edit').submit(); 
+		       return true;
+	    }		
+	}
+
+</script>
+
       <!-- page content -->
       <div class="right_col" role="main">
 
@@ -33,9 +58,13 @@
                   <!-- Smart Wizard -->
                   <p>Esse é o formulário onde deve ser preenchidas todas as informações do usuário.</p> <br>
                   
-  				<form method="post" action="<?php echo $this->url('usuario/edit',  array('action'=>'edit', 'id' => $usuario->usuario_id));?>" role="form" class="form-horizontal form-label-left">
+  				<form id="usuario_edit" name="usuario_edit"  onSubmit="validateForm(); return false;"   method="post" action="<?php echo $this->url('usuario/edit',  array('action'=>'edit', 'id' => $usuario->usuario_id));?>" role="form" class="form-horizontal form-label-left">
               
                   <div>
+                  		<div class="alert alert-danger" id="alerta" name="alerta" style="display: none;">
+						  <strong>Erro!</strong> 
+						</div>
+						
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario_nome">Nome <span class="required">*</span>
                           </label>
@@ -55,7 +84,7 @@
                         <div class="form-group">
                           <label for="usuario_senha" class="control-label col-md-3 col-sm-3 col-xs-12">Senha <span class="required">*</span></label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
-                            <input id="usuario_senha" class="form-control col-md-7 col-xs-12"  value="<?php echo $usuario->usuario_senha; ?>" type="password" name="usuario_senha">
+                            <input id="usuario_senha" class="form-control col-md-7 col-xs-12" required="required"  value="<?php echo $usuario->usuario_senha; ?>" type="password" name="usuario_senha">
                           </div>
                         </div>
                                                 

@@ -1,3 +1,40 @@
+  <script>
+	
+	function validateForm(){
+    	var segundos = 5;
+		
+		var valor_minimo = document.getElementById("valor_minimo").value;
+		var valor_maximo = document.getElementById("valor_maximo").value;
+			    
+	    if (valor_minimo > valor_maximo) {
+		    
+	    	document.getElementById('alerta').innerHTML = "O valor mínimo deve ser menor que o valor máximo!";
+	        document.getElementById('alerta').style.display = 'block';
+	    		  	    	
+	    	setTimeout(function(){
+	    	  $('#alerta').fadeOut();
+	    	}, segundos*1000);  
+	    	   
+	        return false;		        
+	    }
+
+	    if (valor_minimo == valor_maximo) {
+		    
+	    	document.getElementById('alerta').innerHTML = "O valor mínimo deve ser menor que o valor máximo!";
+	        document.getElementById('alerta').style.display = 'block';
+	    		  	    	
+	    	setTimeout(function(){
+	    	  $('#alerta').fadeOut();
+	    	}, segundos*1000);  
+	    	   
+	        return false;		        
+	    }else {
+		       $('#indicador_edit').submit(); 
+		       return true;
+	    }		
+	}
+
+</script>
       <!-- page content -->
       <div class="right_col" role="main">
 
@@ -33,12 +70,15 @@
                   <!-- Smart Wizard -->
                   <p>Esse é o formulário onde deve ser preenchidas todas as informações do indicador.</p>
                   
-                   <form method="post" action="<?php echo $this->url('indicador_projeto/edit',  array('action'=>'edit','projeto_id' => $projeto_id, 'id' => $indicadorProjeto->indicador_projeto_id));?>" role="form" class="form-horizontal form-label-left">
+                   <form  id="indicador_edit" name="indicador_edit"  onSubmit="validateForm(); return false;"  method="post" action="<?php echo $this->url('indicador_projeto/edit',  array('action'=>'edit','projeto_id' => $projeto_id, 'id' => $indicadorProjeto->indicador_projeto_id));?>" role="form" class="form-horizontal form-label-left">
                    		
                    		<input type="hidden" id="indicador_projeto_valor" name="indicador_projeto_valor" value="<?php echo $indicadorProjeto->indicador_projeto_valor;?>">
                         <input type="hidden" id="indicador_projeto_descricao" name="indicador_projeto_descricao" value="<?php echo $indicadorProjeto->indicador_projeto_descricao;?>">
                        
                   <div>
+                  		<div class="alert alert-danger" id="alerta" name="alerta" style="display: none;">
+						  <strong>Erro!</strong> 
+						</div> 
 
                        <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_id">Indicador <span class="required">*</span>
@@ -110,7 +150,7 @@
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="valor_maximo">Valor máximo <span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="valor_maximo">Valor Máximo <span class="required">*</span>
                           </label>
                           <div class="col-md-2 col-sm-6 col-xs-12">
                             <input type="number" id="valor_maximo" value="<?php echo $indicadorProjeto->valor_maximo; ?>" name="valor_maximo" required="required" class="form-control col-md-7 col-xs-12">

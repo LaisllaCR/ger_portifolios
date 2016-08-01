@@ -1,4 +1,49 @@
-      <!-- page content -->
+ <script>
+	
+	function validateForm(){
+		
+    	var segundos = 5;	 
+	  	var status = getRadioValor('statusRadios');
+	  	var justificativa = document.getElementById("projeto_status_justificativa").value;
+
+	  	if(status == "Cancelado" || status == "Analise aprovada"){
+		  
+		  if(justificativa == ""){
+			  	document.getElementById('alerta').innerHTML = "A justificativa é obrigatória para esse Status!";
+		        document.getElementById('alerta').style.display = 'block';
+		    		  	    	
+		    	setTimeout(function(){
+		    	  $('#alerta').fadeOut();
+		    	}, segundos*1000);  
+		    	   
+		        return false;
+		  }else {
+		       $('#projeto_justificativa').submit(); 
+		       return true;
+	      }
+	  
+	  	}else {
+	       $('#projeto_justificativa').submit(); 
+	       return true;
+    	}
+	}
+	  
+	  
+	 function getRadioValor(name){
+	  var rads = document.getElementsByName(name);
+	   
+	  for(var i = 0; i < rads.length; i++){
+	   if(rads[i].checked){
+	    return rads[i].value;
+	   }
+	   
+		}
+	 }
+	   
+	 
+</script>
+
+	    <!-- page content -->
       <div class="right_col" role="main">
 
         <div class="">
@@ -31,8 +76,8 @@
 
 
                   <!-- Smart Wizard -->
-                  <p>Esse é o formulário onde deve ser preenchidas o status atual do projeto.</p>
-                   <form method="post" action="<?php echo $this->url('projeto/status',  array('action'=>'status', 'id' => $projeto->projeto_id));?>" role="form" class="form-horizontal form-label-left">
+                  <p>Esse é o formulário onde deve ser preenchido o status atual do projeto.</p>
+                   <form id="projeto_justificativa" name="projeto_justificativa"  onSubmit="validateForm(); return false;" method="post" action="<?php echo $this->url('projeto/status',  array('action'=>'status', 'id' => $projeto->projeto_id));?>" role="form" class="form-horizontal form-label-left">
                   
                   <div>
                       
@@ -65,6 +110,9 @@
                       }
                       
                       ?>
+                  		<div class="alert alert-danger" id="alerta" name="alerta" style="display: none;">
+						  <strong>Erro!</strong> 
+						</div> 
                       
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="statusRadios">Status<span class="required">*</span>
@@ -119,7 +167,7 @@
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_status_justificativa">Justificativa
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea id="projeto_status_justificativa" name="projeto_status_justificativa['analise aprovada']" class="form-control col-md-7 col-xs-12"></textarea>
+                            <textarea id="projeto_status_justificativa" name="projeto_status_justificativa" class="form-control col-md-7 col-xs-12"></textarea>
                           </div>
                         </div> 
                         
@@ -137,6 +185,51 @@
                   </div>
                   </form>
                   <!-- End SmartWizard Content -->
+                  
+                  <!-- ------------Historico de status -->
+                  
+          <div class="row">
+            <div class="col-md-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Histórico</h2>                  
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                  <!-- start project list -->
+                  <table class="table table-striped projects">
+                    <thead>
+                      <tr>
+                        <th style="width: 15%">Data</th>
+                        <th style="width: 15%">Status</th>
+                        <th style="width: 10%">Justificativa</th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                    <?php 
+
+						foreach ($justificativas as $justificativa)
+						{
+					?>
+                      <tr>
+                        <td><?php echo date('d/m/Y', strtotime($justificativa->projeto_status_data)); ?></td>
+                        <td><?php echo $justificativa->projeto_status; ?></td>
+                        <td><?php echo $justificativa->projeto_status_justificativa; ?></td>
+                      </tr>
+                      <?php 
+						}
+                      ?>                      
+                    </tbody>
+                  </table>
+                  <!-- end project list -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ----------Historico de status -->
 
                 </div>
               </div>

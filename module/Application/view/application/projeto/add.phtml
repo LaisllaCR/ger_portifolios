@@ -2,23 +2,65 @@
 	
 	function validateForm(){
     	var segundos = 5;
-    	
-	    var projeto_risco = document.getElementsByName('riscoRadios').value;
+		
+		var projeto_data_inicio = document.getElementById("projeto_data_inicio").value;
+		var projeto_data_previsao_termino = document.getElementById("projeto_data_previsao_termino").value;
+		var projeto_data_real_termino = document.getElementById("projeto_data_real_termino").value;
+		
+	    var data_inicio = new Date(projeto_data_inicio);
+	    var data_previsao = new Date(projeto_data_previsao_termino);
+	    var data_termino = new Date(projeto_data_real_termino);
+	    
+	    if (data_inicio > data_previsao) {
+		    
+	    	document.getElementById('alerta').innerHTML = "A Data de Início deve ser menor que a Previsão de Término!";
+	        document.getElementById('alerta').style.display = 'block';
+	    		  	    	
+	    	setTimeout(function(){
+	    	  $('#alerta').fadeOut();
+	    	}, segundos*1000);  
+	    	   
+	        return false;		        
+	    }
 
-		if (document.getElementsByName('riscoRadios').checked) { 	
-    		document.getElementById('alerta').innerHTML = "O campo 'Classificação de risco é obrigatório!'";
-        	document.getElementById('alerta').style.display = 'block';
-    			  	    	
-    		setTimeout(function(){
-    	  		$('#alerta').fadeOut();
-    		}, segundos*1000);      	   	
+	    if(projeto_data_inicio == projeto_data_previsao_termino) {
+		    
+	    	document.getElementById('alerta').innerHTML = "A Data de Início e a Previsão de Término NÃO devem ser iguais!";
+	        document.getElementById('alerta').style.display = 'block';
+	    		  	    	
+	    	setTimeout(function(){
+	    	  $('#alerta').fadeOut();
+	    	}, segundos*1000);  
+	    	   
+	        return false;		        
+	    }
+	    
+		if (data_inicio > data_termino || data_inicio === data_termino) {
+		    
+	    	document.getElementById('alerta').innerHTML = "A Data de Início deve ser menor que a Data de Término!";
+	        document.getElementById('alerta').style.display = 'block';
+	    		  	    	
+	    	setTimeout(function(){
+	    	  $('#alerta').fadeOut();
+	    	}, segundos*1000);  
+	    	   
+	        return false;		        
+	    } 
 
-    		document.getElementsByName('riscoRadios').focus();
-		    return false;
-		}else{	    
-	        $('#add').submit(); 
-	        return true;
-	    }	
+	    if(projeto_data_inicio == projeto_data_real_termino) {
+		    
+	    	document.getElementById('alerta').innerHTML = "A Data de Início e a Data de Término NÃO devem ser iguais!";
+	        document.getElementById('alerta').style.display = 'block';
+	    		  	    	
+	    	setTimeout(function(){
+	    	  $('#alerta').fadeOut();
+	    	}, segundos*1000);  
+	    	   
+	        return false;		        
+	    } else {
+		       $('#projeto_add').submit(); 
+		       return true;
+	    }		
 	}
 
 </script>
@@ -58,7 +100,7 @@
                   <!-- Smart Wizard -->
                   <p>Esse é o formulário onde deve ser preenchidas todas as informações do novo projeto.</p>
                
-              	<form id="add" name="add"  onSubmit="validateForm(); return false;" method="post" action="<?php echo $this->url('projeto/add',  array('action'=>'add'));?>" role="form" class="form-horizontal form-label-left" enctype="multipart/form-data">
+              	<form id="projeto_add" name="projeto_add"  onSubmit="validateForm(); return false;" method="post" action="<?php echo $this->url('projeto/add',  array('action'=>'add'));?>" role="form" class="form-horizontal form-label-left" enctype="multipart/form-data">
               
                   <div>
               
@@ -132,22 +174,22 @@
                         </div>
                      
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="riscoRadios" required="required">Classificação de Risco<span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="riscoRadios">Classificação de Risco<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="radio">
 	                          <label>
-	                            <input type="radio" value="Baixo risco" id="Baixo risco" name="riscoRadios"> Baixo risco
+	                            <input type="radio" value="Baixo risco" id="Baixo risco" name="riscoRadios" required="required"> Baixo risco
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio" value="Medio risco" id="Medio risco" name="riscoRadios"> Médio risco
+	                            <input type="radio" value="Medio risco" id="Medio risco" name="riscoRadios" required="required"> Médio risco
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio" value="Alto risco" id="Alto risco" name="riscoRadios"> Alto risco
+	                            <input type="radio" value="Alto risco" id="Alto risco" name="riscoRadios" required="required"> Alto risco
 	                          </label>
 	                        </div>
                             

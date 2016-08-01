@@ -80,15 +80,15 @@
 
                           <p class="title">Gerente Responsavel</p>
                           <?php 
-                          $gerente = "";
-                          foreach($usuarios as $usuario){
-                          	if($usuario->usuario_id == $projeto->projeto_gerente_id){
-                          		$gerente = $usuario->usuario_nome;
-                          	}
-                          }
+
+                          $array_usuarios = Array();
                           
+                          foreach($usuarios as $usuario){
+                          	$array_usuarios[$usuario->usuario_id] = $usuario->usuario_nome;
+                          }
+                                                    
                           ?>
-                          <p><?php echo $gerente;?></p>
+                          <p><?php echo $array_usuarios[$projeto->projeto_gerente_id];?></p>
                           <p class="title">Orcamento Total</p>
                           <p><?php echo $projeto->projeto_orcamento_total;?></p>
                           <p class="title">Risco</p>
@@ -100,8 +100,8 @@
                         <br />
 
                         <div class="text-center mtop20">
-                          <a href="#" class="btn btn-sm btn-primary">Add files</a>
-                          <a href="#" class="btn btn-sm btn-warning">Report contact</a>
+                          <a href="<?php echo $this->url('projeto/edit', array('id' => $projeto->projeto_id)); ?>"   class="btn btn-sm btn-primary">Alterar Projeto</a>
+                          <a href="<?php echo $this->url('projeto/status', array('id' => $projeto->projeto_id)); ?>"   class="btn btn-sm btn-warning">Mudar Status</a>
                         </div>
                       </div>
 
@@ -120,30 +120,33 @@
 				
 				                  <div class="row">
 				
-				
+				<?php 
+				foreach ($membrosProjeto as $membro){
+					
+				?>
 				                    <div class="col-md-4 col-sm-4 col-xs-12 animated fadeInDown">
 				                      <div class="well profile_view">
 				                        <div class="col-sm-12">
-				                          <h4 class="brief"><i>Gerente de Projeto</i></h4>
+				                          <h4 class="brief"><i><?php echo $membro->projeto_membro_papel; ?></i></h4>
 				                          <div class="left col-xs-7">
-				                            <h2>Nicole Pearson</h2>
-				                            <p>laisllaramos@gmail.com</p> <br> <br> <br> 
+				                            <h2><?php echo $array_usuarios[$membro->usuario_id]; ?></h2>
 				                          </div>
 				                          <div class="right col-xs-5 text-center">
 				                            <img src="<?php echo $this->basePath('images/img.jpg'); ?>" alt="" class="img-circle img-responsive">
 				                          </div>
 				                        </div>
 				                        <div class="col-xs-12 bottom text-center">
-				                          <div class="col-xs-12 col-sm-6 emphasis">
-				                          <p>4 Tarefas</p>
-				                          </div>
-				                          <div class="col-xs-12 col-sm-6 emphasis">
-				                            <button type="button" class="btn btn-primary btn-xs"> <i class="fa fa-user">
-				                                                            </i> Ver Usuario</button>
+				                          <div class="col-xs-12 col-sm-12 emphasis">
+				                            <a  href="<?php echo $this->url('usuario/detalhe', array('id' => $membro->usuario_id)); ?>"  type="button" class="btn btn-primary btn-xs"> <i class="fa fa-user">
+				                                                            </i> Ver Usuario</a>
 				                          </div>
 				                        </div>
 				                      </div>
 				                    </div>
+				<?php 
+				}
+				?>
+				                    
 				                  </div>
 				
 				                </div>

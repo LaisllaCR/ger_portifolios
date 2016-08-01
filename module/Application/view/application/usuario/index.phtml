@@ -63,7 +63,7 @@
                         <td><?php echo $usuario->usuario_id; ?></td>
                         <td><?php echo $usuario->usuario_nome; ?></td>
                         <td><?php echo $usuario->usuario_email; ?></td>
-                        <td><?php echo $array_perfis[$usuario->perfil_id]; ?>
+                        <td><?php echo utf8_decode($array_perfis[$usuario->perfil_id]); ?>
                         
                         </td>
                         

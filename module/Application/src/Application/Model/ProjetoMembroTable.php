@@ -46,7 +46,7 @@ class ProjetoMembroTable
 		$data = array(
 				'projeto_id' => $projetoMembro->projeto_id,
 				'usuario_id'  => $projetoMembro->usuario_id,
-				'perfil_id'  => $projetoMembro->perfil_id,
+				'projeto_membro_papel'  => $projetoMembro->projeto_membro_papel,
 		);
 
 		$id = (int) $projetoMembro->projeto_membro_id;
@@ -64,5 +64,10 @@ class ProjetoMembroTable
 	public function deleteProjetoMembro($id)
 	{
 		$this->tableGateway->delete(array('projeto_membro_id' => (int) $id));
+	}
+	
+	public function deleteProjetoMembros($id)
+	{
+		$this->tableGateway->delete(array('projeto_id' => (int) $id));
 	}
 }

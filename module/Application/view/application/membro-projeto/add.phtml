@@ -1,3 +1,33 @@
+   <script>
+	
+	function validateForm(){
+    	var segundos = 5;
+
+    		  var rads = document.getElementsByName("membros");
+    		  var novo_membro = document.getElementById("usuario_id").value;
+
+    		  var cont = 0;
+    		  for(var i = 0; i < rads.length; i++){
+        		  var membro = rads[i].value;
+        		  if(novo_membro == membro){
+        		    	document.getElementById('alerta').innerHTML = "Esse usuário já faz parte do projeto!";
+        		        document.getElementById('alerta').style.display = 'block';
+        		    		  	    	
+        		    	setTimeout(function(){
+        		    	  $('#alerta').fadeOut();
+        		    	}, segundos*1000);  
+
+        		    	cont = cont +1;
+        		        return false;		        
+        		  }
+    		   }
+
+		       $('#membro_add').submit(); 
+		       return true;
+	}
+
+</script>   
+     
       <!-- page content -->
       <div class="right_col" role="main">
 
@@ -30,9 +60,23 @@
                   <!-- Smart Wizard -->
                   <p>Esse é o formulário onde deve ser preenchidas todas as informações do novo membro.</p>
                   
-  				<form method="post" action="<?php echo $this->url('membro_projeto/add', array('id' => $id));?>" role="form" class="form-horizontal form-label-left">
+  				<form id="membro_add" name="membro_add"  onSubmit="validateForm(); return false;"  method="post" action="<?php echo $this->url('membro_projeto/add', array('id' => $id));?>" role="form" class="form-horizontal form-label-left">
               
-                  <div>          	
+                          		<?php 
+                          		foreach ($membros as $membro){
+                          		?>
+                          		
+                          		<input type="hidden" id="membro_<?php echo $membro->usuario_id?>" name="membros" value="<?php echo $membro->usuario_id?>">
+                          		
+                          		<?php 
+                          		}
+                          		
+                          		?>
+              	
+                  <div>        
+                  		<div class="alert alert-danger" id="alerta" name="alerta" style="display: none;">
+						  <strong>Erro!</strong> 
+						</div>   	
                                                 
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario_id">Usuário <span class="required">*</span>
@@ -50,6 +94,23 @@
                           		}
                           		
                           		?>
+                          	</select>
+                          </div>
+                        </div>	
+                                                
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_membro_papel">Papel <span class="required">*</span>
+                          </label>
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                          	<select name="projeto_membro_papel" id="projeto_membro_papel"  required="required"  class="form-control col-md-7 col-xs-12">
+                          		<option value="Desenvolvedor">Desenvolvedor</option>
+                          		<option value="Designer">Designer</option>
+                          		<option value="Testador">Testador</option>
+                          		<option value="Analista de Requisitos">Analista de Requisitos</option>
+                          		<option value="Analista de negocio">Analista de negocio</option>
+                          		<option value="Administrador de BD">Administrador de BD</option>
+                          		<option value="Arquiteto da Informacao">Arquiteto da Informacao</option>
+                          		<option value="Analista de Sistemas">Analista de Sistemas</option>
                           	</select>
                           </div>
                         </div>	
