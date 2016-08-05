@@ -14,17 +14,43 @@ use Zend\View\Model\ViewModel;
 
 use Application\Model\ProjetoAcompanhamento;
 use Application\Model\Projeto;
+use Application\Model\ProjetoSemana;
+use Application\Model\ProjetoSemanaTable;
+use Application\Model\ProjetoSemanaJustificativa;
+use Application\Model\ProjetoSemanaJustificativaTable;
 
 class AcompanhamentoProjetoController extends AbstractActionController
 {
 	protected $acompanhamentoProjetoTable;
 	protected $projetoTable;
+	protected $projetoSemanaTable;
+	protected $projetoSemanaJustificativaTable;
 	
 	public function indexAction()
      {
+     	$id = (int) $this->params()->fromRoute('id', 0);
          return new ViewModel(array(
+     			'id' => $id,
              'acompanhamentos' => $this->getAcompanhamentoProjetoTable()->fetchAll(),
          ));
+     }
+
+     public function getProjetoSemanaTable()
+     {
+     	if (!$this->projetoSemanaTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->projetoSemanaTable = $sm->get('Application\Model\ProjetoSemanaTable');
+     	}
+     	return $this->projetoSemanaTable;
+     }
+     
+     public function getProjetoSemanaJustificativaTable()
+     {
+     	if (!$this->projetoSemanaJustificativaTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->projetoSemanaJustificativaTable = $sm->get('Application\Model\ProjetoSemanaJustificativaTable');
+     	}
+     	return $this->projetoSemanaJustificativaTable;
      }
      
      public function consultaAction()
@@ -38,7 +64,7 @@ class AcompanhamentoProjetoController extends AbstractActionController
      	}
      	 
      	try {
-     		$acompanhamentosProjeto = $this->getAcompanhamentoProjetoTable()->getAcompanhamentosProjeto($id);
+     		$acompanhamentosProjeto = $this->getProjetoSemanaTable()->getProjetoSemanas($id);
      	}
      	catch (\Exception $ex) {
      		return $this->redirect()->toRoute('acompanhamento_projeto', array(
@@ -103,19 +129,31 @@ class AcompanhamentoProjetoController extends AbstractActionController
     
     public function editAction()
     {
-    	$id = (int) $this->params()->fromRoute('id', 0);
+    	$projeto_semana_id = (int) $this->params()->fromRoute('id', 0);
     	$projeto_id = (int) $this->params()->fromRoute('projeto_id', 0);
-    	    	
-    	if (!$id) {
+    	$projetoSemana = $this->getProjetoSemanaTable()->getProjetoSemana($projeto_semana_id);
+    	    	    	
+    	if (!$projeto_semana_id) {
     		return $this->redirect()->toRoute('acompanhamento_projeto', array(
     				'action' => 'index'
     		));
     	}
     
     	try {
-    		$acompanhamentoProjeto = $this->getAcompanhamentoProjetoTable()->getProjetoAcompanhamento($id);
-    	}
-    	catch (\Exception $ex) {
+    		
+    		if($this->getProjetoSemanaJustificativaTable()->getProjetoSemanaJustificativa($projeto_semana_id)){
+     			$acompanhamentoProjeto = $this->getProjetoSemanaJustificativaTable()->getProjetoSemanaJustificativa($projeto_semana_id);
+    		}else{ 
+    			$acompanhamentoProjeto = new ProjetoSemanaJustificativa();
+    			$acompanhamentoProjeto->projeto_semana_id = $projeto_semana_id;
+    			$acompanhamentoProjeto->projeto_semana_justificativa = NULL;
+    			
+    			$id = $this->getProjetoSemanaJustificativaTable()->saveProjetoSemanaJustificativa($acompanhamentoProjeto);
+    			
+    			$acompanhamentoProjeto = $this->getProjetoSemanaJustificativaTable()->getProjetoSemanaJustificativa($projeto_semana_id);
+    			
+    		}
+    	} catch (\Exception $ex) {
     		return $this->redirect()->toRoute('acompanhamento_projeto', array(
     				'action' => 'index'
     		));
@@ -125,15 +163,19 @@ class AcompanhamentoProjetoController extends AbstractActionController
     	if ($request->isPost()) {
     		$dados_form = $request->getPost(); 
     		
-    		$acompanhamentoProjeto->projeto_acompanhamento_id = $id; 
+    		/*$acompanhamentoProjeto->projeto_acompanhamento_id = $id; 
     		$acompanhamentoProjeto->projeto_id = $projeto_id;    
     		$acompanhamentoProjeto->projeto_acompanhamento_descricao = $dados_form['projeto_acompanhamento_descricao'];
     		$acompanhamentoProjeto->projeto_acompanhamento_data_inicio = $dados_form['projeto_acompanhamento_data_inicio'];
     		$acompanhamentoProjeto->projeto_acompanhamento_data_termino = $dados_form['projeto_acompanhamento_data_termino'];
-    		$acompanhamentoProjeto->projeto_acompanhamento_semana = $dados_form['projeto_acompanhamento_semana'];
-    		 
+    		$acompanhamentoProjeto->projeto_acompanhamento_semana = $dados_form['projeto_acompanhamento_semana'];*/
+    		
+    		$acompanhamentoProjeto->projeto_semana_id = $projeto_semana_id;
+    		$acompanhamentoProjeto->projeto_semana_justificativa = $dados_form['projeto_semana_justificativa'];
+    		    		 
     		if ($dados_form) {
-    			$this->getAcompanhamentoProjetoTable()->saveAcompanhamentoProjeto($acompanhamentoProjeto);
+    			$this->getProjetoSemanaJustificativaTable()->saveProjetoSemanaJustificativa($acompanhamentoProjeto);
+    			//$this->getAcompanhamentoProjetoTable()->saveAcompanhamentoProjeto($acompanhamentoProjeto);
 
     			return $this->redirect()->toRoute('acompanhamento_projeto/consulta', array(
     					'action' => 'consulta', 'id' => $projeto_id
@@ -142,12 +184,12 @@ class AcompanhamentoProjetoController extends AbstractActionController
     	}
     	 
     	return array(
-    			'id' => $id,
+    			'projeto_semana_id' => $projeto_semana_id,
+    			'projeto_semana' => $projetoSemana,
     			'projeto_id' => $projeto_id,
      			'projeto' => $this->getProjetoTable()->getProjeto($projeto_id),
     			'acompanhamento' => $acompanhamentoProjeto,
-     	);
-    	
+     	);    	
     }
     
     public function deleteAction()
@@ -184,11 +226,17 @@ class AcompanhamentoProjetoController extends AbstractActionController
     
 	public function detalheAction()
     {
-		 $request = $this->getRequest();
-		 
+    	$projeto_semana_id = (int) $this->params()->fromRoute('id', 0);
+    	
+		$request = $this->getRequest();
+
+		$acompanhamentoProjeto = $this->getProjetoSemanaJustificativaTable()->getProjetoSemanaJustificativa($projeto_semana_id);
+    	$projetoSemana = $this->getProjetoSemanaTable()->getProjetoSemana($projeto_semana_id);
 		 
     	return new ViewModel(array(
-    			'acompanhamento' => $this->getAcompanhamentoProjetoTable()->getProjetoAcompanhamento($this->params('id')),
+    			'projetoSemana' => $projetoSemana,
+    			'acompanhamento' => $acompanhamentoProjeto,
+    			//'acompanhamento' => $this->getAcompanhamentoProjetoTable()->getProjetoAcompanhamento($this->params('id')),
     	));
     }   
  	

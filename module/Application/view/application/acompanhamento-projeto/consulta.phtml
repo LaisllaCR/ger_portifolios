@@ -40,7 +40,6 @@
                         <th style="width: 20%">Semana</th>
                         <th style="width: 20%">Data Início</th>
                         <th style="width: 20%">Data Término</th>
-                        <th style="width: 20%">Descrição</th>
                         <th style="width: 20%">Edição</th>
                       </tr>
                     </thead>
@@ -53,17 +52,12 @@
                     	if(is_object($acompanhamento)){
                     ?>
                       <tr>
-                        <td><?php echo $acompanhamento->projeto_acompanhamento_semana; ?></td>
-                        <td><?php echo date('d/m/Y', strtotime($acompanhamento->projeto_acompanhamento_data_inicio)); ?></td>
-                        <td><?php echo date('d/m/Y', strtotime($acompanhamento->projeto_acompanhamento_data_termino)); ?></td>
-                        <?php if(!empty($acompanhamento->projeto_acompanhamento_descricao)){?>
-                        <td><?php echo substr($acompanhamento->projeto_acompanhamento_descricao, 0, 27)."..."; ?></td>
-                        <?php }else{?>
-                        <td></td>
-                        <?php }?>
+                        <td><?php echo $acompanhamento->projeto_semana; ?></td>
+                        <td><?php echo date('d/m/Y', strtotime($acompanhamento->projeto_semana_data_inicio)); ?></td>
+                        <td><?php echo date('d/m/Y', strtotime($acompanhamento->projeto_semana_data_fim)); ?></td>
                         <td>
-                          <a href="<?php echo $this->url('acompanhamento_projeto/detalhe', array('id' => $acompanhamento->projeto_acompanhamento_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>  </a>
-                          <a href="<?php echo $this->url('acompanhamento_projeto/edit', array('projeto_id' => $id, 'id' => $acompanhamento->projeto_acompanhamento_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
+                          <a href="<?php echo $this->url('acompanhamento_projeto/detalhe', array('id' => $acompanhamento->projeto_semana_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>  </a>
+                          <a href="<?php echo $this->url('acompanhamento_projeto/edit', array('id' => $acompanhamento->projeto_semana_id, 'projeto_id' => $id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
                         </td>
                       </tr>
                       <?php 

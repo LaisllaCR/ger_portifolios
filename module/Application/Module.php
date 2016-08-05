@@ -48,6 +48,12 @@ use Application\Model\ProjetoStatusJustificativaTable;
 use Application\Model\Funcionalidade;
 use Application\Model\FuncionalidadeTable;
 
+use Application\Model\ProjetoSemana;
+use Application\Model\ProjetoSemanaTable;
+
+use Application\Model\ProjetoSemanaJustificativa;
+use Application\Model\ProjetoSemanaJustificativaTable;
+
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
@@ -239,6 +245,28 @@ class Module
 		    					$resultSetPrototype = new ResultSet();
 		    					$resultSetPrototype->setArrayObjectPrototype(new Funcionalidade());
 		    					return new TableGateway('funcionalidade', $dbAdapter, null, $resultSetPrototype);
+	    					},
+	    					'Application\Model\ProjetoSemanaTable' =>  function($sm) {
+		    					$tableGateway = $sm->get('ProjetoSemanaTableGateway');
+		    					$table = new ProjetoSemanaTable($tableGateway);
+		    					return $table;
+	    					},
+	    					'ProjetoSemanaTableGateway' => function ($sm) {
+		    					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+		    					$resultSetPrototype = new ResultSet();
+		    					$resultSetPrototype->setArrayObjectPrototype(new ProjetoSemana());
+		    					return new TableGateway('projeto_semana', $dbAdapter, null, $resultSetPrototype);
+	    					},
+	    					'Application\Model\ProjetoSemanaJustificativaTable' =>  function($sm) {
+		    					$tableGateway = $sm->get('ProjetoSemanaJustificativaTableGateway');
+		    					$table = new ProjetoSemanaJustificativaTable($tableGateway);
+		    					return $table;
+	    					},
+	    					'ProjetoSemanaJustificativaTableGateway' => function ($sm) {
+		    					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+		    					$resultSetPrototype = new ResultSet();
+		    					$resultSetPrototype->setArrayObjectPrototype(new ProjetoSemanaJustificativa());
+		    					return new TableGateway('projeto_semana_justificativa', $dbAdapter, null, $resultSetPrototype);
 	    					},
     					),
     				);

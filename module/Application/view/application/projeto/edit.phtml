@@ -145,6 +145,7 @@
                         <div class="form-group">
                           <label for="projeto_data_inicio" class="control-label col-md-3 col-sm-3 col-xs-12">Data de início <span class="required">*</span></label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
+                          	<input type="hidden" name="projeto_data_inicio_anterior" id="projeto_data_inicio_anterior" value="<?php echo $projeto->projeto_data_inicio; ?>">
                             <input required="required"  id="projeto_data_inicio" value="<?php echo $projeto->projeto_data_inicio; ?>" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_inicio">
                           </div>
                         </div>
@@ -152,6 +153,7 @@
                         <div class="form-group">
                           <label for="projeto_data_previsao_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Previsão de Término <span class="required">*</span> </label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
+                          	<input type="hidden" name="projeto_data_previsao_anterior" id="projeto_data_previsao_anterior" value="<?php echo $projeto->projeto_data_previsao_termino; ?>">                           
                             <input required="required" id="projeto_data_previsao_termino" value="<?php echo $projeto->projeto_data_previsao_termino; ?>" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_previsao_termino">
                           </div>
                         </div>
@@ -159,6 +161,7 @@
                         <div class="form-group">
                           <label for="projeto_data_real_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Data real de término</label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
+                          	<input type="hidden" name="projeto_data_real_termino_anterior" id="projeto_data_real_termino_anterior" value="<?php echo $projeto->projeto_data_real_termino; ?>">                           
                             <input id="projeto_data_real_termino" value="<?php echo $projeto->projeto_data_real_termino; ?>" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_real_termino">
                           </div>
                         </div>

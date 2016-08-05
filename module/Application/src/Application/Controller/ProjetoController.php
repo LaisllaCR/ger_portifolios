@@ -20,6 +20,9 @@ use Application\Model\ProjetoStatusJustificativa;
 use Application\Model\IndicadorProjeto;
 use Application\Model\ProjetoTarefa;
 
+use Application\Model\ProjetoSemanaJustificativa;
+use Application\Model\ProjetoSemana;
+
 use Zend\Db\Sql\Ddl\Column\Date;
 use Zend\Session\Container;
 
@@ -33,6 +36,9 @@ class ProjetoController extends AbstractActionController
 	protected $projetoAcompanhamentoTable;
 	protected $membroProjetoTable;
 	protected $tarefaProjetoTable;
+	
+	protected $projetoSemanaTable;
+	protected $projetoSemanaJustificativaTable;
 	
 	public function indexAction()
     {
@@ -69,6 +75,24 @@ class ProjetoController extends AbstractActionController
      }
     
 
+     public function getProjetoSemanaTable()
+     {
+     	if (!$this->projetoSemanaTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->projetoSemanaTable = $sm->get('Application\Model\ProjetoSemanaTable');
+     	}
+     	return $this->projetoSemanaTable;
+     }
+
+     public function getProjetoSemanaJustificativaTable()
+     {
+     	if (!$this->projetoSemanaJustificativaTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->projetoSemanaJustificativaTable = $sm->get('Application\Model\ProjetoSemanaJustificativaTable');
+     	}
+     	return $this->projetoSemanaJustificativaTable;
+     }
+      
      public function getIndicadorProjetoTable()
      {
      	if (!$this->indicadorProjetoTable) {
@@ -150,16 +174,19 @@ class ProjetoController extends AbstractActionController
     			$projeto->projeto_orcamento_total = $dados_form['projeto_orcamento_total'];
     			$projeto->projeto_descricao = $dados_form['projeto_descricao'];
     			$projeto->projeto_status = 'Em analise';
-    			
-    			
+    			    			
     			$projeto->projeto_risco = $dados_form['riscoRadios'];
     			 
     			$id = $this->getProjetoTable()->saveProjeto($projeto);
     			
     			$projeto->projeto_id = $id;
-    			
-    			$this->getProjetoAcompanhamentoTable()->salvarDatasAcompanhamento($projeto);
 
+    			/*** Acompanhamento dos projetos de alto risco*/
+    			    			    			
+    			$this->salvarDatasAcompanhamento($projeto);    			
+				
+				/*** Acompanhamento dos projetos de alto risco*/
+				
     			$projetoStatusJustificativa->projeto_id = $id;
     			$projetoStatusJustificativa->projeto_status = 'Em analise';
     			$projetoStatusJustificativa->projeto_status_data = date('Y-m-d');
@@ -204,15 +231,39 @@ class ProjetoController extends AbstractActionController
     			
     			$projeto->projeto_id = $id; 
     			$projeto->projeto_nome = $dados_form['projeto_nome'];
+    			
     			$projeto->projeto_data_inicio = $dados_form['projeto_data_inicio'];
     			$projeto->projeto_data_previsao_termino = $dados_form['projeto_data_previsao_termino'];
     			$projeto->projeto_data_real_termino = $dados_form['projeto_data_real_termino'];
+    			
+    			$projeto->projeto_data_inicio_anterior = $dados_form['projeto_data_inicio_anterior'];
+    			$projeto->projeto_data_previsao_termino_anterior = $dados_form['projeto_data_previsao_termino_anterior'];
+    			$projeto->projeto_data_real_termino_anterior = $dados_form['projeto_data_real_termino_anterior'];
+    			
     			$projeto->projeto_gerente_id = $dados_form['projeto_gerente_id'];
     			$projeto->projeto_orcamento_total = $dados_form['projeto_orcamento_total'];
     			$projeto->projeto_descricao = $dados_form['projeto_descricao'];
     			$projeto->projeto_risco = $dados_form['riscoRadios'];
     			 
     			$this->getProjetoTable()->saveProjeto($projeto);
+    			
+    			
+    			/*** Acompanhamento dos projetos de alto risco ****/
+    			    			    			
+    			$semanas = $this->getProjetoSemanaTable()->getProjetoSemanas($projeto->projeto_id);
+    			$array_semanas = Array();
+    			
+    			foreach ($semanas as $semana){
+    				$array_semanas[$semana->projeto_semana] = array(
+    						"projeto_semana_id" => $semana->projeto_semana_id, 
+    						"projeto_semana_data_inicio" => $semana->projeto_semana_data_inicio, 
+    						"projeto_semana_data_fim" => $semana->projeto_semana_data_fim);
+    			}
+    			
+    			$this->atualizarDatasAcompanhamento($projeto, $array_semanas);    	
+    			
+				
+				/*** Acompanhamento dos projetos de alto risco*/
     			 
     			return $this->redirect()->toRoute('projeto');
     		}
@@ -221,7 +272,7 @@ class ProjetoController extends AbstractActionController
     	return array(
     			'id' => $id,
     			'projeto' => $projeto,
-             'usuarios' => $this->getUsuarioTable()->fetchAll(),
+             	'usuarios' => $this->getUsuarioTable()->fetchAll(),
      	);
     	
     }
@@ -332,5 +383,180 @@ class ProjetoController extends AbstractActionController
     			'projeto' => $this->getProjetoTable()->getProjeto($id),
     			'usuarios' => $this->getUsuarioTable()->fetchAll(),
     	));
+    }
+    
+    public function salvarDatasAcompanhamento(Projeto $projeto)
+    {    	
+    	if (is_object($projeto)) {
+    			
+    			
+    		$dataInicio = $projeto->projeto_data_inicio;
+    
+    		if(empty($projeto->projeto_data_real_termino) || $projeto->projeto_data_real_termino == NULL){
+    			$dataFinal =$projeto->projeto_data_previsao_termino;
+    		}else{
+    			$dataFinal =$projeto->projeto_data_real_termino;
+    		}
+    
+    		$array_datas = Array();
+    		$array_datas[] = $dataInicio;
+    			
+    		while (strtotime($dataInicio) < strtotime($dataFinal)){
+    			$dataInicio = date('Y-m-d', strtotime("+7 days",strtotime($dataInicio)));
+    			$array_datas[] = $dataInicio;
+    		}
+    
+    		$ultimo = end($array_datas);
+    
+    		if(strtotime($ultimo) > strtotime($dataFinal)){
+    			$pos = count($array_datas) - 1;
+    			$array_datas[$pos] = $dataFinal;
+    		}    			
+    
+    		$count = 0;
+    		$array_datas_bd = Array();
+    		foreach ($array_datas as $data){
+    			if(!empty($array_datas[$count +1])){
+
+    				$projetoSemana = new ProjetoSemana();    				
+    				
+    				$projetoSemana->projeto_id = $projeto->projeto_id;
+    				$projetoSemana->projeto_semana = $count +1;
+    				$projetoSemana->projeto_semana_data_inicio = $data;
+    				$projetoSemana->projeto_semana_data_fim = $array_datas[$count +1];    
+    
+    				$this->getProjetoSemanaTable()->saveProjetoSemana($projetoSemana);
+    			}
+    
+    			$count++;
+    		}
+    		
+    	}
+    }
+    
+    public function atualizarDatasAcompanhamento(Projeto $projeto, $array_semanas)
+    {    	
+    	if (is_object($projeto)) {
+    		 
+    		 
+    		$dataInicio = $projeto->projeto_data_inicio;
+    
+    		if(empty($projeto->projeto_data_real_termino) || $projeto->projeto_data_real_termino == NULL){
+    			$dataFinal =$projeto->projeto_data_previsao_termino;
+    		}else{
+    			$dataFinal =$projeto->projeto_data_real_termino;
+    		}
+    
+    		$array_datas = Array();
+    		$array_datas[] = $dataInicio;
+
+    		while (strtotime($dataInicio) < strtotime($dataFinal)){
+    			$dataInicio = date('Y-m-d', strtotime("+7 days",strtotime($dataInicio)));
+    			$array_datas[] = $dataInicio;
+    		}
+    
+    		$ultimo = end($array_datas);
+    
+    		if(strtotime($ultimo) > strtotime($dataFinal)){
+    			$pos = count($array_datas) - 1;
+    			$array_datas[$pos] = $dataFinal;
+    		}    
+
+
+    		$dif = array_diff_key($array_semanas,$array_datas);
+    		foreach ($dif as $semana){
+    			$this->getProjetoSemanaTable()->deleteProjetoSemana($semana['projeto_semana_id']);
+    		}
+    		
+    		if(count($array_semanas) == count($array_datas)){
+    			
+    			$count = 0;
+    			$array_datas_bd = Array();
+    			foreach ($array_datas as $data){
+    				 
+    				if(!empty($array_datas[$count +1])){
+    			
+    					$projetoSemana = new ProjetoSemana();
+    			
+    					$projetoSemana->projeto_id = $projeto->projeto_id;
+    					$projetoSemana->projeto_semana = $count +1;
+    					$projetoSemana->projeto_semana_data_inicio = $data;
+    					$projetoSemana->projeto_semana_data_fim = $array_datas[$count +1];
+		    			$projetoSemana->projeto_semana_id = $array_semanas[$projetoSemana->projeto_semana]['projeto_semana_id'];
+		    			
+    					$this->getProjetoSemanaTable()->atualizaProjetoSemana($projetoSemana);
+    				}
+    			
+    				$count++;
+    			}
+    			
+    		}
+    		
+    		if(count($array_semanas) > count($array_datas)){
+    			
+    			$count = 0;
+    			$array_datas_bd = Array();
+    			foreach ($array_datas as $data){
+    				 
+    				if(!empty($array_datas[$count +1])){
+    			
+    					$projetoSemana = new ProjetoSemana();
+    			
+    					$projetoSemana->projeto_id = $projeto->projeto_id;
+    					$projetoSemana->projeto_semana = $count +1;
+    					$projetoSemana->projeto_semana_data_inicio = $data;
+    					$projetoSemana->projeto_semana_data_fim = $array_datas[$count +1];
+		    			$projetoSemana->projeto_semana_id = $array_semanas[$projetoSemana->projeto_semana]['projeto_semana_id'];
+		    			
+    					$this->getProjetoSemanaTable()->atualizaProjetoSemana($projetoSemana);
+    				}
+    			
+    				$count++;
+    			}
+    			
+    			$dif = array_diff_key($array_semanas,$array_datas);
+    			foreach ($dif as $semana){
+    				$this->getProjetoSemanaTable()->deleteProjetoSemana($semana->projeto_Semana_id);
+    			}
+    			
+    		}
+    		
+
+    		if(count($array_semanas) < count($array_datas)){
+    			$count = 0;
+    			$array_datas_bd = Array();
+    			
+    			foreach ($array_datas as $data){
+    				 
+    				if(!empty($array_datas[$count +1])){
+    			
+    					$projetoSemana = new ProjetoSemana();
+    			
+    					$projetoSemana->projeto_id = $projeto->projeto_id;
+    					$projetoSemana->projeto_semana = $count +1;
+    					$projetoSemana->projeto_semana_data_inicio = $data;
+    					$projetoSemana->projeto_semana_data_fim = $array_datas[$count +1];
+    			
+    					if(key_exists($projetoSemana->projeto_semana, $array_semanas)){
+    							
+    						$projetoSemana->projeto_semana_id = $array_semanas[$projetoSemana->projeto_semana]['projeto_semana_id'];
+    						$this->getProjetoSemanaTable()->atualizaProjetoSemana($projetoSemana);
+    					}else{
+    						$this->getProjetoSemanaTable()->saveProjetoSemana($projetoSemana);
+    					}
+    				}
+    			
+    				$count++;
+    			}
+    		}
+    		
+    		
+    			
+
+    		
+    		
+
+    
+    	}
     }
 }

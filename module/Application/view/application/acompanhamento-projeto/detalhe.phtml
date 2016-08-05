@@ -43,7 +43,7 @@
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_acompanhamento_semana">Semana:
                           </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
-                           <label class="control-label "><?php echo $acompanhamento->projeto_acompanhamento_semana; ?>
+                           <label class="control-label "><?php echo $projetoSemana->projeto_semana; ?>
                           </label>      	
                           </div>
                         </div>		
@@ -51,21 +51,21 @@
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_acompanhamento_data_inicio">Data de Início: </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">     
-                            <label class="control-label"><?php echo date('d/m/Y', strtotime($acompanhamento->projeto_acompanhamento_data_inicio)); ?></label>  
+                            <label class="control-label"><?php echo date('d/m/Y', strtotime($projetoSemana->projeto_semana_data_inicio)); ?></label>  
                           </div>
                         </div>		
                         
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_acompanhamento_data_termino">Data de Término: </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">                          
-                            <label class="control-label"><?php echo date('d/m/Y', strtotime($acompanhamento->projeto_acompanhamento_data_termino)); ?></label>  
+                            <label class="control-label"><?php echo date('d/m/Y', strtotime($projetoSemana->projeto_semana_data_fim)); ?></label>  
                           </div>
                         </div>	
                         
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Descrição: </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">                          
-                          	<label class=""><?php echo trim($acompanhamento->projeto_acompanhamento_descricao); ?></label>  
+                          	<label class="control-label"><?php echo trim($acompanhamento->projeto_semana_justificativa); ?></label>  
                           </div>
                         </div>		
                         
