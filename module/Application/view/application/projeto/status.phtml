@@ -203,11 +203,20 @@
                       <tr>
                         <th style="width: 15%">Data</th>
                         <th style="width: 15%">Status</th>
-                        <th style="width: 10%">Justificativa</th>
+                        <th style="width: 10%">Usuário</th>
                       </tr>
                     </thead>
                     
                     <tbody>
+                    <?php 
+
+                          $array_usuarios = Array();
+                          
+                          foreach($usuarios as $usuario){
+                          	$array_usuarios[$usuario->usuario_id] = $usuario->usuario_nome;
+                          }
+                                                    
+                          ?>
                     <?php 
 
 						foreach ($justificativas as $justificativa)
@@ -216,7 +225,7 @@
                       <tr>
                         <td><?php echo date('d/m/Y', strtotime($justificativa->projeto_status_data)); ?></td>
                         <td><?php echo $justificativa->projeto_status; ?></td>
-                        <td><?php echo $justificativa->projeto_status_justificativa; ?></td>
+                        <td><?php echo $array_usuarios[$justificativa->usuario_id];?></td>
                       </tr>
                       <?php 
 						}

@@ -9,6 +9,7 @@ class ProjetoStatusJustificativa
 	public $projeto_status;
 	public $projeto_status_data;
 	public $projeto_status_justificativa;
+	public $usuario_id;
 
 	public function exchangeArray($data)
 	{
@@ -17,5 +18,6 @@ class ProjetoStatusJustificativa
 		$this->projeto_status     = (!empty($data['projeto_status'])) ? $data['projeto_status'] : null;
 		$this->projeto_status_data     = (!empty($data['projeto_status_data'])) ? $data['projeto_status_data'] : null;
 		$this->projeto_status_justificativa     = (!empty($data['projeto_status_justificativa'])) ? $data['projeto_status_justificativa'] : null;
+		$this->usuario_id     = (!empty($data['usuario_id'])) ? $data['usuario_id'] : null;
 	}
 }

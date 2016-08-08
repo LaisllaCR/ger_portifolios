@@ -298,7 +298,9 @@ class ProjetoController extends AbstractActionController
     	}
     
     	$request = $this->getRequest();
-    	if ($request->isPost()) {
+    	$session_dados = new Container('usuario_dados');
+    	
+    	if ($request->isPost() && isset($session_dados->id)) {
     		$dados_form = $request->getPost();
         
     		$projeto->projeto_id = $id;
@@ -312,7 +314,8 @@ class ProjetoController extends AbstractActionController
     				$projetoStatusJustificativa->projeto_status = $projeto->projeto_status;
     				$projetoStatusJustificativa->projeto_status_data = date('Y-m-d');
     				$projetoStatusJustificativa->projeto_status_justificativa = $dados_form['projeto_status_justificativa'];
-    				 
+					$projetoStatusJustificativa->usuario_id = $session_dados->id;
+    				    				
     				$this->getProjetoStatusJustificativaTable()->saveProjetoStatusJustificativa($projetoStatusJustificativa);
     
     			return $this->redirect()->toRoute('projeto');

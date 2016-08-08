@@ -48,6 +48,7 @@ class ProjetoStatusJustificativaTable
 				'projeto_status_justificativa'  => $projetoJustificativa->projeto_status_justificativa,
 				'projeto_status'  => $projetoJustificativa->projeto_status,
 				'projeto_status_data'  => $projetoJustificativa->projeto_status_data,
+				'usuario_id'  => $projetoJustificativa->usuario_id,
 		);
 
 		$id = (int) $projetoJustificativa->projeto_status_justificativa_id;
