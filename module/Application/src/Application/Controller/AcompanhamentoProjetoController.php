@@ -18,6 +18,7 @@ use Application\Model\ProjetoSemana;
 use Application\Model\ProjetoSemanaTable;
 use Application\Model\ProjetoSemanaJustificativa;
 use Application\Model\ProjetoSemanaJustificativaTable;
+use Zend\Session\Container;
 
 class AcompanhamentoProjetoController extends AbstractActionController
 {
@@ -72,7 +73,24 @@ class AcompanhamentoProjetoController extends AbstractActionController
      		));
      	}
      	 
+     	$semanas = $this->getProjetoSemanaTable()->getProjetoSemanas($id);
+     	$hoje = date('Y-m-d');
+     	 
+     	$cont = 0;
+     	foreach ($semanas as $semana)
+     	{
+     		$justificativa_semana = $this->getProjetoSemanaJustificativaTable()->getProjetoSemanaJustificativa($semana->projeto_semana_id);
+     	
+     		if($justificativa_semana->projeto_semana_justificativa == NULL){
+     			 
+     			if($hoje > $semana->projeto_semana_data_fim){
+     				$cont++;
+     			}
+     		}
+     	}
+     	
      	return new ViewModel(array(
+     			'validaAcompanhamento' => ( $cont > 0 ? 'sim' : 'nao' ),
      			'id' => $id,
      			'projeto' => $this->getProjetoTable()->getProjeto($id),
      			'acompanhamentosProjeto' => $acompanhamentosProjeto
@@ -101,6 +119,8 @@ class AcompanhamentoProjetoController extends AbstractActionController
     {    	
     	$id = (int) $this->params()->fromRoute('id', 0);
     	$request = $this->getRequest();
+
+    	$session_dados = new Container('usuario_dados');
     	
     	if ($request->isPost()) {
     		$acompanhamentoProjeto = new ProjetoAcompanhamento();
@@ -111,6 +131,7 @@ class AcompanhamentoProjetoController extends AbstractActionController
     			$acompanhamentoProjeto->projeto_acompanhamento_descricao = $dados_form['projeto_acompanhamento_descricao'];
     			$acompanhamentoProjeto->projeto_acompanhamento_data = $dados_form['projeto_acompanhamento_data'];
     			$acompanhamentoProjeto->projeto_id = $id;
+    			$acompanhamentoProjeto->usuario_id = $session_dados->id;
     			 
     			$this->getAcompanhamentoProjetoTable()->saveAcompanhamentoProjeto($acompanhamentoProjeto);
 
@@ -129,6 +150,8 @@ class AcompanhamentoProjetoController extends AbstractActionController
     
     public function editAction()
     {
+    	$session_dados = new Container('usuario_dados');
+    	
     	$projeto_semana_id = (int) $this->params()->fromRoute('id', 0);
     	$projeto_id = (int) $this->params()->fromRoute('projeto_id', 0);
     	$projetoSemana = $this->getProjetoSemanaTable()->getProjetoSemana($projeto_semana_id);
@@ -147,6 +170,7 @@ class AcompanhamentoProjetoController extends AbstractActionController
     			$acompanhamentoProjeto = new ProjetoSemanaJustificativa();
     			$acompanhamentoProjeto->projeto_semana_id = $projeto_semana_id;
     			$acompanhamentoProjeto->projeto_semana_justificativa = NULL;
+    			$acompanhamentoProjeto->usuario_id = $session_dados->id;
     			
     			$id = $this->getProjetoSemanaJustificativaTable()->saveProjetoSemanaJustificativa($acompanhamentoProjeto);
     			
@@ -172,6 +196,7 @@ class AcompanhamentoProjetoController extends AbstractActionController
     		
     		$acompanhamentoProjeto->projeto_semana_id = $projeto_semana_id;
     		$acompanhamentoProjeto->projeto_semana_justificativa = $dados_form['projeto_semana_justificativa'];
+    			$acompanhamentoProjeto->usuario_id = $session_dados->id;
     		    		 
     		if ($dados_form) {
     			$this->getProjetoSemanaJustificativaTable()->saveProjetoSemanaJustificativa($acompanhamentoProjeto);

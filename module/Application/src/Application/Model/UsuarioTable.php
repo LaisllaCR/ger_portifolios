@@ -19,6 +19,13 @@ class UsuarioTable
 		return $resultSet;
 	}
 
+	public function getUsuarioPerfil($perfil_id)
+	{
+		$perfil_id  = (int) $perfil_id;
+		$resultSet = $this->tableGateway->select(array('perfil_id' => $perfil_id));
+		return $resultSet;
+	}
+	
 	public function getUsuario($id)
 	{
 		$id  = (int) $id;

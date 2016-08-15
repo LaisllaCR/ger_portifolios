@@ -59,6 +59,7 @@ class ProjetoSemanaJustificativaTable
 		$data = array(
 				'projeto_semana_justificativa'  => $projetoJustificativa->projeto_semana_justificativa,
 				'projeto_semana_id'  => $projetoJustificativa->projeto_semana_id,
+				'usuario_id'  => $projetoJustificativa->usuario_id,
 		);
 
 		$id = (int) $projetoJustificativa->projeto_semana_justificativa_id;

@@ -58,7 +58,7 @@ class IndicadorController extends AbstractActionController
     	
     		if ($dados_form) {
 
-    			$indicador->indicador_nome = $dados_form['indicador_nome'];
+    			$indicador->indicador_nome = utf8_encode($dados_form['indicador_nome']);
     			 
     			$this->getIndicadorTable()->saveIndicador($indicador);
     	
@@ -94,7 +94,7 @@ class IndicadorController extends AbstractActionController
     		$dados_form = $request->getPost();    	
     		
     		$indicador->indicador_id = $id;    
-    		$indicador->indicador_nome = $dados_form['indicador_nome'];
+    		$indicador->indicador_nome = utf8_encode($dados_form['indicador_nome']);
     		 
     		if ($dados_form) {
     			$this->getIndicadorTable()->saveIndicador($indicador);

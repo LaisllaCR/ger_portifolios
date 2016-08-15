@@ -46,7 +46,15 @@
                     
                     <tbody>
                     <?php 
-                    
+                 
+                    if($validaAcompanhamento == 'sim'){
+                    ?>
+                    <div class="alert alert-danger" id="alerta" name="alerta" >
+						  <strong>Projeto de Alto Risco com Pendência de Acompanhamento!</strong> 
+					</div>
+						
+                    <?php
+                    }
                     foreach ($acompanhamentosProjeto as $acompanhamento)
                     {
                     	if(is_object($acompanhamento)){

@@ -659,6 +659,48 @@ return array(
 								),
 						),
 						
+
+						'alertas' => array(
+								'type' => 'literal',
+								'options' => array(
+										'route'    => '/alertas',
+										'defaults' => array(
+												'controller' => 'Application\Controller\Alertas',
+												'action'     => 'index',
+										)
+								),
+								'may_terminate' => true,
+								'child_routes'  => array(
+										'projetos-cancelados' => array(
+												'type' => 'segment',
+												'options' => array(
+														'route'    => '/:mes',
+														'defaults' => array(
+																'action' => 'projetos-cancelados'
+														),
+														'constraints' => array(
+																'id' => '\d+'
+														)
+												)
+										),
+								),
+							),
+										
+						
+						
+						/*
+						 * 
+						 * 'add' => array(
+												'type' => 'literal',
+												'options' => array(
+														'route'    => '/add',
+														'defaults' => array(
+																'controller' => 'Application\Controller\Projeto',
+																'action'     => 'add'
+														)
+												)
+										),
+						 */
 						
 						'application' => array(
 								'type'    => 'Literal',
@@ -775,12 +817,12 @@ return array(
         		),
         ),
     ),
-		*/
-		
-		
-		
+		*/	
 		
     'service_manager' => array(
+		'invokables' => array(
+				'Application\Service\AlertaService' => 'Application\Service\AlertaService'
+		),
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
@@ -810,8 +852,13 @@ return array(
             'Application\Controller\TarefaProjeto' => Controller\TarefaProjetoController::class,
             'Application\Controller\MembroProjeto' => Controller\MembroProjetoController::class,
             'Application\Controller\AcompanhamentoProjeto' => Controller\AcompanhamentoProjetoController::class,
+            'Application\Controller\Alertas' => Controller\AlertasController::class,
             'Application\Controller\PerfilAcesso' => Controller\PerfilAcessoController::class
         ),
+
+    	'factories' => array(
+    			'Application\Controller\AlertasController' => 'Application\Factory\AlertaControllerFactory'
+    	),
     ),
     'view_manager' => array(
         'display_not_found_reason' => true,

@@ -25,6 +25,7 @@ use Application\Model\ProjetoSemana;
 
 use Zend\Db\Sql\Ddl\Column\Date;
 use Zend\Session\Container;
+use Zend\Db\Sql\Predicate\Between;
 
 class ProjetoController extends AbstractActionController
 {
@@ -43,12 +44,12 @@ class ProjetoController extends AbstractActionController
 	public function indexAction()
     {
      	$session_dados = new Container('usuario_dados');
-     	if(isset($session_dados->id)){
-     		if($session_dados->perfil == 1 || $session_dados->perfil == 2){
+     	//if(isset($session_dados->id)){
+     	//	if($session_dados->perfil == 1 || $session_dados->perfil == 2){
 		         return new ViewModel(array(
 		             'projetos' => $this->getProjetoTable()->fetchAll(),
 		         ));     			
-     		}else{
+     	/*	}else{
      			$membros_projetos = $this->getMembroProjetoTable()->fetchAll();
      			
      			$projetos_usuario_sessao = Array();
@@ -71,7 +72,7 @@ class ProjetoController extends AbstractActionController
 		             'projetos' => $dados_projetos_usuario_sessao,
 		         ));     			
      		}
-     	}
+     	}*/
      }
     
 
@@ -159,6 +160,8 @@ class ProjetoController extends AbstractActionController
     public function addAction()
     {    	
     	$request = $this->getRequest();
+     	$session_dados = new Container('usuario_dados');
+     	
     	if ($request->isPost()) {
     		$projeto = new Projeto();
     		$projetoStatusJustificativa = new ProjetoStatusJustificativa();
@@ -189,6 +192,7 @@ class ProjetoController extends AbstractActionController
 				
     			$projetoStatusJustificativa->projeto_id = $id;
     			$projetoStatusJustificativa->projeto_status = 'Em analise';
+    			$projetoStatusJustificativa->usuario_id = $session_dados->id;
     			$projetoStatusJustificativa->projeto_status_data = date('Y-m-d');
     			$projetoStatusJustificativa->projeto_status_justificativa = NULL;
     				
@@ -296,6 +300,15 @@ class ProjetoController extends AbstractActionController
     				'action' => 'index'
     		));
     	}
+
+    	if($projeto->projeto_risco == "Alto risco"){
+    		$valida = $this->verificarAcompanhamento($projeto);
+    		if($valida == true){
+    			return $this->redirect()->toRoute('acompanhamento_projeto/consulta', array(
+    					'action' => 'consulta', 'id' => $projeto->projeto_id
+    			));
+    		}
+    	}
     
     	$request = $this->getRequest();
     	$session_dados = new Container('usuario_dados');
@@ -329,6 +342,26 @@ class ProjetoController extends AbstractActionController
     			'usuarios' => $this->getUsuarioTable()->fetchAll(),
     	);
     	 
+    }
+    
+    public function verificarAcompanhamento($projeto)
+    {
+    	$semanas = $this->getProjetoSemanaTable()->getProjetoSemanas($projeto->projeto_id);
+    	$hoje = date('Y-m-d');
+    	
+    	foreach ($semanas as $semana)
+    	{
+    		$justificativa_semana = $this->getProjetoSemanaJustificativaTable()->getProjetoSemanaJustificativa($semana->projeto_semana_id);
+    		
+    		if($justificativa_semana->projeto_semana_justificativa == NULL){
+    			
+    			if($hoje > $semana->projeto_semana_data_fim){
+    				return true;
+    			}
+    		}
+    	}
+    	
+    	return false;
     }
     
     public function deleteAction()

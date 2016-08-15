@@ -40,7 +40,7 @@ class ProjetoStatusJustificativaTable
 		}
 		return $rowset;
 	}
-
+	
 	public function saveProjetoStatusJustificativa(ProjetoStatusJustificativa $projetoJustificativa)
 	{
 		$data = array(

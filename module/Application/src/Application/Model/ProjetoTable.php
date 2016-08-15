@@ -3,6 +3,8 @@
 namespace Application\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Sql;
 
 class ProjetoTable
 {
@@ -28,6 +30,17 @@ class ProjetoTable
 			throw new \Exception("Could not find row $id");
 		}
 		return $row;
+	}
+
+	public function getProjetosCancelados($mes)
+	{		
+		$sqlq = new Sql($this->tableGateway->adapter);
+		
+		$sql = 'SELECT * FROM projeto_status_justificativa as a JOIN projeto as b ON a.projeto_id = b.projeto_id WHERE Month(a.projeto_status_data) = '.$mes.' and a.projeto_status = "cancelado"';
+		
+		$statement = $this->tableGateway->adapter->query($sql);
+		
+		return $statement->execute();
 	}
 
 	public function saveProjeto(Projeto $projeto)

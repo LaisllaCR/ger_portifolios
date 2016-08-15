@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 28-Jul-2016 às 00:05
+-- Generation Time: 15-Ago-2016 às 13:20
 -- Versão do servidor: 10.1.13-MariaDB
--- PHP Version: 5.5.34
+-- PHP Version: 5.5.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -99,7 +99,18 @@ CREATE TABLE `indicadores` (
 
 INSERT INTO `indicadores` (`indicador_id`, `indicador_nome`, `indicador_descricao`) VALUES
 (1, 'Performance/Desempenho', ''),
-(4, 'Usabilidade 3', '');
+(4, 'Usabilidade', ''),
+(5, 'Gasto Com Pessoal', ''),
+(6, 'Eficiência', ''),
+(7, 'Eficácia', ''),
+(8, 'Capacidade', ''),
+(9, 'Produtividade', ''),
+(10, 'Qualidade', ''),
+(11, 'Lucratividade', ''),
+(12, 'Rentabilidade', ''),
+(13, 'Competitividade', ''),
+(14, 'Efetividade', ''),
+(15, 'Valor', '');
 
 -- --------------------------------------------------------
 
@@ -124,17 +135,13 @@ CREATE TABLE `indicadores_projeto` (
 --
 
 INSERT INTO `indicadores_projeto` (`indicador_projeto_id`, `indicador_id`, `projeto_id`, `projeto_fase`, `valor_minimo`, `valor_maximo`, `usuario_id`, `indicador_projeto_valor`, `indicador_projeto_descricao`) VALUES
-(1, 1, 3, 'Encerramento', 10, 54, 1, 0, ''),
-(2, 4, 3, 'Monitoramento e Controle', 2, 7, 1, 0, ''),
-(3, 1, 3, 'Execução', 2, 6, 1, 0, ''),
-(4, 1, 3, 'Iniciação', 10, 10, 1, NULL, NULL),
-(5, 4, 3, 'Planejamento', 2, 7, 1, NULL, NULL),
-(7, 4, 4, 'Planejamento', 1, 5, 1, NULL, NULL),
-(8, 1, 4, 'Iniciação', 1, 2, 1, NULL, NULL),
-(9, 1, 4, 'Iniciação', 1, 2, 1, NULL, NULL),
-(12, 4, 3, 'Monitoramento e Controle', 2, 4, 1, NULL, NULL),
-(13, 4, 1, 'Planejamento', 3, 5, 1, 3, ' HGFHGDFHGF 555 GDGFD'),
-(14, 1, 1, 'Iniciação', 1, 2, 1, NULL, NULL);
+(1, 8, 30, 'Iniciação', 1, 10, 1, 11, ' gdg '),
+(2, 11, 30, 'Iniciação', 1, 10, 1, 11, ' fgjf '),
+(3, 11, 30, 'Iniciação', 1, 10, 1, NULL, NULL),
+(4, 1, 30, 'Iniciação', 1, 3, 1, 8, ' fdhf'),
+(5, 1, 30, 'Iniciação', 1, 8, 1, 10, ' ds'),
+(6, 15, 30, 'Iniciação', 1, 2, 1, 4, ' 42           '),
+(7, 7, 30, 'Iniciação', 1, 2, 1, 4, ' ew   ');
 
 -- --------------------------------------------------------
 
@@ -156,7 +163,8 @@ INSERT INTO `perfil` (`perfil_id`, `perfil_nome`) VALUES
 (2, 'Líder do escritório de projetos'),
 (3, 'Líder de projeto'),
 (4, 'Gerente de projeto'),
-(5, 'Equipe técnica');
+(5, 'Equipe técnica'),
+(6, 'Alta direção');
 
 -- --------------------------------------------------------
 
@@ -194,12 +202,11 @@ CREATE TABLE `projeto` (
 --
 
 INSERT INTO `projeto` (`projeto_id`, `projeto_nome`, `projeto_data_inicio`, `projeto_data_previsao_termino`, `projeto_data_real_termino`, `projeto_gerente_id`, `projeto_orcamento_total`, `projeto_descricao`, `projeto_status`, `projeto_risco`) VALUES
-(1, 'Projeto Teste Editado 2 ', '2016-07-08', '2016-07-20', '2016-07-31', 1, 10, ' SERA?  ', 'Encerrado', 'Medio risco'),
-(3, 'Projeto Teste Novo 2', '2016-07-07', '2016-08-19', '2016-08-02', 1, 10, 'asd ', 'Analise realizada', 'Medio risco'),
-(4, 'Projeto de teste de justificativa eh yrjyejyte', '2016-07-22', '2016-07-23', '2016-07-22', 1, 10, 'jhgjhg  ', 'Em analise', 'Baixo risco'),
-(9, 'Teste acompanhamento', '2016-07-26', '2016-08-23', '2016-08-11', 3, 12, '212121', 'Em analise', 'Alto risco'),
-(10, 'Teste acompanhamento 2', '2016-07-26', '2016-07-27', '2016-07-28', 3, 10, '57181', 'Em analise', 'Alto risco'),
-(11, 'Teste acompanhamento 3', '2016-07-26', '2016-11-30', '2017-01-26', 1, 14, 'hih,i', 'Em analise', 'Alto risco');
+(24, 'Teste milesimo', '2016-08-01', '2016-08-24', '2016-08-11', 1, 4.24, '78        ', 'Encerrado', 'Alto risco'),
+(27, 'Projeto Cancelado', '2016-08-13', '2016-08-14', '0000-00-00', 1, 0.45, 'gfdsg', 'Cancelado', 'Medio risco'),
+(28, 'Projeto Cancelado 2', '2016-08-05', '2016-08-06', '0000-00-00', 1, 0.34, 'sfes', 'Cancelado', 'Baixo risco'),
+(29, 'Projeto Cancelado 3', '2016-08-01', '2016-08-03', '0000-00-00', 1, 4.35, 'eger', 'Cancelado', 'Baixo risco'),
+(30, 'Projeto Indicador Limite ', '2016-08-04', '2016-08-13', '0000-00-00', 1, 424.56, '6546546', 'Em analise', 'Medio risco');
 
 -- --------------------------------------------------------
 
@@ -216,43 +223,6 @@ CREATE TABLE `projeto_acompanhamento` (
   `projeto_acompanhamento_descricao` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `projeto_acompanhamento`
---
-
-INSERT INTO `projeto_acompanhamento` (`projeto_acompanhamento_id`, `projeto_id`, `projeto_acompanhamento_semana`, `projeto_acompanhamento_data_inicio`, `projeto_acompanhamento_data_termino`, `projeto_acompanhamento_descricao`) VALUES
-(1, 9, 1, '2016-07-26', '2016-08-02', NULL),
-(2, 9, 2, '2016-08-02', '2016-08-09', NULL),
-(3, 9, 3, '2016-08-09', '2016-08-11', NULL),
-(4, 10, 1, '2016-07-26', '2016-07-28', NULL),
-(5, 11, 1, '0000-00-00', '0000-00-00', ' tetetestre2222'),
-(6, 11, 2, '0000-00-00', '0000-00-00', ' hgfdhgfdhgf'),
-(7, 11, 3, '0000-00-00', '0000-00-00', 'testeeeeeeeeeeeeeee'),
-(8, 11, 4, '0000-00-00', '0000-00-00', ' testeeeeeeeeeeeeeeeee2343'),
-(9, 11, 5, '0000-00-00', '2016-08-30', ' oiioioioioio'),
-(10, 11, 6, '0000-00-00', '2016-09-06', ' htdhtrdhtr'),
-(11, 11, 7, '2016-09-06', '2016-09-13', 'uytiuytiuytiyytuyt7876888887ytiuytiuytiyytuyt7876888887 uytiuytiuytiyytuyt7876888887 uytiuytiuytiyytuyt7876888887'),
-(12, 11, 8, '2016-09-13', '2016-09-20', ' Estou testando a descricao na opcao de detalhes Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et gravida lorem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla facilisi. In non lacin'),
-(13, 11, 9, '2016-09-20', '2016-09-27', NULL),
-(14, 11, 10, '2016-09-27', '2016-10-04', NULL),
-(15, 11, 11, '2016-10-04', '2016-10-11', NULL),
-(16, 11, 12, '2016-10-11', '2016-10-18', NULL),
-(17, 11, 13, '2016-10-18', '2016-10-25', NULL),
-(18, 11, 14, '2016-10-25', '2016-11-01', NULL),
-(19, 11, 15, '2016-11-01', '2016-11-08', NULL),
-(20, 11, 16, '2016-11-08', '2016-11-15', NULL),
-(21, 11, 17, '2016-11-15', '2016-11-22', NULL),
-(22, 11, 18, '2016-11-22', '2016-11-29', NULL),
-(23, 11, 19, '2016-11-29', '2016-12-06', NULL),
-(24, 11, 20, '2016-12-06', '2016-12-13', NULL),
-(25, 11, 21, '2016-12-13', '2016-12-20', NULL),
-(26, 11, 22, '2016-12-20', '2016-12-27', NULL),
-(27, 11, 23, '2016-12-27', '2017-01-03', NULL),
-(28, 11, 24, '2017-01-03', '2017-01-10', NULL),
-(29, 11, 25, '2017-01-10', '2017-01-17', NULL),
-(30, 11, 26, '2017-01-17', '2017-01-24', NULL),
-(31, 11, 27, '2017-01-24', '2017-01-26', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -263,16 +233,58 @@ CREATE TABLE `projeto_membro` (
   `projeto_membro_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
   `projeto_id` int(11) NOT NULL,
-  `perfil_id` int(11) DEFAULT NULL
+  `projeto_membro_papel` enum('Desenvolvedor','Designer','Testador','Analista de Requisitos','Analista de negocio','Administrador de BD','Arquiteto da Informacao','Analista de Sistemas') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `projeto_semana`
+--
+
+CREATE TABLE `projeto_semana` (
+  `projeto_semana_id` int(11) NOT NULL,
+  `projeto_id` int(11) NOT NULL,
+  `projeto_semana` int(11) NOT NULL,
+  `projeto_semana_data_inicio` date NOT NULL,
+  `projeto_semana_data_fim` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `projeto_membro`
+-- Extraindo dados da tabela `projeto_semana`
 --
 
-INSERT INTO `projeto_membro` (`projeto_membro_id`, `usuario_id`, `projeto_id`, `perfil_id`) VALUES
-(1, 1, 3, 5),
-(3, 3, 3, 5);
+INSERT INTO `projeto_semana` (`projeto_semana_id`, `projeto_id`, `projeto_semana`, `projeto_semana_data_inicio`, `projeto_semana_data_fim`) VALUES
+(55, 24, 1, '2016-08-01', '2016-08-08'),
+(69, 24, 2, '2016-08-08', '2016-08-11'),
+(70, 25, 1, '2016-08-13', '2016-08-14'),
+(71, 26, 1, '2016-08-13', '2016-08-14'),
+(72, 27, 1, '2016-08-13', '2016-08-14'),
+(73, 28, 1, '2016-08-05', '2016-08-06'),
+(74, 29, 1, '2016-08-01', '2016-08-03'),
+(75, 30, 1, '2016-08-04', '2016-08-11'),
+(76, 30, 2, '2016-08-11', '2016-08-13');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `projeto_semana_justificativa`
+--
+
+CREATE TABLE `projeto_semana_justificativa` (
+  `projeto_semana_justificativa_id` int(11) NOT NULL,
+  `projeto_semana_id` int(11) NOT NULL,
+  `projeto_semana_justificativa` varchar(255) DEFAULT NULL,
+  `usuario_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `projeto_semana_justificativa`
+--
+
+INSERT INTO `projeto_semana_justificativa` (`projeto_semana_justificativa_id`, `projeto_semana_id`, `projeto_semana_justificativa`, `usuario_id`) VALUES
+(6, 55, ' sd45', 3),
+(7, 69, ' fdhgxvd6r', 3);
 
 -- --------------------------------------------------------
 
@@ -285,23 +297,29 @@ CREATE TABLE `projeto_status_justificativa` (
   `projeto_id` int(11) NOT NULL,
   `projeto_status` varchar(255) NOT NULL,
   `projeto_status_justificativa` varchar(255) DEFAULT NULL,
-  `projeto_status_data` date NOT NULL
+  `projeto_status_data` date NOT NULL,
+  `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `projeto_status_justificativa`
 --
 
-INSERT INTO `projeto_status_justificativa` (`projeto_status_justificativa_id`, `projeto_id`, `projeto_status`, `projeto_status_justificativa`, `projeto_status_data`) VALUES
-(1, 3, 'Analise realizada', NULL, '2016-07-22'),
-(2, 5, 'Em analise', NULL, '2016-07-22'),
-(3, 5, 'Analise realizada', NULL, '2016-07-22'),
-(4, 5, 'Analise aprovada', NULL, '2016-07-22'),
-(5, 5, 'Iniciado', NULL, '2016-07-22'),
-(6, 1, 'Encerrado', NULL, '2016-07-25'),
-(7, 9, 'Em analise', NULL, '2016-07-26'),
-(8, 10, 'Em analise', NULL, '2016-07-26'),
-(9, 11, 'Em analise', NULL, '2016-07-26');
+INSERT INTO `projeto_status_justificativa` (`projeto_status_justificativa_id`, `projeto_id`, `projeto_status`, `projeto_status_justificativa`, `projeto_status_data`, `usuario_id`) VALUES
+(2, 5, 'Em analise', NULL, '2016-07-22', 1),
+(3, 5, 'Analise realizada', NULL, '2016-07-22', 1),
+(4, 5, 'Analise aprovada', NULL, '2016-07-22', 1),
+(5, 5, 'Iniciado', NULL, '2016-07-22', 1),
+(24, 24, 'Em analise', NULL, '2016-08-03', 1),
+(25, 24, 'Analise realizada', 'kuytkuytku', '2016-08-08', 1),
+(26, 24, 'Encerrado', 'rhtregtreht', '2016-08-08', 3),
+(27, 27, 'Em analise', NULL, '2016-08-13', 3),
+(28, 27, 'Cancelado', 'fdsgfds', '2016-08-13', 3),
+(29, 28, 'Em analise', NULL, '2016-08-13', 3),
+(30, 28, 'Cancelado', 'ewterwtwer', '2016-07-13', 3),
+(31, 29, 'Em analise', NULL, '2016-08-13', 3),
+(32, 29, 'Cancelado', 'wrw', '2016-08-13', 3),
+(33, 30, 'Em analise', NULL, '2016-08-13', 3);
 
 -- --------------------------------------------------------
 
@@ -319,13 +337,6 @@ CREATE TABLE `projeto_tarefa` (
   `tarefa_data_termino` date NOT NULL,
   `tarefa_data_previsao_termino` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `projeto_tarefa`
---
-
-INSERT INTO `projeto_tarefa` (`tarefa_id`, `projeto_id`, `tarefa_nome`, `tarefa_descricao`, `tarefa_status`, `tarefa_data_inicio`, `tarefa_data_termino`, `tarefa_data_previsao_termino`) VALUES
-(2, 1, 'TAP 4', ' Termo de Abertura do Projeto 4', 'Suspensa', '2016-07-28', '2016-07-30', '2016-07-29');
 
 -- --------------------------------------------------------
 
@@ -346,9 +357,13 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`usuario_id`, `usuario_nome`, `usuario_email`, `usuario_senha`, `perfil_id`) VALUES
-(1, 'Laislla Ramos 2', 'la.toph@hotmail.com', '123456789', 4),
+(1, 'Laislla Costa Ramos', 'laisllaramos@gmail.com', '475869', 1),
 (3, 'Teste', 'la.toph@hotmail.com', '123456789', 1),
-(4, 'testeuser', 'testeuser@gmail.com', '123456', 5);
+(4, 'g', 'l@g.com.br', '', 1),
+(5, 'l', '2@gmail.com', '1', 1),
+(6, 'L?l', 'la.toph@hotmail.com', '14654654654', 1),
+(7, 'Teste Alta dire??o', 'la.toph@hotmail.com', '123456789', 6),
+(8, 'Manoelvilco@hotmail.com', 'manoelvilco@hotmail.com', '123456', 6);
 
 --
 -- Indexes for dumped tables
@@ -409,6 +424,18 @@ ALTER TABLE `projeto_membro`
   ADD PRIMARY KEY (`projeto_membro_id`);
 
 --
+-- Indexes for table `projeto_semana`
+--
+ALTER TABLE `projeto_semana`
+  ADD PRIMARY KEY (`projeto_semana_id`);
+
+--
+-- Indexes for table `projeto_semana_justificativa`
+--
+ALTER TABLE `projeto_semana_justificativa`
+  ADD PRIMARY KEY (`projeto_semana_justificativa_id`);
+
+--
 -- Indexes for table `projeto_status_justificativa`
 --
 ALTER TABLE `projeto_status_justificativa`
@@ -444,17 +471,17 @@ ALTER TABLE `funcionalidade`
 -- AUTO_INCREMENT for table `indicadores`
 --
 ALTER TABLE `indicadores`
-  MODIFY `indicador_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `indicador_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `indicadores_projeto`
 --
 ALTER TABLE `indicadores_projeto`
-  MODIFY `indicador_projeto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `indicador_projeto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `perfil_acesso`
 --
@@ -464,32 +491,42 @@ ALTER TABLE `perfil_acesso`
 -- AUTO_INCREMENT for table `projeto`
 --
 ALTER TABLE `projeto`
-  MODIFY `projeto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `projeto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `projeto_acompanhamento`
 --
 ALTER TABLE `projeto_acompanhamento`
-  MODIFY `projeto_acompanhamento_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `projeto_acompanhamento_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `projeto_membro`
 --
 ALTER TABLE `projeto_membro`
-  MODIFY `projeto_membro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `projeto_membro_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `projeto_semana`
+--
+ALTER TABLE `projeto_semana`
+  MODIFY `projeto_semana_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+--
+-- AUTO_INCREMENT for table `projeto_semana_justificativa`
+--
+ALTER TABLE `projeto_semana_justificativa`
+  MODIFY `projeto_semana_justificativa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `projeto_status_justificativa`
 --
 ALTER TABLE `projeto_status_justificativa`
-  MODIFY `projeto_status_justificativa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `projeto_status_justificativa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `projeto_tarefa`
 --
 ALTER TABLE `projeto_tarefa`
-  MODIFY `tarefa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tarefa_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -3,6 +3,9 @@
 namespace Application\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Sql;
+
 
 class IndicadorProjetoTable
 {
@@ -17,6 +20,15 @@ class IndicadorProjetoTable
 	{
 		$resultSet = $this->tableGateway->select();
 		return $resultSet;
+	}
+
+	public function getCountIndicadorFaseProjeto(IndicadorProjeto $indicadorProjeto)
+	{			
+		$sql = 'SELECT * FROM indicadores_projeto as a join indicadores b ON a.indicador_id = b.indicador_id WHERE a.projeto_fase = "'.$indicadorProjeto->projeto_fase.'" and a.projeto_id = '.$indicadorProjeto->projeto_id.' and a.indicador_projeto_valor > a.valor_maximo';
+		
+		$statement = $this->tableGateway->adapter->query($sql);
+		
+		return $statement->execute();
 	}
 
 	public function getIndicadorProjeto($id)

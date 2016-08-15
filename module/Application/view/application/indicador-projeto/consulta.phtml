@@ -39,11 +39,11 @@
                   <table class="table table-striped projects">
                     <thead>
                       <tr>
-                        <th style="width: 1%">#</th>
                         <th style="width: 20%">Indicador</th>
                         <th style="width: 20%">Fase</th>
-                        <th style="width: 20%">Valor mínimo</th>
-                        <th style="width: 20%">Valor máximo</th>
+                        <th style="width: 10%">Valor mínimo</th>
+                        <th style="width: 15%">Valor máximo</th>
+                        <th style="width: 10%">Valor</th>
                         <th style="width: 20%">Edição</th>
                       </tr>
                     </thead>
@@ -63,11 +63,11 @@
 							if(is_object($indicador)){
 					?>
                       <tr>
-                        <td><?php echo $indicador->indicador_projeto_id; ?></td>
-                        <td><?php echo $array_indicadores[$indicador->indicador_id]; ?></td>
+                        <td><?php echo utf8_decode($array_indicadores[$indicador->indicador_id]); ?></td>
                         <td><?php echo utf8_decode($indicador->projeto_fase); ?></td>
                         <td><?php echo $indicador->valor_minimo; ?></td>
                         <td><?php echo $indicador->valor_maximo; ?></td>
+                        <td><?php echo $indicador->indicador_projeto_valor; ?></td>
                         <td>
                           <a href="<?php echo $this->url('indicador_projeto/detalhe', array('id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>  </a>
                           <a href="<?php echo $this->url('indicador_projeto/edit', array('projeto_id' => $id, 'id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>

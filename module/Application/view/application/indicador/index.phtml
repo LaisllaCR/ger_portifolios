@@ -54,7 +54,7 @@
                       <tr>
                         <td><?php echo $indicador->indicador_id; ?></td>
                         <td>
-                          <a><?php echo $indicador->indicador_nome; ?></a>
+                          <a><?php echo utf8_decode($indicador->indicador_nome); ?></a>
                         </td>
                         <td>
                           <a href="<?php echo $this->url('indicador/edit', array('id' => $indicador->indicador_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
