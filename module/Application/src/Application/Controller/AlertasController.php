@@ -81,7 +81,7 @@ class AlertasController extends AbstractActionController
      			'connection_config' => array(
      					'ssl'       => 'tls',
      					'username' => 'laisllaramos@gmail.com',
-     					'password' => 'RockNRoll1721'
+     					'password' => ''
      			),
      			'port' => 587,
      	));
