@@ -17,6 +17,9 @@ use Zend\Session\Config\StandardConfig;
 use Zend\Session\SessionManager;
 use Zend\Session\Config\SessionConfig;
 use Zend\Session\Container;
+use Application\Model\PerfilAcesso;
+use Application\Model\Perfil;
+use Application\Model\Funcionalidade;
 
 class LoginController extends AbstractActionController
 {		
@@ -27,8 +30,11 @@ class LoginController extends AbstractActionController
         $viewModel->setTerminal(true);
         return $viewModel;
     }
-
+    
     protected $usuarioTable;
+	protected $perfilAcessoTable;
+	protected $perfilTable;
+	protected $funcionalidadeTable;
     
 	public function getUsuarioTable()
 	{
@@ -37,7 +43,36 @@ class LoginController extends AbstractActionController
 			$this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
 		}
 		return $this->usuarioTable;
+	}	
+	
+	public function getPerfilAcessoTable()
+	{
+		if (!$this->perfilAcessoTable) {
+			$sm = $this->getServiceLocator();
+			$this->perfilAcessoTable = $sm->get('Application\Model\PerfilAcessoTable');
+		}
+		return $this->perfilAcessoTable;
 	}
+	
+	public function getPerfilTable()
+	{
+		if (!$this->perfilTable) {
+			$sm = $this->getServiceLocator();
+			$this->perfilTable = $sm->get('Application\Model\PerfilTable');
+		}
+		return $this->perfilTable;
+	}
+	
+	public function getFuncionalidadeTable()
+	{
+		if (!$this->funcionalidadeTable) {
+			$sm = $this->getServiceLocator();
+			$this->funcionalidadeTable = $sm->get('Application\Model\FuncionalidadeTable');
+		}
+		return $this->funcionalidadeTable;
+	}
+	
+	
       /*  
     public function addUsuarioAction()
     {    	   	
@@ -108,7 +143,30 @@ class LoginController extends AbstractActionController
     	$sessionTimer->email = $usuarioLogadoDados->usuario_email;
     	$sessionTimer->senha = $usuarioLogadoDados->usuario_senha;
     	$sessionTimer->nome = $usuarioLogadoDados->usuario_nome;	
-    	$sessionTimer->perfil = $usuarioLogadoDados->perfil_id;	    	
+    	$sessionTimer->perfil = $usuarioLogadoDados->perfil_id;	
+    	
+    	$perfilAcessos = $this->getPerfilAcessoTable()->getPerfilAcessos($usuarioLogadoDados->perfil_id);
+    	$funcionalidades = $this->getFuncionalidadeTable()->fetchAll();
+
+    	$array_funcionalidades_usuario_logado = Array();
+    	
+    	$funcionalidades_nome = Array();
+    	
+    	foreach ($funcionalidades as $funcionalidade){
+    		$funcionalidades_nome[$funcionalidade->funcionalidade_id] = $funcionalidade->funcionalidade_nome;
+    	}
+    	
+    	foreach ($perfilAcessos as $acesso){
+    		$array_funcionalidades_usuario_logado[$acesso->funcionalidade_id] = $funcionalidades_nome[$acesso->funcionalidade_id];
+    	}
+    	
+    	$array_funcionalidades_usuario_logado['23'] = 'home';
+    	$array_funcionalidades_usuario_logado['24'] = 'login';
+    	
+    	$sessionTimer->funcionalidades_usuario = $array_funcionalidades_usuario_logado;	
+    	
+    	
+    	
     }
 
 	public function atualizarDadosSessao($usuario_dados)

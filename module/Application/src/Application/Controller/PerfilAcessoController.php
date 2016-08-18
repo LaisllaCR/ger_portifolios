@@ -66,11 +66,16 @@ class PerfilAcessoController extends AbstractActionController
     		$dados_form = $request->getPost();
     	
     		if ($dados_form) {
-
-    			$perfilAcesso->perfil_id = $dados_form['perfil_id'];
-    			$perfilAcesso->funcionalidade_id = $dados_form['funcionalidade_id'];
-    			 
-    			$this->getPerfilAcessoTable()->savePerfilAcesso($perfilAcesso);
+    			
+    			$this->getPerfilAcessoTable()->deletePerfilAcesso($dados_form['perfil_id']);
+    			    			
+    			foreach ($dados_form['funcionalidades'] as $funcionalidade_id){
+    				
+    				$perfilAcesso->perfil_id = $dados_form['perfil_id'];
+    				$perfilAcesso->funcionalidade_id = $funcionalidade_id;    				    				
+    				
+    				$this->getPerfilAcessoTable()->savePerfilAcesso($perfilAcesso);
+    			}    			 
     	
     			return $this->redirect()->toRoute('perfil-acesso');
     		}

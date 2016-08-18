@@ -34,11 +34,11 @@ class PerfilAcessoTable
 	{
 		$id  = (int) $id;
 		$rowset = $this->tableGateway->select(array('perfil_id' => $id));
-		$row = $rowset->current();
-		if (!$row) {
+		
+		if (!$rowset) {
 			throw new \Exception("Could not find row $id");
 		}
-		return $row;
+		return $rowset;
 	}
 
 	public function savePerfilAcesso(PerfilAcesso $perfilAcesso)
@@ -62,6 +62,6 @@ class PerfilAcessoTable
 
 	public function deletePerfilAcesso($id)
 	{
-		$this->tableGateway->delete(array('perfil_acesso_id' => (int) $id));
+		$this->tableGateway->delete(array('perfil_id' => (int) $id));
 	}
 }

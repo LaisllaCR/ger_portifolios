@@ -72,7 +72,7 @@ use Zend\Session\Container;
             <div>
               <input type="password" class="form-control" placeholder="Senha" id="usuario_senha" name="usuario_senha" required="required"  />
             </div>
-                 
+                  <!-- 
                    					<div class="input-group">
                                       <div class="checkbox">
                                         <label>
@@ -80,27 +80,28 @@ use Zend\Session\Container;
                                         </label>
                                       </div>
                                     </div>
+            -->
                                            
-		    <div class="control-label col-sm-1">
+		    <div class="control-label col-sm-12" style="text-align: center;">
 		      <button type="submit" class="btn btn-default submit">Acessar</button>
 		    </div>
-            
+            <!--  
             <div>              
               <a class="reset_pass" href="#">Esqueci minha senha?</a>
             </div>
-            
+            -->
             <div class="clearfix"></div>
             <div class="separator">
 
-              <p class="change_link">Não possui cadastro?
+              <p class="change_link"><?php echo utf8_encode('Não possui cadastro?'); ?>
                 <a href="#toregister" class="to_register"> Criar Conta </a>
               </p>
               <div class="clearfix"></div>
               <br />
               <div>
-                <h1><i class="fa fa-puzzle-piece" style="font-size: 26px;"></i> Gerenciador de Projetos!</h1>
+                <h1><i class="fa fa-puzzle-piece" style="font-size: 26px;"></i> Gerenciador de Projetos</h1>
 
-                <p>© 2016 Produzido por Laislla Costa Ramos</p>
+                <p><?php echo utf8_encode('© 2016 Produzido por Laislla Costa Ramos');?></p>
               </div>
             </div>
           </form>
@@ -124,7 +125,7 @@ use Zend\Session\Container;
               <input type="password" class="form-control" placeholder="Senha" id="usuario_senha" name="usuario_senha" required="required" />
             </div>
             
-		    <div class="control-label col-sm-1">
+		    <div class="control-label col-sm-12" style="text-align: center;">
 		      <button type="submit" class="btn btn-default submit">Cadastrar</button>
 		    </div>
             
@@ -137,9 +138,9 @@ use Zend\Session\Container;
               <div class="clearfix"></div>
               <br />
               <div>
-                <h1><i class="fa fa-puzzle-piece" style="font-size: 26px;"></i> Gerenciador de Projetos!</h1>
+                <h1><i class="fa fa-puzzle-piece" style="font-size: 26px;"></i> Gerenciador de Projetos</h1>
 
-                <p><?php echo "© 2016 Produzido por Laislla Costa Ramos";?></p>
+                <p><?php echo utf8_encode("© 2016 Produzido por Laislla Costa Ramos");?></p>
               </div>
             </div>
           </form>

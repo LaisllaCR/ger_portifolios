@@ -75,11 +75,16 @@ class Module
 		// vamos descobrir onde estamos?
 		$controller = $e->getTarget();
 		$rota = $controller->getEvent()->getRouteMatch()->getMatchedRouteName();
+		$sessao = new Container('usuario_dados');
 		 
+		//echo $rota;
+
 		if ($rota != 'login' && $rota != 'login/default') {
-			 
-			$sessao = new Container('usuario_dados');
-						
+			
+			if(!in_array($rota, $sessao->funcionalidades_usuario)){
+				return $controller->redirect()->toRoute('home');			
+			}
+			 						
 			if (!$sessao->id) {
 				return $controller->redirect()->toRoute('login');
 			}

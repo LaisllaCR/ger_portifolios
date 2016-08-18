@@ -657,6 +657,22 @@ return array(
 												'action'     => 'index',
 										),
 								),
+								'may_terminate' => true,
+								'child_routes'  => array(
+									'relatorio-projeto' => array(
+											'type' => 'segment',
+											'options' => array(
+													'route'    => '/:id',
+													'defaults' => array(
+															'controller' => 'Application\Controller\Relatorios',
+															'action'     => 'relatorio-projeto'
+													),
+													'constraints' => array(
+															'id' => '\d+'
+													)
+											)
+									),
+								),
 						),
 						
 
@@ -853,7 +869,8 @@ return array(
             'Application\Controller\MembroProjeto' => Controller\MembroProjetoController::class,
             'Application\Controller\AcompanhamentoProjeto' => Controller\AcompanhamentoProjetoController::class,
             'Application\Controller\Alertas' => Controller\AlertasController::class,
-            'Application\Controller\PerfilAcesso' => Controller\PerfilAcessoController::class
+            'Application\Controller\PerfilAcesso' => Controller\PerfilAcessoController::class,
+            'Application\Controller\Relatorios' => Controller\RelatoriosController::class
         ),
 
     	'factories' => array(

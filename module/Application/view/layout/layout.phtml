@@ -164,18 +164,31 @@ function toggleFullScreen() {
 			
 			            <div class="menu_section">
 			              <ul class="nav side-menu">
-			              
+			              	
 			                <li><a href="<?php echo $this->url('home', array('action'=>'index'));?>" ><i class="fa fa-home"></i> Home </a></li>
 			                
+			              	<?php if(in_array('projeto', $session_dados->funcionalidades_usuario)){ ?>
+			              	
 			                <li><a href="<?php echo $this->url('projeto', array('action'=>'index'));?>" ><i class="fa fa-clipboard"></i> Projetos </a></li>
-			                                			                
+			                
+							<?php }?>
+			                                	
+			              	<?php if(in_array('indicador', $session_dados->funcionalidades_usuario)){ ?>		                
+			                
 			                <li><a href="<?php echo $this->url('indicador', array('action'=>'index'));?>"><i class="fa fa-line-chart"></i> Indicadores </a></li>
 			                
+							<?php }?>
+							
+			              	<?php if(in_array('relatorios', $session_dados->funcionalidades_usuario)){ ?>		
 			                <li><a href="<?php echo $this->url('relatorios', array('action'=>'index'));?>" ><i class="fa fa-bar-chart-o"></i> Relatórios </a></li>  
 			                
-			                <li><a href="<?php echo $this->url('usuario', array('action'=>'index'));?>" ><i class="fa fa-users"></i> Usuários </a></li>
+							<?php }?>
+							
+			              	<?php if(in_array('usuario', $session_dados->funcionalidades_usuario)){ ?>		
+			                <li><a href="<?php echo $this->url('usuario', array('action'=>'index'));?>" ><i class="fa fa-users"></i> Usuários </a></li>			                
+							<?php }?>
 			                
-			                
+			              	<?php if(in_array('perfil-acesso', $session_dados->funcionalidades_usuario)){ ?>	
 			                <li><a><i class="fa fa-user-secret"></i>Perfil de acesso <span class="fa fa-chevron-down"></span></a>
 			                  <ul class="nav child_menu" style="display: none">
 			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 1));?>">Administrador</a></li>
@@ -184,7 +197,8 @@ function toggleFullScreen() {
 			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 4));?>">Alta Direção</a></li>
 			                  </ul>
 			                </li>
-			                              
+			                             		                
+							<?php }?> 
 			                
 			              </ul>
 			            </div> 

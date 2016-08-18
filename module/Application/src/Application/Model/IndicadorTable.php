@@ -3,6 +3,8 @@
 namespace Application\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Sql;
 
 class IndicadorTable
 {
@@ -28,6 +30,15 @@ class IndicadorTable
 			throw new \Exception("Could not find row $id");
 		}
 		return $row;
+	}
+	
+	public function getIndicadoresForaLimite()
+	{				
+		$sql = 'SELECT * FROM indicadores_projeto as a JOIN indicadores b ON a.indicador_id = b.indicador_id WHERE a.indicador_projeto_valor < a.valor_minimo or a.indicador_projeto_valor > a.valor_maximo';
+		
+		$statement = $this->tableGateway->adapter->query($sql);
+		
+		return $statement->execute();
 	}
 
 	public function saveIndicador(Indicador $indicador)
