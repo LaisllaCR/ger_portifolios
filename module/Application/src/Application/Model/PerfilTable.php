@@ -17,6 +17,17 @@ class PerfilTable
 	{
 		$resultSet = $this->tableGateway->select();
 		return $resultSet;
+	}	
+
+	public function getPerfil($id)
+	{
+		$id  = (int) $id;
+		$rowset = $this->tableGateway->select(array('perfil_id' => $id));
+		$row = $rowset->current();
+		if (!$row) {
+			throw new \Exception("Could not find row $id");
+		}
+		return $row;
 	}
 	
 }

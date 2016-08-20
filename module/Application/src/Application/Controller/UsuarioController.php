@@ -56,7 +56,7 @@ class UsuarioController extends AbstractActionController
     	
     		if ($dados_form) {
 
-    			$usuario->usuario_nome = $dados_form['usuario_nome'];
+    			$usuario->usuario_nome = utf8_encode($dados_form['usuario_nome']);
     			$usuario->usuario_email = $dados_form['usuario_email'];
     			$usuario->usuario_senha = $dados_form['usuario_senha'];
     			$usuario->perfil_id = $dados_form['perfil_id'];
@@ -96,7 +96,7 @@ class UsuarioController extends AbstractActionController
     		$dados_form = $request->getPost();    	
     		
     		$usuario->usuario_id = $id;    
-    		$usuario->usuario_nome = $dados_form['usuario_nome'];
+    		$usuario->usuario_nome = utf8_encode($dados_form['usuario_nome']);
     		$usuario->usuario_email = $dados_form['usuario_email'];
     		$usuario->usuario_senha = $dados_form['usuario_senha'];
     		$usuario->perfil_id = $dados_form['perfil_id'];
@@ -178,7 +178,7 @@ class UsuarioController extends AbstractActionController
     		$dados_form = $request->getPost();
     
     		$usuario->usuario_id = $id;
-    		$usuario->usuario_nome = $dados_form['usuario_nome'];
+    		$usuario->usuario_nome = utf8_encode($dados_form['usuario_nome']);
     		$usuario->usuario_email = $dados_form['usuario_email'];
     		$usuario->usuario_senha = $dados_form['usuario_senha'];
     		$usuario->perfil_id = $dados_form['perfil_id'];

@@ -150,7 +150,7 @@ function toggleFullScreen() {
 				        	if(isset($session_dados->id)){        	
 				        ?>
 		        	
-			              <h2><?php echo $session_dados->nome; ?></h2>
+			              <h2><?php echo utf8_decode($session_dados->nome); ?></h2>
 			              
 		        	<?php } ?>
 			            </div>
@@ -192,9 +192,10 @@ function toggleFullScreen() {
 			                <li><a><i class="fa fa-user-secret"></i>Perfil de acesso <span class="fa fa-chevron-down"></span></a>
 			                  <ul class="nav child_menu" style="display: none">
 			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 1));?>">Administrador</a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 3));?>">Líder de Projeto</a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 2));?>">Líder de Escritorio de Projeto</a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 4));?>">Alta Direção</a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 3));?>">Líder de Projeto/Gerente de Projeto</a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 2));?>">Líder do Escritório de Projetos</a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 5));?>">Equipe Técnica</a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 6));?>">Alta Direção</a></li>
 			                  </ul>
 			                </li>
 			                             		                

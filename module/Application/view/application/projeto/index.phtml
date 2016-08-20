@@ -35,7 +35,8 @@
 		              <?php 
 			        	$session_dados = new Container('usuario_dados');
 			        	if(isset($session_dados->id)){ 
-     						if($session_dados->perfil == 1 || $session_dados->perfil == 2){       	
+     						
+                        	if(in_array('projeto/add', $session_dados->funcionalidades_usuario)){    	
 			        ?>
                     <li>
                     	<a class="link"  href="<?php echo $this->url('projeto/add'); ?>" ><i class="fa fa-plus" aria-hidden="true"></i></a>
@@ -84,16 +85,57 @@
                         <td><?php echo $projeto->projeto_status; ?></td>
                         <td><?php echo $projeto->projeto_risco; ?></td>
                         <td class="col-md-4 col-sm-4 col-xs-12">
+                        
+                        <?php if(in_array('projeto/detalhe', $session_dados->funcionalidades_usuario)){ ?>
+			                                      
                           <a href="<?php echo $this->url('projeto/detalhe', array('id' => $projeto->projeto_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>  </a>
+                          
+						<?php }?>
+						
+                        <?php if(in_array('projeto/edit', $session_dados->funcionalidades_usuario)){ ?>
+                          
                           <a href="<?php echo $this->url('projeto/edit', array('id' => $projeto->projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
+                          
+						<?php }?>
+						
+                        <?php if(in_array('projeto/delete', $session_dados->funcionalidades_usuario)){ ?>
+                          
                           <a href="<?php echo $this->url('projeto/delete', array('id' => $projeto->projeto_id)); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
+                          
+						<?php }?>
+						
+                        <?php if(in_array('projeto/status', $session_dados->funcionalidades_usuario)){ ?>
+                          
                           <a href="<?php echo $this->url('projeto/status', array('id' => $projeto->projeto_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-hourglass-half" aria-hidden="true"></i></a>
+                        
+						<?php }?>
+						
                         </td>
                         <td class="col-md-4 col-sm-4 col-xs-12">
+                        	
+                        <?php if(in_array('indicador_projeto/consulta', $session_dados->funcionalidades_usuario)){ ?>
+                        
                           <a href="<?php echo $this->url('indicador_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" class="btn btn-success btn-xs"><i class="fa fa-tags" aria-hidden="true"></i></a>
+                          	
+						<?php }?>
+						
+                        <?php if(in_array('membro_projeto/consulta', $session_dados->funcionalidades_usuario)){ ?>
+                        
                           <a href="<?php echo $this->url('membro_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-users" aria-hidden="true"></i></a>
+                          	
+						<?php }?>
+						
+                        <?php if(in_array('acompanhamento_projeto/consulta', $session_dados->funcionalidades_usuario)){ ?>
+                        
                           <a href="<?php echo $this->url('acompanhamento_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" class="btn btn-success btn-xs"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                          	
+						<?php }?>
+						
+                        <?php if(in_array('tarefa_projeto/consulta', $session_dados->funcionalidades_usuario)){ ?>
+                        
                           <a href="<?php echo $this->url('tarefa_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-tasks" aria-hidden="true"></i></a>
+                        
+						<?php }?>
                         </td>
                       </tr>
                       <?php 

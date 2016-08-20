@@ -24,10 +24,25 @@ class PerfilAcessoController extends AbstractActionController
 	
 	public function indexAction()
      {
+		$array_perfis = Array();
+		$array_perfis_acessos = Array();
+		
+		$perfis = $this->getPerfilTable()->fetchAll();
+		
+		foreach ($perfis as $perfil){
+		
+			$perfis_acessos = $this->getPerfilAcessoTable()->getPerfilAcessos($perfil->perfil_id);
+			
+			foreach ($perfis_acessos as $perfil_acesso){
+				$array_perfis[$perfil->perfil_id][] = $perfil_acesso->funcionalidade_id;
+			}
+		}
+		
          return new ViewModel(array(
              'perfilAcessos' => $this->getPerfilAcessoTable()->fetchAll(),
              'perfis' => $this->getPerfilTable()->fetchAll(),
              'funcionalidades' => $this->getFuncionalidadeTable()->fetchAll(),
+             'array_perfis' => $array_perfis
          ));
      }
     
@@ -98,6 +113,25 @@ class PerfilAcessoController extends AbstractActionController
     
     	try {
     		$perfilAcesso = $this->getPerfilAcessoTable()->getPerfilAcessos($id);
+    		$array_perfis = Array();
+    		$array_perfis_acessos = Array();
+    		
+    		$perfis = $this->getPerfilTable()->fetchAll();
+    		
+    		foreach ($perfis as $perfil){
+    		
+    			$perfis_acessos = $this->getPerfilAcessoTable()->getPerfilAcessos($perfil->perfil_id);
+    			    			
+    			if(count($perfis_acessos) == 0){
+    				$array_perfis[$perfil->perfil_id] = Array();
+    			}else{    				
+	    			foreach ($perfis_acessos as $perfil_acesso){
+	    				$array_perfis[$perfil->perfil_id][] = $perfil_acesso->funcionalidade_id;
+	    			}
+    			}
+    		}
+    		
+    		$perfil_dados = $this->getPerfilTable()->getPerfil($id);
     	}
     	catch (\Exception $ex) {
     		return $this->redirect()->toRoute('perfil-acesso', array(
@@ -107,25 +141,32 @@ class PerfilAcessoController extends AbstractActionController
     
     	$request = $this->getRequest();
     	if ($request->isPost()) {
+    		$perfilAcesso = new PerfilAcesso();
     		$dados_form = $request->getPost();
-    
-    		$usuario->usuario_id = $id;
-    		$usuario->usuario_nome = $dados_form['usuario_nome'];
-    		$usuario->usuario_email = $dados_form['usuario_email'];
-    		$usuario->usuario_senha = $dados_form['usuario_senha'];
-    		$usuario->perfil_id = $dados_form['perfil_id'];
     		 
     		if ($dados_form) {
-    			$this->getUsuarioTable()->saveUsuario($usuario);
-    
-    			return $this->redirect()->toRoute('usuario');
+    			 
+    			$this->getPerfilAcessoTable()->deletePerfilAcesso($dados_form['perfil_id']);
+    	
+    			foreach ($dados_form['funcionalidades'] as $funcionalidade_id){
+    	
+    				$perfilAcesso->perfil_id = $dados_form['perfil_id'];
+    				$perfilAcesso->funcionalidade_id = $funcionalidade_id;
+    	
+    				$this->getPerfilAcessoTable()->savePerfilAcesso($perfilAcesso);
+    			}
+    			 
+    			return $this->redirect()->toRoute('perfil-acesso/edit');
     		}
     	}
-    
-    	return array(
+    	
+       	return array(
+    			'perfil_dados' => $perfil_dados,
     			'id' => $id,
-    			'usuario' => $usuario,
+    			'perfilAcessos' => $this->getPerfilAcessoTable()->fetchAll(),
     			'perfis' => $this->getPerfilTable()->fetchAll(),
+    			'funcionalidades' => $this->getFuncionalidadeTable()->fetchAll(),
+    			'array_perfis' => $array_perfis
     	);
     }
        

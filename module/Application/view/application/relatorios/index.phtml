@@ -16,7 +16,7 @@
                 <p>Total de Indicadores cadastrados.</p>
               </div>
             </div>
-            
+                                    
             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <div class="tile-stats" style="height: 130px;">
                 <div class="icon"><i class="fa fa-exclamation-circle"></i>
@@ -24,18 +24,15 @@
                 <div class="count"><?php echo $totalIndicadoresForaLimite;?></div>
 
                 <h3>Fora do Limite</h3>
-                <p>Total de Indicadores Fora do Limite.</p>
+                <p>Total de Indicadores Analisados Fora do Limite.</p>
               </div>
             </div>
             
             <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <div class="tile-stats" style="height: 130px;">
-                <div class="icon"><i class="fa fa-exclamation-circle"></i>
-                </div>
-                <div class="count"><?php echo $projetoForaLimite;?></div>
+                <div class="count" style="font-size: 18px; text-align:center;">Projeto com maior quantidade de Indicadores Fora do Limite</div>
 
-                <h3>Projetos Fora do Limite</h3>
-                <p>Total de Projetos com Indicadores Fora do Limite.</p>
+                <p style="text-align:center;"><?php echo $projetoForaLimite;?></p>
               </div>
             </div>
             
@@ -43,9 +40,9 @@
               <div class="tile-stats" style="height: 130px; text-align: center;">
                 <div class="icon">
                 </div>
-                <div class="count" style="font-size: 30px;"><?php echo $indicadorForaLimite;?></div>
+                <div class="count" style="font-size: 20px;">Indicador com maior frequencia fora Fora do Limite</div>
 
-                <p>Indicador com maior índice Fora do Limite.</p>
+                <p><?php echo $indicadorForaLimite;?></p>
               </div>
             </div>
           </div>
@@ -54,7 +51,7 @@
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Indicadores por Projetos Ativos <small>Weekly progress</small></h2>
+                  <h2>Quantidade de Indicadores Fora do Limite por Projetos Ativos</h2>
                   <div class="filter">
                     
                   </div>
@@ -62,32 +59,11 @@
                 </div>
                 <div class="x_content">
                   <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="demo-container" style="height:280px">
-                      <div id="placeholder33x" class="demo-placeholder"></div>
-                    </div>
-                    <div class="tiles">
-                      <div class="col-md-4 tile">
-                        <span>Total Sessions</span>
-                        <h2>231,809</h2>
-                        <span class="sparkline11 graph" style="height: 160px;">
-                                        <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-                                    </span>
-                      </div>
-                      <div class="col-md-4 tile">
-                        <span>Total Revenue</span>
-                        <h2>$231,809</h2>
-                        <span class="sparkline22 graph" style="height: 160px;">
-                                        <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-                                    </span>
-                      </div>
-                      <div class="col-md-4 tile">
-                        <span>Total Sessions</span>
-                        <h2>231,809</h2>
-                        <span class="sparkline11 graph" style="height: 160px;">
-                                        <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-                                    </span>
-                      </div>
-                    </div>
+                  <?php foreach ($projetosForaLimite as $projeto){?>
+                  <input type="hidden"  class="webcampics" name="projeto_fora_limite_<?php echo $projeto['projeto_id']; ?>" value="<?php echo $projeto['projeto_quantidade']; ?>">
+                  <input type="hidden"  class="webcampics2" name="projeto_fora_limite_nome_<?php echo $projeto['projeto_id']; ?>" value="<?php echo $projeto['projeto_nome']; ?>">
+                  <?php }?>
+                  <canvas id="mybarChart"></canvas>
 
                   </div>
 
@@ -96,48 +72,6 @@
             </div>
           </div>
 
-
-
-          <div class="row">
-            <div class="col-md-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2>Weekly Summary <small>Activity shares</small></h2>
-                  
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-
-                  <div class="row" style="border-bottom: 1px solid #E0E0E0; padding-bottom: 5px; margin-bottom: 5px;">
-                    <div class="col-md-7" style="overflow:hidden;">
-                      <span class="sparkline_one" style="height: 160px; padding: 10px 25px;">
-                                    <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-                                </span>
-                      <h4 style="margin:18px">Weekly sales progress</h4>
-                    </div>
-
-                    <div class="col-md-5">
-                      <div class="row" style="text-align: center;">
-                        <div class="col-md-4">
-                          <canvas id="canvas1i" height="110" width="110" style="margin: 5px 10px 10px 0"></canvas>
-                          <h4 style="margin:0">Bounce Rates</h4>
-                        </div>
-                        <div class="col-md-4">
-                          <canvas id="canvas1i2" height="110" width="110" style="margin: 5px 10px 10px 0"></canvas>
-                          <h4 style="margin:0">New Traffic</h4>
-                        </div>
-                        <div class="col-md-4">
-                          <canvas id="canvas1i3" height="110" width="110" style="margin: 5px 10px 10px 0"></canvas>
-                          <h4 style="margin:0">Device Share</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <!-- footer content -->
         <footer>
@@ -148,7 +82,7 @@
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-
+</div>
       </div>
       
   <script src="js/bootstrap.min.js"></script>
@@ -182,6 +116,61 @@
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
   <!-- flot -->
+ 
+ <<script type="text/javascript">
+<!--
+
+//-->
+
+Chart.defaults.global.legend = {
+  enabled: false
+};
+
+// Bar chart
+var ctx = document.getElementById("mybarChart");
+
+var inputs = document.getElementsByClassName( 'webcampics' );
+var inputs2 = document.getElementsByClassName( 'webcampics2' );
+
+var valores = new Array();
+var nomes = new Array();
+var cont = 0;
+
+names  = [].map.call(inputs, function( input ) {
+	valores.push(input.value);
+});
+
+var cont = 0;
+
+names  = [].map.call(inputs2, function( input ) {
+	nomes.push(input.value);
+	
+});
+
+
+var mybarChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: nomes,
+    datasets: [{
+      label: '# of Votes',
+      backgroundColor: "#26B99A",
+      data: valores
+    }]
+  },
+
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+});
+</script>
+ 
   <script type="text/javascript">
     //define chart clolors ( you maybe add more colors if you want or flot will add it automatic )
     var chartColours = ['#96CA59', '#3F97EB', '#72c380', '#6f7a8a', '#f7cb38', '#5a8022', '#2c7282'];
