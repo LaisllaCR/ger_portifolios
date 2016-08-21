@@ -41,6 +41,15 @@ class IndicadorProjetoTable
 		}
 		return $row;
 	}
+
+	public function getIndicadores($id)
+	{
+		$sql = 'SELECT * FROM indicadores_projeto as a join indicadores b ON a.indicador_id = b.indicador_id WHERE a.projeto_id = '.$id;
+	
+		$statement = $this->tableGateway->adapter->query($sql);
+	
+		return $statement->execute();
+	}
 	
 	public function getIndicadoresProjeto($id)
 	{

@@ -22,7 +22,7 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
     	return new ViewModel(array(
-    			'projetos' => $this->getProjetoTable()->fetchAll(),
+    		'projetos' => $this->getProjetoTable()->fetchAll(),
              'usuarios' => $this->getUsuarioTable()->fetchAll(),
     	));
     }

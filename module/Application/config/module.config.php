@@ -645,35 +645,29 @@ return array(
 						),
 						
 						'relatorios' => array(
-								'type'    => 'segment',
+								'type' => 'literal',
 								'options' => array(
-										'route'    => '/relatorios[/:action][/:id]',
-										'constraints' => array(
-												'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-												'id'     => '[0-9]+',
-										),
+										'route'    => '/relatorios',
 										'defaults' => array(
 												'controller' => 'Application\Controller\Relatorios',
 												'action'     => 'index',
-										),
+										)
 								),
 								'may_terminate' => true,
 								'child_routes'  => array(
-									'relatorio-projeto' => array(
-											'type' => 'segment',
-											'options' => array(
-													'route'    => '/:id',
-													'defaults' => array(
-															'controller' => 'Application\Controller\Relatorios',
-															'action'     => 'relatorio-projeto'
-													),
-													'constraints' => array(
-															'id' => '\d+'
-													)
-											)
-									),
-								),
-						),
+										'detalhe' => array(
+												'type' => 'segment',
+												'options' => array(
+														'route'    => '/:id',
+														'defaults' => array(
+																'action' => 'detalhe'
+														),
+														'constraints' => array(
+																'id' => '\d+'
+														)
+												)
+										),
+										)),
 						
 
 						'alertas' => array(

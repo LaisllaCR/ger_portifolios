@@ -5,44 +5,25 @@
         <div class="">
 
           <div class="row top_tiles">
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
+            <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">            
+              <div class="tile-stats" style="height: 130px;">
                 <div class="icon"><i class="fa fa-clipboard"></i>
                 </div>
-                <div class="count">179</div>
+                <div class="count"><?php echo $projetosForaLimite[$id]['total_indicadores'];?></div>
 
-                <h3>Projetos</h3>
-                <p>Lorem ipsum psdea itgum rixt.</p>
+                <h3>Total</h3>
+                <p>Total de Indicadores cadastrados.</p>
               </div>
             </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-list-alt"></i>
-                </div>
-                <div class="count">179</div>
-
-                <h3>Tarefas</h3>
-                <p>Lorem ipsum psdea itgum rixt.</p>
-              </div>
-            </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
-                <div class="icon"><i class="fa fa-ban"></i>
-                </div>
-                <div class="count">179</div>
-
-                <h3>Cancelados</h3>
-                <p>Lorem ipsum psdea itgum rixt.</p>
-              </div>
-            </div>
-            <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="tile-stats">
+                                    
+            <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="tile-stats" style="height: 130px;">
                 <div class="icon"><i class="fa fa-exclamation-circle"></i>
                 </div>
-                <div class="count">179</div>
+                <div class="count"><?php echo $projetosForaLimite[$id]['projeto_quantidade'];?></div>
 
-                <h3>Indicadores</h3>
-                <p>Lorem ipsum psdea itgum rixt.</p>
+                <h3>Fora do Limite</h3>
+                <p>Total de Indicadores Analisados Fora do Limite.</p>
               </div>
             </div>
           </div>
@@ -51,65 +32,40 @@
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Transaction Summary <small>Weekly progress</small></h2>                  
+                  <h2>Indicadores do Projeto</h2>
+                                                 
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <div class="col-md-9 col-sm-12 col-xs-12">
-                    <div class="demo-container" style="height:280px">
-                      <div id="placeholder33x" class="demo-placeholder"></div>
-                    </div>
-                  </div>
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                  
+                   <?php foreach ($indicadoresProjeto as $projeto){?>
+                  <input type="hidden"  class="webcampics" name="indicador_valor_<?php echo $projeto['indicador_projeto_id']; ?>" value="<?php echo $projeto['indicador_projeto_valor']; ?>">
+                  <input type="hidden"  class="webcampics2" name="indicador_nome_<?php echo $projeto['indicador_projeto_id']; ?>" value="<?php echo utf8_decode($projeto['indicador_nome']); ?>">
+                  <input type="hidden"  class="webcampics3" name="indicador_valor_minimo_<?php echo $projeto['indicador_projeto_id']; ?>" value="<?php echo $projeto['valor_minimo']; ?>">
+                  <input type="hidden"  class="webcampics4" name="indicador_valor_maximo_<?php echo $projeto['indicador_projeto_id']; ?>" value="<?php echo $projeto['valor_maximo']; ?>">
+                  <?php }?>
+                  
+                  <canvas id="mybarChart"></canvas>
 
-                  <div class="col-md-3 col-sm-12 col-xs-12">
-                    <div>
-                      <div class="x_title">
-                        <h2>Projetos de Alto Risco</h2>
-                        <div class="clearfix"></div>
-                      </div>
-                      <ul class="list-unstyled top_profiles scroll-view">
-                      <?php 
-                      $array_usuarios = Array();
-                      
-                      foreach($usuarios as $usuario){
-                      	$array_usuarios[$usuario->usuario_id] = $usuario->usuario_nome;
-                      }
-                      
-                      		foreach ($projetos as $projeto){
-                      			if($projeto->projeto_risco == "Alto risco"){
-                      ?>
-                        <li class="media event">
-                          <a class="pull-left border-aero profile_thumb">
-                            <i class="fa fa-user aero"></i>
-                          </a>
-                          <div class="media-body">
-                            <a class="title" href="#"><?php echo $projeto->projeto_nome;?></a>
-                            <p> <?php echo $array_usuarios[$projeto->projeto_gerente_id]; ?>
-                            </p>
-                          </div>
-                        </li>
-                        <?php 	}
-                      		}?>
-                      </ul>
-                    </div>
                   </div>
 
                 </div>
               </div>
             </div>
           </div>
-        </div>
+
 
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos   
+            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
             </p>
           </div>
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-
+</div>
       </div>
       
   <script src="js/bootstrap.min.js"></script>
@@ -143,6 +99,86 @@
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
   <!-- flot -->
+ 
+ <script type="text/javascript">
+<!--
+
+//-->
+
+
+
+Chart.defaults.global.legend = {
+  enabled: false
+};
+
+// Bar chart
+var ctx = document.getElementById("mybarChart");
+
+var inputs = document.getElementsByClassName( 'webcampics' );
+var inputs2 = document.getElementsByClassName( 'webcampics2' );
+var inputs3 = document.getElementsByClassName( 'webcampics3' );
+var inputs4 = document.getElementsByClassName( 'webcampics4' );
+
+var valores = new Array();
+var nomes = new Array();
+var minimo = new Array();
+var maximo = new Array();
+var cont = 0;
+
+names  = [].map.call(inputs, function( input ) {
+	valores.push(input.value);
+});
+
+var cont = 0;
+
+names  = [].map.call(inputs2, function( input ) {
+	nomes.push(input.value);	
+});
+
+var cont = 0;
+
+names  = [].map.call(inputs3, function( input ) {
+	minimo.push(input.value);	
+});
+
+var cont = 0;
+
+names  = [].map.call(inputs4, function( input ) {
+	maximo.push(input.value);	
+});
+
+
+var mybarChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: nomes,
+    datasets: [{
+      label: '# Valor Analisado',
+      backgroundColor: "#26B99A",
+      data: valores
+    }, {
+        label: '# Valor Minimo',
+        backgroundColor: "#00cc66",
+        data: minimo
+      }, {
+          label: '# Valor Maximo',
+          backgroundColor: "#ff4d4d",
+          data: maximo
+        }],
+  },
+
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+});
+</script>
+ 
   <script type="text/javascript">
     //define chart clolors ( you maybe add more colors if you want or flot will add it automatic )
     var chartColours = ['#96CA59', '#3F97EB', '#72c380', '#6f7a8a', '#f7cb38', '#5a8022', '#2c7282'];

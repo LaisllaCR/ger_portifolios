@@ -58,7 +58,7 @@ class RelatoriosController extends AbstractActionController
      	$projetos = $this->getProjetoTable()->fetchAll();
      	
      	$maior_valor = $this->getTotalIndicadoresForaLimitePorIndicador($indicadores, $indicadoresForaLimite); 
-     	$maior_valor_projeto = $this->getTotalIndicadoresForaLimitePorProjeto($projetos);     
+     	$maior_valor_projeto = $this->getTotalIndicadoresForaLimitePorProjeto();     
      	$projetos_fora_limite = $this->getForaLimitePorProjeto();
       	
      	/*
@@ -68,6 +68,7 @@ class RelatoriosController extends AbstractActionController
      	*/
      	
          return new ViewModel(array(
+         		'projetos' => $projetos,
          		'totalIndicadores' => count($indicadores),
          		'totalIndicadoresForaLimite' => count($indicadoresForaLimite),
          		'indicadorForaLimite' => $maior_valor['indicador_nome'],
@@ -75,6 +76,27 @@ class RelatoriosController extends AbstractActionController
          		'projetosForaLimite' => $projetos_fora_limite,
             // 'relatorioss' => $this->getRelatoriosTable()->fetchAll(),
          ));
+     }
+     
+     public function detalheAction()
+     {
+    	$id = (int) $this->params()->fromRoute('id', 0);
+    	
+    	if (!$id) {
+    		return $this->redirect()->toRoute('relatorios', array(
+    				'action' => 'index'
+    		));
+    	}
+    
+    	$projetos_fora_limite = $this->getForaLimitePorProjeto();
+     	 
+     
+     	return array(
+     			'id' => $id, 
+     			'indicadoresProjeto' => $this->getIndicadorProjetoTable()->getIndicadores($id),
+     			'projetosForaLimite' => $projetos_fora_limite,
+     			// 'relatorioss' => $this->getRelatoriosTable()->fetchAll(),
+     	);
      }
      
      
@@ -110,8 +132,10 @@ class RelatoriosController extends AbstractActionController
      	
      }
      
-     public function getTotalIndicadoresForaLimitePorProjeto($projetos)
+     public function getTotalIndicadoresForaLimitePorProjeto()
      {
+
+     	$projetos = $this->getProjetoTable()->fetchAll();
 
      	$indicadoresForaLimite = $this->getIndicadorTable()->getIndicadoresForaLimite();
      	$array_indicador = Array();
@@ -167,7 +191,9 @@ class RelatoriosController extends AbstractActionController
      	}
      	      	 
      	foreach ($array_indicador as $chave=>$valor){
-     		$projetos_fora_limite[] = array('projeto_id' => $chave,'projeto_nome' => $array_projetos[$chave], 'projeto_quantidade' => $valor);
+     		$total = count($this->getIndicadorProjetoTable()->getIndicadoresProjeto($chave));
+     		
+     		$projetos_fora_limite[$chave] = array('projeto_id' => $chave,'projeto_nome' => $array_projetos[$chave], 'projeto_quantidade' => $valor, 'total_indicadores' => $total);
      	}
      	//quantidade de indicadores fora do limite por indicador
      	 

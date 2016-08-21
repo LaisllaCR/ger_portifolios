@@ -51,10 +51,8 @@
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Quantidade de Indicadores Fora do Limite por Projetos Ativos</h2>
-                  <div class="filter">
-                    
-                  </div>
+                  <h2>Quantidade de Indicadores Fora do Limite por Projetos Ativos</h2>                
+                
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -71,12 +69,59 @@
               </div>
             </div>
           </div>
+          
+           <div class="row">
+            <div class="col-md-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Projetos</h2>                  
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                  <!-- start project list -->
+                  <table class="table table-striped projects">
+                    <thead>
+                      <tr>
+                        <th style="width: 15%">Projeto</th>
+                        <th style="width: 15%">Quantidade de Indicadores</th>
+                        <th style="width: 15%">Quantidade de Indicadores Fora do Limite</th>
+                        <th style="width: 10%"></th>
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                    <?php 
+
+						foreach ($projetosForaLimite as $projeto)
+						{
+					?>
+                      <tr>
+                        <td><?php echo $projeto['projeto_nome']; ?></td>
+                        <td><?php echo $projeto['total_indicadores']; ?></td>
+                        <td><?php echo $projeto['projeto_quantidade'];?></td>
+                        <td><a href="<?php echo $this->url('relatorios/detalhe', array('id' => $projeto['projeto_id']));?>" ><i class="fa fa-bar-chart-o"></i> Ver relatório </a></td>
+                      </tr>
+                      <?php 
+						}
+                      ?>                      
+                    </tbody>
+                  </table>
+                  <!-- end project list -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ----------Historico de status -->
+
+          
 
 
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>    
+            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos   
             </p>
           </div>
           <div class="clearfix"></div>
@@ -116,11 +161,13 @@
   <!-- pace -->
   <script src="js/pace/pace.min.js"></script>
   <!-- flot -->
- 
- <<script type="text/javascript">
+      
+ <script type="text/javascript">
 <!--
 
 //-->
+
+
 
 Chart.defaults.global.legend = {
   enabled: false
@@ -153,7 +200,7 @@ var mybarChart = new Chart(ctx, {
   data: {
     labels: nomes,
     datasets: [{
-      label: '# of Votes',
+      label: '# de Indicadores',
       backgroundColor: "#26B99A",
       data: valores
     }]
