@@ -63,8 +63,8 @@
                         <td><?php echo date('d/m/Y',  strtotime($tarefa->tarefa_data_inicio)); ?></td>
                         <td><?php echo date('d/m/Y',  strtotime($tarefa->tarefa_data_previsao_termino)); ?></td>
                         <td>
-                          <a href="<?php echo $this->url('tarefa_projeto/detalhe', array('id' => $tarefa->tarefa_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>  </a>
-                          <a href="<?php echo $this->url('tarefa_projeto/edit', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
+                          <a href="<?php echo $this->url('tarefa_projeto/detalhe', array('id' => $tarefa->tarefa_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
+                          <a href="<?php echo $this->url('tarefa_projeto/edit', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>  </a>
                           <a href="<?php echo $this->url('tarefa_projeto/delete', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
                         </td>
                       </tr>

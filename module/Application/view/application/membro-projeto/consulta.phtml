@@ -71,8 +71,8 @@
                         <td><?php echo $array_usuarios[$membro->usuario_id]; ?></td>
                         <td><?php echo $membro->projeto_membro_papel; ?></td>
                         <td>
-                          <a href="<?php echo $this->url('membro_projeto/detalhe', array('id' => $membro->projeto_membro_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>  </a>
-                          <a href="<?php echo $this->url('membro_projeto/edit', array('projeto_id' => $id, 'id' => $membro->projeto_membro_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
+                          <a href="<?php echo $this->url('membro_projeto/detalhe', array('id' => $membro->projeto_membro_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
+                          <a href="<?php echo $this->url('membro_projeto/edit', array('projeto_id' => $id, 'id' => $membro->projeto_membro_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>  </a>
                           <a href="<?php echo $this->url('membro_projeto/delete', array('projeto_id' => $id, 'id' => $membro->projeto_membro_id)); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
                         </td>
                       </tr>

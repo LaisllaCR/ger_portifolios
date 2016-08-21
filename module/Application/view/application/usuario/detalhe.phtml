@@ -109,14 +109,14 @@
                     <ul class="list-unstyled user_data">
                       <li><i class="fa fa-map-marker user-profile-icon"></i> Cuiaba, Mato Grosso, BR
                       </li>
-<?php 
-
-$array_perfis = Array();
-
-foreach ($perfis as $perfil){
-	$array_perfis[$perfil->perfil_id] = utf8_decode($perfil->perfil_nome);
-}
-?>
+						<?php 
+						
+						$array_perfis = Array();
+						
+						foreach ($perfis as $perfil){
+							$array_perfis[$perfil->perfil_id] = utf8_decode($perfil->perfil_nome);
+						}
+						?>
                       <li>
                         <i class="fa fa-briefcase user-profile-icon"></i> <?php echo $array_perfis[$usuario->perfil_id]; ?>
                       </li>
@@ -129,35 +129,7 @@ foreach ($perfis as $perfil){
                     <a  href="<?php echo $this->url('usuario/edit', array('id' => $usuario->usuario_id)); ?>" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
                     <br />
 
-                    <!-- start skills -->
-                    <h4>Habilidades</h4>
-                    <ul class="list-unstyled user_data">
-                      <li>
-                        <p>Programacao Web</p>
-                        <div class="progress progress_sm">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                        </div>
-                      </li>
-                      <li>
-                        <p>Gerenciamento de Projetos</p>
-                        <div class="progress progress_sm">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="70"></div>
-                        </div>
-                      </li>
-                      <li>
-                        <p>Testes de Software</p>
-                        <div class="progress progress_sm">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"></div>
-                        </div>
-                      </li>
-                      <li>
-                        <p>UI / UX</p>
-                        <div class="progress progress_sm">
-                          <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                        </div>
-                      </li>
-                    </ul>
-                    <!-- end of skills -->
+                    
 
                   </div>
                   <div class="col-md-9 col-sm-9 col-xs-12">
@@ -168,7 +140,7 @@ foreach ($perfis as $perfil){
                       </div>
                     </div>
                     <!-- start of user-activity-graph -->
-                    <div style="width:100%; height:550px;">
+                    <div style="width:100%;">
                      <!-- start user projects -->
                           <table class="data table table-striped no-margin">
                             <thead>
@@ -240,14 +212,11 @@ foreach ($perfis as $perfil){
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
 
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">Â© 2016 Produzido por Laislla Costa Ramos
+            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
             </p>
           </div>
           <div class="clearfix"></div>

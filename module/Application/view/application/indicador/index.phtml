@@ -57,9 +57,9 @@
                           <a><?php echo utf8_decode($indicador->indicador_nome); ?></a>
                         </td>
                         <td>
-                          <a href="<?php echo $this->url('indicador/edit', array('id' => $indicador->indicador_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
+                          <a href="<?php echo $this->url('indicador/detalhe', array('id' => $indicador->indicador_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
+                          <a href="<?php echo $this->url('indicador/edit', array('id' => $indicador->indicador_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>  </a>
                           <a href="<?php echo $this->url('indicador/delete', array('id' => $indicador->indicador_id)); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
-                          <a href="<?php echo $this->url('indicador/detalhe', array('id' => $indicador->indicador_id)); ?>" class="btn btn-success btn-xs"><i class="fa fa-folder"></i>  </a>
                         </td>
                       </tr>
                       <?php 
@@ -78,7 +78,7 @@
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
             </p>
           </div>
           <div class="clearfix"></div>

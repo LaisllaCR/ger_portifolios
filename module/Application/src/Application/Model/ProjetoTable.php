@@ -43,6 +43,13 @@ class ProjetoTable
 		return $statement->execute();
 	}
 
+	public function getProjetoStatus($status)
+	{
+		$rowset = $this->tableGateway->select(array('projeto_status' => $status));
+		
+		return $rowset;
+	}
+
 	public function saveProjeto(Projeto $projeto)
 	{
 		$data = array(

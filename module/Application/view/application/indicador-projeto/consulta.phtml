@@ -69,10 +69,10 @@
                         <td><?php echo $indicador->valor_maximo; ?></td>
                         <td><?php echo $indicador->indicador_projeto_valor; ?></td>
                         <td>
-                          <a href="<?php echo $this->url('indicador_projeto/detalhe', array('id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>  </a>
-                          <a href="<?php echo $this->url('indicador_projeto/edit', array('projeto_id' => $id, 'id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
+                          <a href="<?php echo $this->url('indicador_projeto/detalhe', array('id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
+                          <a href="<?php echo $this->url('indicador_projeto/edit', array('projeto_id' => $id, 'id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>  </a>
                           <a href="<?php echo $this->url('indicador_projeto/delete', array('projeto_id' => $id, 'id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
-                          <a href="<?php echo $this->url('indicador_projeto/analise', array('projeto_id' => $id, 'id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-line-chart"></i>  </a>
+                          <a href="<?php echo $this->url('indicador_projeto/analise', array('projeto_id' => $id, 'id' => $indicador->indicador_projeto_id)); ?>" class="btn btn-warning btn-xs"><i class="fa fa-line-chart"></i>  </a>
                         </td>
                       </tr>
                       <?php 
@@ -92,7 +92,7 @@
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
             </p>
           </div>
           <div class="clearfix"></div>

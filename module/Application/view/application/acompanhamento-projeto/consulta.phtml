@@ -64,8 +64,8 @@
                         <td><?php echo date('d/m/Y', strtotime($acompanhamento->projeto_semana_data_inicio)); ?></td>
                         <td><?php echo date('d/m/Y', strtotime($acompanhamento->projeto_semana_data_fim)); ?></td>
                         <td>
-                          <a href="<?php echo $this->url('acompanhamento_projeto/detalhe', array('id' => $acompanhamento->projeto_semana_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i>  </a>
-                          <a href="<?php echo $this->url('acompanhamento_projeto/edit', array('id' => $acompanhamento->projeto_semana_id, 'projeto_id' => $id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i>  </a>
+                          <a href="<?php echo $this->url('acompanhamento_projeto/detalhe', array('id' => $acompanhamento->projeto_semana_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
+                          <a href="<?php echo $this->url('acompanhamento_projeto/edit', array('id' => $acompanhamento->projeto_semana_id, 'projeto_id' => $id)); ?>" class="btn btn-warning btn-xs"><i class="fa fa-calendar-o"></i>  </a>
                         </td>
                       </tr>
                       <?php 
