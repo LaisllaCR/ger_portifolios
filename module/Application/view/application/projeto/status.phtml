@@ -9,7 +9,7 @@
 	  	if(status == "Cancelado" || status == "Analise aprovada"){
 		  
 		  if(justificativa == ""){
-			  	document.getElementById('alerta').innerHTML = "A justificativa é obrigatória para esse Status!";
+			  	document.getElementById('alerta').innerHTML = "A justificativa ï¿½ obrigatï¿½ria para esse Status!";
 		        document.getElementById('alerta').style.display = 'block';
 		    		  	    	
 		    	setTimeout(function(){
@@ -75,7 +75,7 @@
 
 
                   <!-- Smart Wizard -->
-                  <p>Esse é o formulário onde deve ser preenchido o status atual do projeto.</p>
+                  <p>Esse Ã© o formulÃ¡rio onde deve ser preenchido o status atual do projeto.</p>
                    <form id="projeto_justificativa" name="projeto_justificativa"  onSubmit="validateForm(); return false;" method="post" action="<?php echo $this->url('projeto/status',  array('action'=>'status', 'id' => $projeto->projeto_id));?>" role="form" class="form-horizontal form-label-left">
                   
                   <div>
@@ -119,17 +119,17 @@
                           <div class="col-md-6 col-sm-6 col-xs-12">
                          	<div class="radio">
 	                          <label>
-	                            <input type="radio"  <?php echo $emAnalise; ?> value="Em analise" id="Em analise" name="statusRadios"> Em análise
+	                            <input type="radio"  <?php echo $emAnalise; ?> value="Em analise" id="Em analise" name="statusRadios"> Em anÃ¡lise
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio"  <?php echo $analiseRealizada; ?> value="Analise realizada" id="Analise realizada" name="statusRadios"> Análise realizada
+	                            <input type="radio"  <?php echo $analiseRealizada; ?> value="Analise realizada" id="Analise realizada" name="statusRadios"> AnÃ¡lise realizada
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio"   <?php echo $analiseAprovada; ?> value="Analise aprovada" id="Analise aprovada" name="statusRadios"> Análise aprovada
+	                            <input type="radio"   <?php echo $analiseAprovada; ?> value="Analise aprovada" id="Analise aprovada" name="statusRadios"> AnÃ¡lise aprovada
 	                          </label>
 	                        </div>
                         
@@ -191,7 +191,7 @@
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Histórico</h2>                  
+                  <h2>HistÃ³rico</h2>                  
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -202,7 +202,7 @@
                       <tr>
                         <th style="width: 15%">Data</th>
                         <th style="width: 15%">Status</th>
-                        <th style="width: 10%">Usuário</th>
+                        <th style="width: 10%">UsuÃ¡rio</th>
                       </tr>
                     </thead>
                     
@@ -249,7 +249,7 @@
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
+            <p class="pull-right">Â© 2016 Produzido por Laislla Costa Ramos
             </p>
           </div>
           <div class="clearfix"></div>

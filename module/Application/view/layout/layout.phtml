@@ -4,7 +4,7 @@ use Zend\Session\Container;
 <html lang="en">
     <head>
         <meta charset="iso 8859-1">
-        <?php echo $this->headTitle('Gerenciador de Portifólios de Projetos'. $this->translate('Gerenciador de Portifólios de Projetos'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('Gerenciador de PortifÃ³lios de Projetos'. $this->translate('Gerenciador de PortifÃ³lios de Projetos'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?php echo $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -133,7 +133,7 @@ function toggleFullScreen() {
 			        <div class="left_col scroll-view">
 			
 			          <div class="navbar nav_title" style="border: 0;">
-			            <a href="<?php echo $this->url('home', array('action'=>'index'));?>" class="site_title"><i class="fa fa-puzzle-piece"></i> <span><?php echo utf8_encode('Portifólio!'); ?></span></a>
+			            <a href="<?php echo $this->url('home', array('action'=>'index'));?>" class="site_title"><i class="fa fa-puzzle-piece"></i> <span><?php echo 'PortifÃ³lio!'; ?></span></a>
 			          </div>
 			          <div class="clearfix"></div>
 			
@@ -141,7 +141,7 @@ function toggleFullScreen() {
 			          <!-- menu prile quick info -->
 			          <div class="profile" style="padding-bottom: 80px;">
 			            <div class="profile_pic">
-			              <img src="<?php echo $this->basePath('images/img.jpg'); ?>" alt="..." class="img-circle profile_img">
+			              <img src="<?php echo $this->basePath('images/user_icon.png'); ?>" alt="..." class="img-circle profile_img">
 			            </div>
 			            <div class="profile_info">
 			              <span>Bem Vindo,</span>
@@ -180,22 +180,22 @@ function toggleFullScreen() {
 							<?php }?>
 							
 			              	<?php if(in_array('relatorios', $session_dados->funcionalidades_usuario)){ ?>		
-			                <li><a href="<?php echo $this->url('relatorios', array('action'=>'index'));?>" ><i class="fa fa-bar-chart-o"></i> Relatórios </a></li>  
+			                <li><a href="<?php echo $this->url('relatorios', array('action'=>'index'));?>" ><i class="fa fa-bar-chart-o"></i> <?php echo ('RelatÃ³rios'); ?> </a></li>  
 			                
 							<?php }?>
 							
 			              	<?php if(in_array('usuario', $session_dados->funcionalidades_usuario)){ ?>		
-			                <li><a href="<?php echo $this->url('usuario', array('action'=>'index'));?>" ><i class="fa fa-users"></i> Usuários </a></li>			                
+			                <li><a href="<?php echo $this->url('usuario', array('action'=>'index'));?>" ><i class="fa fa-users"></i> <?php echo ('UsuÃ¡rios'); ?> </a></li>			                
 							<?php }?>
 			                
 			              	<?php if(in_array('perfil-acesso', $session_dados->funcionalidades_usuario)){ ?>	
 			                <li><a><i class="fa fa-user-secret"></i>Perfil de acesso <span class="fa fa-chevron-down"></span></a>
 			                  <ul class="nav child_menu" style="display: none">
 			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 1));?>">Administrador</a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 3));?>">Líder de Projeto/Gerente de Projeto</a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 2));?>">Líder do Escritório de Projetos</a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 5));?>">Equipe Técnica</a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 6));?>">Alta Direção</a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 3));?>"><?php echo utf8_encode('LÃ­der de Projeto/Gerente de Projeto'); ?></a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 2));?>"><?php echo utf8_encode('LÃ­der do EscritÃ³rio de Projetos'); ?></a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 5));?>"><?php echo utf8_encode('Equipe TÃ©cnica'); ?></a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 6));?>"><?php echo utf8_encode('Alta DireÃ§Ã£o'); ?></a></li>
 			                  </ul>
 			                </li>
 			                             		                
@@ -209,7 +209,7 @@ function toggleFullScreen() {
 			
 			          <!-- /menu footer buttons -->
 			          <div class="sidebar-footer hidden-small">
-			            <a  href="<?php echo $this->url('usuario/edit-user', array('action' => 'edit-senha', 'id' => $session_dados->id)); ?>" data-toggle="tooltip" data-placement="top" title="Configurações">
+			            <a  href="<?php echo $this->url('usuario/edit-user', array('action' => 'edit-senha', 'id' => $session_dados->id)); ?>" data-toggle="tooltip" data-placement="top" title="<?php echo ('ConfiguraÃ§Ãµes'); ?> ">
 			              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 			            </a>
 			            <a href="<?php echo $this->url('usuario/edit-senha', array('action' => 'edit-senha', 'id' => $session_dados->id)); ?>" data-toggle="tooltip" data-placement="top" title="Alterar Senha">
@@ -548,6 +548,21 @@ function toggleFullScreen() {
         $('#reportrange').data('daterangepicker').remove();
       });
     });
+  </script>
+  
+    <script>
+  
+  $("#search").keyup(function(){
+      _this = this;
+      // Show only matching TR, hide rest of them
+      $.each($("#table tbody tr"), function() {
+          if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+             $(this).hide();
+          else
+             $(this).show();                
+      });
+  }); 
+
   </script>
   <!-- /datepicker -->
         

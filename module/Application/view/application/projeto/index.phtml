@@ -15,7 +15,7 @@
             <div class="title_right">
               <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search for...">
+                  <input type="text" class="form-control" id="search" placeholder="Procurar por...">
                   <span class="input-group-btn">
                             <button class="btn btn-default" type="button">Buscar!</button>
                         </span>
@@ -51,15 +51,15 @@
                   <p>Lista todos os projetos</p>
 
                   <!-- start project list -->
-                  <table class="table table-striped projects">
+                  <table id="table" class="table table-striped projects">
                     <thead>
                       <tr>
                         <th style="width: 1%">#</th>
                         <th style="width: 20%">Nome</th>
                         <th style="width: 15%">Status</th>
                         <th style="width: 10%">Risco</th>
-                        <th style="width: 20%">Edição</th>
-                        <th style="width: 20%">Ações</th>
+                        <th style="width: 20%"><?php echo ('EdiÃ§Ã£o'); ?> </th>
+                        <th style="width: 20%"><?php echo ('AÃ§Ãµes'); ?></th>
                       </tr>
                     </thead>
                     
@@ -79,7 +79,7 @@
 								$projeto_data_inicio = explode('-', $projeto->projeto_data_inicio);
 								
 							?>                          
-                          <small>Início <?php echo $projeto_data_inicio[2]."/".$projeto_data_inicio[1]."/".$projeto_data_inicio[0]; ?></small>
+                          <small>InÃ­cio <?php echo $projeto_data_inicio[2]."/".$projeto_data_inicio[1]."/".$projeto_data_inicio[0]; ?></small>
                         </td>
                         
                         <td><?php echo $projeto->projeto_status; ?></td>
@@ -88,25 +88,25 @@
                         
                         <?php if(in_array('projeto/detalhe', $session_dados->funcionalidades_usuario)){ ?>
 			                                      
-                          <a href="<?php echo $this->url('projeto/detalhe', array('id' => $projeto->projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
+                          <a href="<?php echo $this->url('projeto/detalhe', array('id' => $projeto->projeto_id)); ?>" data-toggle="tooltip" data-placement="top" title="Ver Detalhado" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
                           
 						<?php }?>
 						
                         <?php if(in_array('projeto/edit', $session_dados->funcionalidades_usuario)){ ?>
                           
-                          <a href="<?php echo $this->url('projeto/edit', array('id' => $projeto->projeto_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>  </a>
+                          <a href="<?php echo $this->url('projeto/edit', array('id' => $projeto->projeto_id)); ?>" data-toggle="tooltip" data-placement="top" title="Alterar" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>  </a>
                           
 						<?php }?>
 						
                         <?php if(in_array('projeto/delete', $session_dados->funcionalidades_usuario)){ ?>
                           
-                          <a href="<?php echo $this->url('projeto/delete', array('id' => $projeto->projeto_id)); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
+                          <a href="<?php echo $this->url('projeto/delete', array('id' => $projeto->projeto_id)); ?>" data-toggle="tooltip" data-placement="top" title="Excluir" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
                           
 						<?php }?>
 						
                         <?php if(in_array('projeto/status', $session_dados->funcionalidades_usuario)){ ?>
                           
-                          <a href="<?php echo $this->url('projeto/status', array('id' => $projeto->projeto_id)); ?>" class="btn btn-warning btn-xs"><i class="fa fa-hourglass-half" aria-hidden="true"></i></a>
+                          <a href="<?php echo $this->url('projeto/status', array('id' => $projeto->projeto_id)); ?>" data-toggle="tooltip" data-placement="top" title="Alterar Status" class="btn btn-warning btn-xs"><i class="fa fa-hourglass-half" aria-hidden="true"></i></a>
                         
 						<?php }?>
 						
@@ -115,25 +115,25 @@
                         	
                         <?php if(in_array('indicador_projeto/consulta', $session_dados->funcionalidades_usuario)){ ?>
                         
-                          <a href="<?php echo $this->url('indicador_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-tags" aria-hidden="true"></i></a>
+                          <a href="<?php echo $this->url('indicador_projeto/consulta', array('id' => $projeto->projeto_id)); ?>"  data-toggle="tooltip" data-placement="top" title="Indicadores do Projeto" class="btn btn-info btn-xs"><i class="fa fa-tags" aria-hidden="true"></i></a>
                           	
 						<?php }?>
 						
                         <?php if(in_array('membro_projeto/consulta', $session_dados->funcionalidades_usuario)){ ?>
                         
-                          <a href="<?php echo $this->url('membro_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-users" aria-hidden="true"></i></a>
+                          <a href="<?php echo $this->url('membro_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" data-toggle="tooltip" data-placement="top" title="Membros do Projeto" class="btn btn-info btn-xs"><i class="fa fa-users" aria-hidden="true"></i></a>
                           	
 						<?php }?>
 						
                         <?php if(in_array('acompanhamento_projeto/consulta', $session_dados->funcionalidades_usuario)){ ?>
                         
-                          <a href="<?php echo $this->url('acompanhamento_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                          <a href="<?php echo $this->url('acompanhamento_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" data-toggle="tooltip" data-placement="top" title="Acompanhamentos do Projeto" class="btn btn-info btn-xs"><i class="fa fa-calendar" aria-hidden="true"></i></a>
                           	
 						<?php }?>
 						
                         <?php if(in_array('tarefa_projeto/consulta', $session_dados->funcionalidades_usuario)){ ?>
                         
-                          <a href="<?php echo $this->url('tarefa_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-tasks" aria-hidden="true"></i></a>
+                          <a href="<?php echo $this->url('tarefa_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" data-toggle="tooltip" data-placement="top" title="Tarefas do Projeto" class="btn btn-info btn-xs"><i class="fa fa-tasks" aria-hidden="true"></i></a>
                         
 						<?php }?>
                         </td>
@@ -154,7 +154,7 @@
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
+            <p class="pull-right"><?php echo ('Â© 2016 Produzido por Laislla Costa Ramos'); ?>
             </p>
           </div>
           <div class="clearfix"></div>

@@ -11,7 +11,7 @@
 	    
 	    if(pass_anterior !=  pass_atual){	
 	    	
-	    	document.getElementById('alerta').innerHTML = "A senha digitada não confere com a senha atual.";
+	    	document.getElementById('alerta').innerHTML = "A senha digitada nï¿½o confere com a senha atual.";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -35,7 +35,7 @@
 
 	    if(pass_nova == ""  || pass_nova_confirma == ""){ 
 		    
-	    	document.getElementById('alerta').innerHTML = "A nova senha e a confirmação de nova senha devem ser iguais!";
+	    	document.getElementById('alerta').innerHTML = "A nova senha e a confirmaï¿½ï¿½o de nova senha devem ser iguais!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -47,7 +47,7 @@
 	    
 		if(pass_nova != pass_nova_confirma){
 		    
-	    	document.getElementById('alerta').innerHTML = "A nova senha e a confirmação de nova senha devem ser iguais!";
+	    	document.getElementById('alerta').innerHTML = "A nova senha e a confirmaï¿½ï¿½o de nova senha devem ser iguais!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -75,7 +75,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Usuários</h3>
+              <h3>UsuÃ¡rios</h3>
             </div>
             
           </div>
@@ -87,7 +87,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Alterar Senha do Usuário <?php echo $usuario->usuario_nome; ?><small></small></h2>
+                  <h2>Alterar Senha do UsuÃ¡rio <?php echo $usuario->usuario_nome; ?><small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"></a>
                     </li>
@@ -102,7 +102,7 @@
 
 
                   <!-- Smart Wizard -->
-                  <p>Esse é o formulário onde deve ser preenchidas todas as informações da nova senha de usuário.</p> <br>
+                  <p>Esse Ã© o formulÃ¡rio onde deve ser preenchidas todas as informaÃ§Ãµes da nova senha de usuÃ¡rio.</p> <br>
                                        
   				<form id="edit-senha" name="edit-senha"  onSubmit="validateForm(); return false;" method="post" action="<?php echo $this->url('usuario/edit',  array('action'=>'editSenha', 'id' => $usuario->usuario_id));?>" role="form" class="form-horizontal form-label-left" enctype="multipart/form-data">
               		<input type="hidden" name="usuario_senha_anterior" id="usuario_senha_anterior" value="<?php echo $usuario->usuario_senha; ?>">
@@ -158,7 +158,7 @@
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
+            <p class="pull-right">Â© 2016 Produzido por Laislla Costa Ramos
             </p>
           </div>
           <div class="clearfix"></div>

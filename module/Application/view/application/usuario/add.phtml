@@ -7,7 +7,7 @@
 	    
 	    if (senha.length < 6 ) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Senha deve conter no mÌnimo 6 dÌgitos!";
+	    	document.getElementById('alerta').innerHTML = "A Senha deve conter no mÔøΩnimo 6 dÔøΩgitos!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -28,7 +28,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Usu·rios</h3>
+              <h3>Usu√°rios</h3>
             </div>
             
           </div>
@@ -40,7 +40,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Novo Usu·rio <small></small></h2>
+                  <h2>Novo Usu√°rio <small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                      <li><a class="link"  href="<?php echo $this->url('usuario'); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
                    
@@ -55,7 +55,7 @@
 
 
                   <!-- Smart Wizard -->
-                  <p>Esse È o formul·rio onde deve ser preenchidas todas as informaÁıes do novo usu·rio.</p> <br>
+                  <p>Esse √© o formul√°rio onde deve ser preenchidas todas as informa√ß√µes do novo usu√°rio.</p> <br>
                   
   				<form id="usuario_add" name="usuario_add"  onSubmit="validateForm(); return false;"  method="post" action="<?php echo $this->url('usuario/add',  array('action'=>'add'));?>" role="form" class="form-horizontal form-label-left">
               
@@ -97,7 +97,7 @@
                           			foreach($perfis as $perfil){
                           	?>
                           	
-                          		<option value="<?php echo $perfil->perfil_id; ?>"><?php echo utf8_decode($perfil->perfil_nome); ?></option>
+                          		<option value="<?php echo $perfil->perfil_id; ?>"><?php echo ($perfil->perfil_nome); ?></option>
                           	<?php 
                           			}
                           	?>
@@ -129,7 +129,7 @@
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
+            <p class="pull-right">¬© 2016 Produzido por Laislla Costa Ramos
             </p>
           </div>
           <div class="clearfix"></div>
