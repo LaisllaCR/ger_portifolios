@@ -4,7 +4,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Tarefas do Projeto</h3>
+              <h3>Tarefas do Projeto - <?php echo $projeto->projeto_nome; ?></h3>
             </div>
 
             <div class="title_right">
@@ -24,10 +24,12 @@
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Tarefas de <?php echo  $projeto->projeto_nome;?></h2>
+                  <h2>Consultar Tarefas de <?php echo  $projeto->projeto_nome;?></h2>
                   <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="link"  href="<?php echo $this->url('tarefa_projeto/add', array('id' => $id)); ?>" ><i class="fa fa-plus" aria-hidden="true"></i></a>
+                    <li><a class="link"  href="<?php echo $this->url('tarefa_projeto/add', array('id' => $id)); ?>" ><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</a>
                     </li>
+                    <li><a class="link"  href="<?php echo $this->url('projeto', array('id' => $projeto->projeto_id)); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
+                   
                   </ul>
                   <div class="clearfix"></div>
                 </div>
@@ -63,7 +65,7 @@
                         <td><?php echo date('d/m/Y',  strtotime($tarefa->tarefa_data_inicio)); ?></td>
                         <td><?php echo date('d/m/Y',  strtotime($tarefa->tarefa_data_previsao_termino)); ?></td>
                         <td>
-                          <a href="<?php echo $this->url('tarefa_projeto/detalhe', array('id' => $tarefa->tarefa_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
+                          <a href="<?php echo $this->url('tarefa_projeto/detalhe', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
                           <a href="<?php echo $this->url('tarefa_projeto/edit', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>  </a>
                           <a href="<?php echo $this->url('tarefa_projeto/delete', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
                         </td>

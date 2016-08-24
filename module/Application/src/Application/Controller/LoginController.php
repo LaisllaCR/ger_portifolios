@@ -106,7 +106,7 @@ class LoginController extends AbstractActionController
     		 
     		if ($form_dados) {
 					
-    			$usuarioLogado = $this->getUsuarioTable()->getUsuarioLogin($form_dados['usuario_email'], $form_dados['usuario_senha']);
+    			$usuarioLogado = $this->getUsuarioTable()->getUsuarioLogin($form_dados['usuario_email'], md5($form_dados['usuario_senha']));
     			$dadosUsuarioLogado = $usuarioLogado->current();
     			
     			if(count($usuarioLogado) > 0){
@@ -141,7 +141,7 @@ class LoginController extends AbstractActionController
     	$sessionTimer = new Container('usuario_dados');
     	$sessionTimer->id = $usuarioLogadoDados->usuario_id;
     	$sessionTimer->email = $usuarioLogadoDados->usuario_email;
-    	$sessionTimer->senha = $usuarioLogadoDados->usuario_senha;
+    	$sessionTimer->senha = md5($usuarioLogadoDados->usuario_senha);
     	$sessionTimer->nome = $usuarioLogadoDados->usuario_nome;	
     	$sessionTimer->perfil = $usuarioLogadoDados->perfil_id;	
     	
@@ -175,7 +175,7 @@ class LoginController extends AbstractActionController
 
 		$dados_sessao_atual->id = $usuario_dados->usuario_id;
 		$dados_sessao_atual->email = $usuario_dados->usuario_email;
-		$dados_sessao_atual->senha = $usuario_dados->usuario_senha;
+		$dados_sessao_atual->senha = md5($usuario_dados->usuario_senha);
 		$dados_sessao_atual->nome = $usuario_dados->usuario_nome;
     	$dados_sessao_atual->perfil = $usuario_dados->perfil_id;	   
 	}

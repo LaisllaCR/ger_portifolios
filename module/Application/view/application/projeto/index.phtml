@@ -29,7 +29,7 @@
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Projetos</h2>
+                  <h2>Consultar Projetos</h2>
                   <ul class="nav navbar-right panel_toolbox">
                   
 		              <?php 
@@ -39,7 +39,7 @@
                         	if(in_array('projeto/add', $session_dados->funcionalidades_usuario)){    	
 			        ?>
                     <li>
-                    	<a class="link"  href="<?php echo $this->url('projeto/add'); ?>" ><i class="fa fa-plus" aria-hidden="true"></i></a>
+                    	<a class="link"  href="<?php echo $this->url('projeto/add'); ?>" ><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</a>
                     </li>
                     <?php 	}
      					}?>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="x_content">
 
-                  <p>Lista de todos os projetos</p>
+                  <p>Lista todos os projetos</p>
 
                   <!-- start project list -->
                   <table class="table table-striped projects">

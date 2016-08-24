@@ -199,10 +199,13 @@ class MembroProjetoController extends AbstractActionController
 	public function detalheAction()
     {
 		 $request = $this->getRequest();
+    	$id = (int) $this->params()->fromRoute('id', 0);
+    	$projeto_id = (int) $this->params()->fromRoute('projeto_id', 0);
 		 
 		 
     	return new ViewModel(array(
      			'usuarios' => $this->getUsuarioTable()->fetchAll(),
+     			'projeto' => $this->getProjetoTable()->getProjeto($projeto_id),
     			'membro' => $this->getMembroProjetoTable()->getProjetoMembro($this->params('id')),
     	));
     }

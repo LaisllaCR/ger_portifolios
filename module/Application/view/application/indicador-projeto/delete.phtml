@@ -10,7 +10,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Indicadores do Projeto</h3>
+              <h3>Indicadores do Projeto - <?php echo $projeto->projeto_nome; ?></h3>
             </div>
             
           </div>
@@ -24,9 +24,8 @@
                 <div class="x_title">
                   <h2>Excluir Indicador de <?php echo $projeto->projeto_nome; ?><small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"></a>
-                    </li>
-                    <li class="dropdown">
+                   <li><a class="link"  href="<?php echo $this->url('indicador_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
+                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"></a>                      
                     </li>
                   </ul>

@@ -15,6 +15,7 @@ use Zend\View\Model\ViewModel;
 use Application\Model\Usuario;
 use Application\Model\Perfil;
 use Application\Controller\Login;
+use Zend\Session\Container;
 
 class UsuarioController extends AbstractActionController
 {
@@ -56,14 +57,20 @@ class UsuarioController extends AbstractActionController
     	
     		if ($dados_form) {
 
-    			$usuario->usuario_nome = utf8_encode($dados_form['usuario_nome']);
+    			$usuario->usuario_nome = $dados_form['usuario_nome'];
     			$usuario->usuario_email = $dados_form['usuario_email'];
-    			$usuario->usuario_senha = $dados_form['usuario_senha'];
+    			$usuario->usuario_senha = md5($dados_form['usuario_senha']);
     			$usuario->perfil_id = $dados_form['perfil_id'];
-    			 
+    			    			 
     			$this->getUsuarioTable()->saveUsuario($usuario);
-    	
-    			return $this->redirect()->toRoute('usuario');
+    			
+				$sessao = new Container('usuario_dados');
+				
+				if (!$sessao->id) {
+					return $this->redirect()->toRoute('login');
+				}else{    	
+    				return $this->redirect()->toRoute('usuario');
+				}
     		}
     	}
     	

@@ -81,8 +81,7 @@ class AcompanhamentoProjetoController extends AbstractActionController
      	{
      		$justificativa_semana = $this->getProjetoSemanaJustificativaTable()->getProjetoSemanaJustificativa($semana->projeto_semana_id);
      	
-     		if($justificativa_semana->projeto_semana_justificativa == NULL){
-     			 
+     		if(!isset($justificativa_semana->projeto_semana_justificativa)){			 
      			if($hoje > $semana->projeto_semana_data_fim){
      				$cont++;
      			}
@@ -252,6 +251,7 @@ class AcompanhamentoProjetoController extends AbstractActionController
 	public function detalheAction()
     {
     	$projeto_semana_id = (int) $this->params()->fromRoute('id', 0);
+    	$projeto_id = (int) $this->params()->fromRoute('projeto_id', 0);
     	
 		$request = $this->getRequest();
 
@@ -261,6 +261,7 @@ class AcompanhamentoProjetoController extends AbstractActionController
     	return new ViewModel(array(
     			'projetoSemana' => $projetoSemana,
     			'acompanhamento' => $acompanhamentoProjeto,
+     			'projeto' => $this->getProjetoTable()->getProjeto($projeto_id),
     			//'acompanhamento' => $this->getAcompanhamentoProjetoTable()->getProjetoAcompanhamento($this->params('id')),
     	));
     }   

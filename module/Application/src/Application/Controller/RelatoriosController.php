@@ -93,6 +93,7 @@ class RelatoriosController extends AbstractActionController
      
      	return array(
      			'id' => $id, 
+     			'projeto' => $this->getProjetoTable()->getProjeto($id),
      			'indicadoresProjeto' => $this->getIndicadorProjetoTable()->getIndicadores($id),
      			'projetosForaLimite' => $projetos_fora_limite,
      			// 'relatorioss' => $this->getRelatoriosTable()->fetchAll(),

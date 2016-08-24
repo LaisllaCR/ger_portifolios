@@ -79,12 +79,12 @@ class Module
 		 
 		//echo $rota;
 
-		if ($rota != 'login' && $rota != 'login/default') {
-		/*	
+		if ($rota != 'login' && $rota != 'login/default' && $rota != 'usuario/add') {
+			/*
 			if(!in_array($rota, $sessao->funcionalidades_usuario)){
 				return $controller->redirect()->toRoute('home');			
 			}
-		*/					
+							*/
 			if (!$sessao->id) {
 				return $controller->redirect()->toRoute('login');
 			}

@@ -190,9 +190,12 @@ class TarefaProjetoController extends AbstractActionController
 	public function detalheAction()
     {
 		 $request = $this->getRequest();
+    	$id = (int) $this->params()->fromRoute('id', 0);
+    	$projeto_id = (int) $this->params()->fromRoute('projeto_id', 0);
 		 
 		 
     	return new ViewModel(array(
+     			'projeto' => $this->getProjetoTable()->getProjeto($projeto_id),
     			'tarefa' => $this->getTarefaProjetoTable()->getTarefaProjeto($this->params('id')),
     	));
     }

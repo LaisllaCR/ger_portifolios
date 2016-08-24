@@ -14,7 +14,7 @@ use Zend\Session\Container;
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Gentallela Alela! | </title>
+  <title><?php echo utf8_encode('Gerenciador de Portifólio de Projetos'); ?></title>
 
   <!-- Bootstrap core CSS -->
 
@@ -53,7 +53,7 @@ use Zend\Session\Container;
       <div id="login" class="animate form">
         <section class="login_content">
         
-          <form  id="loginform" class="form-horizontal" role="form" action="<?php echo $this->url('login', array('action' => 'logar')); ?>" method="post"  enctype="application/x-www-form-urlencoded">
+          <form  id="loginform" class="" role="form" action="<?php echo $this->url('login', array('action' => 'logar')); ?>" method="post"  enctype="application/x-www-form-urlencoded">
                             <?php
 
                             $usuario_dados = new Container('usuario_dados');
@@ -66,12 +66,16 @@ use Zend\Session\Container;
 							</div>
 							<?php } }?>
             <h1>Acessar</h1>
-            <div>
-              <input type="text" class="form-control" placeholder="Nome" id="usuario_email" name="usuario_email" required="required"/>
-            </div>
-            <div>
-              <input type="password" class="form-control" placeholder="Senha" id="usuario_senha" name="usuario_senha" required="required"  />
-            </div>
+            
+          <div class="form-group" style="text-align: left;">
+		    <label for="email">E-mail</label>
+              <input type="text" class="form-control" placeholder="xxxxx@xxxxx.com" id="usuario_email" name="usuario_email" required="required"/>
+		  </div>
+		  <div class="form-group" style="text-align: left;">
+		    <label for="pwd">Senha</label>
+              <input type="password" class="form-control" placeholder="******" id="usuario_senha" name="usuario_senha" required="required"  />
+		  </div>
+		  
                   <!-- 
                    					<div class="input-group">
                                       <div class="checkbox">
@@ -99,7 +103,7 @@ use Zend\Session\Container;
               <div class="clearfix"></div>
               <br />
               <div>
-                <h1><i class="fa fa-puzzle-piece" style="font-size: 26px;"></i> Gerenciador de Projetos</h1>
+                <h1><i class="fa fa-puzzle-piece" style="font-size: 26px;"></i> <?php echo utf8_encode('Gerenciador de Portifólio de Projetos'); ?></h1>
 
                 <p><?php echo utf8_encode('© 2016 Produzido por Laislla Costa Ramos');?></p>
               </div>
@@ -115,18 +119,22 @@ use Zend\Session\Container;
           <form method="post" action="<?php echo $this->url('usuario/add',  array('action'=>'add'));?>" role="form" class="form-horizontal form-label-left">
             <input type="hidden" id="perfi_id" name="perfil_id" value="5">
             <h1>Criar Conta</h1>
-            <div>
-              <input type="text" class="form-control" placeholder="Nome" id="usuario_nome" name="usuario_nome" required="required" />
-            </div>
-            <div>
-              <input type="email" class="form-control" placeholder="Email" id="usuario_email" name="usuario_email" required="required" />
-            </div>
-            <div>
-              <input type="password" class="form-control" placeholder="Senha" id="usuario_senha" name="usuario_senha" required="required" />
-            </div>
             
+          <div class="form-group" style="text-align: left;">
+		    <label for="email">Nome</label>
+              <input type="text" class="form-control" placeholder="Nome" id="usuario_nome" name="usuario_nome" required="required" />
+		  </div>
+          <div class="form-group" style="text-align: left;">
+		    <label for="email">E-mail</label>
+              <input type="email" class="form-control" placeholder="Email" id="usuario_email" name="usuario_email" required="required" />
+		  </div>
+          <div class="form-group" style="text-align: left;">
+		    <label for="email">Senha</label>
+              <input type="password" class="form-control" placeholder="Senha" id="usuario_senha" name="usuario_senha" required="required" />
+		  </div>
+		              
 		    <div class="control-label col-sm-12" style="text-align: center;">
-		      <button type="submit" class="btn btn-default submit">Cadastrar</button>
+		      <button type="submit" >Cadastrar</button>
 		    </div>
             
             <div class="clearfix"></div>
@@ -138,7 +146,7 @@ use Zend\Session\Container;
               <div class="clearfix"></div>
               <br />
               <div>
-                <h1><i class="fa fa-puzzle-piece" style="font-size: 26px;"></i> Gerenciador de Projetos</h1>
+                <h1><i class="fa fa-puzzle-piece" style="font-size: 26px;"></i> <?php echo utf8_encode('Gerenciador de Portifólio de Projetos'); ?></h1>
 
                 <p><?php echo utf8_encode("© 2016 Produzido por Laislla Costa Ramos");?></p>
               </div>

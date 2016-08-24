@@ -243,10 +243,13 @@ class IndicadorProjetoController extends AbstractActionController
 	public function detalheAction()
     {
 		 $request = $this->getRequest();
+    	$id = (int) $this->params()->fromRoute('id', 0);
+    	$projeto_id = (int) $this->params()->fromRoute('projeto_id', 0);
 		 
 		 
     	return new ViewModel(array(
             	'indicadores' => $this->getIndicadorTable()->fetchAll(),
+     			'projeto' => $this->getProjetoTable()->getProjeto($projeto_id),
     			'indicadorProjeto' => $this->getIndicadorProjetoTable()->getIndicadorProjeto($this->params('id')),
     	));
     }

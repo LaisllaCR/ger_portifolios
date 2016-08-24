@@ -4,7 +4,7 @@ use Zend\Session\Container;
 <html lang="en">
     <head>
         <meta charset="iso 8859-1">
-        <?php echo $this->headTitle('Gerenciador de Portifólios '. $this->translate('Gerenciador de Portifólios'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('Gerenciador de Portifólios de Projetos'. $this->translate('Gerenciador de Portifólios de Projetos'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?php echo $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -133,7 +133,7 @@ function toggleFullScreen() {
 			        <div class="left_col scroll-view">
 			
 			          <div class="navbar nav_title" style="border: 0;">
-			            <a href="<?php echo $this->url('home', array('action'=>'index'));?>" class="site_title"><i class="fa fa-puzzle-piece"></i> <span>Portifólio!</span></a>
+			            <a href="<?php echo $this->url('home', array('action'=>'index'));?>" class="site_title"><i class="fa fa-puzzle-piece"></i> <span><?php echo utf8_encode('Portifólio!'); ?></span></a>
 			          </div>
 			          <div class="clearfix"></div>
 			

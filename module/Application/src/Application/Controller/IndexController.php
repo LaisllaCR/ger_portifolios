@@ -29,9 +29,14 @@ class IndexController extends AbstractActionController
     {
     	$projetos = $this->getProjetoTable()->fetchAll();
     	
-    	foreach ($projetos as $projeto){
-    		$tarefas[$projeto->projeto_id] = $this->getTarefaProjetoTable()->getTarefasProjeto($projeto->projeto_id);
-    		$indicadores[$projeto->projeto_id] = $this->getIndicadorProjetoTable()->getIndicadores($projeto->projeto_id);
+    	$tarefas = Array();
+    	$indicadores = Array();
+    	
+    	if(is_array($projetos)){
+	    	foreach ($projetos as $projeto){
+	    		$tarefas[$projeto->projeto_id] = $this->getTarefaProjetoTable()->getTarefasProjeto($projeto->projeto_id);
+	    		$indicadores[$projeto->projeto_id] = $this->getIndicadorProjetoTable()->getIndicadores($projeto->projeto_id);
+	    	}
     	}
 
     	return new ViewModel(array(

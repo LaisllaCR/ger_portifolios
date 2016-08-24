@@ -167,9 +167,10 @@ return array(
 										'detalhe' => array(
 												'type' => 'segment',
 												'options' => array(
-														'route'    => '/detalhe/:id',
+														'route'    => '/:projeto_id/detalhe/:id',
 														'defaults' => array(
-																'action' => 'detalhe'
+																'controller' => 'Application\Controller\AcompanhamentoProjeto',
+																'action'     => 'detalhe'
 														),
 														'constraints' => array(
 																'id' => '\d+'
@@ -248,9 +249,10 @@ return array(
 										'detalhe' => array(
 												'type' => 'segment',
 												'options' => array(
-														'route'    => '/detalhe/:id',
+														'route'    => '/:projeto_id/detalhe/:id',
 														'defaults' => array(
-																'action' => 'detalhe'
+																'controller' => 'Application\Controller\MembroProjeto',
+																'action'     => 'detalhe'
 														),
 														'constraints' => array(
 																'id' => '\d+'
@@ -330,9 +332,10 @@ return array(
 										'detalhe' => array(
 												'type' => 'segment',
 												'options' => array(
-														'route'    => '/detalhe/:id',
+														'route'    => '/:projeto_id/detalhe/:id',
 														'defaults' => array(
-																'action' => 'detalhe'
+																'controller' => 'Application\Controller\TarefaProjeto',
+																'action'     => 'detalhe'
 														),
 														'constraints' => array(
 																'id' => '\d+'
@@ -412,9 +415,10 @@ return array(
 										'detalhe' => array(
 												'type' => 'segment',
 												'options' => array(
-														'route'    => '/detalhe/:id',
+														'route'    => '/:projeto_id/detalhe/:id',
 														'defaults' => array(
-																'action' => 'detalhe'
+																'controller' => 'Application\Controller\IndicadorProjeto',
+																'action'     => 'detalhe'
 														),
 														'constraints' => array(
 																'id' => '\d+'

@@ -300,7 +300,7 @@ class ProjetoController extends AbstractActionController
     				'action' => 'index'
     		));
     	}
-
+/*
     	if($projeto->projeto_risco == "Alto risco"){
     		$valida = $this->verificarAcompanhamento($projeto);
     		if($valida == true){
@@ -309,7 +309,7 @@ class ProjetoController extends AbstractActionController
     			));
     		}
     	}
-    
+    */
     	$request = $this->getRequest();
     	$session_dados = new Container('usuario_dados');
     	
