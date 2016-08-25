@@ -47,7 +47,7 @@
                    						
                    						?>
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Título:
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">TÃ­tulo:
                           </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
                           <label class="control-label "><?php echo $array_indicadores[$indicadorProjeto->indicador_id]; ?>
@@ -58,19 +58,19 @@
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Fase: </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">                          
-                          	<label class="control-label"><?php echo utf8_decode($indicadorProjeto->projeto_fase); ?></label>  
+                          	<label class="control-label"><?php echo ($indicadorProjeto->projeto_fase); ?></label>  
                           </div>
                         </div>	
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Valor mínimo:</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Valor mÃ­nimo:</label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
                           	<label class="control-label"><?php echo $indicadorProjeto->valor_minimo; ?></label>      	
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Valor máximo:</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Valor mÃ¡ximo:</label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
                           	<label class="control-label"><?php echo $indicadorProjeto->valor_maximo; ?></label>      	
                           </div>
@@ -84,7 +84,7 @@
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Análise:</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">AnÃ¡lise:</label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
                           	<label class="control-label"><?php echo $indicadorProjeto->indicador_projeto_descricao; ?></label>      	
                           </div>
@@ -103,7 +103,7 @@
         <!-- footer content -->
         <footer>
           <div class="copyright-info">
-            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
+            <p class="pull-right">Â© 2016 Produzido por Laislla Costa Ramos
             </p>
           </div>
           <div class="clearfix"></div>

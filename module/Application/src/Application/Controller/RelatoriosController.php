@@ -191,6 +191,7 @@ class RelatoriosController extends AbstractActionController
      		$array_projetos[$projeto_dados->projeto_id] = utf8_decode($projeto_dados->projeto_nome);
      	}
      	      	 
+     	$projetos_fora_limite = Array();
      	foreach ($array_indicador as $chave=>$valor){
      		$total = count($this->getIndicadorProjetoTable()->getIndicadoresProjeto($chave));
      		
