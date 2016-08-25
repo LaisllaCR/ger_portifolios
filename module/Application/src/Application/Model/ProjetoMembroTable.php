@@ -3,6 +3,8 @@
 namespace Application\Model;
 
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Sql;
 
 class ProjetoMembroTable
 {
@@ -41,6 +43,17 @@ class ProjetoMembroTable
 		return $rowset;
 	}
 
+	public function getDadosProjetosMembro($usuario_id)
+	{
+		$sqlq = new Sql($this->tableGateway->adapter);
+	
+		$sql = 'SELECT * FROM projeto_membro a JOIN projeto b ON a.projeto_id = b.projeto_id WHERE a.usuario_id = '.$usuario_id;
+	
+		$statement = $this->tableGateway->adapter->query($sql);
+	
+		return $statement->execute();
+	}
+	
 	public function saveMembroProjeto(ProjetoMembro $projetoMembro)
 	{
 		$data = array(

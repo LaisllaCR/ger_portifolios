@@ -3,9 +3,6 @@
      use Zend\Session\Container;
      
      ?>
-       <!-- page content -->
-      <div class="right_col" role="main">
-
         <div class="">
           <div class="page-title">
             <div class="title_left">
@@ -46,10 +43,10 @@
                   </ul>
                   <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
+                <div class="x_content" id="page-selection">
 
                   <p>Lista todos os projetos</p>
-
+                  
                   <!-- start project list -->
                   <table id="table" class="table table-striped projects">
                     <thead>
@@ -69,6 +66,7 @@
 						foreach ($projetos as $projeto)
 						{
 					?>
+					
                       <tr>
                         <td><?php echo $projeto->projeto_id; ?></td>
                         <td>
@@ -146,23 +144,22 @@
                   <!-- end project list -->
 
                 </div>
+                
+		    <script>
+		        // init bootpag
+		        $('#page-selection').bootpag({
+		            total: 10
+		        }).on("page", function(event, /* page number here */ num){
+		             $("#content").html("Insert content"); // some ajax content loading...
+		        });
+		    </script>
+		    
               </div>
             </div>
           </div>
         </div>
 
-        <!-- footer content -->
-        <footer>
-          <div class="copyright-info">
-            <p class="pull-right"><?php echo ('© 2016 Produzido por Laislla Costa Ramos'); ?>
-            </p>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-
-      </div>
-      <!-- /page content -->
+    <script src="//raw.github.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
 
   <script src="<?php echo $this->basePath('js/bootstrap.min.js'); ?>"></script>
 
@@ -178,5 +175,17 @@
 
   <!-- pace -->
   <script src="<?php echo $this->basePath('js/pace/pace.min.js'); ?>"></script>
+  
+  <script>
+  $('.demo1').bootpag({
+	    total: 5
+	}).on("page", function(event, num){
+	    $(".content").html("Page " + num); // or some ajax content loading...
+	 
+	    // ... after content load -> change total to 10
+	    $(this).bootpag({total: 10, maxVisible: 10});
+	 
+	});
+</script>
 
 

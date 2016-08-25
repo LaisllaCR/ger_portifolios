@@ -6,6 +6,7 @@ class ProjetoTarefa
 {
 	public $tarefa_id;
 	public $projeto_id;
+	public $usuario_id;
 	public $tarefa_nome;
 	public $tarefa_descricao;
 	public $tarefa_status;
@@ -17,6 +18,7 @@ class ProjetoTarefa
 	{
 		$this->tarefa_id     = (!empty($data['tarefa_id'])) ? $data['tarefa_id'] : null;
 		$this->projeto_id     = (!empty($data['projeto_id'])) ? $data['projeto_id'] : null;
+		$this->usuario_id     = (!empty($data['usuario_id'])) ? $data['usuario_id'] : null;
 		$this->tarefa_nome = (!empty($data['tarefa_nome'])) ? $data['tarefa_nome'] : null;	
 		$this->tarefa_descricao = (!empty($data['tarefa_descricao'])) ? $data['tarefa_descricao'] : null;		
 		$this->tarefa_status = (!empty($data['tarefa_status'])) ? $data['tarefa_status'] : null;		

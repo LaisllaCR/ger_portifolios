@@ -1,6 +1,3 @@
-       <!-- page content -->
-      <div class="right_col" role="main">
-
         <div class="">
           <div class="page-title">
             <div class="title_left">
@@ -42,15 +39,24 @@
                     <thead>
                       <tr>
                         <th style="width: 1%">#</th>
-                        <th style="width: 20%">TÌtulo</th>
+                        <th style="width: 20%">T√≠tulo</th>
+                        <th style="width: 20%">Respons√°vel</th>
                         <th style="width: 20%">Status</th>
-                        <th style="width: 20%">Data inÌcio</th>
-                        <th style="width: 20%">Previs„o de TÈrmino</th>
-                        <th style="width: 20%">EdiÁ„o</th>
+                        <th style="width: 20%">Data in√≠cio</th>
+                        <th style="width: 20%">Edi√ß√£o</th>
                       </tr>
                     </thead>
                     
                     <tbody>
+                     <?php 
+
+                          $array_usuarios = Array();
+                          
+                          foreach($usuarios as $usuario){
+                          	$array_usuarios[$usuario->usuario_id] = $usuario->usuario_nome;
+                          }
+                                                    
+                          ?>
                     <?php 
 
 						foreach ($tarefasProjeto as $tarefa)
@@ -61,13 +67,13 @@
                       <tr>
                         <td><?php echo $tarefa->tarefa_id; ?></td>
                         <td><?php echo $tarefa->tarefa_nome; ?></td>
+                        <td><?php echo $array_usuarios[$tarefa->usuario_id];?></td>
                         <td><?php echo $tarefa->tarefa_status; ?></td>
                         <td><?php echo date('d/m/Y',  strtotime($tarefa->tarefa_data_inicio)); ?></td>
-                        <td><?php echo date('d/m/Y',  strtotime($tarefa->tarefa_data_previsao_termino)); ?></td>
                         <td>
-                          <a href="<?php echo $this->url('tarefa_projeto/detalhe', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
-                          <a href="<?php echo $this->url('tarefa_projeto/edit', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>  </a>
-                          <a href="<?php echo $this->url('tarefa_projeto/delete', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
+                          <a href="<?php echo $this->url('tarefa_projeto/detalhe', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" data-toggle="tooltip" data-placement="top" title="Ver Detalhado" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
+                          <a href="<?php echo $this->url('tarefa_projeto/edit', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" data-toggle="tooltip" data-placement="top" title="Alterar" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>  </a>
+                          <a href="<?php echo $this->url('tarefa_projeto/delete', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" data-toggle="tooltip" data-placement="top" title="Excluir" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
                         </td>
                       </tr>
                       <?php 
@@ -83,20 +89,7 @@
             </div>
           </div>
         </div>
-
-        <!-- footer content -->
-        <footer>
-          <div class="copyright-info">
-            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
-            </p>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-
-      </div>
-      <!-- /page content -->
-
+        
   <script src="<?php echo $this->basePath('js/bootstrap.min.js'); ?>"></script>
 
   <!-- chart js -->

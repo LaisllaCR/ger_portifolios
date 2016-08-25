@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 21-Ago-2016 às 05:15
+-- Generation Time: 25-Ago-2016 às 23:32
 -- Versão do servidor: 10.1.13-MariaDB
--- PHP Version: 5.5.35
+-- PHP Version: 5.6.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -148,20 +148,6 @@ CREATE TABLE `indicadores_projeto` (
   `indicador_projeto_valor` int(11) DEFAULT NULL,
   `indicador_projeto_descricao` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `indicadores_projeto`
---
-
-INSERT INTO `indicadores_projeto` (`indicador_projeto_id`, `indicador_id`, `projeto_id`, `projeto_fase`, `valor_minimo`, `valor_maximo`, `usuario_id`, `indicador_projeto_valor`, `indicador_projeto_descricao`) VALUES
-(1, 8, 30, 'Iniciação', 1, 10, 1, 11, ' gdg '),
-(2, 11, 30, 'Iniciação', 1, 10, 1, 11, ' fgjf '),
-(3, 11, 30, 'Iniciação', 1, 10, 1, NULL, NULL),
-(4, 1, 30, 'Iniciação', 1, 3, 1, 8, ' fdhf'),
-(5, 1, 30, 'Iniciação', 1, 8, 1, 10, ' ds'),
-(6, 15, 30, 'Iniciação', 1, 2, 1, 4, ' 42           '),
-(7, 7, 30, 'Iniciação', 1, 2, 1, 4, ' ew   '),
-(8, 1, 24, 'Iniciação', 1, 2, 1, 3, '3');
 
 -- --------------------------------------------------------
 
@@ -322,26 +308,17 @@ CREATE TABLE `projeto` (
 --
 
 INSERT INTO `projeto` (`projeto_id`, `projeto_nome`, `projeto_data_inicio`, `projeto_data_previsao_termino`, `projeto_data_real_termino`, `projeto_gerente_id`, `projeto_orcamento_total`, `projeto_descricao`, `projeto_status`, `projeto_risco`) VALUES
-(24, 'Teste milesimo', '2016-08-01', '2016-08-24', '2016-08-31', 1, 4.24, '78         ', 'Em andamento', 'Alto risco'),
-(27, 'Projeto Cancelado', '2016-08-13', '2016-08-14', '0000-00-00', 1, 0.45, 'gfdsg', 'Cancelado', 'Medio risco'),
-(28, 'Projeto Cancelado 2', '2016-08-05', '2016-08-06', '0000-00-00', 1, 0.34, 'sfes', 'Cancelado', 'Baixo risco'),
-(29, 'Projeto Cancelado 3', '2016-08-01', '2016-08-03', '0000-00-00', 1, 4.35, 'eger', 'Cancelado', 'Baixo risco'),
-(30, 'Projeto Indicador Limite ', '2016-08-04', '2016-08-13', '0000-00-00', 1, 424.56, '6546546', 'Em analise', 'Medio risco');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `projeto_acompanhamento`
---
-
-CREATE TABLE `projeto_acompanhamento` (
-  `projeto_acompanhamento_id` int(11) NOT NULL,
-  `projeto_id` int(11) NOT NULL,
-  `projeto_acompanhamento_semana` int(11) NOT NULL,
-  `projeto_acompanhamento_data_inicio` date NOT NULL,
-  `projeto_acompanhamento_data_termino` date NOT NULL,
-  `projeto_acompanhamento_descricao` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(1, 'TCC', '2016-05-09', '2016-08-30', '0000-00-00', 2, 10, 'Entrega do Trabalho de Conclusão de Curso', 'Em analise', 'Alto risco'),
+(2, 'Yearbook', '2015-04-01', '2015-04-18', '2015-04-17', 7, 10, 'Como projeto interdisciplinar do primeiro módulo do curso, você deverá desenvolver um álbum dos alunos da sua turma do curso de especialização. A ideia é implementar algo parecido com os Yearbooks publicados pelas escolas americanas.\r\n\r\nA princípio, esse ', 'Encerrado', 'Baixo risco'),
+(3, 'Aplicação em Javascript', '2015-05-01', '2015-05-25', '2015-05-25', 7, 10, 'Desenvolva uma pequena aplicação web para solucionar o case proposto, utilizando JavaScript e as tecnologias auxiliares vistas nesta disciplina.\r\n', 'Encerrado', 'Baixo risco'),
+(4, 'Sistema de Venda de Passagens', '2015-06-01', '2015-07-06', '2015-07-07', 7, 10, 'Tendo em vista estes números, a atividade aberta da disciplina consiste em para desenvolver um site e um sistema Web ofereça os seguintes serviços:\r\n\r\nVenda de passagens aéreas entre as cidades de Belo Horizonte, Porto Alegre, São Paulo, Rio de Janeiro, B', 'Em analise', 'Baixo risco'),
+(5, 'TCC', '2016-05-09', '2016-08-30', '0000-00-00', 2, 10, 'Entrega do Trabalho de Conclusão de Curso', 'Em analise', 'Alto risco'),
+(6, 'Yearbook', '2015-04-01', '2015-04-18', '2015-04-17', 7, 10, 'Como projeto interdisciplinar do primeiro módulo do curso, você deverá desenvolver um álbum dos alunos da sua turma do curso de especialização. A ideia é implementar algo parecido com os Yearbooks publicados pelas escolas americanas.\r\n\r\nA princípio, esse ', 'Encerrado', 'Baixo risco'),
+(7, 'Aplicação em Javascript', '2015-05-01', '2015-05-25', '2015-05-25', 7, 10, 'Desenvolva uma pequena aplicação web para solucionar o case proposto, utilizando JavaScript e as tecnologias auxiliares vistas nesta disciplina.\r\n', 'Encerrado', 'Baixo risco'),
+(8, 'Aplicação em Javascript', '2015-05-01', '2015-05-25', '2015-05-25', 7, 10, 'Desenvolva uma pequena aplicação web para solucionar o case proposto, utilizando JavaScript e as tecnologias auxiliares vistas nesta disciplina.\r\n', 'Encerrado', 'Baixo risco'),
+(9, 'Aplicação em Javascript', '2015-05-01', '2015-05-25', '2015-05-25', 7, 10, 'Desenvolva uma pequena aplicação web para solucionar o case proposto, utilizando JavaScript e as tecnologias auxiliares vistas nesta disciplina.\r\n', 'Encerrado', 'Baixo risco'),
+(10, 'Aplicação em Javascript', '2015-05-01', '2015-05-25', '2015-05-25', 7, 10, 'Desenvolva uma pequena aplicação web para solucionar o case proposto, utilizando JavaScript e as tecnologias auxiliares vistas nesta disciplina.\r\n', 'Encerrado', 'Baixo risco'),
+(11, 'Aplicação em Javascript', '2015-05-01', '2015-05-25', '2015-05-25', 7, 10, 'Desenvolva uma pequena aplicação web para solucionar o case proposto, utilizando JavaScript e as tecnologias auxiliares vistas nesta disciplina.\r\n', 'Encerrado', 'Baixo risco');
 
 -- --------------------------------------------------------
 
@@ -361,7 +338,9 @@ CREATE TABLE `projeto_membro` (
 --
 
 INSERT INTO `projeto_membro` (`projeto_membro_id`, `usuario_id`, `projeto_id`, `projeto_membro_papel`) VALUES
-(1, 1, 24, 'Desenvolvedor');
+(2, 7, 1, 'Desenvolvedor'),
+(3, 5, 1, 'Desenvolvedor'),
+(4, 8, 1, 'Testador');
 
 -- --------------------------------------------------------
 
@@ -382,18 +361,36 @@ CREATE TABLE `projeto_semana` (
 --
 
 INSERT INTO `projeto_semana` (`projeto_semana_id`, `projeto_id`, `projeto_semana`, `projeto_semana_data_inicio`, `projeto_semana_data_fim`) VALUES
-(55, 24, 1, '2016-08-01', '2016-08-08'),
-(69, 24, 2, '2016-08-08', '2016-08-15'),
-(70, 24, 1, '2016-08-01', '2016-08-08'),
-(71, 24, 1, '2016-08-01', '2016-08-08'),
-(72, 24, 1, '2016-08-01', '2016-08-08'),
-(73, 24, 1, '2016-08-01', '2016-08-08'),
-(74, 24, 1, '2016-08-01', '2016-08-08'),
-(75, 24, 1, '2016-08-01', '2016-08-08'),
-(76, 24, 2, '2016-08-08', '2016-08-15'),
-(77, 24, 3, '2016-08-15', '2016-08-22'),
-(78, 24, 4, '2016-08-22', '2016-08-29'),
-(79, 24, 5, '2016-08-29', '2016-08-31');
+(1, 2, 1, '2015-04-01', '2015-04-08'),
+(2, 2, 2, '2015-04-08', '2015-04-15'),
+(3, 2, 3, '2015-04-15', '2015-04-17'),
+(4, 1, 4, '2016-05-30', '2016-06-06'),
+(5, 1, 5, '2016-06-06', '2016-06-13'),
+(6, 1, 6, '2016-06-13', '2016-06-20'),
+(7, 1, 7, '2016-06-20', '2016-06-27'),
+(8, 1, 8, '2016-06-27', '2016-07-04'),
+(9, 1, 9, '2016-07-04', '2016-07-11'),
+(10, 1, 10, '2016-07-11', '2016-07-18'),
+(11, 1, 11, '2016-07-18', '2016-07-25'),
+(12, 1, 12, '2016-07-25', '2016-08-01'),
+(13, 1, 13, '2016-08-01', '2016-08-08'),
+(14, 1, 14, '2016-08-08', '2016-08-15'),
+(15, 1, 15, '2016-08-15', '2016-08-22'),
+(16, 1, 16, '2016-08-22', '2016-08-29'),
+(17, 1, 17, '2016-08-29', '2016-08-30'),
+(18, 2, 1, '2015-04-01', '2015-04-08'),
+(19, 2, 2, '2015-04-08', '2015-04-15'),
+(20, 2, 3, '2015-04-15', '2015-04-17'),
+(21, 3, 1, '2015-05-01', '2015-05-08'),
+(22, 3, 2, '2015-05-08', '2015-05-15'),
+(23, 3, 3, '2015-05-15', '2015-05-22'),
+(24, 3, 4, '2015-05-22', '2015-05-25'),
+(25, 4, 1, '2015-06-01', '2015-06-08'),
+(26, 4, 2, '2015-06-08', '2015-06-15'),
+(27, 4, 3, '2015-06-15', '2015-06-22'),
+(28, 4, 4, '2015-06-22', '2015-06-29'),
+(29, 4, 5, '2015-06-29', '2015-07-06'),
+(30, 4, 6, '2015-07-06', '2015-07-07');
 
 -- --------------------------------------------------------
 
@@ -407,14 +404,6 @@ CREATE TABLE `projeto_semana_justificativa` (
   `projeto_semana_justificativa` varchar(255) DEFAULT NULL,
   `usuario_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `projeto_semana_justificativa`
---
-
-INSERT INTO `projeto_semana_justificativa` (`projeto_semana_justificativa_id`, `projeto_semana_id`, `projeto_semana_justificativa`, `usuario_id`) VALUES
-(6, 55, ' sd45', 3),
-(7, 69, ' fdhgxvd6r', 3);
 
 -- --------------------------------------------------------
 
@@ -436,21 +425,12 @@ CREATE TABLE `projeto_status_justificativa` (
 --
 
 INSERT INTO `projeto_status_justificativa` (`projeto_status_justificativa_id`, `projeto_id`, `projeto_status`, `projeto_status_justificativa`, `projeto_status_data`, `usuario_id`) VALUES
-(2, 5, 'Em analise', NULL, '2016-07-22', 1),
-(3, 5, 'Analise realizada', NULL, '2016-07-22', 1),
-(4, 5, 'Analise aprovada', NULL, '2016-07-22', 1),
-(5, 5, 'Iniciado', NULL, '2016-07-22', 1),
-(24, 24, 'Em analise', NULL, '2016-08-03', 1),
-(25, 24, 'Analise realizada', 'kuytkuytku', '2016-08-08', 1),
-(26, 24, 'Encerrado', 'rhtregtreht', '2016-08-08', 3),
-(27, 27, 'Em analise', NULL, '2016-08-13', 3),
-(28, 27, 'Cancelado', 'fdsgfds', '2016-08-13', 3),
-(29, 28, 'Em analise', NULL, '2016-08-13', 3),
-(30, 28, 'Cancelado', 'ewterwtwer', '2016-07-13', 3),
-(31, 29, 'Em analise', NULL, '2016-08-13', 3),
-(32, 29, 'Cancelado', 'wrw', '2016-08-13', 3),
-(33, 30, 'Em analise', NULL, '2016-08-13', 3),
-(34, 24, 'Em andamento', '', '2016-08-21', 3);
+(1, 1, 'Em analise', NULL, '2016-08-25', 1),
+(2, 2, 'Em analise', NULL, '2016-08-25', 1),
+(3, 2, 'Encerrado', '', '2016-08-25', 1),
+(4, 3, 'Em analise', NULL, '2016-08-25', 1),
+(5, 3, 'Encerrado', '', '2016-08-25', 1),
+(6, 4, 'Em analise', NULL, '2016-08-25', 1);
 
 -- --------------------------------------------------------
 
@@ -461,6 +441,7 @@ INSERT INTO `projeto_status_justificativa` (`projeto_status_justificativa_id`, `
 CREATE TABLE `projeto_tarefa` (
   `tarefa_id` int(11) NOT NULL,
   `projeto_id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
   `tarefa_nome` varchar(255) NOT NULL,
   `tarefa_descricao` varchar(255) NOT NULL,
   `tarefa_status` enum('Aberta','Em Andamento','Suspensa','Encerrada') NOT NULL,
@@ -473,8 +454,10 @@ CREATE TABLE `projeto_tarefa` (
 -- Extraindo dados da tabela `projeto_tarefa`
 --
 
-INSERT INTO `projeto_tarefa` (`tarefa_id`, `projeto_id`, `tarefa_nome`, `tarefa_descricao`, `tarefa_status`, `tarefa_data_inicio`, `tarefa_data_termino`, `tarefa_data_previsao_termino`) VALUES
-(1, 24, 'daa', 'sda', 'Aberta', '2016-08-12', '0000-00-00', '2016-08-20');
+INSERT INTO `projeto_tarefa` (`tarefa_id`, `projeto_id`, `usuario_id`, `tarefa_nome`, `tarefa_descricao`, `tarefa_status`, `tarefa_data_inicio`, `tarefa_data_termino`, `tarefa_data_previsao_termino`) VALUES
+(1, 1, 7, 'Atividade Aberta 01', ' Entrega do Trabalho de Conclusão de Curso', 'Aberta', '2016-05-09', '0000-00-00', '2016-08-31'),
+(2, 1, 5, 'Slide', 'Apresentação para aplicação para a banca do curso.', 'Aberta', '2016-09-01', '0000-00-00', '2016-09-30'),
+(3, 1, 7, 'Projeto', 'Projeto escrito da aplicação.', 'Aberta', '2016-05-09', '0000-00-00', '2016-08-31');
 
 -- --------------------------------------------------------
 
@@ -495,20 +478,14 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`usuario_id`, `usuario_nome`, `usuario_email`, `usuario_senha`, `perfil_id`) VALUES
-(1, 'Laislla Costa Ramos', 'laisllaramos@gmail.com', '475869', 1),
-(3, 'Teste', 'la.toph@hotmail.com', '123456789', 1),
-(4, 'g', 'l@g.com.br', '', 1),
-(5, 'l', '2@gmail.com', '1', 1),
-(6, 'L?l', 'la.toph@hotmail.com', '14654654654', 1),
-(7, 'Teste Alta dire??o', 'la.toph@hotmail.com', '123456789', 6),
-(8, 'Manoelvilco@hotmail.com', 'manoelvilco@hotmail.com', '123456', 6),
-(9, 'administrador', 'administrador@gmail.com', '123456', 1),
-(10, 'Líder do Escritório de Projetos', 'liderdoescritoriodeprojetos@gmail.com', '123456', 2),
-(11, 'Líder de Projeto', 'liderdeprojeto@gmail.com', '123456', 3),
-(12, 'Equipe Técnica', 'equipetecnica@gmail.com', '123456', 5),
-(13, 'Alta Direção', 'altadirecao@gmail.com', '123456', 6),
-(14, '?', 'la.toph@hotmail.com', '123456789', 1),
-(15, 'é', 'la.toph@hotmail.com', '123456789', 1);
+(1, 'Administrador', 'administrador@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 1),
+(2, 'Gerente', 'gerente@gerportifolio.com', 'e10adc3949ba59abbe56e057f20f883e', 3),
+(3, 'Coordenador', 'coordenador@gerportifolio.com', 'e10adc3949ba59abbe56e057f20f883e', 2),
+(4, 'Diretor', 'gerportifolio@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 6),
+(5, 'João', 'joao@gerportifolio.com', 'e10adc3949ba59abbe56e057f20f883e', 5),
+(6, 'Maria', 'maria@gerportifolio.com', 'e10adc3949ba59abbe56e057f20f883e', 5),
+(7, 'Laislla Ramos', 'laisllaramos@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 1),
+(8, 'rosa', 'rosa@gerportifolio.com', 'e10adc3949ba59abbe56e057f20f883e', 5);
 
 --
 -- Indexes for dumped tables
@@ -555,12 +532,6 @@ ALTER TABLE `perfil_acesso`
 --
 ALTER TABLE `projeto`
   ADD PRIMARY KEY (`projeto_id`);
-
---
--- Indexes for table `projeto_acompanhamento`
---
-ALTER TABLE `projeto_acompanhamento`
-  ADD PRIMARY KEY (`projeto_acompanhamento_id`);
 
 --
 -- Indexes for table `projeto_membro`
@@ -621,7 +592,7 @@ ALTER TABLE `indicadores`
 -- AUTO_INCREMENT for table `indicadores_projeto`
 --
 ALTER TABLE `indicadores_projeto`
-  MODIFY `indicador_projeto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `indicador_projeto_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `perfil`
 --
@@ -636,42 +607,37 @@ ALTER TABLE `perfil_acesso`
 -- AUTO_INCREMENT for table `projeto`
 --
 ALTER TABLE `projeto`
-  MODIFY `projeto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
---
--- AUTO_INCREMENT for table `projeto_acompanhamento`
---
-ALTER TABLE `projeto_acompanhamento`
-  MODIFY `projeto_acompanhamento_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `projeto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `projeto_membro`
 --
 ALTER TABLE `projeto_membro`
-  MODIFY `projeto_membro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `projeto_membro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `projeto_semana`
 --
 ALTER TABLE `projeto_semana`
-  MODIFY `projeto_semana_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `projeto_semana_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `projeto_semana_justificativa`
 --
 ALTER TABLE `projeto_semana_justificativa`
-  MODIFY `projeto_semana_justificativa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `projeto_semana_justificativa_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `projeto_status_justificativa`
 --
 ALTER TABLE `projeto_status_justificativa`
-  MODIFY `projeto_status_justificativa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `projeto_status_justificativa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `projeto_tarefa`
 --
 ALTER TABLE `projeto_tarefa`
-  MODIFY `tarefa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tarefa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

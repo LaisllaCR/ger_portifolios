@@ -13,7 +13,7 @@
 	    
 	    if (data_inicio > data_previsao) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Data de In�cio deve ser menor que a Previs�o de T�rmino!";
+	    	document.getElementById('alerta').innerHTML = "A Data de Início deve ser menor que a Previsão de Término!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -25,7 +25,7 @@
 
 	    if(projeto_data_inicio == projeto_data_previsao_termino) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Data de In�cio e a Previs�o de T�rmino N�O devem ser iguais!";
+	    	document.getElementById('alerta').innerHTML = "A Data de Início e a Previsão de Término NÃO devem ser iguais!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -37,7 +37,7 @@
 	    
 		if (data_inicio > data_termino || data_inicio === data_termino) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Data de In�cio deve ser menor que a Data de T�rmino!";
+	    	document.getElementById('alerta').innerHTML = "A Data de Início deve ser menor que a Data de Término!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -49,7 +49,7 @@
 
 	    if(projeto_data_inicio == projeto_data_real_termino) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Data de In�cio e a Data de T�rmino N�O devem ser iguais!";
+	    	document.getElementById('alerta').innerHTML = "A Data de Início e a Data de Término NÃO devem ser iguais!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -64,9 +64,6 @@
 	}
 
 </script>
-
-      <!-- page content -->
-      <div class="right_col" role="main">
 
         <div class="">
           <div class="page-title">
@@ -244,16 +241,3 @@
 
           </div>
         </div>
-
-        <!-- footer content -->
-        <footer>
-          <div class="copyright-info">
-            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
-            </p>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-
-      </div>
-      <!-- /page content -->

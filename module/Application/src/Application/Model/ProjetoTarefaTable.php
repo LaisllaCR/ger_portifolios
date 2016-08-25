@@ -29,6 +29,13 @@ class ProjetoTarefaTable
 		}
 		return $row;
 	}	
+	
+	public function getTarefaUsuarioPorProjeto($projeto_id, $usuario_id)
+	{
+		$rowset = $this->tableGateway->select(array('projeto_id' => $projeto_id, 'usuario_id' => $usuario_id));
+
+		return $rowset;
+	}
 
 	public function getTarefasProjeto($id)
 	{
@@ -45,6 +52,7 @@ class ProjetoTarefaTable
 	{	
 		$data = array(
 				'tarefa_nome' => $tarefaProjeto->tarefa_nome,
+				'usuario_id' => $tarefaProjeto->usuario_id,
 				'projeto_id' => $tarefaProjeto->projeto_id,
 				'tarefa_descricao' => $tarefaProjeto->tarefa_descricao,
 				'tarefa_status' => $tarefaProjeto->tarefa_status,

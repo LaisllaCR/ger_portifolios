@@ -226,24 +226,24 @@ function toggleFullScreen() {
 			        </div>
 			      </div>
 			
-			      <!-- top navigation -->
-			      <div class="top_nav">
-			
-			        <div class="nav_menu">
-			          <nav class="" role="navigation">
-			            <div class="nav toggle">
-			              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-			            </div>
-			
-			          </nav>
-			        </div>
-			
-			      </div>
-			      <!-- /top navigation --> 
                 
+       <!-- page content -->
+      <div class="right_col" role="main">
         
             <?php echo $this->content; ?>
             
+	        <!-- footer content -->
+	        <footer>
+	          <div class="copyright-info">
+	            <p class="pull-right"><?php echo ('© 2016 Produzido por Laislla Costa Ramos'); ?>
+	            </p>
+	          </div>
+	          <div class="clearfix"></div>
+	        </footer>
+	        <!-- /footer content -->
+	        
+      </div>
+      <!-- /page content -->
             
     			</div>
     			
@@ -254,18 +254,12 @@ function toggleFullScreen() {
     			
     			
     			
+
     			
     			
-            <hr>
         </div> <!-- /container -->
         
-         <div id="custom_notifications" class="custom-notifications dsp_none">
-		    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
-		    </ul>
-		    <div class="clearfix"></div>
-		    <div id="notif-group" class="tabbed_notifications"></div>
-		  </div>
-        <?php echo $this->inlineScript() ?>
+       
         
   <script src="<?php echo $this->basePath('js/bootstrap.min.js'); ?>"></script>
   

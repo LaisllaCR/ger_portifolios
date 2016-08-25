@@ -13,7 +13,7 @@
         		  if(novo_membro == membro){
 
             		  if(membro_atual != novo_membro){
-        		    	document.getElementById('alerta').innerHTML = "Esse usuário já faz parte do projeto!";
+        		    	document.getElementById('alerta').innerHTML = "Esse usuï¿½rio jï¿½ faz parte do projeto!";
         		        document.getElementById('alerta').style.display = 'block';
         		    		  	    	
         		    	setTimeout(function(){
@@ -31,9 +31,6 @@
 	}
 
 </script>   
-      <!-- page content -->
-      <div class="right_col" role="main">
-
         <div class="">
           <div class="page-title">
             <div class="title_left">
@@ -59,7 +56,7 @@
                 <div class="x_content">
 
                   <!-- Smart Wizard -->
-                  <p>Esse é o formulário onde deve ser preenchidas todas as informações do membro do projeto.</p>
+                  <p>Esse Ã© o formulÃ¡rio onde deve ser preenchidas todas as informaÃ§Ãµes do membro do projeto.</p>
                   
   				<form id="membro_edit" name="membro_edit"  onSubmit="validateForm(); return false;"   method="post" action="<?php echo $this->url('membro_projeto/edit', array('id' => $id, 'projeto_id' => $projeto_id));?>" role="form" class="form-horizontal form-label-left">
               <?php 
@@ -114,7 +111,7 @@
                       ?>                  
                                        
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario_id">Usuário <span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario_id">UsuÃ¡rio <span class="required">*</span>
                           </label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                           	<select name="usuario_id" id="usuario_id"  required="required"  class="form-control col-md-7 col-xs-12">
@@ -173,16 +170,3 @@
 
           </div>
         </div>
-
-        <!-- footer content -->
-        <footer>
-          <div class="copyright-info">
-            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
-            </p>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-
-      </div>
-      <!-- /page content -->

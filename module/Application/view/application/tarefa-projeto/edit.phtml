@@ -1,6 +1,3 @@
-      <!-- page content -->
-      <div class="right_col" role="main">
-
         <div class="">
           <div class="page-title">
             <div class="title_left">
@@ -26,22 +23,46 @@
                 <div class="x_content">
 
                   <!-- Smart Wizard -->
-                  <p>Esse È o formul·rio onde deve ser preenchidas todas as informaÁıes da tarefa.</p>
+                  <p>Esse √© o formul√°rio onde deve ser preenchidas todas as informa√ß√µes da tarefa.</p>
                   
   				<form method="post" action="<?php echo $this->url('tarefa_projeto/edit', array('id' => $id, 'projeto_id' => $projeto_id));?>" role="form" class="form-horizontal form-label-left">
               
                   <div>                    
                                                 
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tarefa_nome">TÌtulo <span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tarefa_nome">T√≠tulo <span class="required">*</span>
                           </label>
                           <div class="col-md-5 col-sm-6 col-xs-12">
                             <input type="text" id="tarefa_nome" value="<?php echo $tarefa->tarefa_nome; ?>" name="tarefa_nome" required="required" class="form-control col-md-7 col-xs-12">
                           </div>
                         </div>                                        
+                                                
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario_id">Respons√°vel <span class="required">*</span>
+                          </label>
+                          <div class="col-md-4 col-sm-4 col-xs-12">
+	                          <select name="usuario_id" id="usuario_id"  required="required"  class="form-control col-md-7 col-xs-12">
+	                          	<?php 
+	                          			foreach($usuarios as $usuario){
+	                          				if($usuario->usuario_id == $tarefa->usuario_id){
+	                          	?>
+	                          			
+	                          		<option selected value="<?php echo $usuario->usuario_id; ?>"><?php echo $usuario->usuario_nome?></option>
+	                          	<?php 
+	                          				}else{ ?>
+	                          				
+	                          		<option value="<?php echo $usuario->usuario_id; ?>"><?php echo $usuario->usuario_nome?></option>
+	                          				
+	                          	<?php 
+	                          				}
+	                          			}
+	                          	?>
+	                          	</select>
+                          	</div>
+                        </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tarefa_descricao">DescriÁ„o<span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tarefa_descricao">Descri√ß√£o<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <textarea id="tarefa_descricao" name="tarefa_descricao" required="required" class="form-control col-md-7 col-xs-12"> <?php echo trim($tarefa->tarefa_descricao); ?></textarea>
@@ -82,21 +103,21 @@
                         </div>	
                         
                         <div class="form-group">
-                          <label for="tarefa_data_inicio" class="control-label col-md-3 col-sm-3 col-xs-12">Data de inÌcio <span class="required">*</span></label>
+                          <label for="tarefa_data_inicio" class="control-label col-md-3 col-sm-3 col-xs-12">Data de in√≠cio <span class="required">*</span></label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                             <input id="tarefa_data_inicio" value="<?php echo $tarefa->tarefa_data_inicio; ?>" class="form-control col-md-7 col-xs-12" type="date" name="tarefa_data_inicio">
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label for="tarefa_data_previsao_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Previs„o de TÈrmino <span class="required">*</span> </label>
+                          <label for="tarefa_data_previsao_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Previs√£o de T√©rmino <span class="required">*</span> </label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                             <input id="tarefa_data_previsao_termino" value="<?php echo $tarefa->tarefa_data_previsao_termino; ?>"  class="form-control col-md-7 col-xs-12" type="date" name="tarefa_data_previsao_termino">
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label for="tarefa_data_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Data real de tÈrmino</label>
+                          <label for="tarefa_data_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Data real de t√©rmino</label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                             <input id="tarefa_data_termino" value="<?php echo $tarefa->tarefa_data_termino; ?>" class="form-control col-md-7 col-xs-12" type="date" name="tarefa_data_termino">
                           </div>
@@ -123,16 +144,3 @@
 
           </div>
         </div>
-
-        <!-- footer content -->
-        <footer>
-          <div class="copyright-info">
-            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
-            </p>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-
-      </div>
-      <!-- /page content -->

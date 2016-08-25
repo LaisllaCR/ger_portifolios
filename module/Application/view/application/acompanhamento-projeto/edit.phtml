@@ -1,6 +1,3 @@
-      <!-- page content -->
-      <div class="right_col" role="main">
-
         <div class="">
           <div class="page-title">
             <div class="title_left">
@@ -26,7 +23,7 @@
                 <div class="x_content">
 
                   <!-- Smart Wizard -->
-                  <p>Esse é o formulário onde deve ser preenchidas todas as informações do acompanhamento do projeto.</p>
+                  <p>Esse Ã© o formulÃ¡rio onde deve ser preenchidas todas as informaÃ§Ãµes do acompanhamento do projeto.</p>
                   
   				<form method="post" action="<?php echo $this->url('acompanhamento_projeto/edit', array('id' => $acompanhamento->projeto_semana_id, 'projeto_id' => $projeto_id));?>" role="form" class="form-horizontal form-label-left">
               
@@ -44,21 +41,21 @@
                         </div>		
                         	
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_acompanhamento_data_inicio">Data de Início: </label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_acompanhamento_data_inicio">Data de InÃ­cio: </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">     
                             <label class="control-label"><?php echo date('d/m/Y', strtotime($projeto_semana->projeto_semana_data_inicio)); ?></label>  
                           </div>
                         </div>		
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_acompanhamento_data_termino">Data de Término: </label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_acompanhamento_data_termino">Data de TÃ©rmino: </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">                          
                             <label class="control-label"><?php echo date('d/m/Y', strtotime($projeto_semana->projeto_semana_data_fim)); ?></label>  
                           </div>
                         </div>	
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_semana_justificativa">Descrição<span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_semana_justificativa">DescriÃ§Ã£o<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <textarea id="projeto_semana_justificativa" name="projeto_semana_justificativa" required="required" class="form-control col-md-7 col-xs-12"> <?php echo trim($acompanhamento->projeto_semana_justificativa); ?></textarea>
@@ -86,16 +83,3 @@
 
           </div>
         </div>
-
-        <!-- footer content -->
-        <footer>
-          <div class="copyright-info">
-            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
-            </p>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-
-      </div>
-      <!-- /page content -->

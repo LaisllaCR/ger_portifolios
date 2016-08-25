@@ -4,9 +4,6 @@
  $this->headTitle($title);
  ?>
  
-       <!-- page content -->
-      <div class="right_col" role="main">
-
         <div class="">
           <div class="page-title">
             <div class="title_left">
@@ -39,16 +36,33 @@
   				<form action="" method="post" role="form" class="form-horizontal form-label-left">
   				
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">TÌtulo:
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">T√≠tulo:
                           </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
                           <label class="control-label "><?php echo $tarefa->tarefa_nome; ?>
                           </label>      	
                           </div>
+                        </div>	
+                        <?php 
+
+                          $array_usuarios = Array();
+                          
+                          foreach($usuarios as $usuario){
+                          	$array_usuarios[$usuario->usuario_id] = $usuario->usuario_nome;
+                          }
+                                                    
+                          ?>
+                        <div class="form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Respons√°vel:
+                          </label>
+                          <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
+                          <label class="control-label "><?php echo $array_usuarios[$tarefa->usuario_id];?>
+                          </label>      	
+                          </div>
                         </div>		
                         	
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">DescriÁ„o: </label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Descri√ß√£o: </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">                          
                           	<label class="control-label"><?php echo trim($tarefa->tarefa_descricao); ?></label>  
                           </div>
@@ -62,21 +76,21 @@
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Data InÌcio:</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Data In√≠cio:</label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
                           	<label class="control-label"><?php echo date('d/m/Y', strtotime($tarefa->tarefa_data_inicio)); ?></label>      	
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Previs„o de TÈrmino:</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Previs√£o de T√©rmino:</label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
                           	<label class="control-label"><?php echo date('d/m/Y', strtotime($tarefa->tarefa_data_previsao_termino)); ?></label>      	
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Data TÈrmino:</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Data T√©rmino:</label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
                           	<label class="control-label"><?php echo date('d/m/Y', strtotime($tarefa->tarefa_data_termino)); ?></label>      	
                           </div>
@@ -91,18 +105,3 @@
 
           </div>
         </div>
-
-        <!-- footer content -->
-        <footer>
-          <div class="copyright-info">
-            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
-            </p>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-
-      </div>
-      <!-- /page content -->
-                  
- 

@@ -13,17 +13,20 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 use Application\Model\ProjetoTarefa;
+use Application\Model\Usuario;
+use Application\Model\ProjetoSemanaJustificativa;
+use Application\Model\ProjetoSemana;
 
 class TarefaProjetoController extends AbstractActionController
 {
+	protected $usuarioTable;
 	protected $tarefaProjetoTable;
 	protected $projetoTable;
+	protected $projetoSemanaTable;
+	protected $projetoSemanaJustificativaTable;
 	
 	public function indexAction()
      {
-         return new ViewModel(array(
-             'tarefas' => $this->getTarefaProjetoTable()->fetchAll(),
-         ));
      }
      
      public function consultaAction()
@@ -44,14 +47,76 @@ class TarefaProjetoController extends AbstractActionController
      				'action' => 'index'
      		));
      	}
+
+     	$projeto = $this->getProjetoTable()->getProjeto($id);
+     	
+     	if($projeto->projeto_risco == "Alto risco"){
+     		$valida = $this->verificarAcompanhamento($projeto);
+     		if($valida == true){
+     			return $this->redirect()->toRoute('acompanhamento_projeto/consulta', array(
+     					'action' => 'consulta', 'id' => $projeto->projeto_id
+     			));
+     		}
+     	}
      	 
      	return new ViewModel(array(
      			'id' => $id,
+             	'usuarios' => $this->getUsuarioTable()->fetchAll(),
      			'projeto' => $this->getProjetoTable()->getProjeto($id),
      			'tarefasProjeto' => $tarefasProjeto
      	));
      }
 
+
+     public function getProjetoSemanaTable()
+     {
+     	if (!$this->projetoSemanaTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->projetoSemanaTable = $sm->get('Application\Model\ProjetoSemanaTable');
+     	}
+     	return $this->projetoSemanaTable;
+     }
+     
+     public function getProjetoSemanaJustificativaTable()
+     {
+     	if (!$this->projetoSemanaJustificativaTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->projetoSemanaJustificativaTable = $sm->get('Application\Model\ProjetoSemanaJustificativaTable');
+     	}
+     	return $this->projetoSemanaJustificativaTable;
+     }
+     
+     public function verificarAcompanhamento($projeto)
+     {
+     	$semanas = $this->getProjetoSemanaTable()->getProjetoSemanas($projeto->projeto_id);
+     	$hoje = date('Y-m-d');
+     
+     	foreach ($semanas as $semana)
+     	{
+     		$justificativa_semana = $this->getProjetoSemanaJustificativaTable()->getProjetoSemanaJustificativa($semana->projeto_semana_id);
+     
+     		if($justificativa_semana->projeto_semana_justificativa == NULL){
+     
+     			if($hoje > $semana->projeto_semana_data_fim){
+     				return true;
+     			}
+     		}
+     	}
+     
+     	return false;
+     }
+     
+      
+
+     public function getUsuarioTable()
+     {
+     	if (!$this->usuarioTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
+     	}
+     	return $this->usuarioTable;
+     }
+     
      public function getProjetoTable()
      {
      	if (!$this->projetoTable) {
@@ -82,6 +147,7 @@ class TarefaProjetoController extends AbstractActionController
     		if ($dados_form) {
 
     			$tarefaProjeto->tarefa_nome = $dados_form['tarefa_nome'];
+    			$tarefaProjeto->usuario_id = $dados_form['usuario_id'];
     			$tarefaProjeto->projeto_id = $id;
     			$tarefaProjeto->tarefa_descricao = $dados_form['tarefa_descricao'];
     			$tarefaProjeto->tarefa_status = $dados_form['tarefa_status'];
@@ -99,6 +165,7 @@ class TarefaProjetoController extends AbstractActionController
     	
     	return new ViewModel(array(
     			'id' => $id,
+             	'usuarios' => $this->getUsuarioTable()->fetchAll(),
      			'projeto' => $this->getProjetoTable()->getProjeto($id),
     			'tarefas' => $this->getTarefaProjetoTable()->fetchAll(),
     	));
@@ -130,6 +197,7 @@ class TarefaProjetoController extends AbstractActionController
     		
     		$tarefaProjeto->tarefa_id = $id; 
     		$tarefaProjeto->projeto_id = $projeto_id;    
+    		$tarefaProjeto->usuario_id = $dados_form['usuario_id'];
     		$tarefaProjeto->tarefa_nome = $dados_form['tarefa_nome'];
     		$tarefaProjeto->tarefa_descricao = $dados_form['tarefa_descricao'];
     		$tarefaProjeto->tarefa_status = $dados_form['tarefa_status'];
@@ -149,6 +217,7 @@ class TarefaProjetoController extends AbstractActionController
     	return array(
     			'id' => $id,
     			'projeto_id' => $projeto_id,
+            	'usuarios' => $this->getUsuarioTable()->fetchAll(),
      			'projeto' => $this->getProjetoTable()->getProjeto($projeto_id),
     			'tarefa' => $tarefaProjeto,
      	);
@@ -195,6 +264,7 @@ class TarefaProjetoController extends AbstractActionController
 		 
 		 
     	return new ViewModel(array(
+             	'usuarios' => $this->getUsuarioTable()->fetchAll(),
      			'projeto' => $this->getProjetoTable()->getProjeto($projeto_id),
     			'tarefa' => $this->getTarefaProjetoTable()->getTarefaProjeto($this->params('id')),
     	));

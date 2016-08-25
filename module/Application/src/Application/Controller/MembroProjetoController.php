@@ -15,12 +15,16 @@ use Zend\View\Model\ViewModel;
 use Application\Model\ProjetoMembro;
 use Application\Model\Projeto;
 use Application\Model\Usuario;
+use Application\Model\ProjetoSemanaJustificativa;
+use Application\Model\ProjetoSemana;
 
 class MembroProjetoController extends AbstractActionController
 {
 	protected $membroProjetoTable;
 	protected $projetoTable;
 	protected $usuarioTable;
+	protected $projetoSemanaTable;
+	protected $projetoSemanaJustificativaTable;
 	
 	public function indexAction()
      {
@@ -47,6 +51,17 @@ class MembroProjetoController extends AbstractActionController
      				'action' => 'index'
      		));
      	}
+     	
+     	$projeto = $this->getProjetoTable()->getProjeto($id);
+
+     	if($projeto->projeto_risco == "Alto risco"){
+     		$valida = $this->verificarAcompanhamento($projeto);
+     		if($valida == true){
+     			return $this->redirect()->toRoute('acompanhamento_projeto/consulta', array(
+     					'action' => 'consulta', 'id' => $projeto->projeto_id
+     			));
+     		}
+     	}
      	 
      	return new ViewModel(array(
      			'id' => $id,
@@ -55,6 +70,47 @@ class MembroProjetoController extends AbstractActionController
      			'membrosProjeto' => $membrosProjeto
      	));
      }
+     
+
+     public function getProjetoSemanaTable()
+     {
+     	if (!$this->projetoSemanaTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->projetoSemanaTable = $sm->get('Application\Model\ProjetoSemanaTable');
+     	}
+     	return $this->projetoSemanaTable;
+     }
+     
+     public function getProjetoSemanaJustificativaTable()
+     {
+     	if (!$this->projetoSemanaJustificativaTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->projetoSemanaJustificativaTable = $sm->get('Application\Model\ProjetoSemanaJustificativaTable');
+     	}
+     	return $this->projetoSemanaJustificativaTable;
+     }
+     
+     public function verificarAcompanhamento($projeto)
+     {
+     	$semanas = $this->getProjetoSemanaTable()->getProjetoSemanas($projeto->projeto_id);
+     	$hoje = date('Y-m-d');
+     
+     	foreach ($semanas as $semana)
+     	{
+     		$justificativa_semana = $this->getProjetoSemanaJustificativaTable()->getProjetoSemanaJustificativa($semana->projeto_semana_id);
+     
+     		if($justificativa_semana->projeto_semana_justificativa == NULL){
+     
+     			if($hoje > $semana->projeto_semana_data_fim){
+     				return true;
+     			}
+     		}
+     	}
+     
+     	return false;
+     }
+     
+      
 
      public function getProjetoTable()
      {

@@ -225,6 +225,15 @@ class ProjetoController extends AbstractActionController
     				'action' => 'index'
     		));
     	}
+    	
+    	if($projeto->projeto_risco == "Alto risco"){
+    		$valida = $this->verificarAcompanhamento($projeto);
+    		if($valida == true){
+    			return $this->redirect()->toRoute('acompanhamento_projeto/consulta', array(
+    					'action' => 'consulta', 'id' => $projeto->projeto_id
+    			));
+    		}
+    	}
 
     	$request = $this->getRequest();
     	if ($request->isPost()) {
@@ -300,7 +309,7 @@ class ProjetoController extends AbstractActionController
     				'action' => 'index'
     		));
     	}
-/*
+
     	if($projeto->projeto_risco == "Alto risco"){
     		$valida = $this->verificarAcompanhamento($projeto);
     		if($valida == true){
@@ -309,7 +318,7 @@ class ProjetoController extends AbstractActionController
     			));
     		}
     	}
-    */
+    
     	$request = $this->getRequest();
     	$session_dados = new Container('usuario_dados');
     	
@@ -411,11 +420,30 @@ class ProjetoController extends AbstractActionController
     {
 		 $request = $this->getRequest();
 		 $id = $this->params('id');
+		 $projeto = $this->getProjetoTable()->getProjeto($id);
+		 
+		 if($projeto->projeto_risco == "Alto risco"){
+		 	$valida = $this->verificarAcompanhamento($projeto);
+		 	if($valida == true){
+		 		return $this->redirect()->toRoute('acompanhamento_projeto/consulta', array(
+		 				'action' => 'consulta', 'id' => $projeto->projeto_id
+		 		));
+		 	}
+		 }
 
 		 $membrosProjeto = $this->getMembroProjetoTable()->getMembrosProjeto($id);
+		 		 	
+		 $array_membros = Array();
+		 	
+		 foreach ($membrosProjeto as $membro){
+		 	$total_tarefas_usuario_projeto = count($this->getTarefaProjetoTable()->getTarefaUsuarioPorProjeto($id, $membro->usuario_id));
 		 
+		 	$array_membros[$membro->usuario_id] = $total_tarefas_usuario_projeto;
+		 }
+		 		 
     	return new ViewModel(array(
-     			'membrosProjeto' => $membrosProjeto,
+    			'tarefas_por_usuario' => $array_membros,
+     			'membrosProjeto' => $this->getMembroProjetoTable()->getMembrosProjeto($id),
     			'projeto' => $this->getProjetoTable()->getProjeto($id),
     			'usuarios' => $this->getUsuarioTable()->fetchAll(),
     	));

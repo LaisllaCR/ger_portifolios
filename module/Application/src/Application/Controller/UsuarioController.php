@@ -16,11 +16,15 @@ use Application\Model\Usuario;
 use Application\Model\Perfil;
 use Application\Controller\Login;
 use Zend\Session\Container;
+use Application\Model\ProjetoMembro;
+use Application\Model\ProjetoTarefa;
 
 class UsuarioController extends AbstractActionController
 {
 	protected $usuarioTable;
 	protected $perfilTable;
+	protected $membroProjetoTable;
+	protected $tarefaProjetoTable;
 	
 	public function indexAction()
      {
@@ -29,6 +33,16 @@ class UsuarioController extends AbstractActionController
              'perfis' => $this->getPerfilTable()->fetchAll(),
          ));
      }
+     
+    public function getMembroProjetoTable()
+    {
+    	if (!$this->membroProjetoTable) {
+    		$sm = $this->getServiceLocator();
+    		$this->membroProjetoTable = $sm->get('Application\Model\ProjetoMembroTable');
+    	}
+    	return $this->membroProjetoTable;
+    }
+    
     
     public function getUsuarioTable()
     {
@@ -46,6 +60,15 @@ class UsuarioController extends AbstractActionController
     		$this->perfilTable = $sm->get('Application\Model\PerfilTable');
     	}
     	return $this->perfilTable;
+    }
+    
+    public function getTarefaProjetoTable()
+    {
+    	if (!$this->tarefaProjetoTable) {
+    		$sm = $this->getServiceLocator();
+    		$this->tarefaProjetoTable = $sm->get('Application\Model\ProjetoTarefaTable');
+    	}
+    	return $this->tarefaProjetoTable;
     }
     
     public function addAction()
@@ -235,10 +258,23 @@ class UsuarioController extends AbstractActionController
 	public function detalheAction()
     {
 		 $request = $this->getRequest();
+
+		 $id = $this->params('id');
+		 $projetos = $this->getMembroProjetoTable()->getDadosProjetosMembro($id);
 		 
+		 $array_projetos = Array();
+		 
+		 foreach ($projetos as $projeto){
+		 	$total_tarefas_usuario_projeto = count($this->getTarefaProjetoTable()->getTarefaUsuarioPorProjeto($projeto['projeto_id'], $id));
+		 	$total_tarefas_projeto = count($this->getTarefaProjetoTable()->getTarefasProjeto($projeto['projeto_id']));
+		 	
+		 	$array_projetos[$projeto['projeto_id']] = ($total_tarefas_usuario_projeto * 100 ) / $total_tarefas_projeto;
+		 }
 		 
     	return new ViewModel(array(
-    			'usuario' => $this->getUsuarioTable()->getUsuario($this->params('id')),
+    		'contribuicao' => $array_projetos,
+    		'projetos' => $this->getMembroProjetoTable()->getDadosProjetosMembro($id),
+    		'usuario' => $this->getUsuarioTable()->getUsuario($id),
             'perfis' => $this->getPerfilTable()->fetchAll(),
     	));
     }

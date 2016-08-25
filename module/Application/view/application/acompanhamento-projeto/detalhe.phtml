@@ -4,9 +4,6 @@
  $this->headTitle($title);
  ?>
  
-       <!-- page content -->
-      <div class="right_col" role="main">
-
         <div class="">
           <div class="page-title">
             <div class="title_left">
@@ -48,21 +45,21 @@
                         </div>		
                         	
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_acompanhamento_data_inicio">Data de Início: </label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_acompanhamento_data_inicio">Data de InÃ­cio: </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">     
                             <label class="control-label"><?php echo date('d/m/Y', strtotime($projetoSemana->projeto_semana_data_inicio)); ?></label>  
                           </div>
                         </div>		
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_acompanhamento_data_termino">Data de Término: </label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_acompanhamento_data_termino">Data de TÃ©rmino: </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">                          
                             <label class="control-label"><?php echo date('d/m/Y', strtotime($projetoSemana->projeto_semana_data_fim)); ?></label>  
                           </div>
                         </div>	
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Descrição: </label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">DescriÃ§Ã£o: </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">                          
                           	<label class="control-label"><?php echo trim($acompanhamento->projeto_semana_justificativa); ?></label>  
                           </div>
@@ -77,19 +74,5 @@
             </div>
 
           </div>
-        </div>
-
-        <!-- footer content -->
-        <footer>
-          <div class="copyright-info">
-            <p class="pull-right">© 2016 Produzido por Laislla Costa Ramos
-            </p>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-
-      </div>
-      <!-- /page content -->
-                  
+        </div>              
  

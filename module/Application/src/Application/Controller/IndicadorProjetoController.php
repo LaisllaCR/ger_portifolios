@@ -26,6 +26,8 @@ use Zend\Mail\Transport\SmtpOptions;
 use Application\Model\Usuario;
 use Application\Model\ProjetoStatusJustificativa;
 use Application\Service\AlertaService;
+use Application\Model\ProjetoSemanaJustificativa;
+use Application\Model\ProjetoSemana;
 
 
 class IndicadorProjetoController extends AbstractActionController
@@ -33,6 +35,8 @@ class IndicadorProjetoController extends AbstractActionController
 	protected $indicadorProjetoTable;
 	protected $indicadorTable;
 	protected $projetoTable;
+	protected $projetoSemanaTable;
+	protected $projetoSemanaJustificativaTable;
 	
 	public function indexAction()
      {
@@ -79,7 +83,18 @@ class IndicadorProjetoController extends AbstractActionController
      				'action' => 'index'
      		));
      	}
-     
+
+     	$projeto = $this->getProjetoTable()->getProjeto($id);
+
+     	if($projeto->projeto_risco == "Alto risco"){
+     		$valida = $this->verificarAcompanhamento($projeto);
+     		if($valida == true){
+     			return $this->redirect()->toRoute('acompanhamento_projeto/consulta', array(
+     					'action' => 'consulta', 'id' => $projeto->projeto_id
+     			));
+     		}
+     	}
+     	
      	return new ViewModel(array(
      			'id' => $id,
      			'projeto' => $this->getProjetoTable()->getProjeto($id),
@@ -87,6 +102,8 @@ class IndicadorProjetoController extends AbstractActionController
      			'indicadores' => $indicadores
      	));
      }
+     
+     
     
     public function getIndicadorProjetoTable()
     {
@@ -240,6 +257,44 @@ class IndicadorProjetoController extends AbstractActionController
     	);    	
     }
     
+    public function getProjetoSemanaTable()
+    {
+    	if (!$this->projetoSemanaTable) {
+    		$sm = $this->getServiceLocator();
+    		$this->projetoSemanaTable = $sm->get('Application\Model\ProjetoSemanaTable');
+    	}
+    	return $this->projetoSemanaTable;
+    }
+    
+    public function getProjetoSemanaJustificativaTable()
+    {
+    	if (!$this->projetoSemanaJustificativaTable) {
+    		$sm = $this->getServiceLocator();
+    		$this->projetoSemanaJustificativaTable = $sm->get('Application\Model\ProjetoSemanaJustificativaTable');
+    	}
+    	return $this->projetoSemanaJustificativaTable;
+    }
+
+    public function verificarAcompanhamento($projeto)
+    {
+    	$semanas = $this->getProjetoSemanaTable()->getProjetoSemanas($projeto->projeto_id);
+    	$hoje = date('Y-m-d');
+    	 
+    	foreach ($semanas as $semana)
+    	{
+    		$justificativa_semana = $this->getProjetoSemanaJustificativaTable()->getProjetoSemanaJustificativa($semana->projeto_semana_id);
+    
+    		if($justificativa_semana->projeto_semana_justificativa == NULL){
+    			 
+    			if($hoje > $semana->projeto_semana_data_fim){
+    				return true;
+    			}
+    		}
+    	}
+    	 
+    	return false;
+    }
+    
 	public function detalheAction()
     {
 		 $request = $this->getRequest();
@@ -303,7 +358,7 @@ class IndicadorProjetoController extends AbstractActionController
     			if($quant_fora_limite >= 2){
     				
     				$html = $this->gerarHtmlForaLimites($indicadorProjeto, $projeto, $indicadores);
-    				$this->enviarEmailAltaDirecao($html, utf8_encode('3 ou mais indicadores estão fora do limite esperado!'));
+    				$this->enviarEmailAltaDirecao($html, utf8_encode('3 ou mais indicadores estï¿½o fora do limite esperado!'));
     			}
     		
     		}
@@ -482,13 +537,13 @@ class IndicadorProjetoController extends AbstractActionController
 														<br/>
 														<div class="contentEditableContainer contentTextEditable">
 															<div class="contentEditable" >
-																<div style="font-size:23px;font-family:Heveltica, Arial, sans-serif;color:#fff;">'.utf8_encode('3 ou mais indicadores estão fora do limite esperado!').'</div>
+																<div style="font-size:23px;font-family:Heveltica, Arial, sans-serif;color:#fff;">'.utf8_encode('3 ou mais indicadores estï¿½o fora do limite esperado!').'</div>
 															</div>
 														</div>
     
 														<div class="contentEditableContainer contentTextEditable">
 															<div class="contentEditable"  style="padding:20px 10px 0 0;margin:0;font-family:Helvetica, Arial, sans-serif;font-size:15px;line-height:150%;">
-																<p style="color:#FFEECE;">'.utf8_encode('Sistema de Gerenciamento de Portifólio de Projetos').'</strong></p>
+																<p style="color:#FFEECE;">'.utf8_encode('Sistema de Gerenciamento de Portifï¿½lio de Projetos').'</strong></p>
 															</div>
 														</div>
     
@@ -549,7 +604,7 @@ class IndicadorProjetoController extends AbstractActionController
 										<td width="60%" height="70" valign="middle" style="padding-bottom:20px;">
 											<div class="contentEditableContainer contentTextEditable">
 												<div class="contentEditable" >
-													<span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;">'.utf8_encode('Sistema de Gerenciamento de Portifólio de Projetos').' by Laislla Ramos</span>
+													<span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;">'.utf8_encode('Sistema de Gerenciamento de Portifï¿½lio de Projetos').' by Laislla Ramos</span>
 													<br/>
 													<span style="font-size:11px;color:#555;font-family:Helvetica, Arial, sans-serif;line-height:200%;">laisllaramos@gmail.com</span>
 													<br/>
@@ -614,6 +669,8 @@ class IndicadorProjetoController extends AbstractActionController
     	$transport->setOptions($options);
     	$transport->send($message);
     }
+    
+    
      
     
     public function verificarIndicadoresFase($indicadorProjeto)
