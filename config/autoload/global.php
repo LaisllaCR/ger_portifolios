@@ -14,7 +14,8 @@
 return array(
      'db' => array(
          'driver'         => 'Pdo',
-         'dsn'            => 'mysql:dbname=ger_portifolios;host=localhost',
+         'dsn'            => 'mysql:dbname=u328573629_proje;host=localhost',
+        // 'dsn'            => 'mysql:dbname=ger_portifolios;host=localhost',
          'driver_options' => array(
              PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
          ),
