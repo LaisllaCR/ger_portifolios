@@ -39,7 +39,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Indicadores do Projeto - <?php echo $projeto->projeto_nome; ?></h3>
+              <h3>Indicadores do Projeto - <?php echo utf8_decode($projeto->projeto_nome); ?></h3>
             </div>
             
           </div>
@@ -51,7 +51,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Editar Indicador de  <?php echo $projeto->projeto_nome;?> <small></small></h2>
+                  <h2>Editar Indicador de  <?php echo utf8_decode($projeto->projeto_nome);?> <small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                    <li><a class="link"  href="<?php echo $this->url('indicador_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
                    <li class="dropdown">
@@ -65,7 +65,7 @@
 
 
                   <!-- Smart Wizard -->
-                  <p>Esse é o formulário onde deve ser preenchidas todas as informações do indicador.</p>
+                  <p>Esse &eacute; o formul&aacute;rio onde deve ser preenchidas todas as informa&ccedil;&otilde;es do indicador.</p>
                   
                    <form  id="indicador_edit" name="indicador_edit"  onSubmit="validateForm(); return false;"  method="post" action="<?php echo $this->url('indicador_projeto/edit',  array('action'=>'edit','projeto_id' => $projeto_id, 'id' => $indicadorProjeto->indicador_projeto_id));?>" role="form" class="form-horizontal form-label-left">
                    		
@@ -94,7 +94,7 @@
                           	?>
                           	<h3><?php echo $indicadorProjeto->indicador_id.'-'.$indicador->indicador_id.'-'.$indicador->indicador_nome."<br>"; ?></h3>
                           	
-                          		<option <?php echo $selected;?> value="<?php echo $indicador->indicador_id; ?>"><?php echo $indicador->indicador_nome; ?></option>
+                          		<option <?php echo $selected;?> value="<?php echo $indicador->indicador_id; ?>"><?php echo utf8_decode($indicador->indicador_nome); ?></option>
                           	<?php 
                           		}
                           	
@@ -114,11 +114,11 @@
 	                          $monitoramento = "";
 	                          $encerramento = "";
 	                          
-                          	if(utf8_decode($indicadorProjeto->projeto_fase) == "Iniciação"){
+                          	if(utf8_decode($indicadorProjeto->projeto_fase) == "Inicia��o"){
                           		$iniciacao = "selected";
                           	}else if(utf8_decode($indicadorProjeto->projeto_fase) == "Planejamento"){
                           		$planejamento = "selected";
-                          	}else if(utf8_decode($indicadorProjeto->projeto_fase) == "Execução"){
+                          	}else if(utf8_decode($indicadorProjeto->projeto_fase) == "Execu��o"){
                           		$execucao = "selected";
                           	}else if(utf8_decode($indicadorProjeto->projeto_fase) == "Monitoramento e Controle"){
                           		$monitoramento = "selected";
@@ -129,9 +129,9 @@
                           ?>                         
                           
                           	<select id="projeto_fase" name="projeto_fase" required="required"  class="form-control col-md-7 col-xs-12">
-                          		<option <?php echo $iniciacao; ?> value="Iniciacao">Iniciação</option>
+                          		<option <?php echo $iniciacao; ?> value="Iniciacao">Inicia&ccedil;&atilde;o</option>
                           		<option <?php echo $planejamento; ?> value="Planejamento">Planejamento</option>
-                          		<option <?php echo $execucao; ?> value="Execucao">Execução</option>
+                          		<option <?php echo $execucao; ?> value="Execucao">Execu&ccedil;&atilde;o</option>
                           		<option <?php echo $monitoramento; ?> value="Monitoramento e Controle">Monitoramento e Controle</option>
                           		<option <?php echo $encerramento; ?> value="Encerramento">Encerramento</option>
                           	</select>
@@ -139,7 +139,7 @@
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="valor_minimo">Valor Mínimo <span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="valor_minimo">Valor M&iacute;nimo <span class="required">*</span>
                           </label>
                           <div class="col-md-2 col-sm-6 col-xs-12">
                             <input type="number" id="valor_minimo" value="<?php echo $indicadorProjeto->valor_minimo; ?>" name="valor_minimo" required="required" class="form-control col-md-7 col-xs-12">
@@ -147,7 +147,7 @@
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="valor_maximo">Valor Máximo <span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="valor_maximo">Valor M&aacute;ximo <span class="required">*</span>
                           </label>
                           <div class="col-md-2 col-sm-6 col-xs-12">
                             <input type="number" id="valor_maximo" value="<?php echo $indicadorProjeto->valor_maximo; ?>" name="valor_maximo" required="required" class="form-control col-md-7 col-xs-12">

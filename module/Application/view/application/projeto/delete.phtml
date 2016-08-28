@@ -1,7 +1,7 @@
 <?php
  // module/Album/view/album/album/delete.phtml:
 
- $title = $projeto->projeto_nome;
+ $title = utf8_decode($projeto->projeto_nome);
  $this->headTitle($title);
  ?>
  
@@ -36,7 +36,7 @@
                   <!-- Smart Wizard -->
                   
 				 <p>Tem certeza que deseja excluir <br>
-				     <strong><?php echo $this->escapeHtml($projeto->projeto_nome); ?></strong>?
+				     <strong><?php echo utf8_decode($projeto->projeto_nome); ?></strong>?
 				 </p>
  
                   
@@ -55,7 +55,7 @@
 							      <button type="submit" class="btn btn-default" name="submit" value="Sim">Sim</button>
 							    </div>
 							    <div class="control-label col-md-1 col-sm-1 col-xs-1"">
-							      <button type="submit" class="btn btn-default" name="submit" value="Nao">Não</button>
+							      <button type="submit" class="btn btn-default" name="submit" value="Nao">N&atilde;o</button>
 							    </div>
 							  </div>
 					  

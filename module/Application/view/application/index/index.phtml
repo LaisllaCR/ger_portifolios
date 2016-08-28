@@ -51,7 +51,7 @@
                   <div class="col-md-9 col-sm-12 col-xs-12">
                     
                    <?php foreach ($projetos as $projeto){?>
-                  <input type="hidden"  class="webcampics" name="projetos" value="<?php echo ($projeto->projeto_nome); ?>">
+                  <input type="hidden"  class="webcampics" name="projetos" value="<?php echo (utf8_decode($projeto->projeto_nome)); ?>">
                   <input type="hidden"  class="webcampics2" name="tarefas" value="<?php echo count($projeto_tarefas[$projeto->projeto_id]); ?>">
     			  <input type="hidden"  class="webcampics3" name="indicadores" value="<?php echo count($projeto_indicadores[$projeto->projeto_id]); ?>">
     	

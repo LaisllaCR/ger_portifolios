@@ -6,7 +6,7 @@
          <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Indicadores do Projeto - <?php echo $projeto->projeto_nome; ?></h3>
+              <h3>Indicadores do Projeto - <?php echo utf8_decode($projeto->projeto_nome); ?></h3>
             </div>
             
           </div>
@@ -18,7 +18,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Excluir Indicador de <?php echo $projeto->projeto_nome; ?><small></small></h2>
+                  <h2>Excluir Indicador de <?php echo utf8_decode($projeto->projeto_nome); ?><small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                    <li><a class="link"  href="<?php echo $this->url('indicador_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
                    <li class="dropdown">
@@ -37,12 +37,12 @@
                   $array_indicadores = Array();
                   
                   foreach($indicadores as $indicador){
-                  	$array_indicadores[$indicador->indicador_id] = $indicador->indicador_nome;
+                  	$array_indicadores[$indicador->indicador_id] = ($indicador->indicador_nome);
                   }
                   
                   ?>
 				 <p>Tem certeza que deseja excluir o indicador <br>
-				     <strong><?php echo '"'.$this->escapeHtml($array_indicadores[$indicadorProjeto->indicador_id]).'"'; ?></strong> do projeto ?
+				     <strong><?php echo '"'.utf8_decode($array_indicadores[$indicadorProjeto->indicador_id]).'"'; ?></strong> do projeto ?
 				 </p>
  
                   
@@ -59,7 +59,7 @@
 							      <button type="submit" class="btn btn-default" name="submit" value="Sim">Sim</button>
 							    </div>
 							    <div class="control-label col-md-1 col-sm-1 col-xs-1"">
-							      <button type="submit" class="btn btn-default" name="submit" value="Nao">N�o</button>
+							      <button type="submit" class="btn btn-default" name="submit" value="Nao">N&atilde;o</button>
 							    </div>
 							  </div>
 					  

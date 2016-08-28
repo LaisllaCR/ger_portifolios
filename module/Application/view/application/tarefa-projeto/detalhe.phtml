@@ -7,7 +7,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Tarefas do Projeto - <?php echo $projeto->projeto_nome; ?></h3>
+              <h3>Tarefas do Projeto - <?php echo utf8_decode($projeto->projeto_nome); ?></h3>
             </div>
             
           </div>
@@ -19,7 +19,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2><?php echo $title;?> <?php echo $projeto->projeto_nome; ?><small></small></h2>
+                  <h2><?php echo $title;?> <?php echo utf8_decode($projeto->projeto_nome); ?><small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="link"  href="<?php echo $this->url('tarefa_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
                   	<li class="dropdown">
@@ -36,10 +36,10 @@
   				<form action="" method="post" role="form" class="form-horizontal form-label-left">
   				
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Título:
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">T&iacute;tulo:
                           </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
-                          <label class="control-label "><?php echo $tarefa->tarefa_nome; ?>
+                          <label class="control-label "><?php echo utf8_decode($tarefa->tarefa_nome); ?>
                           </label>      	
                           </div>
                         </div>	
@@ -48,12 +48,12 @@
                           $array_usuarios = Array();
                           
                           foreach($usuarios as $usuario){
-                          	$array_usuarios[$usuario->usuario_id] = $usuario->usuario_nome;
+                          	$array_usuarios[$usuario->usuario_id] = utf8_decode($usuario->usuario_nome);
                           }
                                                     
                           ?>
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Responsável:
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Respons&aacute;vel:
                           </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
                           <label class="control-label "><?php echo $array_usuarios[$tarefa->usuario_id];?>
@@ -62,9 +62,9 @@
                         </div>		
                         	
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Descrição: </label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Descri&ccedil;&atilde;o: </label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">                          
-                          	<label class="control-label"><?php echo trim($tarefa->tarefa_descricao); ?></label>  
+                          	<label class="control-label"><?php echo utf8_decode(trim($tarefa->tarefa_descricao)); ?></label>  
                           </div>
                         </div>	
                         
@@ -76,21 +76,21 @@
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Data Início:</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Data In&iacute;cio:</label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
                           	<label class="control-label"><?php echo date('d/m/Y', strtotime($tarefa->tarefa_data_inicio)); ?></label>      	
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Previsão de Término:</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Previs&atilde;o de T&eacute;rmino:</label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
                           	<label class="control-label"><?php echo date('d/m/Y', strtotime($tarefa->tarefa_data_previsao_termino)); ?></label>      	
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Data Término:</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Data T&eacute;rmino:</label>
                           <div class="col-md-9 col-sm-9 col-xs-12" style="text-align: left;">
                           	<label class="control-label"><?php echo date('d/m/Y', strtotime($tarefa->tarefa_data_termino)); ?></label>      	
                           </div>

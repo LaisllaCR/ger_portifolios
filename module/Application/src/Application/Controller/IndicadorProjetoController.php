@@ -348,7 +348,7 @@ class IndicadorProjetoController extends AbstractActionController
     		$indicadorProjeto->valor_maximo = $dados_form['valor_maximo'];
     		
     		$indicadorProjeto->indicador_projeto_valor = $dados_form['indicador_projeto_valor'];
-    		$indicadorProjeto->indicador_projeto_descricao = $dados_form['indicador_projeto_descricao'];
+    		$indicadorProjeto->indicador_projeto_descricao = utf8_encode($dados_form['indicador_projeto_descricao']);
     		
     		if($indicadorProjeto->indicador_projeto_valor > $indicadorProjeto->valor_maximo){
     			

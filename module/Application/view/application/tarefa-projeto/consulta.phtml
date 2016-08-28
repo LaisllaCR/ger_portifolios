@@ -1,7 +1,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Tarefas do Projeto - <?php echo $projeto->projeto_nome; ?></h3>
+              <h3>Tarefas do Projeto - <?php echo utf8_decode($projeto->projeto_nome); ?></h3>
             </div>
 
             <div class="title_right">
@@ -21,7 +21,7 @@
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Consultar Tarefas de <?php echo  $projeto->projeto_nome;?></h2>
+                  <h2>Consultar Tarefas de <?php echo  utf8_decode($projeto->projeto_nome);?></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="link"  href="<?php echo $this->url('tarefa_projeto/add', array('id' => $id)); ?>" ><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</a>
                     </li>
@@ -39,11 +39,11 @@
                     <thead>
                       <tr>
                         <th style="width: 1%">#</th>
-                        <th style="width: 20%">Título</th>
-                        <th style="width: 20%">Responsável</th>
+                        <th style="width: 20%">T&iacute;tulo</th>
+                        <th style="width: 20%">Respons&aacute;vel</th>
                         <th style="width: 20%">Status</th>
-                        <th style="width: 20%">Data início</th>
-                        <th style="width: 20%">Edição</th>
+                        <th style="width: 20%">Data in&iacute;cio</th>
+                        <th style="width: 20%">Edi&ccedil;&atilde;o</th>
                       </tr>
                     </thead>
                     
@@ -53,7 +53,7 @@
                           $array_usuarios = Array();
                           
                           foreach($usuarios as $usuario){
-                          	$array_usuarios[$usuario->usuario_id] = $usuario->usuario_nome;
+                          	$array_usuarios[$usuario->usuario_id] = utf8_decode($usuario->usuario_nome);
                           }
                                                     
                           ?>
@@ -66,7 +66,7 @@
 					?>
                       <tr>
                         <td><?php echo $tarefa->tarefa_id; ?></td>
-                        <td><?php echo $tarefa->tarefa_nome; ?></td>
+                        <td><?php echo utf8_decode($tarefa->tarefa_nome); ?></td>
                         <td><?php echo $array_usuarios[$tarefa->usuario_id];?></td>
                         <td><?php echo $tarefa->tarefa_status; ?></td>
                         <td><?php echo date('d/m/Y',  strtotime($tarefa->tarefa_data_inicio)); ?></td>

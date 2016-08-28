@@ -21,7 +21,7 @@
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2> Projeto Detalhe - <?php echo $projeto->projeto_nome;?></h2>
+                  <h2> Projeto Detalhe - <?php echo utf8_decode($projeto->projeto_nome);?></h2>
                   <ul class="nav navbar-right panel_toolbox">                  
                     <li><a class="link"  href="<?php echo $this->url('projeto'); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
                   </ul>
@@ -34,14 +34,14 @@
 
                     <ul class="stats-overview">
                       <li>
-                        <span class="name"> Data Inicio </span>
+                        <span class="name"> Data In&iacute;cio </span>
                         
                           <?php 
 
                           $array_usuarios = Array();
                           
                           foreach($usuarios as $usuario){
-                          	$array_usuarios[$usuario->usuario_id] = $usuario->usuario_nome;
+                          	$array_usuarios[$usuario->usuario_id] = utf8_decode($usuario->usuario_nome);
                           }
                                                     
                           ?>
@@ -54,11 +54,11 @@
                         <span class="value text-success"> <?php echo $projeto_data_inicio[2]."/".$projeto_data_inicio[1]."/".$projeto_data_inicio[0]; ?> </span>
                       </li>
                       <li>
-                        <span class="name"> Data Previsao Termino </span>
+                        <span class="name"> Data Previs&atilde;o T&eacute;rmino </span>
                         <span class="value text-success"> <?php echo $projeto_data_previsao_termino[2]."/".$projeto_data_previsao_termino[1]."/".$projeto_data_previsao_termino[0]; ?> </span>
                       </li>
                       <li class="hidden-phone">
-                        <span class="name"> Data Termino </span>
+                        <span class="name"> Data T&eacute;rmino </span>
                         <span class="value text-success"> <?php echo $projeto_data_real_termino[2]."/".$projeto_data_real_termino[1]."/".$projeto_data_real_termino[0]; ?> </span>
                       </li>
                     </ul>
@@ -79,19 +79,19 @@
                     <section class="panel">
 
                       <div class="x_title">
-                        <h2>Projeto Descricao</h2>
+                        <h2>Projeto Descri&ccedil;&atilde;o</h2>
                         <div class="clearfix"></div>
                       </div>
                       <div class="panel-body">
 
-                        <p><?php echo $projeto->projeto_descricao;?></p>
+                        <p><?php echo utf8_decode($projeto->projeto_descricao);?></p>
                         <br />
 
                         <div class="project_detail">
 
-                          <p class="title">Gerente Responsavel</p>
+                          <p class="title">Gerente Respons&aacute;vel</p>
                           <p><?php echo $array_usuarios[$projeto->projeto_gerente_id];?></p>
-                          <p class="title">Orcamento Total</p>
+                          <p class="title">Or&ccedil;amento Total</p>
                           <p>R$ <?php echo $projeto->projeto_orcamento_total;?></p>
                           <p class="title">Risco</p>
                           <p><?php echo $projeto->projeto_risco;?></p>

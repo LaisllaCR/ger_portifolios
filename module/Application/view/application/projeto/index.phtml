@@ -55,8 +55,8 @@
                         <th style="width: 20%">Nome</th>
                         <th style="width: 15%">Status</th>
                         <th style="width: 10%">Risco</th>
-                        <th style="width: 20%"><?php echo ('Edição'); ?> </th>
-                        <th style="width: 20%"><?php echo ('Ações'); ?></th>
+                        <th style="width: 20%">Edi&ccedil;&atilde;o</th>
+                        <th style="width: 20%">A&ccedil;&otilde;es</th>
                       </tr>
                     </thead>
                     
@@ -70,14 +70,14 @@
                       <tr>
                         <td><?php echo $projeto->projeto_id; ?></td>
                         <td>
-                          <a><?php echo $projeto->projeto_nome; ?></a>
+                          <a><?php echo utf8_decode($projeto->projeto_nome); ?></a>
                           <br />                          
 		                    <?php 
 		
 								$projeto_data_inicio = explode('-', $projeto->projeto_data_inicio);
 								
 							?>                          
-                          <small>Início <?php echo $projeto_data_inicio[2]."/".$projeto_data_inicio[1]."/".$projeto_data_inicio[0]; ?></small>
+                          <small>In&iacute;cio <?php echo $projeto_data_inicio[2]."/".$projeto_data_inicio[1]."/".$projeto_data_inicio[0]; ?></small>
                         </td>
                         
                         <td><?php echo $projeto->projeto_status; ?></td>

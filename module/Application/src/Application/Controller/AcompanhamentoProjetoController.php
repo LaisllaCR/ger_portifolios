@@ -194,7 +194,7 @@ class AcompanhamentoProjetoController extends AbstractActionController
     		$acompanhamentoProjeto->projeto_acompanhamento_semana = $dados_form['projeto_acompanhamento_semana'];*/
     		
     		$acompanhamentoProjeto->projeto_semana_id = $projeto_semana_id;
-    		$acompanhamentoProjeto->projeto_semana_justificativa = $dados_form['projeto_semana_justificativa'];
+    		$acompanhamentoProjeto->projeto_semana_justificativa = utf8_encode($dados_form['projeto_semana_justificativa']);
     			$acompanhamentoProjeto->usuario_id = $session_dados->id;
     		    		 
     		if ($dados_form) {

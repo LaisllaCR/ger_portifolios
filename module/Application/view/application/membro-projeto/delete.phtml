@@ -6,7 +6,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Membros do Projeto - <?php echo $projeto->projeto_nome; ?></h3>
+              <h3>Membros do Projeto - <?php echo utf8_decode($projeto->projeto_nome); ?></h3>
             </div>
             
           </div>
@@ -18,7 +18,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Excluir Membro de <?php echo $projeto->projeto_nome; ?><small></small></h2>
+                  <h2>Excluir Membro de <?php echo utf8_decode($projeto->projeto_nome); ?><small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                      <li><a class="link"  href="<?php echo $this->url('membro_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
                    <li class="dropdown">
@@ -36,11 +36,11 @@
 				 $array_usuarios = Array();
 				 
 				 foreach($usuarios as $usuario){
-				 	$array_usuarios[$usuario->usuario_id] = $usuario->usuario_nome;
+				 	$array_usuarios[$usuario->usuario_id] = utf8_decode($usuario->usuario_nome);
 				 }
 				 ?>
 				 
-				     <strong><?php echo '"'.$this->escapeHtml($array_usuarios[$membro->usuario_id]).'"'; ?></strong> do projeto ?
+				     <strong><?php echo '"'.($array_usuarios[$membro->usuario_id]).'"'; ?></strong> do projeto ?
 				 </p>
  
                   
@@ -57,7 +57,7 @@
 							      <button type="submit" class="btn btn-default" name="submit" value="Sim">Sim</button>
 							    </div>
 							    <div class="control-label col-md-1 col-sm-1 col-xs-1"">
-							      <button type="submit" class="btn btn-default" name="submit" value="Nao">Não</button>
+							      <button type="submit" class="btn btn-default" name="submit" value="Nao">N&atilde;o</button>
 							    </div>
 							  </div>
 					  

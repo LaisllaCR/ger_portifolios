@@ -146,10 +146,10 @@ class TarefaProjetoController extends AbstractActionController
     	
     		if ($dados_form) {
 
-    			$tarefaProjeto->tarefa_nome = $dados_form['tarefa_nome'];
+    			$tarefaProjeto->tarefa_nome = utf8_encode($dados_form['tarefa_nome']);
     			$tarefaProjeto->usuario_id = $dados_form['usuario_id'];
     			$tarefaProjeto->projeto_id = $id;
-    			$tarefaProjeto->tarefa_descricao = $dados_form['tarefa_descricao'];
+    			$tarefaProjeto->tarefa_descricao = utf8_encode($dados_form['tarefa_descricao']);
     			$tarefaProjeto->tarefa_status = $dados_form['tarefa_status'];
     			$tarefaProjeto->tarefa_data_inicio = $dados_form['tarefa_data_inicio'];
     			$tarefaProjeto->tarefa_data_previsao_termino = $dados_form['tarefa_data_previsao_termino'];
@@ -198,8 +198,8 @@ class TarefaProjetoController extends AbstractActionController
     		$tarefaProjeto->tarefa_id = $id; 
     		$tarefaProjeto->projeto_id = $projeto_id;    
     		$tarefaProjeto->usuario_id = $dados_form['usuario_id'];
-    		$tarefaProjeto->tarefa_nome = $dados_form['tarefa_nome'];
-    		$tarefaProjeto->tarefa_descricao = $dados_form['tarefa_descricao'];
+    		$tarefaProjeto->tarefa_nome = utf8_encode($dados_form['tarefa_nome']);
+    		$tarefaProjeto->tarefa_descricao = utf8_encode($dados_form['tarefa_descricao']);
     		$tarefaProjeto->tarefa_status = $dados_form['tarefa_status'];
     		$tarefaProjeto->tarefa_data_inicio = $dados_form['tarefa_data_inicio'];
     		$tarefaProjeto->tarefa_data_previsao_termino = $dados_form['tarefa_data_previsao_termino'];

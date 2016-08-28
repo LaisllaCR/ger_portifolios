@@ -18,7 +18,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Indicador Detalhe - <?php echo $indicador->indicador_nome; ?> <small></small></h2>
+                  <h2>Indicador Detalhe - <?php echo utf8_decode($indicador->indicador_nome); ?> <small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="link"  href="<?php echo $this->url('indicador'); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
                    <li class="dropdown">
@@ -35,10 +35,10 @@
   				<form action="" method="post" role="form" class="form-horizontal form-label-left">
                    						
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">Título:
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome">T&iacute;tulo:
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_nome"><?php echo $indicador->indicador_nome; ?>
+                          <label class="control-label col-md-5 col-sm-3 col-xs-12" for="indicador_nome"><?php echo trim(utf8_decode($indicador->indicador_nome)); ?>
                           </label>      	
                           </div>
                         </div>	

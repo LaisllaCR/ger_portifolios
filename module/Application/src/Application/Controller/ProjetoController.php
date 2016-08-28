@@ -169,13 +169,13 @@ class ProjetoController extends AbstractActionController
     	
     		if ($dados_form) {
 
-    			$projeto->projeto_nome = $dados_form['projeto_nome'];
+    			$projeto->projeto_nome = utf8_encode($dados_form['projeto_nome']);
     			$projeto->projeto_data_inicio = $dados_form['projeto_data_inicio'];
     			$projeto->projeto_data_previsao_termino = $dados_form['projeto_data_previsao_termino'];
     			$projeto->projeto_data_real_termino = $dados_form['projeto_data_real_termino'];
     			$projeto->projeto_gerente_id = $dados_form['projeto_gerente_id'];
     			$projeto->projeto_orcamento_total = $dados_form['projeto_orcamento_total'];
-    			$projeto->projeto_descricao = $dados_form['projeto_descricao'];
+    			$projeto->projeto_descricao = utf8_encode($dados_form['projeto_descricao']);
     			$projeto->projeto_status = 'Em analise';
     			    			
     			$projeto->projeto_risco = $dados_form['riscoRadios'];
@@ -243,7 +243,7 @@ class ProjetoController extends AbstractActionController
     		if ($dados_form) {
     			
     			$projeto->projeto_id = $id; 
-    			$projeto->projeto_nome = $dados_form['projeto_nome'];
+    			$projeto->projeto_nome = utf8_encode($dados_form['projeto_nome']);
     			
     			$projeto->projeto_data_inicio = $dados_form['projeto_data_inicio'];
     			$projeto->projeto_data_previsao_termino = $dados_form['projeto_data_previsao_termino'];
@@ -255,7 +255,7 @@ class ProjetoController extends AbstractActionController
     			
     			$projeto->projeto_gerente_id = $dados_form['projeto_gerente_id'];
     			$projeto->projeto_orcamento_total = $dados_form['projeto_orcamento_total'];
-    			$projeto->projeto_descricao = $dados_form['projeto_descricao'];
+    			$projeto->projeto_descricao = utf8_encode($dados_form['projeto_descricao']);
     			$projeto->projeto_risco = $dados_form['riscoRadios'];
     			 
     			$this->getProjetoTable()->saveProjeto($projeto);
@@ -333,9 +333,9 @@ class ProjetoController extends AbstractActionController
     			
     
     				$projetoStatusJustificativa->projeto_id = $projeto->projeto_id;
-    				$projetoStatusJustificativa->projeto_status = $projeto->projeto_status;
+    				$projetoStatusJustificativa->projeto_status = ($projeto->projeto_status);
     				$projetoStatusJustificativa->projeto_status_data = date('Y-m-d');
-    				$projetoStatusJustificativa->projeto_status_justificativa = $dados_form['projeto_status_justificativa'];
+    				$projetoStatusJustificativa->projeto_status_justificativa = utf8_encode($dados_form['projeto_status_justificativa']);
 					$projetoStatusJustificativa->usuario_id = $session_dados->id;
     				    				
     				$this->getProjetoStatusJustificativaTable()->saveProjetoStatusJustificativa($projetoStatusJustificativa);

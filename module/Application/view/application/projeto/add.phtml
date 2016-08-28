@@ -13,7 +13,7 @@
 	    
 	    if (data_inicio > data_previsao) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Data de Inï¿½cio deve ser menor que a Previsï¿½o de Tï¿½rmino!";
+	    	document.getElementById('alerta').innerHTML = "A Data de Início deve ser menor que a Previsão de Término!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -25,7 +25,7 @@
 
 	    if(projeto_data_inicio == projeto_data_previsao_termino) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Data de Inï¿½cio e a Previsï¿½o de Tï¿½rmino Nï¿½O devem ser iguais!";
+	    	document.getElementById('alerta').innerHTML = "A Data de Início e a Previsão de Término NÃO devem ser iguais!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -37,7 +37,7 @@
 	    
 		if (data_inicio > data_termino || data_inicio === data_termino) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Data de Inï¿½cio deve ser menor que a Data de Tï¿½rmino!";
+	    	document.getElementById('alerta').innerHTML = "A Data de Início deve ser menor que a Data de Término!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -49,7 +49,7 @@
 
 	    if(projeto_data_inicio == projeto_data_real_termino) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Data de Inï¿½cio e a Data de Tï¿½rmino Nï¿½O devem ser iguais!";
+	    	document.getElementById('alerta').innerHTML = "A Data de Início e a Data de Término NÃO devem ser iguais!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -94,12 +94,10 @@
 
 
                   <!-- Smart Wizard -->
-                  <p>Esse Ã© o formulÃ¡rio onde deve ser preenchidas todas as informaÃ§Ãµes do novo projeto.</p>
+                  <p>Esse &eacute; o formul&aacute;io onde deve ser preenchidas todas as informa&ccedil;&otilde;es do novo projeto.</p>
                
               	<form id="projeto_add" name="projeto_add"  onSubmit="validateForm(); return false;" method="post" action="<?php echo $this->url('projeto/add',  array('action'=>'add'));?>" role="form" class="form-horizontal form-label-left" enctype="multipart/form-data">
-              
-                  <div>
-              
+                           
                    
                     <div>
                     
@@ -108,7 +106,7 @@
 						</div> 
 
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_nome">TÃ­tulo <span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_nome">T&iacute;tulo <span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <input type="text" id="projeto_nome" name="projeto_nome" required="required" class="form-control col-md-7 col-xs-12">
@@ -116,7 +114,7 @@
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_gerente_id">Gerente ResponsÃ¡vel <span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_gerente_id">Gerente Respons&aacute;vel <span class="required">*</span>
                           </label>
                           <div class="col-md-4 col-sm-4 col-xs-12">
                           	<select name="projeto_gerente_id" id="projeto_gerente_id"  required="required"  class="form-control col-md-7 col-xs-12">
@@ -124,7 +122,7 @@
                           			foreach($usuarios as $usuario){
                           	?>
                           	
-                          		<option value="<?php echo $usuario->usuario_id; ?>"><?php echo $usuario->usuario_nome?></option>
+                          		<option value="<?php echo $usuario->usuario_id; ?>"><?php echo utf8_decode($usuario->usuario_nome); ?></option>
                           	<?php 
                           			}
                           	?>
@@ -133,28 +131,28 @@
                         </div>
                         
                         <div class="form-group">
-                          <label for="projeto_data_inicio" class="control-label col-md-3 col-sm-3 col-xs-12">Data de inÃ­cio <span class="required">*</span></label>
+                          <label for="projeto_data_inicio" class="control-label col-md-3 col-sm-3 col-xs-12">Data de in&iacute;cio <span class="required">*</span></label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                             <input id="projeto_data_inicio" class="form-control col-md-7 col-xs-12"  required="required" type="date" name="projeto_data_inicio">
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label for="projeto_data_previsao_termino" class="control-label col-md-3 col-sm-3 col-xs-12">PrevisÃ£o de TÃ©rmino <span class="required">*</span> </label>
+                          <label for="projeto_data_previsao_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Previs&atilde;o de T&eacute;rmino <span class="required">*</span> </label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                             <input id="projeto_data_previsao_termino" class="form-control col-md-7 col-xs-12"  required="required" type="date" name="projeto_data_previsao_termino">
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label for="projeto_data_real_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Data real de tÃ©rmino</label>
+                          <label for="projeto_data_real_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Data real de t&eacute;rmino</label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                             <input id="projeto_data_real_termino" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_real_termino">
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_orcamento_total">OrÃ§amento Total<span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_orcamento_total">Or&ccedil;amento Total<span class="required">*</span>
                           </label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                             <input type="text" id="projeto_orcamento_total" name="projeto_orcamento_total" required="required" class="form-control col-md-7 col-xs-12">
@@ -162,7 +160,7 @@
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_descricao">DescriÃ§Ã£o<span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_descricao">Descri&ccedil;&atilde;o<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <textarea id="projeto_descricao" name="projeto_descricao" required="required" class="form-control col-md-7 col-xs-12"></textarea>
@@ -170,7 +168,7 @@
                         </div>
                      
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="riscoRadios">ClassificaÃ§Ã£o de Risco<span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="riscoRadios">Classifica&ccedil;&atilde;o de Risco<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="radio">
@@ -180,7 +178,7 @@
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio" value="Medio risco" id="Medio risco" name="riscoRadios" required="required"> MÃ©dio risco
+	                            <input type="radio" value="Medio risco" id="Medio risco" name="riscoRadios" required="required"> M&eacute;dio risco
 	                          </label>
 	                        </div>
 	                        <div class="radio">

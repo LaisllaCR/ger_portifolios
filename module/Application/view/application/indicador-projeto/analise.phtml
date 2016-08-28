@@ -1,7 +1,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Indicadores do Projeto - <?php echo $projeto->projeto_nome; ?></h3>
+              <h3>Indicadores do Projeto - <?php echo utf8_decode($projeto->projeto_nome); ?></h3>
             </div>
             
           </div>
@@ -13,7 +13,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Analisar Indicador de  <?php echo $projeto->projeto_nome;?> <small></small></h2>
+                  <h2>Analisar Indicador de  <?php echo utf8_decode($projeto->projeto_nome);?> <small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                      <li><a class="link"  href="<?php echo $this->url('indicador_projeto/consulta', array('id' => $projeto->projeto_id)); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
                      <li class="dropdown">
@@ -27,13 +27,13 @@
 
 
                   <!-- Smart Wizard -->
-                  <p>Esse é o formulário onde deve ser preenchidas todas as informações da análise do indicador.</p>
+                  <p>Esse &eacute; o formul&aacute;rio onde deve ser preenchidas todas as informa&ccedil;&otilde;es da an&aacute;lise do indicador.</p>
                   
                    <form method="post" action="<?php echo $this->url('indicador_projeto/analise',  array('action'=>'analise','projeto_id' => $projeto_id, 'id' => $indicadorProjeto->indicador_projeto_id));?>" role="form" class="form-horizontal form-label-left">
                   
                   <div>       		
     		
-                        <input type="hidden" id="projeto_fase" name="projeto_fase" value="<?php echo $indicadorProjeto->projeto_fase;?>">
+                        <input type="hidden" id="projeto_fase" name="projeto_fase" value="<?php echo utf8_decode($indicadorProjeto->projeto_fase);?>">
                         <input type="hidden" id="indicador_id" name="indicador_id" value="<?php echo $indicadorProjeto->indicador_id;?>">
                         <input type="hidden" id="valor_minimo" name="valor_minimo" value="<?php echo $indicadorProjeto->valor_minimo;?>">
                         <input type="hidden" id="valor_maximo" name="valor_maximo" value="<?php echo $indicadorProjeto->valor_maximo;?>">
@@ -47,10 +47,10 @@
                         </div>
                                                 
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_projeto_descricao">Descrição<span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="indicador_projeto_descricao">Descri&ccedil;&atilde;o<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea id="indicador_projeto_descricao" name="indicador_projeto_descricao" required="required" class="form-control col-md-7 col-xs-12"><?php echo $indicadorProjeto->indicador_projeto_descricao; ?> </textarea>
+                            <textarea id="indicador_projeto_descricao" name="indicador_projeto_descricao" required="required" class="form-control col-md-7 col-xs-12"><?php echo utf8_decode($indicadorProjeto->indicador_projeto_descricao); ?> </textarea>
                           </div>
                         </div> 
 

@@ -1,7 +1,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Usuários </h3>
+              <h3>Usu&aacute;rios </h3>
             </div>
 
             <div class="title_right">
@@ -21,7 +21,7 @@
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Consultar Usuários</h2>
+                  <h2>Consultar Usu&aacute;rios</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="link"  href="<?php echo $this->url('usuario/add'); ?>" ><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</a>
                     </li>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="x_content">
 
-                  <p>Lista todos os usuários</p>
+                  <p>Lista todos os usu&aacute;rios</p>
 
                   <!-- start project list -->
                   <table id="table" class="table table-striped projects">
@@ -41,7 +41,7 @@
                         <th style="width: 20%">Nome</th>
                         <th>E-mail</th>
                         <th>Perfil</th>
-                        <th style="width: 20%">Edição</th>
+                        <th style="width: 20%">Edi&ccedil;&atilde;o</th>
                       </tr>
                     </thead>
                     
@@ -51,7 +51,7 @@
                     $array_perfis = Array();
                     
                     foreach ($perfis as $perfil){
-                    	$array_perfis[$perfil->perfil_id] = $perfil->perfil_nome;                    	
+                    	$array_perfis[$perfil->perfil_id] = utf8_decode($perfil->perfil_nome);                    	
                     }
                     
 						foreach ($usuarios as $usuario)
@@ -59,7 +59,7 @@
 					?>
                       <tr>
                         <td><?php echo $usuario->usuario_id; ?></td>
-                        <td><?php echo ($usuario->usuario_nome); ?></td>
+                        <td><?php echo utf8_decode($usuario->usuario_nome); ?></td>
                         <td><?php echo $usuario->usuario_email; ?></td>
                         <td><?php echo ($array_perfis[$usuario->perfil_id]); ?></td>
                         

@@ -37,7 +37,7 @@
               <div class="tile-stats" style="height: 130px; text-align: center;">
                 <div class="icon">
                 </div>
-                <div class="count" style="font-size: 20px;">Indicador com maior frequencia fora Fora do Limite</div>
+                <div class="count" style="font-size: 20px;">Indicador com maior frequ&ecirc;ncia fora Fora do Limite</div>
 
                 <p><?php echo $indicadorForaLimite;?></p>
               </div>
@@ -94,10 +94,10 @@
 						{
 					?>
                       <tr>
-                        <td><?php echo $projeto['projeto_nome']; ?></td>
+                        <td><?php echo utf8_decode($projeto['projeto_nome']); ?></td>
                         <td><?php echo $projeto['total_indicadores']; ?></td>
                         <td><?php echo $projeto['projeto_quantidade'];?></td>
-                        <td><a href="<?php echo $this->url('relatorios/detalhe', array('id' => $projeto['projeto_id']));?>" ><i class="fa fa-bar-chart-o"></i> Ver relat�rio </a></td>
+                        <td><a href="<?php echo $this->url('relatorios/detalhe', array('id' => $projeto['projeto_id']));?>" ><i class="fa fa-bar-chart-o"></i> Ver relat&oacute;rio </a></td>
                       </tr>
                       <?php 
 						}

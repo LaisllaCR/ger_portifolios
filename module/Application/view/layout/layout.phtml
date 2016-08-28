@@ -4,7 +4,7 @@ use Zend\Session\Container;
 <html lang="en">
     <head>
         <meta charset="iso 8859-1">
-        <?php echo $this->headTitle('Gerenciador de Portifólios de Projetos'. $this->translate('Gerenciador de Portifólios de Projetos'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('Gerenciador de Portif�lios de Projetos'. $this->translate('Gerenciador de Portif�lios de Projetos'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?php echo $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -133,7 +133,7 @@ function toggleFullScreen() {
 			        <div class="left_col scroll-view">
 			
 			          <div class="navbar nav_title" style="border: 0;">
-			            <a href="<?php echo $this->url('home', array('action'=>'index'));?>" class="site_title"><i class="fa fa-puzzle-piece"></i> <span><?php echo 'Portifólio!'; ?></span></a>
+			            <a href="<?php echo $this->url('home', array('action'=>'index'));?>" class="site_title"><i class="fa fa-puzzle-piece"></i> <span>Portif&oacute;lio</abbr></span></a>
 			          </div>
 			          <div class="clearfix"></div>
 			
@@ -180,22 +180,22 @@ function toggleFullScreen() {
 							<?php }?>
 							
 			              	<?php if(in_array('relatorios', $session_dados->funcionalidades_usuario)){ ?>		
-			                <li><a href="<?php echo $this->url('relatorios', array('action'=>'index'));?>" ><i class="fa fa-bar-chart-o"></i> <?php echo ('Relatórios'); ?> </a></li>  
+			                <li><a href="<?php echo $this->url('relatorios', array('action'=>'index'));?>" ><i class="fa fa-bar-chart-o"></i> Relat&oacute;rios </a></li>  
 			                
 							<?php }?>
 							
 			              	<?php if(in_array('usuario', $session_dados->funcionalidades_usuario)){ ?>		
-			                <li><a href="<?php echo $this->url('usuario', array('action'=>'index'));?>" ><i class="fa fa-users"></i> <?php echo ('Usuários'); ?> </a></li>			                
+			                <li><a href="<?php echo $this->url('usuario', array('action'=>'index'));?>" ><i class="fa fa-users"></i> Usu&aacute;rios </a></li>			                
 							<?php }?>
 			                
 			              	<?php if(in_array('perfil-acesso', $session_dados->funcionalidades_usuario)){ ?>	
 			                <li><a><i class="fa fa-user-secret"></i>Perfil de acesso <span class="fa fa-chevron-down"></span></a>
 			                  <ul class="nav child_menu" style="display: none">
 			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 1));?>">Administrador</a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 3));?>"><?php echo ('Líder de Projeto/Gerente de Projeto'); ?></a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 2));?>"><?php echo ('Líder do Escritório de Projetos'); ?></a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 5));?>"><?php echo ('Equipe Técnica'); ?></a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 6));?>"><?php echo ('Alta Direção'); ?></a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 3));?>">L&iacute;der de Projeto/Gerente de Projeto</a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 2));?>">L&iacute;der do Escrit&oacute;rio de Projetos</a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 5));?>">Equipe T&eacute;cnica</a></li>
+			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 6));?>">Alta Dire&ccedil;&atilde;o</a></li>
 			                  </ul>
 			                </li>
 			                             		                
@@ -235,7 +235,7 @@ function toggleFullScreen() {
 	        <!-- footer content -->
 	        <footer>
 	          <div class="copyright-info">
-	            <p class="pull-right"><?php echo ('© 2016 Produzido por Laislla Costa Ramos'); ?>
+	            <p class="pull-right">&copy; 2016 Produzido por Laislla Costa Ramos
 	            </p>
 	          </div>
 	          <div class="clearfix"></div>

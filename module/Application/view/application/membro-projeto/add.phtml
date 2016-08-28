@@ -10,7 +10,7 @@
     		  for(var i = 0; i < rads.length; i++){
         		  var membro = rads[i].value;
         		  if(novo_membro == membro){
-        		    	document.getElementById('alerta').innerHTML = "Esse usu�rio j� faz parte do projeto!";
+        		    	document.getElementById('alerta').innerHTML = "Esse usu�rio j� faz parte do projeto!";
         		        document.getElementById('alerta').style.display = 'block';
         		    		  	    	
         		    	setTimeout(function(){
@@ -30,7 +30,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Membros do Projeto - <?php echo $projeto->projeto_nome; ?></h3>
+              <h3>Membros do Projeto - <?php echo utf8_decode($projeto->projeto_nome); ?></h3>
             </div>
             
           </div>
@@ -42,7 +42,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Novo Membro de <?php echo $projeto->projeto_nome;?> <small></small></h2>
+                  <h2>Novo Membro de <?php echo utf8_decode($projeto->projeto_nome);?> <small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="link"  href="<?php echo $this->url('membro_projeto/consulta', array('id' => $id)); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
                    </ul>
@@ -53,12 +53,12 @@
 
 
                   <!-- Smart Wizard -->
-                  <p>Esse é o formulário onde deve ser preenchidas todas as informações do novo membro.</p>
+                  <p>Esse &eacute; o formul&aacute;io onde deve ser preenchidas todas as informa&ccedil;&otilde;es do novo membro.</p>
                   
   				<form id="membro_add" name="membro_add"  onSubmit="validateForm(); return false;"  method="post" action="<?php echo $this->url('membro_projeto/add', array('id' => $id));?>" role="form" class="form-horizontal form-label-left">
               
                           		<?php 
-                          		foreach ($membros as $membro){
+                          		foreach ($membros_cadastrados as $membro){
                           		?>
                           		
                           		<input type="hidden" id="membro_<?php echo $membro->usuario_id?>" name="membros" value="<?php echo $membro->usuario_id?>">
@@ -74,7 +74,7 @@
 						</div>   	
                                                 
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario_id">Usuário <span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario_id">Usu&aacute;rio <span class="required">*</span>
                           </label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                           	<select name="usuario_id" id="usuario_id"  required="required"  class="form-control col-md-7 col-xs-12">
@@ -83,7 +83,7 @@
                           		foreach ($usuarios as $usuario){
                           		?>
                           		
-                          		<option value="<?php echo $usuario->usuario_id?>"><?php echo $usuario->usuario_nome; ?></option>
+                          		<option value="<?php echo $usuario->usuario_id?>"><?php echo utf8_decode($usuario->usuario_nome); ?></option>
                           		
                           		<?php 
                           		}
@@ -102,9 +102,9 @@
                           		<option value="Designer">Designer</option>
                           		<option value="Testador">Testador</option>
                           		<option value="Analista de Requisitos">Analista de Requisitos</option>
-                          		<option value="Analista de negocio">Analista de negocio</option>
+                          		<option value="Analista de negocio">Analista de neg&oacute;cio</option>
                           		<option value="Administrador de BD">Administrador de BD</option>
-                          		<option value="Arquiteto da Informacao">Arquiteto da Informacao</option>
+                          		<option value="Arquiteto da Informacao">Arquiteto da Informa&ccedil;&atilde;o</option>
                           		<option value="Analista de Sistemas">Analista de Sistemas</option>
                           	</select>
                           </div>

@@ -13,7 +13,7 @@
 	    
 	    if (data_inicio > data_previsao) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Data de Início deve ser menor que a Previsão de Término!";
+	    	document.getElementById('alerta').innerHTML = "A Data de In�cio deve ser menor que a Previs�o de T�rmino!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -25,7 +25,7 @@
 
 	    if(projeto_data_inicio == projeto_data_previsao_termino) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Data de Início e a Previsão de Término NÃO devem ser iguais!";
+	    	document.getElementById('alerta').innerHTML = "A Data de In�cio e a Previs�o de T�rmino N�O devem ser iguais!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -37,7 +37,7 @@
 	    
 		if (data_inicio > data_termino || data_inicio === data_termino) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Data de Início deve ser menor que a Data de Término!";
+	    	document.getElementById('alerta').innerHTML = "A Data de In�cio deve ser menor que a Data de T�rmino!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -49,7 +49,7 @@
 
 	    if(projeto_data_inicio == projeto_data_real_termino) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Data de Início e a Data de Término NÃO devem ser iguais!";
+	    	document.getElementById('alerta').innerHTML = "A Data de In�cio e a Data de T�rmino N�O devem ser iguais!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -80,7 +80,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Editar Projeto - <?php echo $projeto->projeto_nome; ?><small></small></h2>
+                  <h2>Editar Projeto - <?php echo utf8_decode($projeto->projeto_nome); ?><small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">                    
                     <li><a class="link"  href="<?php echo $this->url('projeto'); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
                     <li class="dropdown">
@@ -94,7 +94,7 @@
 
 
                   <!-- Smart Wizard -->
-                  <p>Esse é o formulário onde deve ser preenchidas todas as informações do projeto.</p>
+                  <p>Esse &eacute; o formul&aacute;rio onde deve ser preenchidas todas as informa&ccedil;&otilde;es do projeto.</p>
                    <form id="projeto_edit" name="projeto_edit"  onSubmit="validateForm(); return false;" method="post" action="<?php echo $this->url('projeto/edit',  array('action'=>'edit', 'id' => $projeto->projeto_id));?>" role="form" class="form-horizontal form-label-left" enctype="multipart/form-data">
                   
                   <div >
@@ -106,16 +106,16 @@
 						</div> 
 
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_nome">Título <span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_nome">T&iacute;tulo <span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="projeto_nome" name="projeto_nome" value="<?php echo $projeto->projeto_nome; ?>" required="required" class="form-control col-md-7 col-xs-12">
-                          	<input type="hidden"  id="projeto_id" name="projeto_id" value="<?php echo $projeto->projeto_nome; ?>">                 	
+                            <input type="text" id="projeto_nome" name="projeto_nome" value="<?php echo utf8_decode($projeto->projeto_nome); ?>" required="required" class="form-control col-md-7 col-xs-12">
+                          	<input type="hidden"  id="projeto_id" name="projeto_id" value="<?php echo utf8_decode($projeto->projeto_nome); ?>">                 	
                           </div>
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_gerente_id">Gerente Responsável <span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_gerente_id">Gerente Respons&aacute;vel <span class="required">*</span>
                           </label>
                           <div class="col-md-4 col-sm-4 col-xs-12">
 	                          <select name="projeto_gerente_id" id="projeto_gerente_id"  required="required"  class="form-control col-md-7 col-xs-12">
@@ -124,11 +124,11 @@
 	                          				if($usuario->usuario_id == $projeto->projeto_gerente_id){
 	                          	?>
 	                          			
-	                          		<option selected value="<?php echo $usuario->usuario_id; ?>"><?php echo $usuario->usuario_nome?></option>
+	                          		<option selected value="<?php echo $usuario->usuario_id; ?>"><?php echo utf8_decode($usuario->usuario_nome); ?></option>
 	                          	<?php 
 	                          				}else{ ?>
 	                          				
-	                          		<option value="<?php echo $usuario->usuario_id; ?>"><?php echo $usuario->usuario_nome?></option>
+	                          		<option value="<?php echo $usuario->usuario_id; ?>"><?php echo utf8_decode($usuario->usuario_nome);?></option>
 	                          				
 	                          	<?php 
 	                          				}
@@ -139,7 +139,7 @@
                         </div>
                         
                         <div class="form-group">
-                          <label for="projeto_data_inicio" class="control-label col-md-3 col-sm-3 col-xs-12">Data de início <span class="required">*</span></label>
+                          <label for="projeto_data_inicio" class="control-label col-md-3 col-sm-3 col-xs-12">Data de in&iacute;cio <span class="required">*</span></label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                           	<input type="hidden" name="projeto_data_inicio_anterior" id="projeto_data_inicio_anterior" value="<?php echo $projeto->projeto_data_inicio; ?>">
                             <input required="required"  id="projeto_data_inicio" value="<?php echo $projeto->projeto_data_inicio; ?>" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_inicio">
@@ -147,7 +147,7 @@
                         </div>
                         
                         <div class="form-group">
-                          <label for="projeto_data_previsao_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Previsão de Término <span class="required">*</span> </label>
+                          <label for="projeto_data_previsao_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Previs&atilde;o de T&eacute;rmino <span class="required">*</span> </label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                           	<input type="hidden" name="projeto_data_previsao_anterior" id="projeto_data_previsao_anterior" value="<?php echo $projeto->projeto_data_previsao_termino; ?>">                           
                             <input required="required" id="projeto_data_previsao_termino" value="<?php echo $projeto->projeto_data_previsao_termino; ?>" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_previsao_termino">
@@ -155,7 +155,7 @@
                         </div>
                         
                         <div class="form-group">
-                          <label for="projeto_data_real_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Data real de término</label>
+                          <label for="projeto_data_real_termino" class="control-label col-md-3 col-sm-3 col-xs-12">Data real de T&eacute;rmino</label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                           	<input type="hidden" name="projeto_data_real_termino_anterior" id="projeto_data_real_termino_anterior" value="<?php echo $projeto->projeto_data_real_termino; ?>">                           
                             <input id="projeto_data_real_termino" value="<?php echo $projeto->projeto_data_real_termino; ?>" class="form-control col-md-7 col-xs-12" type="date" name="projeto_data_real_termino">
@@ -163,7 +163,7 @@
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_orcamento_total">Orçamento Total<span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_orcamento_total">Or&ccedil;amento Total<span class="required">*</span>
                           </label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                             <input type="text" id="projeto_orcamento_total" value="<?php echo $projeto->projeto_orcamento_total; ?>" name="projeto_orcamento_total" required="required" class="form-control col-md-7 col-xs-12">
@@ -171,10 +171,10 @@
                         </div>
                         
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_descricao">Descrição<span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="projeto_descricao">Descri&ccedil;&atilde;o<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea id="projeto_descricao" name="projeto_descricao" required="required" class="form-control col-md-7 col-xs-12"><?php echo $projeto->projeto_descricao; ?> </textarea>
+                            <textarea id="projeto_descricao" name="projeto_descricao" required="required" class="form-control col-md-7 col-xs-12"><?php echo utf8_decode($projeto->projeto_descricao); ?> </textarea>
                           </div>
                         </div>   
                         
@@ -193,7 +193,7 @@
                       
                       ?>
                         <div class="form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="riscoRadios">Classificação de Risco<span class="required">*</span>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="riscoRadios">Classifica&ccedil;&atilde;o de Risco<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             
@@ -207,7 +207,7 @@
 		                        </div>
 		                        <div class="radio">
 		                          <label>
-		                            <input required="required" type="radio" <?php echo $medioRisco; ?> value="Medio risco" id="Medio risco" name="riscoRadios"> Médio risco
+		                            <input required="required" type="radio" <?php echo $medioRisco; ?> value="Medio risco" id="Medio risco" name="riscoRadios"> M&eacute;dio risco
 		                          </label>
 		                        </div>
 		                        <div class="radio">

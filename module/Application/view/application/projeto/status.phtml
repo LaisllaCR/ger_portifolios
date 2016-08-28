@@ -9,7 +9,7 @@
 	  	if(status == "Cancelado" || status == "Analise aprovada"){
 		  
 		  if(justificativa == ""){
-			  	document.getElementById('alerta').innerHTML = "A justificativa � obrigat�ria para esse Status!";
+			  	document.getElementById('alerta').innerHTML = "A justificativa � obrigat�ria para esse Status!";
 		        document.getElementById('alerta').style.display = 'block';
 		    		  	    	
 		    	setTimeout(function(){
@@ -57,7 +57,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Status do Projeto - <?php echo $projeto->projeto_nome; ?><small></small></h2>
+                  <h2>Status do Projeto - <?php echo utf8_decode($projeto->projeto_nome); ?><small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="link"  href="<?php echo $this->url('projeto'); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
                     <li class="dropdown">
@@ -71,7 +71,7 @@
 
 
                   <!-- Smart Wizard -->
-                  <p>Esse é o formulário onde deve ser preenchido o status atual do projeto.</p>
+                  <p>Esse &eacute; o formul&aacute;rio onde deve ser preenchido o status atual do projeto.</p>
                    <form id="projeto_justificativa" name="projeto_justificativa"  onSubmit="validateForm(); return false;" method="post" action="<?php echo $this->url('projeto/status',  array('action'=>'status', 'id' => $projeto->projeto_id));?>" role="form" class="form-horizontal form-label-left">
                   
                   <div>
@@ -115,17 +115,17 @@
                           <div class="col-md-6 col-sm-6 col-xs-12">
                          	<div class="radio">
 	                          <label>
-	                            <input type="radio"  <?php echo $emAnalise; ?> value="Em analise" id="Em analise" name="statusRadios"> Em análise
+	                            <input type="radio"  <?php echo $emAnalise; ?> value="Em analise" id="Em analise" name="statusRadios"> Em an&aacute;lise
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio"  <?php echo $analiseRealizada; ?> value="Analise realizada" id="Analise realizada" name="statusRadios"> Análise realizada
+	                            <input type="radio"  <?php echo $analiseRealizada; ?> value="Analise realizada" id="Analise realizada" name="statusRadios"> An&aacute;lise realizada
 	                          </label>
 	                        </div>
 	                        <div class="radio">
 	                          <label>
-	                            <input type="radio"   <?php echo $analiseAprovada; ?> value="Analise aprovada" id="Analise aprovada" name="statusRadios"> Análise aprovada
+	                            <input type="radio"   <?php echo $analiseAprovada; ?> value="Analise aprovada" id="Analise aprovada" name="statusRadios"> An&aacute;lise aprovada
 	                          </label>
 	                        </div>
                         
@@ -187,7 +187,7 @@
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Histórico</h2>                  
+                  <h2>Hist&oacute;rico</h2>                  
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -198,7 +198,8 @@
                       <tr>
                         <th style="width: 15%">Data</th>
                         <th style="width: 15%">Status</th>
-                        <th style="width: 10%">Usuário</th>
+                        <th style="width: 15%">Justificativa</th>
+                        <th style="width: 10%">Usu&aacute;rio</th>
                       </tr>
                     </thead>
                     
@@ -208,7 +209,7 @@
                           $array_usuarios = Array();
                           
                           foreach($usuarios as $usuario){
-                          	$array_usuarios[$usuario->usuario_id] = $usuario->usuario_nome;
+                          	$array_usuarios[$usuario->usuario_id] = utf8_decode($usuario->usuario_nome);
                           }
                                                     
                           ?>
@@ -220,6 +221,7 @@
                       <tr>
                         <td><?php echo date('d/m/Y', strtotime($justificativa->projeto_status_data)); ?></td>
                         <td><?php echo $justificativa->projeto_status; ?></td>
+                        <td><?php echo substr(utf8_decode($justificativa->projeto_status_justificativa), 0, 30)."..."; ?></td>
                         <td><?php echo $array_usuarios[$justificativa->usuario_id];?></td>
                       </tr>
                       <?php 

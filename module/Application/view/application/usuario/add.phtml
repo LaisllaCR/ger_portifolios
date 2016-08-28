@@ -7,7 +7,7 @@
 	    
 	    if (senha.length < 6 ) {
 		    
-	    	document.getElementById('alerta').innerHTML = "A Senha deve conter no m�nimo 6 d�gitos!";
+	    	document.getElementById('alerta').innerHTML = "A Senha deve conter no m�nimo 6 d�gitos!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -25,7 +25,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Usuários</h3>
+              <h3>Usu&aacute;rios</h3>
             </div>
             
           </div>
@@ -37,7 +37,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Novo Usuário <small></small></h2>
+                  <h2>Novo Usu&aacute;rio <small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                      <li><a class="link"  href="<?php echo $this->url('usuario'); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
                    
@@ -52,7 +52,7 @@
 
 
                   <!-- Smart Wizard -->
-                  <p>Esse é o formulário onde deve ser preenchidas todas as informações do novo usuário.</p> <br>
+                  <p>Esse &eacute; o formul&aacute;rio onde deve ser preenchidas todas as informa&ccedil;&otilde;es do novo usu&aacute;rio.</p> <br>
                   
   				<form id="usuario_add" name="usuario_add"  onSubmit="validateForm(); return false;"  method="post" action="<?php echo $this->url('usuario/add',  array('action'=>'add'));?>" role="form" class="form-horizontal form-label-left">
               
@@ -94,7 +94,7 @@
                           			foreach($perfis as $perfil){
                           	?>
                           	
-                          		<option value="<?php echo $perfil->perfil_id; ?>"><?php echo ($perfil->perfil_nome); ?></option>
+                          		<option value="<?php echo $perfil->perfil_id; ?>"><?php echo utf8_decode($perfil->perfil_nome); ?></option>
                           	<?php 
                           			}
                           	?>

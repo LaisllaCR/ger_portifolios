@@ -38,7 +38,7 @@
                       <tr>
                         <th style="width: 1%">#</th>
                         <th style="width: 20%">Indicador</th>
-                        <th style="width: 20%">Edição</th>
+                        <th style="width: 20%">Edi&ccedil;&atilde;o</th>
                       </tr>
                     </thead>
                     
@@ -51,7 +51,7 @@
                       <tr>
                         <td><?php echo $indicador->indicador_id; ?></td>
                         <td>
-                          <a><?php echo ($indicador->indicador_nome); ?></a>
+                          <a><?php echo (utf8_decode($indicador->indicador_nome)); ?></a>
                         </td>
                         <td>
                           <a href="<?php echo $this->url('indicador/detalhe', array('id' => $indicador->indicador_id)); ?>" data-toggle="tooltip" data-placement="top" title="Ver Detalhado" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>

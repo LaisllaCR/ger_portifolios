@@ -42,7 +42,7 @@ class MembroProjetoController extends AbstractActionController
      				'action' => 'index'
      		));
      	}
-     	 
+     	
      	try {
      		$membrosProjeto = $this->getMembroProjetoTable()->getMembrosProjeto($id);
      	}
@@ -166,6 +166,7 @@ class MembroProjetoController extends AbstractActionController
     			'id' => $id,
      			'usuarios' => $this->getUsuarioTable()->fetchAll(),
      			'projeto' => $this->getProjetoTable()->getProjeto($id),
+    			'membros_cadastrados' => $this->getMembroProjetoTable()->getMembrosProjeto($id),
     			'membros' => $this->getMembroProjetoTable()->fetchAll(),
     	));
     }

@@ -11,7 +11,7 @@
 	    
 	    if(pass_anterior !=  pass_atual){	
 	    	
-	    	document.getElementById('alerta').innerHTML = "A senha digitada nÔøΩo confere com a senha atual.";
+	    	document.getElementById('alerta').innerHTML = "A senha digitada n„o confere com a senha atual.";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -23,7 +23,7 @@
 	    
 	    if(tam_senha < 6){
 		    
-	    	document.getElementById('alerta').innerHTML = "A senha deve ter no minimo 6 digitos!";
+	    	document.getElementById('alerta').innerHTML = "A senha deve ter no mÌnimo 6 digitos!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -35,7 +35,7 @@
 
 	    if(pass_nova == ""  || pass_nova_confirma == ""){ 
 		    
-	    	document.getElementById('alerta').innerHTML = "A nova senha e a confirmaÔøΩÔøΩo de nova senha devem ser iguais!";
+	    	document.getElementById('alerta').innerHTML = "A nova senha e a confirmaÁ„o de nova senha devem ser iguais!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -47,7 +47,7 @@
 	    
 		if(pass_nova != pass_nova_confirma){
 		    
-	    	document.getElementById('alerta').innerHTML = "A nova senha e a confirmaÔøΩÔøΩo de nova senha devem ser iguais!";
+	    	document.getElementById('alerta').innerHTML = "A nova senha e a confirmaÁ„o de nova senha devem ser iguais!";
 	        document.getElementById('alerta').style.display = 'block';
 	    		  	    	
 	    	setTimeout(function(){
@@ -72,7 +72,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Usu√°rios</h3>
+              <h3>Usu&aacute;rios</h3>
             </div>
             
           </div>
@@ -84,7 +84,7 @@
               <div class="x_panel">
                 
                 <div class="x_title">
-                  <h2>Alterar Senha do Usu√°rio <?php echo $usuario->usuario_nome; ?><small></small></h2>
+                  <h2>Alterar Senha do Usu&aacute;rio <?php echo utf8_decode($usuario->usuario_nome); ?><small></small></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"></a>
                     </li>
@@ -99,11 +99,11 @@
 
 
                   <!-- Smart Wizard -->
-                  <p>Esse √© o formul√°rio onde deve ser preenchidas todas as informa√ß√µes da nova senha de usu√°rio.</p> <br>
+                  <p>Esse &eacute; o formul&aacute;rio onde deve ser preenchidas todas as informa&ccedil;&otilde;es da nova senha de usu&aacute;rio.</p> <br>
                                        
   				<form id="edit-senha" name="edit-senha"  onSubmit="validateForm(); return false;" method="post" action="<?php echo $this->url('usuario/edit',  array('action'=>'editSenha', 'id' => $usuario->usuario_id));?>" role="form" class="form-horizontal form-label-left" enctype="multipart/form-data">
               		<input type="hidden" name="usuario_senha_anterior" id="usuario_senha_anterior" value="<?php echo $usuario->usuario_senha; ?>">
-              		<input type="hidden" name="usuario_nome" id="usuario_nome" value="<?php echo $usuario->usuario_nome; ?>">
+              		<input type="hidden" name="usuario_nome" id="usuario_nome" value="<?php echo utf8_decode($usuario->usuario_nome); ?>">
               		<input type="hidden" name="usuario_email" id="usuario_email" value="<?php echo $usuario->usuario_email; ?>">
               		<input type="hidden" name="perfil_id" id="perfil_id" value="<?php echo $usuario->perfil_id; ?>">
                   <div>   

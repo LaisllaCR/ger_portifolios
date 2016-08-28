@@ -1,7 +1,7 @@
         <div class="">
           <div class="page-title">
             <div class="title_left">
-              <h3>Indicadores do Projeto - <?php echo $projeto->projeto_nome; ?></h3>
+              <h3>Indicadores do Projeto - <?php echo utf8_decode($projeto->projeto_nome); ?></h3>
             </div>
 
             <div class="title_right">
@@ -21,7 +21,7 @@
             <div class="col-md-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Consultar Indicadores de <?php echo $projeto->projeto_nome;?></h2>
+                  <h2>Consultar Indicadores de <?php echo utf8_decode($projeto->projeto_nome);?></h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li>
                     	<a class="link"  href="<?php echo $this->url('indicador_projeto/add', array('id' => $id));?>" ><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</a>
@@ -41,10 +41,10 @@
                       <tr>
                         <th style="width: 20%">Indicador</th>
                         <th style="width: 20%">Fase</th>
-                        <th style="width: 10%">Valor mánimo</th>
-                        <th style="width: 15%">Valor míximo</th>
+                        <th style="width: 10%">Valor m&iacute;nimo</th>
+                        <th style="width: 15%">Valor m&aacute;ximo</th>
                         <th style="width: 10%">Valor</th>
-                        <th style="width: 20%">Edição</th>
+                        <th style="width: 20%">Edi&ccedil;&atilde;o</th>
                       </tr>
                     </thead>
                     
@@ -63,8 +63,8 @@
 							if(is_object($indicador)){
 					?>
                       <tr>
-                        <td><?php echo ($array_indicadores[$indicador->indicador_id]); ?></td>
-                        <td><?php echo ($indicador->projeto_fase); ?></td>
+                        <td><?php echo utf8_decode($array_indicadores[$indicador->indicador_id]); ?></td>
+                        <td><?php echo utf8_decode($indicador->projeto_fase); ?></td>
                         <td><?php echo $indicador->valor_minimo; ?></td>
                         <td><?php echo $indicador->valor_maximo; ?></td>
                         <td><?php echo $indicador->indicador_projeto_valor; ?></td>
