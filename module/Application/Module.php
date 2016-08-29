@@ -54,6 +54,9 @@ use Application\Model\ProjetoSemanaTable;
 use Application\Model\ProjetoSemanaJustificativa;
 use Application\Model\ProjetoSemanaJustificativaTable;
 
+use Application\Model\Logs;
+use Application\Model\LogsTable;
+
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
@@ -272,6 +275,17 @@ class Module
 		    					$resultSetPrototype = new ResultSet();
 		    					$resultSetPrototype->setArrayObjectPrototype(new ProjetoSemanaJustificativa());
 		    					return new TableGateway('projeto_semana_justificativa', $dbAdapter, null, $resultSetPrototype);
+	    					},
+	    					'Application\Model\LogsTable' =>  function($sm) {
+	    					$tableGateway = $sm->get('LogsTableGateway');
+	    					$table = new LogsTable($tableGateway);
+	    					return $table;
+	    					},
+	    					'LogsTableGateway' => function ($sm) {
+	    					$dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+	    					$resultSetPrototype = new ResultSet();
+	    					$resultSetPrototype->setArrayObjectPrototype(new Logs());
+	    					return new TableGateway('logs', $dbAdapter, null, $resultSetPrototype);
 	    					},
     					),
     				);

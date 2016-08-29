@@ -79,6 +79,6 @@ class ProjetoSemanaJustificativaTable
 
 	public function deleteProjetoSemanaJustificativas($id)
 	{
-		$this->tableGateway->delete(array('projeto_id' => (int) $id));
+		$this->tableGateway->delete(array('projeto_semana_id' => (int) $id));
 	}
 }

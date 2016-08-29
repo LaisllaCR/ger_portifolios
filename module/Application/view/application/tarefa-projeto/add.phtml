@@ -44,10 +44,10 @@
                           <div class="col-md-4 col-sm-4 col-xs-12">
                           	<select name="usuario_id" id="usuario_id"  required="required"  class="form-control col-md-7 col-xs-12">
                           	<?php 
-                          			foreach($usuarios as $usuario){
+                          			foreach($membros as $usuario){
                           	?>
                           	
-                          		<option value="<?php echo $usuario->usuario_id; ?>"><?php echo utf8_decode($usuario->usuario_nome); ?></option>
+                          		<option value="<?php echo $usuario['usuario_id']; ?>"><?php echo utf8_decode($usuario['usuario_nome']); ?></option>
                           	<?php 
                           			}
                           	?>

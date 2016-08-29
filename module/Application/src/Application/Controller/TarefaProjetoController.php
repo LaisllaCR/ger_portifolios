@@ -16,9 +16,11 @@ use Application\Model\ProjetoTarefa;
 use Application\Model\Usuario;
 use Application\Model\ProjetoSemanaJustificativa;
 use Application\Model\ProjetoSemana;
+use Application\Model\ProjetoMembro;
 
 class TarefaProjetoController extends AbstractActionController
 {
+	protected $membroProjetoTable;
 	protected $usuarioTable;
 	protected $tarefaProjetoTable;
 	protected $projetoTable;
@@ -67,6 +69,14 @@ class TarefaProjetoController extends AbstractActionController
      	));
      }
 
+     public function getMembroProjetoTable()
+     {
+     	if (!$this->membroProjetoTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->membroProjetoTable = $sm->get('Application\Model\ProjetoMembroTable');
+     	}
+     	return $this->membroProjetoTable;
+     }
 
      public function getProjetoSemanaTable()
      {
@@ -165,7 +175,7 @@ class TarefaProjetoController extends AbstractActionController
     	
     	return new ViewModel(array(
     			'id' => $id,
-             	'usuarios' => $this->getUsuarioTable()->fetchAll(),
+             	'membros' => $this->getMembroProjetoTable()->getDadosMembro($id),
      			'projeto' => $this->getProjetoTable()->getProjeto($id),
     			'tarefas' => $this->getTarefaProjetoTable()->fetchAll(),
     	));
@@ -217,7 +227,7 @@ class TarefaProjetoController extends AbstractActionController
     	return array(
     			'id' => $id,
     			'projeto_id' => $projeto_id,
-            	'usuarios' => $this->getUsuarioTable()->fetchAll(),
+             	'membros' => $this->getMembroProjetoTable()->getDadosMembro($projeto_id),
      			'projeto' => $this->getProjetoTable()->getProjeto($projeto_id),
     			'tarefa' => $tarefaProjeto,
      	);

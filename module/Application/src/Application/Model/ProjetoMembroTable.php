@@ -43,6 +43,17 @@ class ProjetoMembroTable
 		return $rowset;
 	}
 
+	public function getDadosMembro($id)
+	{
+		$sqlq = new Sql($this->tableGateway->adapter);
+	
+		$sql = 'SELECT * FROM projeto_membro a JOIN usuario b ON a.usuario_id = b.usuario_id WHERE a.projeto_id = '.$id;
+	
+		$statement = $this->tableGateway->adapter->query($sql);
+	
+		return $statement->execute();
+	}
+	
 	public function getDadosProjetosMembro($usuario_id)
 	{
 		$sqlq = new Sql($this->tableGateway->adapter);

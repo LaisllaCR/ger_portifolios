@@ -22,14 +22,17 @@ use Application\Model\ProjetoTarefa;
 
 use Application\Model\ProjetoSemanaJustificativa;
 use Application\Model\ProjetoSemana;
+use Application\Model\Logss;
 
 use Zend\Db\Sql\Ddl\Column\Date;
 use Zend\Session\Container;
 use Zend\Db\Sql\Predicate\Between;
+use Application\Model\Logs;
 
 class ProjetoController extends AbstractActionController
 {
 	protected $projetoTable;
+	protected $logsTable;
 	protected $usuarioTable;
 	
 	protected $projetoStatusJustificativaTable;
@@ -76,6 +79,15 @@ class ProjetoController extends AbstractActionController
      }
     
 
+     public function getLogsTable()
+     {
+     	if (!$this->logsTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->logsTable = $sm->get('Application\Model\LogsTable');
+     	}
+     	return $this->logsTable;
+     }
+     
      public function getProjetoSemanaTable()
      {
      	if (!$this->projetoSemanaTable) {
@@ -183,6 +195,9 @@ class ProjetoController extends AbstractActionController
     			$id = $this->getProjetoTable()->saveProjeto($projeto);
     			
     			$projeto->projeto_id = $id;
+    			
+    			$acao = "projeto/add";
+    			$this->salvarLog($acao, $id);
 
     			/*** Acompanhamento dos projetos de alto risco*/
     			    			    			
@@ -259,7 +274,9 @@ class ProjetoController extends AbstractActionController
     			$projeto->projeto_risco = $dados_form['riscoRadios'];
     			 
     			$this->getProjetoTable()->saveProjeto($projeto);
-    			
+
+    			$acao = "projeto/edit";
+    			$this->salvarLog($acao, $id);
     			
     			/*** Acompanhamento dos projetos de alto risco ****/
     			    			    			
@@ -330,8 +347,7 @@ class ProjetoController extends AbstractActionController
     		 
     		if ($dados_form) {
     			$this->getProjetoTable()->saveProjeto($projeto);
-    			
-    
+    			    
     				$projetoStatusJustificativa->projeto_id = $projeto->projeto_id;
     				$projetoStatusJustificativa->projeto_status = ($projeto->projeto_status);
     				$projetoStatusJustificativa->projeto_status_data = date('Y-m-d');
@@ -339,6 +355,9 @@ class ProjetoController extends AbstractActionController
 					$projetoStatusJustificativa->usuario_id = $session_dados->id;
     				    				
     				$this->getProjetoStatusJustificativaTable()->saveProjetoStatusJustificativa($projetoStatusJustificativa);
+
+    				$acao = "projeto/status";
+    				$this->salvarLog($acao, $id);
     
     			return $this->redirect()->toRoute('projeto');
     		}
@@ -395,7 +414,13 @@ class ProjetoController extends AbstractActionController
     			$this->getIndicadorProjetoTable()->deleteIndicadoresProjeto($id);
 
     			// exclui acompanhamento
-    			$this->getProjetoAcompanhamentoTable()->deleteProjetoAcompanhamentos($id);
+    			$this->getProjetoSemanaJustificativaTable()->deleteProjetoSemanaJustificativas($id);
+    			$semanas = $this->getProjetoSemanaTable()->getProjetoSemanas();
+    			
+    			foreach ($semanas as $semana){    			
+    				$this->getProjetoSemanaTable()->deleteProjetoSemanaJustificativas($semana->projeto_semana_id);
+    			}
+    			//$this->getProjetoAcompanhamentoTable()->deleteProjetoAcompanhamentos($id);
     			
     			// exclui justificativas de status do projeto
     			$this->getProjetoStatusJustificativaTable()->deleteProjetoStatusJustificativas($id);
@@ -405,6 +430,9 @@ class ProjetoController extends AbstractActionController
     			
     			// exclui membros
     			$this->getMembroProjetoTable()->deleteProjetoMembros($id);
+    			
+    			$acao = "projeto/delete";
+    			$this->salvarLog($acao, $id);
     		}
     	
     		return $this->redirect()->toRoute('projeto');
@@ -434,12 +462,17 @@ class ProjetoController extends AbstractActionController
 		 $membrosProjeto = $this->getMembroProjetoTable()->getMembrosProjeto($id);
 		 		 	
 		 $array_membros = Array();
+		 
+		 $acao = "projeto/detalhe";
+		 $this->salvarLog($acao, $id);
 		 	
 		 foreach ($membrosProjeto as $membro){
 		 	$total_tarefas_usuario_projeto = count($this->getTarefaProjetoTable()->getTarefaUsuarioPorProjeto($id, $membro->usuario_id));
 		 
 		 	$array_membros[$membro->usuario_id] = $total_tarefas_usuario_projeto;
 		 }
+		 
+		 
 		 		 
     	return new ViewModel(array(
     			'tarefas_por_usuario' => $array_membros,
@@ -447,6 +480,19 @@ class ProjetoController extends AbstractActionController
     			'projeto' => $this->getProjetoTable()->getProjeto($id),
     			'usuarios' => $this->getUsuarioTable()->fetchAll(),
     	));
+    }
+    
+    public function salvarLog($acao, $id)
+    {
+    	$session_dados = new Container('usuario_dados');
+    	$log = new Logs();
+    	
+    	$log->acao = $acao;
+    	$log->data = date('Y-m-d');    		
+    	$log->usuario_id = $session_dados->id;
+    	$log->id = $id;
+    	    		
+    	$this->getLogsTable()->saveLogs($log);
     }
     
     public function salvarDatasAcompanhamento(Projeto $projeto)
