@@ -15,12 +15,49 @@ use Zend\View\Model\ViewModel;
 use Application\Model\PerfilAcesso;
 use Application\Model\Perfil;
 use Application\Model\Funcionalidade;
+use Zend\Session\Container;
+use Application\Model\Logs;
+use Application\Model\Usuario;
 
 class PerfilAcessoController extends AbstractActionController
 {
 	protected $perfilAcessoTable;
 	protected $perfilTable;
 	protected $funcionalidadeTable;
+	protected $usuarioTable;
+	protected $logsTable;
+	
+
+	public function getLogsTable()
+	{
+		if (!$this->logsTable) {
+			$sm = $this->getServiceLocator();
+			$this->logsTable = $sm->get('Application\Model\LogsTable');
+		}
+		return $this->logsTable;
+	}
+	
+	public function salvarLog($acao, $id)
+	{
+		$session_dados = new Container('usuario_dados');
+		$log = new Logs();
+		 
+		$log->acao = $acao;
+		$log->data = date('Y-m-d');
+		$log->usuario_id = $session_dados->id;
+		$log->id = $id;
+		 
+		$this->getLogsTable()->saveLogs($log);
+	}
+
+	public function getUsuarioTable()
+	{
+		if (!$this->usuarioTable) {
+			$sm = $this->getServiceLocator();
+			$this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
+		}
+		return $this->usuarioTable;
+	}
 	
 	public function indexAction()
      {
@@ -91,7 +128,10 @@ class PerfilAcessoController extends AbstractActionController
     				
     				$this->getPerfilAcessoTable()->savePerfilAcesso($perfilAcesso);
     			}    			 
-    	
+
+    			$acao = "perfil-acesso/edit";
+    			$this->salvarLog($acao, $dados_form['perfil_id']);
+    			
     			return $this->redirect()->toRoute('perfil-acesso');
     		}
     	}
@@ -154,6 +194,7 @@ class PerfilAcessoController extends AbstractActionController
     				$perfilAcesso->funcionalidade_id = $funcionalidade_id;
     	
     				$this->getPerfilAcessoTable()->savePerfilAcesso($perfilAcesso);
+
     			}
     			 
     			return $this->redirect()->toRoute('perfil-acesso/edit');

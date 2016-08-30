@@ -28,15 +28,50 @@ use Application\Model\ProjetoStatusJustificativa;
 use Application\Service\AlertaService;
 use Application\Model\ProjetoSemanaJustificativa;
 use Application\Model\ProjetoSemana;
+use Zend\Session\Container;
+use Application\Model\Logs;
 
 
 class IndicadorProjetoController extends AbstractActionController
 {
 	protected $indicadorProjetoTable;
+	protected $logsTable;
+	protected $usuarioTable;
 	protected $indicadorTable;
 	protected $projetoTable;
 	protected $projetoSemanaTable;
 	protected $projetoSemanaJustificativaTable;
+
+	public function getUsuarioTable()
+	{
+		if (!$this->usuarioTable) {
+			$sm = $this->getServiceLocator();
+			$this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
+		}
+		return $this->usuarioTable;
+	}
+	
+	public function getLogsTable()
+	{
+		if (!$this->logsTable) {
+			$sm = $this->getServiceLocator();
+			$this->logsTable = $sm->get('Application\Model\LogsTable');
+		}
+		return $this->logsTable;
+	}
+	
+	public function salvarLog($acao, $id)
+	{
+		$session_dados = new Container('usuario_dados');
+		$log = new Logs();
+		 
+		$log->acao = $acao;
+		$log->data = date('Y-m-d');
+		$log->usuario_id = $session_dados->id;
+		$log->id = $id;
+		 
+		$this->getLogsTable()->saveLogs($log);
+	}
 	
 	public function indexAction()
      {
@@ -152,7 +187,10 @@ class IndicadorProjetoController extends AbstractActionController
     			$indicadorProjeto->indicador_projeto_valor = NULL;
     			$indicadorProjeto->indicador_projeto_descricao = NULL;
     			
-    			$this->getIndicadorProjetoTable()->saveIndicadorProjeto($indicadorProjeto);
+    			$id_ind = $this->getIndicadorProjetoTable()->saveIndicadorProjeto($indicadorProjeto);
+    			
+    			$acao = "indicador_projeto/add";
+    			$this->salvarLog($acao, $id_ind);
 
     			return $this->redirect()->toRoute('indicador_projeto/consulta', array(
     					'action' => 'consulta', 'id' => $id
@@ -207,6 +245,8 @@ class IndicadorProjetoController extends AbstractActionController
     		 
     		if ($dados_form) {
     			$this->getIndicadorProjetoTable()->saveIndicadorProjeto($indicadorProjeto);
+    			$acao = "indicador_projeto/edit";
+    			$this->salvarLog($acao, $id);
 
     			return $this->redirect()->toRoute('indicador_projeto/consulta', array(
     					'action' => 'consulta', 'id' => $projeto_id
@@ -240,6 +280,9 @@ class IndicadorProjetoController extends AbstractActionController
     		if($dados_form['submit'] == "Sim"){
     			$id = (int) $request->getPost('id');
     			$this->getIndicadorProjetoTable()->deleteIndicadorProjeto($id);
+
+    			$acao = "indicador_projeto/delete";
+    			$this->salvarLog($acao, $id);
     		}
 
 
@@ -300,7 +343,9 @@ class IndicadorProjetoController extends AbstractActionController
 		 $request = $this->getRequest();
     	$id = (int) $this->params()->fromRoute('id', 0);
     	$projeto_id = (int) $this->params()->fromRoute('projeto_id', 0);
-		 
+
+    	$acao = "indicador_projeto/detalhe";
+    	$this->salvarLog($acao, $id);
 		 
     	return new ViewModel(array(
             	'indicadores' => $this->getIndicadorTable()->fetchAll(),
@@ -366,6 +411,9 @@ class IndicadorProjetoController extends AbstractActionController
     		if ($dados_form) {
     			$this->getIndicadorProjetoTable()->saveIndicadorProjeto($indicadorProjeto);
 
+    			$acao = "indicador_projeto/analise";
+    			$this->salvarLog($acao, $id);
+
     			return $this->redirect()->toRoute('indicador_projeto/consulta', array(
     					'action' => 'consulta', 'id' => $projeto_id
     			));
@@ -381,17 +429,6 @@ class IndicadorProjetoController extends AbstractActionController
      	);    	
     }
     
-
-    protected $usuarioTable;
-    
-    public function getUsuarioTable()
-    {
-    	if (!$this->usuarioTable) {
-    		$sm = $this->getServiceLocator();
-    		$this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
-    	}
-    	return $this->usuarioTable;
-    }
     public function enviarEmailAltaDirecao($html, $titulo)
     {
     	$altaDirecao = $this->getUsuarioTable()->getUsuarioPerfil(6);

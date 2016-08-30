@@ -16,12 +16,14 @@ use Application\Model\Usuario;
 use Application\Model\Perfil;
 use Application\Controller\Login;
 use Zend\Session\Container;
+use Application\Model\Logs;
 use Application\Model\ProjetoMembro;
 use Application\Model\ProjetoTarefa;
 
 class UsuarioController extends AbstractActionController
 {
 	protected $usuarioTable;
+	protected $logsTable;
 	protected $perfilTable;
 	protected $membroProjetoTable;
 	protected $tarefaProjetoTable;
@@ -32,6 +34,28 @@ class UsuarioController extends AbstractActionController
              'usuarios' => $this->getUsuarioTable()->fetchAll(),         		
              'perfis' => $this->getPerfilTable()->fetchAll(),
          ));
+     }
+
+     public function getLogsTable()
+     {
+     	if (!$this->logsTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->logsTable = $sm->get('Application\Model\LogsTable');
+     	}
+     	return $this->logsTable;
+     }
+      
+     public function salvarLog($acao, $id)
+     {
+     	$session_dados = new Container('usuario_dados');
+     	$log = new Logs();
+     	 
+     	$log->acao = $acao;
+     	$log->data = date('Y-m-d');
+     	$log->usuario_id = $session_dados->id;
+     	$log->id = $id;
+     	 
+     	$this->getLogsTable()->saveLogs($log);
      }
      
     public function getMembroProjetoTable()
@@ -85,7 +109,10 @@ class UsuarioController extends AbstractActionController
     			$usuario->usuario_senha = md5($dados_form['usuario_senha']);
     			$usuario->perfil_id = $dados_form['perfil_id'];
     			    			 
-    			$this->getUsuarioTable()->saveUsuario($usuario);
+    			$id = $this->getUsuarioTable()->saveUsuario($usuario);
+    			
+    			$acao = "usuario/add";
+    			$this->salvarLog($acao, $id);
     			
 				$sessao = new Container('usuario_dados');
 				
@@ -133,6 +160,9 @@ class UsuarioController extends AbstractActionController
     		 
     		if ($dados_form) {
     			$this->getUsuarioTable()->saveUsuario($usuario);
+    			
+    			$acao = "usuario/edit";
+    			$this->salvarLog($acao, $id);
     			 
     			return $this->redirect()->toRoute('usuario');
     		}
@@ -173,6 +203,9 @@ class UsuarioController extends AbstractActionController
     		 
     		if ($dados_form) {
     			$this->getUsuarioTable()->saveUsuario($usuario);
+    			
+    			$acao = "usuario/edit-senha";
+    			$this->salvarLog($acao, $id);
     
     			return $this->redirect()->toRoute('home');
     		}
@@ -215,6 +248,10 @@ class UsuarioController extends AbstractActionController
     		 
     		if ($dados_form) {
     			$this->getUsuarioTable()->saveUsuario($usuario);
+
+    			$acao = "usuario/edit-user";
+    			$this->salvarLog($acao, $id);
+    			
     			$login = new LoginController();
     			$login->atualizarDadosSessao($usuario);
     
@@ -244,6 +281,9 @@ class UsuarioController extends AbstractActionController
     		if($dados_form['submit'] == "Sim"){
     			$id = (int) $request->getPost('id');
     			$this->getUsuarioTable()->deleteUsuario($id);
+    			
+    			$acao = "usuario/delete";
+    			$this->salvarLog($acao, $id);
     		}
     	
     		return $this->redirect()->toRoute('usuario');
@@ -270,6 +310,9 @@ class UsuarioController extends AbstractActionController
 		 	
 		 	$array_projetos[$projeto['projeto_id']] = ($total_tarefas_usuario_projeto * 100 ) / $total_tarefas_projeto;
 		 }
+		 
+    			$acao = "usuario/detalhe";
+    			$this->salvarLog($acao, $id);
 		 
     	return new ViewModel(array(
     		'contribuicao' => $array_projetos,

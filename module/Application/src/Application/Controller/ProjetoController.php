@@ -14,7 +14,6 @@ use Zend\View\Model\ViewModel;
 
 use Application\Model\Projeto;
 use Application\Model\ProjetoAcompanhamento;
-use Application\Model\Usuario;
 use Application\Model\ProjetoMembro;
 use Application\Model\ProjetoStatusJustificativa;
 use Application\Model\IndicadorProjeto;
@@ -25,9 +24,10 @@ use Application\Model\ProjetoSemana;
 use Application\Model\Logss;
 
 use Zend\Db\Sql\Ddl\Column\Date;
-use Zend\Session\Container;
 use Zend\Db\Sql\Predicate\Between;
+use Zend\Session\Container;
 use Application\Model\Logs;
+use Application\Model\Usuario;
 
 class ProjetoController extends AbstractActionController
 {
@@ -77,7 +77,15 @@ class ProjetoController extends AbstractActionController
      		}
      	}*/
      }
-    
+
+     public function getUsuarioTable()
+     {
+     	if (!$this->usuarioTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
+     	}
+     	return $this->usuarioTable;
+     }
 
      public function getLogsTable()
      {
@@ -132,16 +140,7 @@ class ProjetoController extends AbstractActionController
     	}
     	return $this->projetoTable;
     }
-    
-    public function getUsuarioTable()
-    {
-    	if (!$this->usuarioTable) {
-    		$sm = $this->getServiceLocator();
-    		$this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
-    	}
-    	return $this->usuarioTable;
-    }
-    
+        
     public function getProjetoStatusJustificativaTable()
     {
     	if (!$this->projetoStatusJustificativaTable) {

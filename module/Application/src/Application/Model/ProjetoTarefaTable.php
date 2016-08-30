@@ -64,6 +64,8 @@ class ProjetoTarefaTable
 		$id = (int) $tarefaProjeto->tarefa_id;
 		if ($id == 0) {
 			$this->tableGateway->insert($data);
+			$id = $this->tableGateway->getLastInsertValue();
+			return $id;
 		} else {
 			if ($this->getTarefaProjeto($id)) {
 				$this->tableGateway->update($data, array('tarefa_id' => $id));

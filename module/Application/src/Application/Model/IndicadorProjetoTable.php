@@ -78,6 +78,8 @@ class IndicadorProjetoTable
 		$id = (int) $indicadorProjeto->indicador_projeto_id;
 		if ($id == 0) {
 			$this->tableGateway->insert($data);
+			$id = $this->tableGateway->getLastInsertValue();
+			return $id;
 		} else {
 			if ($this->getIndicadorProjeto($id)) {
 				$this->tableGateway->update($data, array('indicador_projeto_id' => $id));
@@ -97,6 +99,8 @@ class IndicadorProjetoTable
 		$id = (int) $indicadorProjeto->indicador_projeto_id;
 		if ($id == 0) {
 			$this->tableGateway->insert($data);
+			$id = $this->tableGateway->getLastInsertValue();
+			return $id;
 		} else {
 			if ($this->getIndicadorProjeto($id)) {
 				$this->tableGateway->update($data, array('indicador_projeto_id' => $id));

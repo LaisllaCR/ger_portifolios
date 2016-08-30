@@ -17,14 +17,39 @@ use Application\Model\Projeto;
 use Application\Model\Usuario;
 use Application\Model\ProjetoSemanaJustificativa;
 use Application\Model\ProjetoSemana;
+use Application\Model\Logs;
+use Zend\Session\Container;
 
 class MembroProjetoController extends AbstractActionController
 {
 	protected $membroProjetoTable;
+	protected $logsTable;
 	protected $projetoTable;
 	protected $usuarioTable;
 	protected $projetoSemanaTable;
 	protected $projetoSemanaJustificativaTable;
+
+	public function salvarLog($acao, $id)
+	{
+		$session_dados = new Container('usuario_dados');
+		$log = new Logs();
+		 
+		$log->acao = $acao;
+		$log->data = date('Y-m-d');
+		$log->usuario_id = $session_dados->id;
+		$log->id = $id;
+		 
+		$this->getLogsTable()->saveLogs($log);
+	}
+
+     public function getLogsTable()
+     {
+     	if (!$this->logsTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->logsTable = $sm->get('Application\Model\LogsTable');
+     	}
+     	return $this->logsTable;
+     }
 	
 	public function indexAction()
      {
@@ -154,7 +179,10 @@ class MembroProjetoController extends AbstractActionController
     			$membroProjeto->projeto_id = $id;
     			$membroProjeto->projeto_membro_papel = $dados_form['projeto_membro_papel'];
     			 
-    			$this->getMembroProjetoTable()->saveMembroProjeto($membroProjeto);
+    			$id_mem = $this->getMembroProjetoTable()->saveMembroProjeto($membroProjeto);
+    			
+    			$acao = "membro_projeto/add";
+    			$this->salvarLog($acao, $id_mem);
 
     			return $this->redirect()->toRoute('membro_projeto/consulta', array(
     					'action' => 'consulta', 'id' => $id
@@ -202,6 +230,9 @@ class MembroProjetoController extends AbstractActionController
     		 
     		if ($dados_form) {
     			$this->getMembroProjetoTable()->saveMembroProjeto($membroProjeto);
+    			
+    			$acao = "membro_projeto/edit";
+    			$this->salvarLog($acao, $id);
 
     			return $this->redirect()->toRoute('membro_projeto/consulta', array(
     					'action' => 'consulta', 'id' => $projeto_id
@@ -237,6 +268,9 @@ class MembroProjetoController extends AbstractActionController
     		if($dados_form['submit'] == "Sim"){
     			$id = (int) $request->getPost('id');
     			$this->getMembroProjetoTable()->deleteProjetoMembro($id);
+    			
+    			$acao = "membro_projeto/delete";
+    			$this->salvarLog($acao, $id);
     		}
 
     		return $this->redirect()->toRoute('membro_projeto/consulta', array(
@@ -258,7 +292,9 @@ class MembroProjetoController extends AbstractActionController
 		 $request = $this->getRequest();
     	$id = (int) $this->params()->fromRoute('id', 0);
     	$projeto_id = (int) $this->params()->fromRoute('projeto_id', 0);
-		 
+
+    	$acao = "membro_projeto/detalhe";
+    	$this->salvarLog($acao, $id);
 		 
     	return new ViewModel(array(
      			'usuarios' => $this->getUsuarioTable()->fetchAll(),

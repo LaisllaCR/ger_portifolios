@@ -12,12 +12,16 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
+use Application\Model\Logs;
+use Application\Model\Usuario;
 
 use Application\Model\Indicador;
 
 class IndicadorController extends AbstractActionController
 {
 	protected $indicadorTable;
+	protected $logsTable;
+	protected $usuarioTable;
 	
 	/*public function indexAction()
 	{
@@ -32,7 +36,25 @@ class IndicadorController extends AbstractActionController
 			}
 		}
 	}*/
+
+	public function getUsuarioTable()
+	{
+		if (!$this->usuarioTable) {
+			$sm = $this->getServiceLocator();
+			$this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
+		}
+		return $this->usuarioTable;
+	}
 	
+	public function getLogsTable()
+	{
+		if (!$this->logsTable) {
+			$sm = $this->getServiceLocator();
+			$this->logsTable = $sm->get('Application\Model\LogsTable');
+		}
+		return $this->logsTable;
+	}
+	 
 	public function indexAction()
      {
          return new ViewModel(array(
@@ -60,7 +82,10 @@ class IndicadorController extends AbstractActionController
 
     			$indicador->indicador_nome = utf8_encode($dados_form['indicador_nome']);
     			 
-    			$this->getIndicadorTable()->saveIndicador($indicador);
+    			$id = $this->getIndicadorTable()->saveIndicador($indicador);
+    			
+    			$acao = "indicador/add";
+    			$this->salvarLog($acao, $id);
     	
     			return $this->redirect()->toRoute('indicador');
     		}
@@ -98,6 +123,9 @@ class IndicadorController extends AbstractActionController
     		 
     		if ($dados_form) {
     			$this->getIndicadorTable()->saveIndicador($indicador);
+
+    			$acao = "indicador/edit";
+    			$this->salvarLog($acao, $id);
     			 
     			return $this->redirect()->toRoute('indicador');
     		}
@@ -125,6 +153,9 @@ class IndicadorController extends AbstractActionController
     		if($dados_form['submit'] == "Sim"){
     			$id = (int) $request->getPost('id');
     			$this->getIndicadorTable()->deleteIndicador($id);
+
+    			$acao = "indicador/delete";
+    			$this->salvarLog($acao, $id);
     		}
     	
     		return $this->redirect()->toRoute('indicador');
@@ -139,10 +170,26 @@ class IndicadorController extends AbstractActionController
 	public function detalheAction()
     {
 		 $request = $this->getRequest();
+		 $id = $this->params('id');
 		 
+		 $acao = "indicador/detalhe";
+		 $this->salvarLog($acao, $id);
 		 
     	return new ViewModel(array(
-    			'indicador' => $this->getIndicadorTable()->getIndicador($this->params('id')),
+    			'indicador' => $this->getIndicadorTable()->getIndicador($id),
     	));
+    }
+    
+    public function salvarLog($acao, $id)
+    {
+    	$session_dados = new Container('usuario_dados');
+    	$log = new Logs();
+    	 
+    	$log->acao = $acao;
+    	$log->data = date('Y-m-d');
+    	$log->usuario_id = $session_dados->id;
+    	$log->id = $id;
+    	 
+    	$this->getLogsTable()->saveLogs($log);
     }
 }

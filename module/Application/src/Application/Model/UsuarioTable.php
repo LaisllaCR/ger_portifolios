@@ -63,6 +63,8 @@ class UsuarioTable
 		$id = (int) $usuario->usuario_id;
 		if ($id == 0) {
 			$this->tableGateway->insert($data);
+			$id = $this->tableGateway->getLastInsertValue();
+			return $id;
 		} else {
 			if ($this->getUsuario($id)) {
 				$this->tableGateway->update($data, array('usuario_id' => $id));

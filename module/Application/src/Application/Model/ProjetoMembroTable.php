@@ -76,6 +76,8 @@ class ProjetoMembroTable
 		$id = (int) $projetoMembro->projeto_membro_id;
 		if ($id == 0) {
 			$this->tableGateway->insert($data);
+			$id = $this->tableGateway->getLastInsertValue();
+			return $id;
 		} else {
 			if ($this->getProjetoMembro($id)) {
 				$this->tableGateway->update($data, array('projeto_membro_id' => $id));

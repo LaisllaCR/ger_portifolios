@@ -19,6 +19,8 @@ use Application\Model\ProjetoSemanaTable;
 use Application\Model\ProjetoSemanaJustificativa;
 use Application\Model\ProjetoSemanaJustificativaTable;
 use Zend\Session\Container;
+use Application\Model\Usuario;
+use Application\Model\Logs;
 
 class AcompanhamentoProjetoController extends AbstractActionController
 {
@@ -26,6 +28,8 @@ class AcompanhamentoProjetoController extends AbstractActionController
 	protected $projetoTable;
 	protected $projetoSemanaTable;
 	protected $projetoSemanaJustificativaTable;
+	protected $usuarioTable;
+	protected $logsTable;
 	
 	public function indexAction()
      {
@@ -53,6 +57,15 @@ class AcompanhamentoProjetoController extends AbstractActionController
      	}
      	return $this->projetoSemanaJustificativaTable;
      }
+     
+    public function getUsuarioTable()
+    {
+    	if (!$this->usuarioTable) {
+    		$sm = $this->getServiceLocator();
+    		$this->usuarioTable = $sm->get('Application\Model\UsuarioTable');
+    	}
+    	return $this->usuarioTable;
+    }
      
      public function consultaAction()
      {
@@ -199,6 +212,8 @@ class AcompanhamentoProjetoController extends AbstractActionController
     		    		 
     		if ($dados_form) {
     			$this->getProjetoSemanaJustificativaTable()->saveProjetoSemanaJustificativa($acompanhamentoProjeto);
+    			$acao = "acompanhamento_projeto/edit";
+    			$this->salvarLog($acao, $projeto_id);
     			//$this->getAcompanhamentoProjetoTable()->saveAcompanhamentoProjeto($acompanhamentoProjeto);
 
     			return $this->redirect()->toRoute('acompanhamento_projeto/consulta', array(
@@ -248,6 +263,29 @@ class AcompanhamentoProjetoController extends AbstractActionController
     	);    	
     }
     
+
+    public function salvarLog($acao, $id)
+    {
+    	$session_dados = new Container('usuario_dados');
+    	$log = new Logs();
+    	 
+    	$log->acao = $acao;
+    	$log->data = date('Y-m-d');
+    	$log->usuario_id = $session_dados->id;
+    	$log->id = $id;
+    	 
+    	$this->getLogsTable()->saveLogs($log);
+    }
+
+     public function getLogsTable()
+     {
+     	if (!$this->logsTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->logsTable = $sm->get('Application\Model\LogsTable');
+     	}
+     	return $this->logsTable;
+     }
+    
 	public function detalheAction()
     {
     	$projeto_semana_id = (int) $this->params()->fromRoute('id', 0);
@@ -257,7 +295,10 @@ class AcompanhamentoProjetoController extends AbstractActionController
 
 		$acompanhamentoProjeto = $this->getProjetoSemanaJustificativaTable()->getProjetoSemanaJustificativa($projeto_semana_id);
     	$projetoSemana = $this->getProjetoSemanaTable()->getProjetoSemana($projeto_semana_id);
-		 
+
+    	$acao = "acompanhamento_projeto/detalhe";
+    	$this->salvarLog($acao, $projeto_id);
+    	
     	return new ViewModel(array(
     			'projetoSemana' => $projetoSemana,
     			'acompanhamento' => $acompanhamentoProjeto,

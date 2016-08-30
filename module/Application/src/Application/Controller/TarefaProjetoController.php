@@ -13,6 +13,8 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 use Application\Model\ProjetoTarefa;
+use Zend\Session\Container;
+use Application\Model\Logs;
 use Application\Model\Usuario;
 use Application\Model\ProjetoSemanaJustificativa;
 use Application\Model\ProjetoSemana;
@@ -21,6 +23,7 @@ use Application\Model\ProjetoMembro;
 class TarefaProjetoController extends AbstractActionController
 {
 	protected $membroProjetoTable;
+	protected $logsTable;
 	protected $usuarioTable;
 	protected $tarefaProjetoTable;
 	protected $projetoTable;
@@ -30,6 +33,29 @@ class TarefaProjetoController extends AbstractActionController
 	public function indexAction()
      {
      }
+
+
+     public function getLogsTable()
+     {
+     	if (!$this->logsTable) {
+     		$sm = $this->getServiceLocator();
+     		$this->logsTable = $sm->get('Application\Model\LogsTable');
+     	}
+     	return $this->logsTable;
+     }
+     
+    public function salvarLog($acao, $id)
+    {
+    	$session_dados = new Container('usuario_dados');
+    	$log = new Logs();
+    	
+    	$log->acao = $acao;
+    	$log->data = date('Y-m-d');    		
+    	$log->usuario_id = $session_dados->id;
+    	$log->id = $id;
+    	    		
+    	$this->getLogsTable()->saveLogs($log);
+    }
      
      public function consultaAction()
      {
@@ -165,7 +191,10 @@ class TarefaProjetoController extends AbstractActionController
     			$tarefaProjeto->tarefa_data_previsao_termino = $dados_form['tarefa_data_previsao_termino'];
     			$tarefaProjeto->tarefa_data_termino = $dados_form['tarefa_data_termino'];
     			 
-    			$this->getTarefaProjetoTable()->saveTarefaProjeto($tarefaProjeto);
+    			$id_tar = $this->getTarefaProjetoTable()->saveTarefaProjeto($tarefaProjeto);
+    			
+    			$acao = "tarefa_projeto/add";
+    			$this->salvarLog($acao, $id_tar);
 
     			return $this->redirect()->toRoute('tarefa_projeto/consulta', array(
     					'action' => 'consulta', 'id' => $id
@@ -217,6 +246,9 @@ class TarefaProjetoController extends AbstractActionController
     		 
     		if ($dados_form) {
     			$this->getTarefaProjetoTable()->saveTarefaProjeto($tarefaProjeto);
+    			
+    			$acao = "tarefa_projeto/edit";
+    			$this->salvarLog($acao, $id);
 
     			return $this->redirect()->toRoute('tarefa_projeto/consulta', array(
     					'action' => 'consulta', 'id' => $projeto_id
@@ -251,6 +283,8 @@ class TarefaProjetoController extends AbstractActionController
     		if($dados_form['submit'] == "Sim"){
     			$id = (int) $request->getPost('id');
     			$this->getTarefaProjetoTable()->deleteTarefaProjeto($id);
+    			$acao = "tarefa_projeto/delete";
+    			$this->salvarLog($acao, $id);
     		}
 
     		return $this->redirect()->toRoute('tarefa_projeto/consulta', array(
@@ -271,7 +305,9 @@ class TarefaProjetoController extends AbstractActionController
 		 $request = $this->getRequest();
     	$id = (int) $this->params()->fromRoute('id', 0);
     	$projeto_id = (int) $this->params()->fromRoute('projeto_id', 0);
-		 
+
+    	$acao = "tarefa_projeto/detalhe";
+    	$this->salvarLog($acao, $id);
 		 
     	return new ViewModel(array(
              	'usuarios' => $this->getUsuarioTable()->fetchAll(),

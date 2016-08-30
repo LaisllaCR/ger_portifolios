@@ -189,15 +189,7 @@ function toggleFullScreen() {
 							<?php }?>
 			                
 			              	<?php if(in_array('perfil-acesso', $session_dados->funcionalidades_usuario)){ ?>	
-			                <li><a><i class="fa fa-user-secret"></i>Perfil de acesso <span class="fa fa-chevron-down"></span></a>
-			                  <ul class="nav child_menu" style="display: none">
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 1));?>">Administrador</a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 3));?>">L&iacute;der de Projeto/Gerente de Projeto</a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 2));?>">L&iacute;der do Escrit&oacute;rio de Projetos</a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 5));?>">Equipe T&eacute;cnica</a></li>
-			                    <li><a href="<?php echo $this->url('perfil-acesso/edit', array('action'=>'edit', 'id'=> 6));?>">Alta Dire&ccedil;&atilde;o</a></li>
-			                  </ul>
-			                </li>
+			                <li><a href="<?php echo $this->url('perfil-acesso', array('action'=>'index'));?>" ><i class="fa fa-user-secret"></i>Perfil de acesso</a></li>
 			                             		                
 							<?php }?> 
 			                
@@ -209,7 +201,7 @@ function toggleFullScreen() {
 			
 			          <!-- /menu footer buttons -->
 			          <div class="sidebar-footer hidden-small">
-			            <a  href="<?php echo $this->url('usuario/edit-user', array('action' => 'edit-senha', 'id' => $session_dados->id)); ?>" data-toggle="tooltip" data-placement="top" title="<?php echo ('ConfiguraÃ§Ãµes'); ?> ">
+			            <a  href="<?php echo $this->url('usuario/edit-user', array('action' => 'edit-senha', 'id' => $session_dados->id)); ?>" data-toggle="tooltip" data-placement="top" title="Configurações">
 			              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 			            </a>
 			            <a href="<?php echo $this->url('usuario/edit-senha', array('action' => 'edit-senha', 'id' => $session_dados->id)); ?>" data-toggle="tooltip" data-placement="top" title="Alterar Senha">
