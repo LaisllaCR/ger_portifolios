@@ -307,8 +307,11 @@ class UsuarioController extends AbstractActionController
 		 foreach ($projetos as $projeto){
 		 	$total_tarefas_usuario_projeto = count($this->getTarefaProjetoTable()->getTarefaUsuarioPorProjeto($projeto['projeto_id'], $id));
 		 	$total_tarefas_projeto = count($this->getTarefaProjetoTable()->getTarefasProjeto($projeto['projeto_id']));
-		 	
-		 	$array_projetos[$projeto['projeto_id']] = ($total_tarefas_usuario_projeto * 100 ) / $total_tarefas_projeto;
+		 	if($total_tarefas_projeto != 0){
+		 		$array_projetos[$projeto['projeto_id']] = ($total_tarefas_usuario_projeto * 100 ) / $total_tarefas_projeto;
+		 	}else{
+		 		$array_projetos[$projeto['projeto_id']] = 0;
+		 	}
 		 }
 		 
     			$acao = "usuario/detalhe";

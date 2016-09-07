@@ -306,7 +306,7 @@ class AlertasController extends AbstractActionController
 														
 														<div class="contentEditableContainer contentTextEditable">
 															<div class="contentEditable"  style="padding:20px 10px 0 0;margin:0;font-family:Helvetica, Arial, sans-serif;font-size:15px;line-height:150%;">
-																<p style="color:#FFEECE;">'.utf8_encode('Sistema de Gerenciamento de Portifólio de Projetos').'</strong></p>
+																<p style="color:#FFEECE;">'.utf8_encode('Sistema de Gerenciamento de Portfolio de Projetos').'</strong></p>
 															</div>
 														</div>
 
@@ -365,12 +365,11 @@ class AlertasController extends AbstractActionController
 										<td width="60%" height="70" valign="middle" style="padding-bottom:20px;">
 											<div class="contentEditableContainer contentTextEditable">
 												<div class="contentEditable" >
-													<span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;">Sistema de Gerenciamento de Portifólio de Projetos by Laislla Ramos</span>
+													<span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;"><a href="http://www.gerportifolios.esy.es/public"> Sistema de Gerenciamento de Portfolio de Projetos by Laislla Ramos</a></span>
 													<br/>
 													<span style="font-size:11px;color:#555;font-family:Helvetica, Arial, sans-serif;line-height:200%;">laisllaramos@gmail.com</span>
 													<br/>
 													<span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;">
-														<a target="_blank" href="[UNSUBSCRIBE]" style="text-decoration:none;color:#555">Não desejo continuar a receber os alertas</a></span>
 												</div>
 											</div>
 										</td>
@@ -541,7 +540,7 @@ class AlertasController extends AbstractActionController
      	
 														<div class="contentEditableContainer contentTextEditable">
 															<div class="contentEditable"  style="padding:20px 10px 0 0;margin:0;font-family:Helvetica, Arial, sans-serif;font-size:15px;line-height:150%;">
-																<p style="color:#FFEECE;">Sistema de Gerenciamento de '.utf8_encode('Portifólio').' de Projetos</strong></p>
+																<p style="color:#FFEECE;">Sistema de Gerenciamento de '.utf8_encode('Portfolio').' de Projetos</strong></p>
 															</div>
 														</div>
      	
@@ -579,7 +578,7 @@ class AlertasController extends AbstractActionController
 										<td width="60%" height="70" valign="middle" style="padding-bottom:20px;">
 											<div class="contentEditableContainer contentTextEditable">
 												<div class="contentEditable" >
-													<span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;">Sistema de Gerenciamento de '.utf8_encode('Portifólio').' de Projetos by Laislla Ramos</span>
+													<span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;"><a href="gerportifolios.esy.es/public"> Sistema de Gerenciamento de Portfolio de Projetos by Laislla Ramos</a></span>
 													<br/>
 													<span style="font-size:11px;color:#555;font-family:Helvetica, Arial, sans-serif;line-height:200%;">laisllaramos@gmail.com</span>
 													<br/>

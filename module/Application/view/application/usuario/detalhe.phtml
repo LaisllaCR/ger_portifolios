@@ -1,3 +1,7 @@
+    <?php 
+use Zend\Session\Container;
+$session_dados = new Container('usuario_dados');
+?>      
         <div class="">
           <div class="page-title">
             <div class="title_left">
@@ -13,9 +17,13 @@
               <div class="x_panel">
                 <div class="x_title">
                   <h2>Usu&aacute;rio Detalhe - <?php echo utf8_decode($usuario->usuario_nome);?> </h2>
-                  <ul class="nav navbar-right panel_toolbox">
+                  <ul class="nav navbar-right panel_toolbox">                 
+
+                        <?php if(in_array('usuario', $session_dados->funcionalidades_usuario)){ ?>
                     <li><a class="link"  href="<?php echo $this->url('usuario'); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
-                   
+                    <?php }else{ ?>                   
+                    <li><a class="link"  href="<?php echo $this->url('projeto'); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
+                    <?php } ?>
                   </ul>
                   <div class="clearfix"></div>
                 </div>
@@ -122,7 +130,9 @@
                       </li>
                     </ul>
 
+                        <?php if(in_array('usuario/edit', $session_dados->funcionalidades_usuario)){ ?>
                     <a  href="<?php echo $this->url('usuario/edit', array('id' => $usuario->usuario_id)); ?>" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i> Editar Perfil</a>
+                    <?php } ?>
                     <br />
 
                     

@@ -1,19 +1,12 @@
+<?php 
+     use Zend\Session\Container;  
+	 $session_dados = new Container('usuario_dados');   
+ ?> 
         <div class="">
           <div class="page-title">
             <div class="title_left">
               <h3>Acompanhamentos do Projeto - <?php echo utf8_decode($projeto->projeto_nome); ?></h3>
-            </div>
-
-            <div class="title_right">
-              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="search" placeholder="Procurar por...">
-                  <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Buscar!</button>
-                        </span>
-                </div>
-              </div>
-            </div>
+            </div>            
           </div>
           <div class="clearfix"></div>
 
@@ -28,12 +21,12 @@
                   </ul>
                   <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
+                <div class="x_content" class="table-responsive">
 
                   <p>Lista todos os acompanhamentos do projeto</p>
 
                   <!-- start project list -->
-                  <table  id="table" class="table table-striped projects">
+                  <table  id="minhatabela" class="table table-striped">
                     <thead>
                       <tr>
                         <th style="width: 20%">Semana</th>
@@ -63,8 +56,12 @@
                         <td><?php echo date('d/m/Y', strtotime($acompanhamento->projeto_semana_data_inicio)); ?></td>
                         <td><?php echo date('d/m/Y', strtotime($acompanhamento->projeto_semana_data_fim)); ?></td>
                         <td>
+		              <?php if(in_array('acompanhamento_projeto/detalhe', $session_dados->funcionalidades_usuario)){ ?>
                           <a href="<?php echo $this->url('acompanhamento_projeto/detalhe', array('id' => $acompanhamento->projeto_semana_id, 'projeto_id' => $id)); ?>" data-toggle="tooltip" data-placement="top" title="Ver Detalhado" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
-                          <a href="<?php echo $this->url('acompanhamento_projeto/edit', array('id' => $acompanhamento->projeto_semana_id, 'projeto_id' => $id)); ?>" data-toggle="tooltip" data-placement="top" title="Realizar Acompanhamento" class="btn btn-warning btn-xs"><i class="fa fa-calendar-o"></i>  </a>
+                      <?php }?>
+                         <?php if(in_array('acompanhamento_projeto/edit', $session_dados->funcionalidades_usuario)){ ?>
+                         <a href="<?php echo $this->url('acompanhamento_projeto/edit', array('id' => $acompanhamento->projeto_semana_id, 'projeto_id' => $id)); ?>" data-toggle="tooltip" data-placement="top" title="Realizar Acompanhamento" class="btn btn-warning btn-xs"><i class="fa fa-calendar-o"></i>  </a>
+                      <?php }?>
                         </td>
                       </tr>
                       <?php 
@@ -96,5 +93,12 @@
 
   <!-- pace -->
   <script src="<?php echo $this->basePath('js/pace/pace.min.js'); ?>"></script>
+  <script src="<?php echo $this->basePath('js/jquery.dataTables.min.js'); ?>"></script>
 
 
+		    <script>
+			    $(document).ready(function(){
+			        $('#minhatabela').dataTable();
+			    });
+		        
+		    </script>

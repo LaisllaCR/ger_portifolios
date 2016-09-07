@@ -1,4 +1,10 @@
-        <div class="">
+       <?php 
+
+	     use Zend\Session\Container;
+		 $session_dados = new Container('usuario_dados');
+     
+     ?>    
+      <div class="">
           <div class="page-title">
             <div class="title_left">
               <h3>Tarefas do Projeto - <?php echo utf8_decode($projeto->projeto_nome); ?></h3>
@@ -28,12 +34,23 @@
   				<form method="post" action="<?php echo $this->url('tarefa_projeto/edit', array('id' => $id, 'projeto_id' => $projeto_id));?>" role="form" class="form-horizontal form-label-left">
               
                   <div>                    
-                                                
+                              <?php 
+                              
+
+                              if(isset($session_dados->id)){
+                              	if($session_dados->perfil != 5 && $session_dados->perfil != 6){
+                              		$disabled = 'disabled';	
+                              	}else{
+                              		$disabled = '';	
+                              	}
+                              }
+                              
+                              ?>                  
                         <div class="form-group">
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tarefa_nome">T&iacute;tulo <span class="required">*</span>
                           </label>
                           <div class="col-md-5 col-sm-6 col-xs-12">
-                            <input type="text" id="tarefa_nome" value="<?php echo utf8_decode($tarefa->tarefa_nome); ?>" name="tarefa_nome" required="required" class="form-control col-md-7 col-xs-12">
+                            <input disabled="<?php echo $disabled; ?>" type="text" id="tarefa_nome" value="<?php echo utf8_decode($tarefa->tarefa_nome); ?>" name="tarefa_nome" required="required" class="form-control col-md-7 col-xs-12">
                           </div>
                         </div>                                        
                                                 
@@ -41,7 +58,7 @@
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="usuario_id">Respons&aacute;vel <span class="required">*</span>
                           </label>
                           <div class="col-md-4 col-sm-4 col-xs-12">
-	                          <select name="usuario_id" id="usuario_id"  required="required"  class="form-control col-md-7 col-xs-12">
+	                          <select disabled="<?php echo $disabled; ?>" name="usuario_id" id="usuario_id"  required="required"  class="form-control col-md-7 col-xs-12">
 	                          	<?php 
 	                          			foreach($membros as $usuario){
 	                          				if($usuario['usuario_id'] == $tarefa->usuario_id){
@@ -65,7 +82,7 @@
                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tarefa_descricao">Descri&ccedil;&atilde;o<span class="required">*</span>
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea id="tarefa_descricao" name="tarefa_descricao" required="required" class="form-control col-md-7 col-xs-12"> <?php echo utf8_decode(trim($tarefa->tarefa_descricao)); ?></textarea>
+                            <textarea disabled="<?php echo $disabled; ?>" id="tarefa_descricao" name="tarefa_descricao" required="required" class="form-control col-md-7 col-xs-12"> <?php echo utf8_decode(trim($tarefa->tarefa_descricao)); ?></textarea>
                           </div>
                         </div>	
                                                 

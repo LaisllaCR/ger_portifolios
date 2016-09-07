@@ -24,6 +24,9 @@ class IndicadorProjetoTable
 
 	public function getCountIndicadorFaseProjeto(IndicadorProjeto $indicadorProjeto)
 	{			
+		$indicadorProjeto->projeto_fase = str_replace('ç', 'c', $indicadorProjeto->projeto_fase);
+		$indicadorProjeto->projeto_fase = str_replace('ã', 'a', $indicadorProjeto->projeto_fase);
+		
 		$sql = 'SELECT * FROM indicadores_projeto as a join indicadores b ON a.indicador_id = b.indicador_id WHERE a.projeto_fase = "'.$indicadorProjeto->projeto_fase.'" and a.projeto_id = '.$indicadorProjeto->projeto_id.' and a.indicador_projeto_valor > a.valor_maximo';
 		
 		$statement = $this->tableGateway->adapter->query($sql);

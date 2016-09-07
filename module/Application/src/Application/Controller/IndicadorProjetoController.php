@@ -396,14 +396,13 @@ class IndicadorProjetoController extends AbstractActionController
     		$indicadorProjeto->indicador_projeto_descricao = utf8_encode($dados_form['indicador_projeto_descricao']);
     		
     		if($indicadorProjeto->indicador_projeto_valor > $indicadorProjeto->valor_maximo){
-    			
     			$indicadores = $this->verificarIndicadoresFase($indicadorProjeto);
     			$quant_fora_limite = count($indicadores);
     			
     			if($quant_fora_limite >= 2){
     				
     				$html = $this->gerarHtmlForaLimites($indicadorProjeto, $projeto, $indicadores);
-    				$this->enviarEmailAltaDirecao($html, utf8_encode('3 ou mais indicadores estï¿½o fora do limite esperado!'));
+    				$this->enviarEmailAltaDirecao($html, utf8_encode('3 ou mais indicadores estão fora do limite esperado!'));
     			}
     		
     		}
@@ -567,20 +566,20 @@ class IndicadorProjetoController extends AbstractActionController
 							<div class="movableContent">
 								<table cellpadding="0" cellspacing="0" border="0" align="center" width="100%" style="border-collapse:collapse;">
 									<tr>
-										<td style="color:#fff;" class="bgItem">
+										<td style="color:#fff; background-color: #F4A81C;" class="bgItem">
 											<table cellpadding="0" style="border-collapse:collapse;" cellspacing="0" border="0" align="center" width="600">
 												<tr>
 													<td width="400" valign="top" style="padding-top:40px;padding-bottom:20px;">
 														<br/>
 														<div class="contentEditableContainer contentTextEditable">
 															<div class="contentEditable" >
-																<div style="font-size:23px;font-family:Heveltica, Arial, sans-serif;color:#fff;">'.utf8_encode('3 ou mais indicadores estï¿½o fora do limite esperado!').'</div>
+																<div style="font-size:23px;font-family:Heveltica, Arial, sans-serif;color:#fff;">'.('3 ou mais indicadores estão fora do limite esperado!').'</div>
 															</div>
 														</div>
     
 														<div class="contentEditableContainer contentTextEditable">
 															<div class="contentEditable"  style="padding:20px 10px 0 0;margin:0;font-family:Helvetica, Arial, sans-serif;font-size:15px;line-height:150%;">
-																<p style="color:#FFEECE;">'.utf8_encode('Sistema de Gerenciamento de Portifï¿½lio de Projetos').'</strong></p>
+																<p style="color:#FFEECE;">'.('Sistema de Gerenciamento de Portfolio de Projetos').'</strong></p>
 															</div>
 														</div>
     
@@ -607,8 +606,8 @@ class IndicadorProjetoController extends AbstractActionController
 										<td width="50">&nbsp;</td>
 										<td width="500" align="left">
 											<div class="contentEditableContainer contentTextEditable">
-												<div class="contentEditable" >
-													<div style="font-family:Helvetica, Arial, sans-serif;font-size:16px;line-height:160%;color:#181818;font-weight:bold;">'.utf8_encode($projeto->projeto_nome).'</div>
+												<div class="contentEditable">
+													<div style="font-family:Helvetica, Arial, sans-serif;font-size:16px;line-height:160%;color:#181818;font-weight:bold;">'.utf8_decode($projeto->projeto_nome).'</div>
 													<div style="font-family:Helvetica, Arial, sans-serif;font-size:20px;line-height:160%;color:#181818;"><small>'.$indicadores->projeto_fase.'</small></div>
 												</div>
 											</div>
@@ -641,12 +640,11 @@ class IndicadorProjetoController extends AbstractActionController
 										<td width="60%" height="70" valign="middle" style="padding-bottom:20px;">
 											<div class="contentEditableContainer contentTextEditable">
 												<div class="contentEditable" >
-													<span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;">'.utf8_encode('Sistema de Gerenciamento de Portifï¿½lio de Projetos').' by Laislla Ramos</span>
+													<span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;"><a href="http://gerportifolios.esy.es/public"> Sistema de Gerenciamento de Portfolio de Projetos by Laislla Ramos </a></span>
 													<br/>
 													<span style="font-size:11px;color:#555;font-family:Helvetica, Arial, sans-serif;line-height:200%;">laisllaramos@gmail.com</span>
 													<br/>
 													<span style="font-size:13px;color:#181818;font-family:Helvetica, Arial, sans-serif;line-height:200%;">
-														<a target="_blank" href="" style="text-decoration:none;color:#555">Cancelar alertas</a></span>
 												</div>
 											</div>
 										</td>

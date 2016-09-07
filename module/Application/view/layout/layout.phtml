@@ -4,7 +4,7 @@ use Zend\Session\Container;
 <html lang="en">
     <head>
         <meta charset="iso 8859-1">
-        <?php echo $this->headTitle('Gerenciador de Portifólios de Projetos'. $this->translate('Gerenciador de Portifólios de Projetos'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('Gerenciador de Portfolios de Projetos'. $this->translate('Gerenciador de Portfolios de Projetos'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?php echo $this->headMeta()
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -21,8 +21,9 @@ use Zend\Session\Container;
 
                         ->prependStylesheet($this->basePath('css/custom.css'))
                         ->prependStylesheet($this->basePath('css/maps/jquery-jvectormap-2.0.3.css'))
+                        ->prependStylesheet($this->basePath('css/jquery.dataTables.min.css'))
                         ->prependStylesheet($this->basePath('css/icheck/flat/green.css'))
-                        ->prependStylesheet($this->basePath('css/floatexamples.css'))?>                        
+                        ->prependStylesheet($this->basePath('css/floatexamples.css'))?>       
         <!-- Scripts -->
 
         <?php echo $this->headScript()
@@ -47,6 +48,8 @@ use Zend\Session\Container;
             ->prependFile($this->basePath('js/flot/curvedLines.js'))
             ->prependFile($this->basePath('js/flot/jquery.flot.resize.js'))
             ->prependFile($this->basePath('js/pace/pace.min.js'))
+            ->prependFile($this->basePath('js/jquery.dataTables.min.js'))
+           
             
             ->prependFile($this->basePath('js/datepicker/daterangepicker.js'))
             ->prependFile($this->basePath('js/sparkline/jquery.sparkline.min.js'))
@@ -133,7 +136,7 @@ function toggleFullScreen() {
 			        <div class="left_col scroll-view">
 			
 			          <div class="navbar nav_title" style="border: 0;">
-			            <a href="<?php echo $this->url('home', array('action'=>'index'));?>" class="site_title"><i class="fa fa-puzzle-piece"></i> <span>Portif&oacute;lio</abbr></span></a>
+			            <a href="<?php echo $this->url('home', array('action'=>'index'));?>" class="site_title"><i class="fa fa-puzzle-piece"></i> <span>Portfolio</abbr></span></a>
 			          </div>
 			          <div class="clearfix"></div>
 			
@@ -219,6 +222,18 @@ function toggleFullScreen() {
 			      </div>
 			
                 
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav class="" role="navigation">
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+            </nav>
+        </div>
+      </div>
+              <br>
+      
        <!-- page content -->
       <div class="right_col" role="main">
         
@@ -534,21 +549,6 @@ function toggleFullScreen() {
         $('#reportrange').data('daterangepicker').remove();
       });
     });
-  </script>
-  
-    <script>
-  
-  $("#search").keyup(function(){
-      _this = this;
-      // Show only matching TR, hide rest of them
-      $.each($("#table tbody tr"), function() {
-          if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
-             $(this).hide();
-          else
-             $(this).show();                
-      });
-  }); 
-
   </script>
   <!-- /datepicker -->
         

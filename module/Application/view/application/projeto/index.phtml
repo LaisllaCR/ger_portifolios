@@ -2,22 +2,11 @@
 
      use Zend\Session\Container;
      
-     ?>
+     ?>      
         <div class="">
           <div class="page-title">
             <div class="title_left">
               <h3>Projetos </h3>
-            </div>
-
-            <div class="title_right">
-              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="search" placeholder="Procurar por...">
-                  <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Buscar!</button>
-                        </span>
-                </div>
-              </div>
             </div>
           </div>
           <div class="clearfix"></div>
@@ -43,25 +32,32 @@
                   </ul>
                   <div class="clearfix"></div>
                 </div>
-                <div class="x_content" id="page-selection">
+                <div class="x_content" class="table-responsive">
 
                   <p>Lista todos os projetos</p>
                   
                   <!-- start project list -->
-                  <table id="table" class="table table-striped projects">
+                  <table id="minhatabela" class="table table-striped">
                     <thead>
                       <tr>
                         <th style="width: 1%">#</th>
-                        <th style="width: 20%">Nome</th>
-                        <th style="width: 15%">Status</th>
-                        <th style="width: 10%">Risco</th>
-                        <th style="width: 20%">Edi&ccedil;&atilde;o</th>
-                        <th style="width: 20%">A&ccedil;&otilde;es</th>
+                        <th style="width: 25%">Nome</th>
+                        <th>Responsável</th>
+                        <th>Status</th>
+                        <th>Risco</th>
+                        <th style="width: 15%">Edi&ccedil;&atilde;o</th>
+                        <th style="width: 15%">A&ccedil;&otilde;es</th>
                       </tr>
                     </thead>
                     
                     <tbody>
                     <?php 
+
+                    $array_usuarios = Array();
+                    
+                    foreach($usuarios as $usuario){
+                    	$array_usuarios[$usuario->usuario_id] = $usuario->usuario_nome;
+                    }
 
 						foreach ($projetos as $projeto)
 						{
@@ -80,9 +76,10 @@
                           <small>In&iacute;cio <?php echo $projeto_data_inicio[2]."/".$projeto_data_inicio[1]."/".$projeto_data_inicio[0]; ?></small>
                         </td>
                         
+                        <td><?php echo utf8_decode($array_usuarios[$projeto->projeto_gerente_id]); ?></td>
                         <td><?php echo $projeto->projeto_status; ?></td>
                         <td><?php echo $projeto->projeto_risco; ?></td>
-                        <td class="col-md-4 col-sm-4 col-xs-12">
+                        <td>
                         
                         <?php if(in_array('projeto/detalhe', $session_dados->funcionalidades_usuario)){ ?>
 			                                      
@@ -90,11 +87,13 @@
                           
 						<?php }?>
 						
-                        <?php if(in_array('projeto/edit', $session_dados->funcionalidades_usuario)){ ?>
-                          
+                        <?php if(in_array('projeto/edit', $session_dados->funcionalidades_usuario)){
+                        	//if($projeto->projeto_gerente_id == $session_dados->id){	
+                        ?>                          
                           <a href="<?php echo $this->url('projeto/edit', array('id' => $projeto->projeto_id)); ?>" data-toggle="tooltip" data-placement="top" title="Alterar" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>  </a>
                           
-						<?php }?>
+						<?php //} 
+						}?>
 						
                         <?php if(in_array('projeto/delete', $session_dados->funcionalidades_usuario)){ ?>
                           
@@ -109,7 +108,7 @@
 						<?php }?>
 						
                         </td>
-                        <td class="col-md-4 col-sm-4 col-xs-12">
+                        <td>
                         	
                         <?php if(in_array('indicador_projeto/consulta', $session_dados->funcionalidades_usuario)){ ?>
                         
@@ -145,14 +144,6 @@
 
                 </div>
                 
-		    <script>
-		        // init bootpag
-		        $('#page-selection').bootpag({
-		            total: 10
-		        }).on("page", function(event, /* page number here */ num){
-		             $("#content").html("Insert content"); // some ajax content loading...
-		        });
-		    </script>
 		    
               </div>
             </div>
@@ -172,20 +163,17 @@
   <script src="<?php echo $this->basePath('js/icheck/icheck.min.js'); ?>"></script>
 
   <script src="<?php echo $this->basePath('js/custom.js'); ?>"></script>
+  <script src="<?php echo $this->basePath('js/jquery.dataTables.min.js'); ?>"></script>
 
   <!-- pace -->
   <script src="<?php echo $this->basePath('js/pace/pace.min.js'); ?>"></script>
   
-  <script>
-  $('.demo1').bootpag({
-	    total: 5
-	}).on("page", function(event, num){
-	    $(".content").html("Page " + num); // or some ajax content loading...
-	 
-	    // ... after content load -> change total to 10
-	    $(this).bootpag({total: 10, maxVisible: 10});
-	 
-	});
-</script>
+		    <script>
+			    $(document).ready(function(){
+			        $('#minhatabela').dataTable();
+			    });
+		        
+		    </script>
+  
 
 

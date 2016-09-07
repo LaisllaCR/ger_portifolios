@@ -1588,6 +1588,27 @@ tfoot input {
     color: #444;
 }
 
+input[type="search"] {
+    width: 150px;
+    color: #999;
+    
+    border-right: 0;
+    padding-left: 20px;
+    padding: 0;
+    border-radius: 0px 25px 25px 0px;
+    border: 1px solid rgba(221, 226, 232, 0.49);
+    border-left: 0;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    color: #93A2B2;
+    margin-bottom: 0 !important;
+    placeholder: 'Procurar...'
+}
+
+.top_search .form-control:focus {
+    border: 1px solid rgba(221, 226, 232, 0.49);
+    border-right: 0;
+}
+
 tfoot input.search_init {
     color: #999;
 }

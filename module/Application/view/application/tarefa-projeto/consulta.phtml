@@ -1,18 +1,11 @@
-        <div class="">
+ <?php 
+use Zend\Session\Container;
+$session_dados = new Container('usuario_dados');
+?>         
+     <div class="">
           <div class="page-title">
             <div class="title_left">
               <h3>Tarefas do Projeto - <?php echo utf8_decode($projeto->projeto_nome); ?></h3>
-            </div>
-
-            <div class="title_right">
-              <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <div class="input-group">
-                  <input type="text" class="form-control" id="search" placeholder="Procurar por...">
-                  <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Buscar!</button>
-                        </span>
-                </div>
-              </div>
             </div>
           </div>
           <div class="clearfix"></div>
@@ -23,19 +16,22 @@
                 <div class="x_title">
                   <h2>Consultar Tarefas de <?php echo  utf8_decode($projeto->projeto_nome);?></h2>
                   <ul class="nav navbar-right panel_toolbox">
+                  
+                  	<?php if(in_array('tarefa_projeto/add', $session_dados->funcionalidades_usuario)){  ?>
                     <li><a class="link"  href="<?php echo $this->url('tarefa_projeto/add', array('id' => $id)); ?>" ><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</a>
-                    </li>
+                    </li>                    
+                     <?php }?>
                     <li><a class="link"  href="<?php echo $this->url('projeto', array('id' => $projeto->projeto_id)); ?>" ><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</a></li>
                    
                   </ul>
                   <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
+                <div class="x_content" class="table-responsive">
 
                   <p>Lista todas as tarefas do projeto</p>
 
                   <!-- start project list -->
-                  <table  id="table" class="table table-striped projects">
+                  <table id="minhatabela" class="table table-striped">
                     <thead>
                       <tr>
                         <th style="width: 1%">#</th>
@@ -70,10 +66,20 @@
                         <td><?php echo $array_usuarios[$tarefa->usuario_id];?></td>
                         <td><?php echo $tarefa->tarefa_status; ?></td>
                         <td><?php echo date('d/m/Y',  strtotime($tarefa->tarefa_data_inicio)); ?></td>
-                        <td>
-                          <a href="<?php echo $this->url('tarefa_projeto/detalhe', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" data-toggle="tooltip" data-placement="top" title="Ver Detalhado" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
-                          <a href="<?php echo $this->url('tarefa_projeto/edit', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" data-toggle="tooltip" data-placement="top" title="Alterar" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>  </a>
+                        <td>                        
+                  			<?php if(in_array('tarefa_projeto/detalhe', $session_dados->funcionalidades_usuario)){  ?>
+                          		<a href="<?php echo $this->url('tarefa_projeto/detalhe', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" data-toggle="tooltip" data-placement="top" title="Ver Detalhado" class="btn btn-info btn-xs"><i class="fa fa-folder"></i>  </a>
+                          <?php } ?>
+                  			<?php if(in_array('tarefa_projeto/edit', $session_dados->funcionalidades_usuario)){
+                  						if($tarefa->usuario_id == $session_dados->id){ ?>
+                          		<a href="<?php echo $this->url('tarefa_projeto/edit', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" data-toggle="tooltip" data-placement="top" title="Alterar" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>  </a>
+                         	<?php 		}else{ ?>
+                         		<a disabled href="" data-toggle="tooltip" data-placement="top" title="Alterar" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>  </a>
+                         	<?php 		}
+                  					}?>
+                  			<?php if(in_array('tarefa_projeto/delete', $session_dados->funcionalidades_usuario)){  ?>
                           <a href="<?php echo $this->url('tarefa_projeto/delete', array('projeto_id' => $id, 'id' => $tarefa->tarefa_id)); ?>" data-toggle="tooltip" data-placement="top" title="Excluir" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>  </a>
+                        	<?php }?>
                         </td>
                       </tr>
                       <?php 
@@ -101,8 +107,16 @@
   <script src="<?php echo $this->basePath('js/icheck/icheck.min.js'); ?>"></script>
 
   <script src="<?php echo $this->basePath('js/custom.js'); ?>"></script>
+  <script src="<?php echo $this->basePath('js/jquery.dataTables.min.js'); ?>"></script>
 
   <!-- pace -->
   <script src="<?php echo $this->basePath('js/pace/pace.min.js'); ?>"></script>
+  
+		    <script>
+			    $(document).ready(function(){
+			        $('#minhatabela').dataTable();
+			    });
+		        
+		    </script>
 
 

@@ -47,12 +47,13 @@ class ProjetoController extends AbstractActionController
 	public function indexAction()
     {
      	$session_dados = new Container('usuario_dados');
-     	//if(isset($session_dados->id)){
-     	//	if($session_dados->perfil == 1 || $session_dados->perfil == 2){
+     	if(isset($session_dados->id)){
+     		if($session_dados->perfil == 1 || $session_dados->perfil == 2 || $session_dados->perfil == 3){
 		         return new ViewModel(array(
 		             'projetos' => $this->getProjetoTable()->fetchAll(),
+     				 'usuarios' => $this->getUsuarioTable()->fetchAll()
 		         ));     			
-     	/*	}else{
+     		}else{
      			$membros_projetos = $this->getMembroProjetoTable()->fetchAll();
      			
      			$projetos_usuario_sessao = Array();
@@ -73,9 +74,10 @@ class ProjetoController extends AbstractActionController
      			
 		         return new ViewModel(array(
 		             'projetos' => $dados_projetos_usuario_sessao,
+     				 'usuarios' => $this->getUsuarioTable()->fetchAll()
 		         ));     			
      		}
-     	}*/
+     	}
      }
 
      public function getUsuarioTable()
